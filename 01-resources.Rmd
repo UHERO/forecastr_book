@@ -78,7 +78,6 @@ Suggested workflow:
 2) Clone it via RStudio project setup.  
 3) Commit changes, pull, resolve issues, push.
 3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.
-sd
 
 
 Render results from R scripts via Rmd:
