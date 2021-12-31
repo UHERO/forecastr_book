@@ -76,12 +76,9 @@ https://happygitwithr.com/ideas-for-content.html
 Suggested workflow:  
 1) Initialize repository on GitHub.com under the UHERO account.  
 2) Clone it via RStudio project setup.  
-3) Work in a branch (create in RStudio or GitHub Desktop).  
-4) Commit to branch.  
-5) Pull request and merge to Remote:Origin (on GitHub.com).  
+3) Commit changes, pull, resolve issues, push.
+3*) If work in a branch (create in RStudio), commit to branch, push to remote, pull/merge to Remote:Origin (on GitHub.com), delete branch.
 
-
-test test
 
 Render results from R scripts via Rmd:
 1) source your R code from within Rmd
