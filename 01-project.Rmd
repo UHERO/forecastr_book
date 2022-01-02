@@ -1,0 +1,192 @@
+# Resources for time series modeling with R
+
+## Project setup
+
+Coding Conventions in R:
+
+Basic ideas for a reproducible workflow: 
+
+Set up your work in projects:
+https://r4ds.had.co.nz/workflow-projects.html
+
+Read section I in WTF:
+https://rstats.wtf/save-source.html
+
+A good list of consideration for structuring projects:
+https://www.r-bloggers.com/2018/08/structuring-r-projects/
+
+Use RStudio projects with sub-directories
+
+-   R - R code.
+-   data/raw - data external to the project.
+-   data/processed - intermediate processed data.
+-   notes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc.
+-   output - reports, tables, etc.
+-   output/plots - plots.
+-   renv - used for library management (don't edit).
+-   man - help files (don't edit).
+
+Preference settings:
+
+
+Follow the tidyverse style guide:
+https://style.tidyverse.org/index.html
+
+Not to self: look at the targets package for workflow automation
+https://docs.ropensci.org/targets/index.html
+
+Render results from R scripts via Rmd:
+1) source your R code from within Rmd
+2) only render important results in Rmd chunks
+
+R Best Practices by Krista L. DeStasio: https://kdestasio.github.io/post/r_best_practices/  
+
+Use here() from the here package to write file paths 
+
+Suppose you have a dataset in csv format. Use readr::read_csv(here::here("The subfolder where your csv file resides", "The CSV file.csv"))
+
+Do not use setwd() and rm(list = ls())
+
+Do not save the workspace to the .Rdta file
+
+Use library() not require()
+
+Use version control (useful for recording changes between different versions of a file over time - see below for Git integration)
+
+Resources: 
+
+Happy Git and GitHub for the useR: https://happygitwithr.com/ 
+
+Github for collaboration: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md  
+
+My research workflow, based on Github: https://www.carlboettiger.info/2012/05/06/research-workflow.html 
+
+Collaborating with renv: https://rstudio.github.io/renv/articles/collaborating.html  
+
+R style guide: http://adv-r.had.co.nz/Style.html  
+
+UHERO R style guide: 
+
+Use block letters for R file names (because the NAS file server is case sensitive) 
+
+Comment your code
+
+Time Series Modeling: 
+
+Forecasting: Principles and Practice (3rd ed) by Rob J Hyndman and George Athanasopoulos : https://otexts.com/fpp3/index.html 
+
+An Introduction to Statistical Learning (1st ed): https://www.statlearning.com   
+
+Manipulating Time Series Data in R with xts & zoo: https://rstudio-pubs-static.s3.amazonaws.com/288218_117e183e74964557a5da4fc5902fc671.html https://rpubs.com/mpfoley73/504487 Time Series in R, The Power of xts and zoo: https://ugoproto.github.io/ugo_r_doc/time_series_in_r_the_power_of_xts_and_zoo/ xts Cheat Sheet: Time Series in R: https://www.r-bloggers.com/2017/05/xts-cheat-sheet-time-series-in-r/ 
+
+R For Data Science Cheat Sheet by DataCamp: https://s3.amazonaws.com/assets.datacamp.com/blog_assets/xts_Cheat_Sheet_R.pdf
+
+Evaluate the R packages: gets, ARDL, etc.
+
+The gets package is used for Multi-path General-to-Specific (GETS) modelling of the mean and/or variance of a regression, and Indicator Saturation (ISAT) methods for detecting structural breaks in the mean.https://cran.r-project.org/web/packages/gets/index.html
+
+ The ARDL package creates complex autoregressive distributed lag (ARDL) models providing just the order and automatically constructs the underlying unrestricted and restricted error correction model (ECM). It also performs the bounds-test for cointegration as described in Pesaran et al. (2001). https://cran.r-project.org/web/packages/ARDL/index.html https://github.com/Natsiopoulos/ARDL 
+
+Tidy tools for time series modeling under tidyverts: https://tidyverts.org  - The fable package applies tidyverse principles to time series modeling used for forecasting: https://fable.tidyverts.org/ - The tsibble package provides a tidy data structure for time series: https://cran.r-project.org/web/packages/tsibble/index.html - The tsibbledata package provide a different types of datasets in the tsibble data structure: https://cran.r-project.org/web/packages/tsibbledata/index.html - The tsibbletalk package introduces shared key to the tsibble, to easily {crosstalk} between plots on both client and server sides (i.e. with or without shiny): https://cran.r-project.org/web/packages/tsibbletalk/tsibbletalk.pdf- The feasts package provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data: https://cran.r-project.org/web/packages/feasts/index.html - The fable.prohphet package provides an interface allowing the prophet forecasting procedure to be used within the fable framework: https://cran.r-project.org/web/packages/fable.prophet/vignettes/intro.html 
+
+The xts or Extensible Time Series package provides an extensible time series class, enabling uniform handling of many R time series classes : https://cran.r-project.org/web/packages/xts/index.html xts: Extensible Time Series: https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf
+
+Think about dummies, breaks, outliers 
+
+Figure out how bimets deals with ragged edge, add-factors, goal search
+
+The bimets is an R package developed with the aim of easing time series analysis and building up a framework that facilitates the definition, estimation and simulation of simultaneous equation models: https://cran.r-project.org/web/packages/bimets/index.htmlbimets - Time Series And Econometric Modeling In R: https://github.com/cran/bimets https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf
+
+Structural Equation Models (SEM): https://rviews.rstudio.com/2021/01/22/sem-time-series-modeling/
+
+Look at tidy models 
+
+The tidymodels package is a collection of packages for modeling and machine learning using tidyverse principles: https://www.tidymodels.org
+
+Port the Gekko code into R: http://t-t.dk/gekko/
+
+Look at DiagrammeR package, also the Gantt charts it can produce
+
+https://rich-iannone.github.io/DiagrammeR/ 
+
+A Beginner’s Guide to Learning R: 
+
+A (very) short introduction to R: https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf
+
+Rstudio Education: https://github.com/rstudio-education 
+
+Remaster the tidyverse: https://github.com/rstudio-education/remaster-the-tidyverse 
+
+Introduction to R and Rstudio: https://jules32.github.io/2016-07-12-Oxford/R_RStudio/ 
+
+An intro to R for new programmers: https://rforcats.net 
+
+fasteR: Fast Lane to Learning R!: https://github.com/matloff/fasteR 
+
+RStudio Cheatsheets: https://rstudio.com/resources/cheatsheets/ 
+
+R for Data Science: https://r4ds.had.co.nz 
+
+Data wrangling, exploration, and analysis with R: https://stat545.com 
+
+R Markdown: The Definitive Guide: https://bookdown.org/yihui/rmarkdown/ 
+
+Data Visualization with R: https://rkabacoff.github.io/datavis/ 
+
+Modern R with the tidyverse: https://b-rodrigues.github.io/modern_R/  
+
+R Cookbook, 2nd Edition: https://rc2e.com  
+
+Advanced R by Hadley Wickham: http://adv-r.had.co.nz  
+
+UC Business Analytics R Programming Guide: http://uc-r.github.io/descriptive  
+
+R Programming for Data Science: https://bookdown.org/rdpeng/rprogdatascience/  
+
+Hands-On Programming with R: https://rstudio-education.github.io/hopr/ 
+
+Efficient R programming: https://csgillespie.github.io/efficientR/index.html 
+
+R for Fledglings: http://www.uvm.edu/~tdonovan/RforFledglings/index.html 
+
+R Intermediate Level (includes applications): 
+
+Advanced Statistical Computing: https://bookdown.org/rdpeng/advstatcomp/  
+
+Feature Engineering and Selection: A Practical Approach for Predictive Models: http://www.feat.engineering/index.html  
+
+Advanced Quantitative Methods: https://uclspp.github.io/PUBLG088/index.html  
+
+Principles of Econometrics with  R: https://bookdown.org/ccolonescu/RPoE4/  
+
+Modern Data Analysis for Economics: https://jiamingmao.github.io/data-analysis/Resources/  
+
+Data Science for Economists: https://github.com/uo-ec607/lectures   
+
+Data Science for Psychologists: https://bookdown.org/hneth/ds4psy/10-time.html   
+
+Rewriting R code in C++: https://adv-r.hadley.nz/rcpp.html 
+
+Writing R Extensions: https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html 
+
+Other R packages for data analysis:
+
+The data.table package is used for fast aggregation of large data (e.g. 100GB in RAM), fast ordered joins, fast add/modify/delete of columns by group using no copies at all, list columns, friendly and fast character- separated-value read/write: https://cran.r-project.org/web/packages/data.table/  
+
+The mlr3 (Lang et al. 2019) package and ecosystem provide a generic, object-oriented, and extensible framework for classification, regression, survival analysis, and other machine learning tasks for the R: https://mlr3book.mlr-org.com  
+
+purr package tutorial: https://jennybc.github.io/purrr-tutorial/ 
+
+ 
+
+Data Visualization with R:
+
+Data Analysis and Visualization Using R: http://varianceexplained.org/RData/   
+
+Data Analysis and Visualization in R for Ecologists: https://datacarpentry.org/R-ecology-lesson/   
+
+Data Visualization with R by Rob Kabacoff: https://rkabacoff.github.io/datavis/  
+
+R Graphics Cookbook, 2nd edition: https://r-graphics.org 
+
+ggplot2: elegant graphics for data analysis: https://ggplot2-book.org 
