@@ -5,3 +5,5 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
+view: https://github.com/UHERO/forecastr_book/blob/main/%s
+edit: https://github.com/UHERO/forecastr_book/edit/main/%s
