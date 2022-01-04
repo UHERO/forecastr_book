@@ -1,4 +1,4 @@
-book_filename: "test"
+book_filename: "forecastr"
 new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true

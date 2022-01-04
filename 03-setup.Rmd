@@ -82,7 +82,7 @@ Non-core `tidyverse` packages (need to be loaded separately):
 https://magrittr.tidyverse.org  
 https://lubridate.tidyverse.org  
 
-Time series tools in `tsbox` (learn them and use them, very useful):  
+Time series tools in `tsbox` (learn them and use them, very useful). All start with `ts_`.  
 https://www.tsbox.help  
 
 Forecasting with multi-equation behavioral models (only load `bimets` if actually doing forecasts, no need for data manipulation):  

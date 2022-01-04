@@ -35,6 +35,13 @@ Coding Conventions in R
 Follow the `tidyverse` style guide:  
 https://style.tidyverse.org/index.html  
 
+Add 4 dashes after a section header for it to show up in the outline:  
+```
+# *************************
+#  setup ----
+# *************************
+```
+
 Package management with `renv`:  
 https://rstudio.github.io/renv/articles/renv.html  
 

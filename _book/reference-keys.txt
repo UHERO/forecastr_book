@@ -35,7 +35,7 @@ qtoa
 qtom
 qtom1
 qtrs
-best-practices-for-time-series-manipulation
+best-practices-for-time-series-data-manipulation
 notes
 project-setup-1
 git-1

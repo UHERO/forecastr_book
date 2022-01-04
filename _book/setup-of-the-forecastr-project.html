@@ -44,12 +44,12 @@
 <li><a class="" href="git.html"><span class="header-section-number">3</span> Git</a></li>
 <li><a class="active" href="setup-of-the-forecastr-project.html"><span class="header-section-number">4</span> Setup of the forecastr project</a></li>
 <li><a class="" href="user-defined-utility-functions.html"><span class="header-section-number">5</span> User defined utility functions</a></li>
-<li><a class="" href="best-practices-for-time-series-manipulation.html"><span class="header-section-number">6</span> Best practices for time series manipulation</a></li>
+<li><a class="" href="best-practices-for-time-series-data-manipulation.html"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></li>
 <li><a class="" href="notes.html"><span class="header-section-number">7</span> Notes</a></li>
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/UHERO/forecastr_book">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -114,7 +114,7 @@ Refer to individual functions in not loaded packages by <code>namespace::functio
 <p>Resolve conflicts across multiple packages with <code>conflicted</code>:<br><a href="https://conflicted.r-lib.org" class="uri">https://conflicted.r-lib.org</a></p>
 <p>Core <code>tidyverse</code> packages:<br><a href="https://www.tidyverse.org" class="uri">https://www.tidyverse.org</a></p>
 <p>Non-core <code>tidyverse</code> packages (need to be loaded separately):<br><a href="https://magrittr.tidyverse.org" class="uri">https://magrittr.tidyverse.org</a><br><a href="https://lubridate.tidyverse.org" class="uri">https://lubridate.tidyverse.org</a></p>
-<p>Time series tools in <code>tsbox</code> (learn them and use them, very useful):<br><a href="https://www.tsbox.help" class="uri">https://www.tsbox.help</a></p>
+<p>Time series tools in <code>tsbox</code> (learn them and use them, very useful). All start with <code>ts_</code>.<br><a href="https://www.tsbox.help" class="uri">https://www.tsbox.help</a></p>
 <p>Forecasting with multi-equation behavioral models (only load <code>bimets</code> if actually doing forecasts, no need for data manipulation):<br><a href="https://cran.r-project.org/web/packages/bimets/index.html" class="uri">https://cran.r-project.org/web/packages/bimets/index.html</a></p>
 <p><code>bimets</code> depends on <code>xts</code> (if not loaded, can access necessary functions via <code>xts::function()</code>):<br><a href="https://cran.r-project.org/web/packages/xts/index.html" class="uri">https://cran.r-project.org/web/packages/xts/index.html</a></p>
 <p>Prefer using <code>tsbox</code> and <code>tidyverse</code> functions whenever possible, but understand the components and behavior of <code>xts</code> objects:
@@ -146,8 +146,8 @@ bnk_end &lt;- ymd("2060-12-31")</code></pre>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/03-setup.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/03-setup.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/UHERO/forecastr_book/blob/master/03-setup.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UHERO/forecastr_book/edit/master/03-setup.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
