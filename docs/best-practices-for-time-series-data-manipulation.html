@@ -92,8 +92,9 @@ sol_q$N_AT_US_SOLQ_ADDGRO[p(dat_end + qtrs(1), dat_end + qtrs(4))] &lt;- -0.35
 # extend history using growth rate
 sol_q$N_AT_US_SOLQ &lt;- sol_q$N_AT_US_SOLQ[p("", dat_end)] %&gt;%
   ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))</code></pre>
-<p>When determinig variable names dynamically, make multiple series in “bank” available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code>.
-For <code>xts</code> series on the left of the assignment use the <code>bank[,seriesname]</code> notation (it can also be used on the right).</p>
+<p>REVISE: CONSIDER USING ts_c().</p>
+<p>When determinig variable names dynamically, make multiple series in <em>bank</em> available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code>.
+For <em>existing</em> <code>xts</code> series on the left of the assignment use the <code>bank[,seriesname]</code> notation (it can also be used on the right).</p>
 <pre><code># calculate the difference between history and forecast
 hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_ADD")] &lt;- hist_a %$%
   (
@@ -149,7 +150,7 @@ hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] &lt;- hist_a_lst %$%
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>User guide to UHERO’s forecast processes</strong>" was written by Peter Fuleky. It was last built on 2022-01-03.</p>
+    <p>"<strong>User guide to UHERO’s forecast processes</strong>" was written by Peter Fuleky. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

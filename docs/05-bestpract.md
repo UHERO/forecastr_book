@@ -49,8 +49,10 @@ sol_q$N_AT_US_SOLQ <- sol_q$N_AT_US_SOLQ[p("", dat_end)] %>%
   ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))
 ```
 
-When determinig variable names dynamically, make multiple series in "bank" available by `%$%` and retrieve inividual series by `get_var()`. 
-For `xts` series on the left of the assignment use the `bank[,seriesname]` notation (it can also be used on the right).
+REVISE: CONSIDER USING ts_c().
+
+When determinig variable names dynamically, make multiple series in *bank* available by `%$%` and retrieve inividual series by `get_var()`. 
+For *existing* `xts` series on the left of the assignment use the `bank[,seriesname]` notation (it can also be used on the right).
 ```
 # calculate the difference between history and forecast
 hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_ADD")] <- hist_a %$%
