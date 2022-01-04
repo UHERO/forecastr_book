@@ -1,7 +1,7 @@
 ---
 title: "User guide to UHERO's forecast processes"
 author: "Peter Fuleky"
-date: "`r Sys.Date()`"
+date: "2022-01-03"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -21,9 +21,4 @@ Fill in description of the user guide here.
 
 Additional info.
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+

@@ -1,4 +1,4 @@
-# Resources for time series modeling with R
+# Notes
 
 ## Project setup
 
