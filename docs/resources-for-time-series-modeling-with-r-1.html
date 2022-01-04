@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Resources for time series modeling with R | User guide to UHERO’s forecast processes</title>
+<meta name="author" content="Peter Fuleky">
+<meta name="description" content="4.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Resources for time series modeling with R | User guide to UHERO’s forecast processes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="4.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Resources for time series modeling with R | User guide to UHERO’s forecast processes">
+<meta name="twitter:description" content="4.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">User guide to UHERO’s forecast processes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="resources-for-time-series-modeling-with-r.html"><span class="header-section-number">2</span> Resources for time series modeling with R</a></li>
+<li><a class="" href="git.html"><span class="header-section-number">3</span> Git</a></li>
+<li><a class="active" href="resources-for-time-series-modeling-with-r-1.html"><span class="header-section-number">4</span> Resources for time series modeling with R</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="resources-for-time-series-modeling-with-r-1" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Resources for time series modeling with R<a class="anchor" aria-label="anchor" href="#resources-for-time-series-modeling-with-r-1"><i class="fas fa-link"></i></a>
+</h1>
+<div id="project-setup-1" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Project setup<a class="anchor" aria-label="anchor" href="#project-setup-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Coding Conventions in R:</p>
+<p>Basic ideas for a reproducible workflow:</p>
+<p>Use RStudio projects with sub-directories</p>
+<ul>
+<li>R - R code.</li>
+<li>data/raw - data external to the project.</li>
+<li>data/processed - intermediate processed data.</li>
+<li>notes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc.</li>
+<li>output - reports, tables, etc.</li>
+<li>output/plots - plots.</li>
+<li>renv - used for library management (don’t edit).</li>
+<li>man - help files (don’t edit).</li>
+</ul>
+<p>Preference settings:</p>
+</div>
+<div id="git-1" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Git<a class="anchor" aria-label="anchor" href="#git-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>A quick overview:
+<a href="https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md" class="uri">https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md</a></p>
+</div>
+<div id="git-step-by-step-1" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Git step by step<a class="anchor" aria-label="anchor" href="#git-step-by-step-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you don’t have Git, install it:<br><a href="https://happygitwithr.com/install-git.html" class="uri">https://happygitwithr.com/install-git.html</a></p>
+<p>Make sure .gitignore contains the following files:<br>
+.Renviron
+.Rprofile</p>
+<p>Introduce yourself to Git:<br>
+In the shell (Terminal tab in RStudio):<br>
+git config –global user.name ‘Jane Doe’<br>
+git config –global user.email ‘<a href="mailto:jane@example.com" class="email">jane@example.com</a>’<br>
+git config –global –list</p>
+<p>For more advanced tasks, use GitHub Desktop:<br><a href="https://desktop.github.com" class="uri">https://desktop.github.com</a></p>
+<p>Store your GitHub PAT (Personal Access Token):<br><a href="https://happygitwithr.com/https-pat.html" class="uri">https://happygitwithr.com/https-pat.html</a></p>
+<p>Use one of three ways to add your project to GitHub:<br>
+Brand new project:<br><a href="https://happygitwithr.com/new-github-first.html" class="uri">https://happygitwithr.com/new-github-first.html</a><br>
+Existing project without version control:<br><a href="https://happygitwithr.com/existing-github-first.html" class="uri">https://happygitwithr.com/existing-github-first.html</a><br>
+Existing project under local version control:<br><a href="https://happygitwithr.com/existing-github-last.html" class="uri">https://happygitwithr.com/existing-github-last.html</a></p>
+<p>Troubleshooting if RStudio can’t detect Git:<br><a href="https://happygitwithr.com/rstudio-see-git.html" class="uri">https://happygitwithr.com/rstudio-see-git.html</a></p>
+<p>Git vocabulary:<br><a href="https://happygitwithr.com/git-basics.html" class="uri">https://happygitwithr.com/git-basics.html</a></p>
+<p>Remote setups (try to stick to GitHub first discussed above):<br><a href="https://happygitwithr.com/common-remote-setups.html" class="uri">https://happygitwithr.com/common-remote-setups.html</a></p>
+<p>Useful Git workflows and dealing with conflicts:<br><a href="https://happygitwithr.com/workflows-intro.html" class="uri">https://happygitwithr.com/workflows-intro.html</a><br><a href="https://happygitwithr.com/push-rejected.html" class="uri">https://happygitwithr.com/push-rejected.html</a><br><a href="https://happygitwithr.com/pull-tricky.html" class="uri">https://happygitwithr.com/pull-tricky.html</a></p>
+<p>Additional resources:<br><a href="https://happygitwithr.com/ideas-for-content.html" class="uri">https://happygitwithr.com/ideas-for-content.html</a></p>
+<p>Suggested workflow:<br>
+1) Initialize repository on GitHub.com under the UHERO account.<br>
+2) Clone it via RStudio project setup.<br>
+3) Commit changes, pull, resolve issues, push.
+3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.</p>
+<p>Render results from R scripts via Rmd:
+1) source your R code from within Rmd
+2) only render important results in Rmd chunks</p>
+<p>Use here() from the here package to write file paths</p>
+<p>Suppose you have a dataset in csv format. Use readr::read_csv(here::here(“The subfolder where your csv file resides,” “The CSV file.csv”))</p>
+<p>Do not use setwd() and rm(list = ls())</p>
+<p>Do not save the workspace to the .Rdta file</p>
+<p>Use library() not require()</p>
+<p>Use version control (useful for recording changes between different versions of a file over time - see below for Git integration)</p>
+<p>See the resources below:</p>
+<p>Best Practices &amp; Style Guide for Writing R Code: <a href="https://github.com/kmishra9/Best-Practices-for-Writing-R-Code" class="uri">https://github.com/kmishra9/Best-Practices-for-Writing-R-Code</a></p>
+<p>R Code – Best practices: <a href="https://www.r-bloggers.com/2018/09/r-code-best-practices/" class="uri">https://www.r-bloggers.com/2018/09/r-code-best-practices/</a></p>
+<p>R Best Practices by Krista L. DeStasio: <a href="https://kdestasio.github.io/post/r_best_practices/" class="uri">https://kdestasio.github.io/post/r_best_practices/</a></p>
+<p>Project-oriented workflow: <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/" class="uri">https://www.tidyverse.org/blog/2017/12/workflow-vs-script/</a></p>
+<p>R coding style best practices: <a href="https://www.datanovia.com/en/blog/r-coding-style-best-practices/" class="uri">https://www.datanovia.com/en/blog/r-coding-style-best-practices/</a></p>
+<p>What They Forgot to Teach You About R by Jennifer Bryan and Jim Hester: <a href="https://rstats.wtf/save-source.html" class="uri">https://rstats.wtf/save-source.html</a></p>
+<p>Conflicted: a new approach to resolving ambiguity: <a href="https://www.tidyverse.org/blog/2018/06/conflicted/" class="uri">https://www.tidyverse.org/blog/2018/06/conflicted/</a></p>
+<p>Introduction to renv package: <a href="https://rstudio.github.io/renv/articles/renv.html#future-work-1" class="uri">https://rstudio.github.io/renv/articles/renv.html#future-work-1</a></p>
+<p>Row-oriented workflows in R with the tidyverse: <a href="https://github.com/jennybc/row-oriented-workflows#readme" class="uri">https://github.com/jennybc/row-oriented-workflows#readme</a></p>
+<p>Structuring R projects: <a href="https://www.r-bloggers.com/2018/08/structuring-r-projects/" class="uri">https://www.r-bloggers.com/2018/08/structuring-r-projects/</a></p>
+<p>Defensive Programming in R: <a href="https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/#8" class="uri">https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/#8</a></p>
+<p>Nice R code: <a href="https://nicercode.github.io/blog/2013-04-05-projects/" class="uri">https://nicercode.github.io/blog/2013-04-05-projects/</a></p>
+<p>Workflow basics: <a href="https://r4ds.had.co.nz/workflow-basics.html" class="uri">https://r4ds.had.co.nz/workflow-basics.html</a></p>
+<p>Namespace package: <a href="https://r-pkgs.org/namespace.html" class="uri">https://r-pkgs.org/namespace.html</a></p>
+<p>Writing R packages in RStudio: <a href="https://ourcodingclub.github.io/tutorials/writing-r-package/" class="uri">https://ourcodingclub.github.io/tutorials/writing-r-package/</a></p>
+<p>It is dangerous to change state: <a href="https://withr.r-lib.org/articles/changing-and-restoring-state.html" class="uri">https://withr.r-lib.org/articles/changing-and-restoring-state.html</a></p>
+<p>The targets R Package User Manual: <a href="https://books.ropensci.org/targets/" class="uri">https://books.ropensci.org/targets/</a></p>
+<p>Github and R:</p>
+<p>Install git on the R system from here: <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p>
+<p>Go to RStudio → Global Options → Git/SVN → Make sure the box “Enable version control interface for RStudio projects” is checked</p>
+<p>Tell RStudio where your Git executable is in the Git/SVN under Global Options</p>
+<p>Create a new project in R (make sure the check box “Create a git repository” is checked)</p>
+<p>Create a new task file in R (New File → Rscript) and save it as a .R file</p>
+<p>To use Git version control on the .R file we need to commit that file</p>
+<p>To commit a file with Git in RStudio go to the Git tab in the top right pane in R → Select one or more files by checking the box</p>
+<p>Checking the box means that it is ready to be committed</p>
+<p>To actually commit the file click the “Commit” button (will open up a commit window)</p>
+<p>Include a commit message then click on the second “Commit” button</p>
+<p>For collaboration on Github:</p>
+<p>Load the usethis package and type in ?use_github in the R console</p>
+<p>In the Authentication section, click on GitHub personal access token (PAT)</p>
+<p>Click on the button to generate a new token</p>
+<p>Put a Note and use repo permission for your token and then click on “Generate token”</p>
+<p>Copy the token ID number (needs to be stored)</p>
+<p>Type in edit_r_environ() in the R console and then type in GITHUB_PAT =‘copy and paste token ID number here’</p>
+<p>In R console type in use_github(protocol =‘https,’ auth_token = Sys.getenv(“GITHUB_PAT”))</p>
+<p>Run it and will ask if you are sure. Select 3</p>
+<p>This will create a Github repository and will set up the syncing</p>
+<p>Another way to collaborate on Github (easier so follow this!):</p>
+<p>Go to <a href="http://github.com" class="uri">http://github.com</a> and create an account</p>
+<p>Create a new repository and give it a name (click “Add a README file)</p>
+<p>Go to R → Install the usethis package and include library(usethis) → Type in use_git_config(user.name = “Your Name on the GitHub account,” user.email = “Your email address on the GitHub account”)</p>
+<p>In the newly created repository, click the “Code” button on GitHub. Copy the URL under the “Clone with HTTPS”</p>
+<p>Go to R → New Project → Version Control → Git → Repository URL (copy and paste the HTTP URL from your Github repository) - this will connect what’s on the cloud on Github to your computer (also called cloning your repository)</p>
+<p>Can start a new R script and would be able to see the Git tab in R</p>
+<p>Can commit and include a commit message (will add the files to your depository)</p>
+<p>Need to push to fully make the changes go through and to show up on your GitHub account</p>
+<p>Under the History tab you would be able to see the changes you made and committed</p>
+<p>Can link the SSH keys from settings on your account and into R under the Git/SVN tab (have to create a SSH RSA key if it has not been created already)</p>
+<p>If there is a merge conflict when collaborating on making simultaneous changes together then pull first and then fix the merge conflict. Then can commit by finalizing on which changes to keep by eliminating the “====” and “&gt;&gt;&gt;&gt;” and push it out. The other person will have to pull in the changes in her hand.</p>
+<p>Creating a new branch will allow you to do things on your own. Click on the branch button to create a new branch and name it. A new branch will allow you to make changes on it and work separately on it. The other person will have to pull to see the new branch and your changes on it. In this way, we can work independently when working together at the same time. Then will have to merge the independent branches.</p>
+<p>Open a pull request by clicking on the Compare and pull request button on the Github site to merge the separate branches together. Can delete your separate branch if desired. Then go to R and pull the changes down.</p>
+<p>For .Renviron have to use specific user credentials such as user name, password, Github and udaman tokens.</p>
+<p>The .Rprofile can be ignored in gitignore if there is a problem with different paths across Macs and PCs.</p>
+<p>Resources:</p>
+<p>Happy Git and GitHub for the useR: <a href="https://happygitwithr.com/" class="uri">https://happygitwithr.com/</a></p>
+<p>Github for collaboration: <a href="https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md" class="uri">https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md</a></p>
+<p>My research workflow, based on Github: <a href="https://www.carlboettiger.info/2012/05/06/research-workflow.html" class="uri">https://www.carlboettiger.info/2012/05/06/research-workflow.html</a></p>
+<p>Collaborating with renv: <a href="https://rstudio.github.io/renv/articles/collaborating.html" class="uri">https://rstudio.github.io/renv/articles/collaborating.html</a></p>
+<p>R style guide: <a href="http://adv-r.had.co.nz/Style.html" class="uri">http://adv-r.had.co.nz/Style.html</a></p>
+<p>UHERO R style guide:</p>
+<p>Use block letters for R file names (because the NAS file server is case sensitive)</p>
+<p>Comment your code</p>
+<p>Time Series Modeling:</p>
+<p>Forecasting: Principles and Practice (3rd ed) by Rob J Hyndman and George Athanasopoulos : <a href="https://otexts.com/fpp3/index.html" class="uri">https://otexts.com/fpp3/index.html</a></p>
+<p>An Introduction to Statistical Learning (1st ed): <a href="https://www.statlearning.com" class="uri">https://www.statlearning.com</a></p>
+<p>Manipulating Time Series Data in R with xts &amp; zoo: <a href="https://rstudio-pubs-static.s3.amazonaws.com/288218_117e183e74964557a5da4fc5902fc671.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/288218_117e183e74964557a5da4fc5902fc671.html</a> <a href="https://rpubs.com/mpfoley73/504487" class="uri">https://rpubs.com/mpfoley73/504487</a> Time Series in R, The Power of xts and zoo: <a href="https://ugoproto.github.io/ugo_r_doc/time_series_in_r_the_power_of_xts_and_zoo/" class="uri">https://ugoproto.github.io/ugo_r_doc/time_series_in_r_the_power_of_xts_and_zoo/</a> xts Cheat Sheet: Time Series in R: <a href="https://www.r-bloggers.com/2017/05/xts-cheat-sheet-time-series-in-r/" class="uri">https://www.r-bloggers.com/2017/05/xts-cheat-sheet-time-series-in-r/</a></p>
+<p>R For Data Science Cheat Sheet by DataCamp: <a href="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/xts_Cheat_Sheet_R.pdf" class="uri">https://s3.amazonaws.com/assets.datacamp.com/blog_assets/xts_Cheat_Sheet_R.pdf</a></p>
+<p>Evaluate the R packages: gets, ARDL, etc.</p>
+<p>The gets package is used for Multi-path General-to-Specific (GETS) modelling of the mean and/or variance of a regression, and Indicator Saturation (ISAT) methods for detecting structural breaks in the mean.https://cran.r-project.org/web/packages/gets/index.html</p>
+<p>The ARDL package creates complex autoregressive distributed lag (ARDL) models providing just the order and automatically constructs the underlying unrestricted and restricted error correction model (ECM). It also performs the bounds-test for cointegration as described in Pesaran et al. (2001). <a href="https://cran.r-project.org/web/packages/ARDL/index.html" class="uri">https://cran.r-project.org/web/packages/ARDL/index.html</a> <a href="https://github.com/Natsiopoulos/ARDL" class="uri">https://github.com/Natsiopoulos/ARDL</a></p>
+<p>Tidy tools for time series modeling under tidyverts: <a href="https://tidyverts.org" class="uri">https://tidyverts.org</a> - The fable package applies tidyverse principles to time series modeling used for forecasting: <a href="https://fable.tidyverts.org/" class="uri">https://fable.tidyverts.org/</a> - The tsibble package provides a tidy data structure for time series: <a href="https://cran.r-project.org/web/packages/tsibble/index.html" class="uri">https://cran.r-project.org/web/packages/tsibble/index.html</a> - The tsibbledata package provide a different types of datasets in the tsibble data structure: <a href="https://cran.r-project.org/web/packages/tsibbledata/index.html" class="uri">https://cran.r-project.org/web/packages/tsibbledata/index.html</a> - The tsibbletalk package introduces shared key to the tsibble, to easily {crosstalk} between plots on both client and server sides (i.e. with or without shiny): <a href="https://cran.r-project.org/web/packages/tsibbletalk/tsibbletalk.pdf-" class="uri">https://cran.r-project.org/web/packages/tsibbletalk/tsibbletalk.pdf-</a> The feasts package provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data: <a href="https://cran.r-project.org/web/packages/feasts/index.html" class="uri">https://cran.r-project.org/web/packages/feasts/index.html</a> - The fable.prohphet package provides an interface allowing the prophet forecasting procedure to be used within the fable framework: <a href="https://cran.r-project.org/web/packages/fable.prophet/vignettes/intro.html" class="uri">https://cran.r-project.org/web/packages/fable.prophet/vignettes/intro.html</a></p>
+<p>The xts or Extensible Time Series package provides an extensible time series class, enabling uniform handling of many R time series classes : <a href="https://cran.r-project.org/web/packages/xts/index.html" class="uri">https://cran.r-project.org/web/packages/xts/index.html</a> xts: Extensible Time Series: <a href="https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf" class="uri">https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf</a></p>
+<p>Think about dummies, breaks, outliers</p>
+<p>Figure out how bimets deals with ragged edge, add-factors, goal search</p>
+<p>The bimets is an R package developed with the aim of easing time series analysis and building up a framework that facilitates the definition, estimation and simulation of simultaneous equation models: <a href="https://cran.r-project.org/web/packages/bimets/index.htmlbimets" class="uri">https://cran.r-project.org/web/packages/bimets/index.htmlbimets</a> - Time Series And Econometric Modeling In R: <a href="https://github.com/cran/bimets" class="uri">https://github.com/cran/bimets</a> <a href="https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf" class="uri">https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf</a></p>
+<p>Structural Equation Models (SEM): <a href="https://rviews.rstudio.com/2021/01/22/sem-time-series-modeling/" class="uri">https://rviews.rstudio.com/2021/01/22/sem-time-series-modeling/</a></p>
+<p>Look at tidy models</p>
+<p>The tidymodels package is a collection of packages for modeling and machine learning using tidyverse principles: <a href="https://www.tidymodels.org" class="uri">https://www.tidymodels.org</a></p>
+<p>Port the Gekko code into R: <a href="http://t-t.dk/gekko/" class="uri">http://t-t.dk/gekko/</a></p>
+<p>Look at DiagrammeR package, also the Gantt charts it can produce</p>
+<p><a href="https://rich-iannone.github.io/DiagrammeR/" class="uri">https://rich-iannone.github.io/DiagrammeR/</a></p>
+<p>A Beginner’s Guide to Learning R:</p>
+<p>A (very) short introduction to R: <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf" class="uri">https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf</a></p>
+<p>Rstudio Education: <a href="https://github.com/rstudio-education" class="uri">https://github.com/rstudio-education</a></p>
+<p>Remaster the tidyverse: <a href="https://github.com/rstudio-education/remaster-the-tidyverse" class="uri">https://github.com/rstudio-education/remaster-the-tidyverse</a></p>
+<p>Introduction to R and Rstudio: <a href="https://jules32.github.io/2016-07-12-Oxford/R_RStudio/" class="uri">https://jules32.github.io/2016-07-12-Oxford/R_RStudio/</a></p>
+<p>An intro to R for new programmers: <a href="https://rforcats.net" class="uri">https://rforcats.net</a></p>
+<p>fasteR: Fast Lane to Learning R!: <a href="https://github.com/matloff/fasteR" class="uri">https://github.com/matloff/fasteR</a></p>
+<p>RStudio Cheatsheets: <a href="https://rstudio.com/resources/cheatsheets/" class="uri">https://rstudio.com/resources/cheatsheets/</a></p>
+<p>R for Data Science: <a href="https://r4ds.had.co.nz" class="uri">https://r4ds.had.co.nz</a></p>
+<p>Data wrangling, exploration, and analysis with R: <a href="https://stat545.com" class="uri">https://stat545.com</a></p>
+<p>R Markdown: The Definitive Guide: <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
+<p>Data Visualization with R: <a href="https://rkabacoff.github.io/datavis/" class="uri">https://rkabacoff.github.io/datavis/</a></p>
+<p>Modern R with the tidyverse: <a href="https://b-rodrigues.github.io/modern_R/" class="uri">https://b-rodrigues.github.io/modern_R/</a></p>
+<p>R Cookbook, 2nd Edition: <a href="https://rc2e.com" class="uri">https://rc2e.com</a></p>
+<p>Advanced R by Hadley Wickham: <a href="http://adv-r.had.co.nz" class="uri">http://adv-r.had.co.nz</a></p>
+<p>UC Business Analytics R Programming Guide: <a href="http://uc-r.github.io/descriptive" class="uri">http://uc-r.github.io/descriptive</a></p>
+<p>R Programming for Data Science: <a href="https://bookdown.org/rdpeng/rprogdatascience/" class="uri">https://bookdown.org/rdpeng/rprogdatascience/</a></p>
+<p>Hands-On Programming with R: <a href="https://rstudio-education.github.io/hopr/" class="uri">https://rstudio-education.github.io/hopr/</a></p>
+<p>Efficient R programming: <a href="https://csgillespie.github.io/efficientR/index.html" class="uri">https://csgillespie.github.io/efficientR/index.html</a></p>
+<p>R for Fledglings: <a href="http://www.uvm.edu/~tdonovan/RforFledglings/index.html" class="uri">http://www.uvm.edu/~tdonovan/RforFledglings/index.html</a></p>
+<p>R Intermediate Level (includes applications):</p>
+<p>Advanced Statistical Computing: <a href="https://bookdown.org/rdpeng/advstatcomp/" class="uri">https://bookdown.org/rdpeng/advstatcomp/</a></p>
+<p>Feature Engineering and Selection: A Practical Approach for Predictive Models: <a href="http://www.feat.engineering/index.html" class="uri">http://www.feat.engineering/index.html</a></p>
+<p>Advanced Quantitative Methods: <a href="https://uclspp.github.io/PUBLG088/index.html" class="uri">https://uclspp.github.io/PUBLG088/index.html</a></p>
+<p>Principles of Econometrics with R: <a href="https://bookdown.org/ccolonescu/RPoE4/" class="uri">https://bookdown.org/ccolonescu/RPoE4/</a></p>
+<p>Modern Data Analysis for Economics: <a href="https://jiamingmao.github.io/data-analysis/Resources/" class="uri">https://jiamingmao.github.io/data-analysis/Resources/</a></p>
+<p>Data Science for Economists: <a href="https://github.com/uo-ec607/lectures" class="uri">https://github.com/uo-ec607/lectures</a></p>
+<p>Data Science for Psychologists: <a href="https://bookdown.org/hneth/ds4psy/10-time.html" class="uri">https://bookdown.org/hneth/ds4psy/10-time.html</a></p>
+<p>Rewriting R code in C++: <a href="https://adv-r.hadley.nz/rcpp.html" class="uri">https://adv-r.hadley.nz/rcpp.html</a></p>
+<p>Writing R Extensions: <a href="https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html" class="uri">https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html</a></p>
+<p>Other R packages for data analysis:</p>
+<p>The data.table package is used for fast aggregation of large data (e.g. 100GB in RAM), fast ordered joins, fast add/modify/delete of columns by group using no copies at all, list columns, friendly and fast character- separated-value read/write: <a href="https://cran.r-project.org/web/packages/data.table/" class="uri">https://cran.r-project.org/web/packages/data.table/</a></p>
+<p>The mlr3 (Lang et al. 2019) package and ecosystem provide a generic, object-oriented, and extensible framework for classification, regression, survival analysis, and other machine learning tasks for the R: <a href="https://mlr3book.mlr-org.com" class="uri">https://mlr3book.mlr-org.com</a></p>
+<p>purr package tutorial: <a href="https://jennybc.github.io/purrr-tutorial/" class="uri">https://jennybc.github.io/purrr-tutorial/</a></p>
+<p>Data Visualization with R:</p>
+<p>Data Analysis and Visualization Using R: <a href="http://varianceexplained.org/RData/" class="uri">http://varianceexplained.org/RData/</a></p>
+<p>Data Analysis and Visualization in R for Ecologists: <a href="https://datacarpentry.org/R-ecology-lesson/" class="uri">https://datacarpentry.org/R-ecology-lesson/</a></p>
+<p>Data Visualization with R by Rob Kabacoff: <a href="https://rkabacoff.github.io/datavis/" class="uri">https://rkabacoff.github.io/datavis/</a></p>
+<p>R Graphics Cookbook, 2nd edition: <a href="https://r-graphics.org" class="uri">https://r-graphics.org</a></p>
+<p>ggplot2: elegant graphics for data analysis: <a href="https://ggplot2-book.org" class="uri">https://ggplot2-book.org</a></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="git.html"><span class="header-section-number">3</span> Git</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#resources-for-time-series-modeling-with-r-1"><span class="header-section-number">4</span> Resources for time series modeling with R</a></li>
+<li><a class="nav-link" href="#project-setup-1"><span class="header-section-number">4.1</span> Project setup</a></li>
+<li><a class="nav-link" href="#git-1"><span class="header-section-number">4.2</span> Git</a></li>
+<li><a class="nav-link" href="#git-step-by-step-1"><span class="header-section-number">4.3</span> Git step by step</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/03-notes.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/03-notes.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>User guide to UHERO’s forecast processes</strong>" was written by Peter Fuleky. It was last built on 2022-01-01.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

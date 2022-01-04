@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Best practices for time series data manipulation | User guide to UHERO’s forecast processes</title>
+<meta name="author" content="Peter Fuleky">
+<meta name="description" content="Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g. N@US.A). Eliminate special characters using a long tibble. hist_q_mod &lt;-...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Best practices for time series data manipulation | User guide to UHERO’s forecast processes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g. N@US.A). Eliminate special characters using a long tibble. hist_q_mod &lt;-...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Best practices for time series data manipulation | User guide to UHERO’s forecast processes">
+<meta name="twitter:description" content="Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g. N@US.A). Eliminate special characters using a long tibble. hist_q_mod &lt;-...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">User guide to UHERO’s forecast processes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="project-setup.html"><span class="header-section-number">2</span> Project setup</a></li>
+<li><a class="" href="git.html"><span class="header-section-number">3</span> Git</a></li>
+<li><a class="" href="setup-of-the-forecastr-project.html"><span class="header-section-number">4</span> Setup of the forecastr project</a></li>
+<li><a class="" href="user-defined-utility-functions.html"><span class="header-section-number">5</span> User defined utility functions</a></li>
+<li><a class="active" href="best-practices-for-time-series-data-manipulation.html"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></li>
+<li><a class="" href="notes.html"><span class="header-section-number">7</span> Notes</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UHERO/forecastr_book">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="best-practices-for-time-series-data-manipulation" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Best practices for time series data manipulation<a class="anchor" aria-label="anchor" href="#best-practices-for-time-series-data-manipulation"><i class="fas fa-link"></i></a>
+</h1>
+<p>Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g. <code>N@US.A</code>).
+Eliminate special characters using a long tibble.</p>
+<pre><code>hist_q_mod &lt;- hist_q %&gt;%
+  ts_tbl() %&gt;%
+  mutate(id = str_replace_all(id, c("@" = "_AT_", "\\." = "_")))
+  
+# revert back to udaman notation
+hist_q &lt;- hist_q_mod %&gt;%
+  ts_tbl() %&gt;%
+  mutate(id = str_replace_all(id, c("_AT_" = "@", "_Q" = "\\.Q")))</code></pre>
+<p>Use the <code>xts</code> format whenever possible. Take advantage of <code>make_xts()</code> (and its defaults, e.g. start and end period).</p>
+<p>Make sure all series are defined on the same range (default start = bnk_start, end = bnk_end).</p>
+<pre><code>make_xts(per = "year") %&gt;%   # using default range
+  ts_tbl() %&gt;% 
+  select(time) %&gt;% 
+  left_join(read_csv(here("data/raw", str_glue("{exp_id_a}.csv"))), by = c("time" = "time")) %&gt;%
+  arrange(time) %&gt;%
+  ts_long() %&gt;%
+  ts_xts()</code></pre>
+<p>Don’t break up multivariate time series (think databank) into individual series.
+If referring directly to an individual series, use the <code>bank$series</code> notation.</p>
+<pre><code># find the last value in history
+dat_end &lt;- find_end(hist_q$N_AT_US_Q)</code></pre>
+<p>Use <code>[p()]</code> to select a period in <code>xts</code> objects, otherwise use <code>ts_span()</code>.</p>
+<pre><code># extend series with addfactored level
+sol_q$N_AT_US_SOLQ &lt;- hist_q$N_AT_US_Q[p("", dat_end)] %&gt;%
+  ts_bind(sol_q$NCEN_AT_US_SOLQ[p(dat_end, "")] +
+    as.numeric(sol_q$N_AT_US_SOLQ_ADDLEV[dat_end]))
+    
+# addfactor for growth
+sol_q$N_AT_US_SOLQ_ADDGRO[p(dat_end + qtrs(1), dat_end + qtrs(4))] &lt;- -0.35
+
+# extend history using growth rate
+sol_q$N_AT_US_SOLQ &lt;- sol_q$N_AT_US_SOLQ[p("", dat_end)] %&gt;%
+  ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))</code></pre>
+<p>When determinig variable names dynamically, make multiple series in “bank” available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code>.
+For <code>xts</code> series on the left of the assignment use the <code>bank[,seriesname]</code> notation (it can also be used on the right).</p>
+<pre><code># calculate the difference between history and forecast
+hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_ADD")] &lt;- hist_a %$%
+  (
+     get_var("E{ser_i}_AT_{cnty_i}") -
+      get_var("E{ser_i}_AT_{cnty_i}_SH") *
+        get_var("E_NF_AT_{cnty_i}") *
+        (get_var("E{ser_i}_AT_NBI") / `E_NF_AT_NBI`)
+  )</code></pre>
+<p>Bimets requires data in a particular <code>tslist</code> format. Convert <code>xts</code> to <code>tslist</code> using <code>ts_tslist()</code>.</p>
+<pre><code># store series as tslist
+hist_a_lst &lt;- hist_a %&gt;% 
+  ts_tslist() %&gt;% 
+
+# convert series to bimets format
+hist_a_bimets &lt;- hist_a_lst %&gt;%
+  map(as.bimets)
+
+# bimets strips the attributes, need to reset them for further manipulation by tsbox
+hist_a &lt;- hist_a_bimets %&gt;% 
+  set_attr("class", c("tslist", "list")) %&gt;% 
+  ts_xts()
+</code></pre>
+<p>For series collected in a <code>tslist</code> on the left of the assignment use the <code>bank[[seriesname]]</code> notation (it can also be used on the right).</p>
+<pre><code># calculate the difference between history and forecast
+hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] &lt;- hist_a_lst %$%
+  (
+     get_var("E{ser_i}_AT_{cnty_i}") -
+      get_var("E{ser_i}_AT_{cnty_i}_SH") *
+        get_var("E_NF_AT_{cnty_i}") *
+        (get_var("E{ser_i}_AT_NBI") / `E_NF_AT_NBI`)
+  )</code></pre>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="user-defined-utility-functions.html"><span class="header-section-number">5</span> User defined utility functions</a></div>
+<div class="next"><a href="notes.html"><span class="header-section-number">7</span> Notes</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#best-practices-for-time-series-data-manipulation"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UHERO/forecastr_book/blob/main/05-bestpract.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UHERO/forecastr_book/edit/main/05-bestpract.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>User guide to UHERO’s forecast processes</strong>" was written by Peter Fuleky. It was last built on 2022-01-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
