@@ -67,19 +67,22 @@ Eliminate special characters using a long tibble.</p>
 hist_q &lt;- hist_q_mod %&gt;%
   ts_tbl() %&gt;%
   mutate(id = str_replace_all(id, c("_AT_" = "@", "_Q" = "\\.Q")))</code></pre>
-<p>Use the <code>xts</code> format whenever possible. Take advantage of <code>make_xts()</code> (and its defaults, e.g. start and end period).</p>
-<p>Make sure all series are defined on the same range (default start = bnk_start, end = bnk_end).</p>
-<pre><code>make_xts(per = "year") %&gt;%   # using default range
-  ts_tbl() %&gt;% 
-  select(time) %&gt;% 
-  left_join(read_csv(here("data/raw", str_glue("{exp_id_a}.csv"))), by = c("time" = "time")) %&gt;%
+<p>Use the <code>xts</code> format whenever possible. Observations in a multivariate <code>xts</code> can be accessed by time and series name in two ways: <code>mul_var_xts[time, ser_name]</code> or <code>mul_var_xts$ser_name[time]</code>.</p>
+<p>Make sure all series are defined on the same range (default start = bnk_start, end = bnk_end). Take advantage of <code>make_xts()</code> (and its defaults, e.g. start and end period).</p>
+<pre><code>import_xts &lt;- read_csv(here("data/raw", str_glue("{exp_id_a}.csv"))) %&gt;%
   arrange(time) %&gt;%
   ts_long() %&gt;%
-  ts_xts()</code></pre>
-<p>Don’t break up multivariate time series (think databank) into individual series.
-If referring directly to an individual series, use the <code>bank$series</code> notation.</p>
+  ts_xts() %&gt;%
+  ts_c(
+    temp = make_xts(per = "year") # temporary variable to force start and end in import_xts
+  ) %&gt;%
+  extract(, str_subset(colnames(.), "temp", negate = TRUE)) # remove temp</code></pre>
+<p>Don’t break up multivariate time series (think databank) into individual series in the global environment.</p>
+<p>If referring directly to a series with a static name, use the <code>bank$series</code> notation (this can be used on both the right and the left hand side of the assignment, while <code>bank[, series]</code> can only be used for existing series in bank).</p>
 <pre><code># find the last value in history
-dat_end &lt;- find_end(hist_q$N_AT_US_Q)</code></pre>
+dat_end &lt;- find_end(hist_q$N_AT_US_Q)
+# same as
+dat_end &lt;- find_end(hist_q[, N_AT_US_Q])</code></pre>
 <p>Use <code>[p()]</code> to select a period in <code>xts</code> objects, otherwise use <code>ts_span()</code>.</p>
 <pre><code># extend series with addfactored level
 sol_q$N_AT_US_SOLQ &lt;- hist_q$N_AT_US_Q[p("", dat_end)] %&gt;%
@@ -92,17 +95,17 @@ sol_q$N_AT_US_SOLQ_ADDGRO[p(dat_end + qtrs(1), dat_end + qtrs(4))] &lt;- -0.35
 # extend history using growth rate
 sol_q$N_AT_US_SOLQ &lt;- sol_q$N_AT_US_SOLQ[p("", dat_end)] %&gt;%
   ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))</code></pre>
-<p>REVISE: CONSIDER USING ts_c().</p>
-<p>When determinig variable names dynamically, make multiple series in <em>bank</em> available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code>.
-For <em>existing</em> <code>xts</code> series on the left of the assignment use the <code>bank[,seriesname]</code> notation (it can also be used on the right).</p>
-<pre><code># calculate the difference between history and forecast
-hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_ADD")] &lt;- hist_a %$%
-  (
-     get_var("E{ser_i}_AT_{cnty_i}") -
-      get_var("E{ser_i}_AT_{cnty_i}_SH") *
-        get_var("E_NF_AT_{cnty_i}") *
-        (get_var("E{ser_i}_AT_NBI") / `E_NF_AT_NBI`)
-  )</code></pre>
+<p>The <code>bank[,seriesname]</code> notation only works for <em>existing</em> <code>xts</code> series on the left of the assignment (it can also be used on the right). <code>seriesname</code> can be determined at runtime</p>
+<pre><code># initialize the lhs series in the "bank"
+hist_a$temp &lt;- make_xts()
+names(hist_a)[names(hist_a) == "temp"] &lt;- str_glue("E{ser_i}_AT_{cnty_i}_ADD")
+
+# calculate expression and assign to lhs
+hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- 
+  (hist_a[, str_glue("E{ser_i}_AT_{cnty_i}")] / hist_a[, str_glue("E_NF_AT_{cnty_i}")])</code></pre>
+<p>Alternatively, make multiple series in <em>bank</em> available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code> on the right.</p>
+<pre><code>hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- hist_a %$%
+  (get_var("E{ser_i}_AT_{cnty_i}") / get_var("E_NF_AT_{cnty_i}"))</code></pre>
 <p>Bimets requires data in a particular <code>tslist</code> format. Convert <code>xts</code> to <code>tslist</code> using <code>ts_tslist()</code>.</p>
 <pre><code># store series as tslist
 hist_a_lst &lt;- hist_a %&gt;% 
@@ -115,25 +118,28 @@ hist_a_bimets &lt;- hist_a_lst %&gt;%
 # bimets strips the attributes, need to reset them for further manipulation by tsbox
 hist_a &lt;- hist_a_bimets %&gt;% 
   set_attr("class", c("tslist", "list")) %&gt;% 
-  ts_xts()
-</code></pre>
-<p>For series collected in a <code>tslist</code> on the left of the assignment use the <code>bank[[seriesname]]</code> notation (it can also be used on the right).</p>
-<pre><code># calculate the difference between history and forecast
+  ts_xts()</code></pre>
+<p>For series collected in a <code>tslist</code> on the left of the assignment use the <code>bank[[seriesname]]</code> notation (it can also be used on the right). Here the lhs series <code>seriesname</code> does not need to exist, and it might easier to work with <code>tslist</code> than <code>xts</code> when variable names are determined at runtime.</p>
+<pre><code># similar to above with a tslist variable
 hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] &lt;- hist_a_lst %$%
-  (
-     get_var("E{ser_i}_AT_{cnty_i}") -
-      get_var("E{ser_i}_AT_{cnty_i}_SH") *
-        get_var("E_NF_AT_{cnty_i}") *
-        (get_var("E{ser_i}_AT_NBI") / `E_NF_AT_NBI`)
-  )</code></pre>
+  (get_var("E{ser_i}_AT_{cnty_i}") - get_var("E_NF_AT_{cnty_i}"))</code></pre>
+<div id="harness-the-power-of-tsbox" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Harness the power of tsbox<a class="anchor" aria-label="anchor" href="#harness-the-power-of-tsbox"><i class="fas fa-link"></i></a>
+</h2>
+<p>Use the converter functions in <a href="https://www.tsbox.help/reference/index.html"><code>tsbox</code></a> to shift between various data types (<code>ts_tbl()</code>, <code>ts_xts()</code>, <code>ts_ts()</code>, <code>ts_tslist()</code>) and reshaping to the long and wide format (<code>ts_long()</code>, <code>ts_wide()</code>). <code>tsbox</code> further contains funtions for time period selection (<code>ts_span()</code>), merging and extension operations (<code>ts_c()</code>, <code>ts_bind()</code>, <code>ts_chain()</code>), transformations (<code>ts_lag()</code>, <code>ts_pc()</code>, <code>ts_pca()</code>, <code>ts_pcy()</code>, <code>ts_diff()</code>, <code>ts_diffy()</code>), and index construction (<code>ts_compound()</code>, <code>ts_index()</code>). Consider these before turning for solutions to <code>dplyr</code> or <code>tidyr</code>.</p>
 
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="user-defined-utility-functions.html"><span class="header-section-number">5</span> User defined utility functions</a></div>
 <div class="next"><a href="notes.html"><span class="header-section-number">7</span> Notes</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#best-practices-for-time-series-data-manipulation"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#best-practices-for-time-series-data-manipulation"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></li>
+<li><a class="nav-link" href="#harness-the-power-of-tsbox"><span class="header-section-number">6.1</span> Harness the power of tsbox</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

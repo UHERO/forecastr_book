@@ -1,5 +1,5 @@
 about
-usage
+contents
 project-setup
 a-quick-overview
 basic-ideas-for-a-reproducible-workflow
@@ -36,6 +36,7 @@ qtom
 qtom1
 qtrs
 best-practices-for-time-series-data-manipulation
+harness-the-power-of-tsbox
 notes
 project-setup-1
 git-1
