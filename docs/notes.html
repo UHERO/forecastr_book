@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 7 Notes | User guide to UHERO’s forecast processes</title>
+<title>Chapter 8 Notes | User guide to UHERO’s forecast processes</title>
 <meta name="author" content="Peter Fuleky">
-<meta name="description" content="7.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
+<meta name="description" content="8.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 7 Notes | User guide to UHERO’s forecast processes">
+<meta property="og:title" content="Chapter 8 Notes | User guide to UHERO’s forecast processes">
 <meta property="og:type" content="book">
-<meta property="og:description" content="7.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
+<meta property="og:description" content="8.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 Notes | User guide to UHERO’s forecast processes">
-<meta name="twitter:description" content="7.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
+<meta name="twitter:title" content="Chapter 8 Notes | User guide to UHERO’s forecast processes">
+<meta name="twitter:description" content="8.1 Project setup Coding Conventions in R: Basic ideas for a reproducible workflow: Use RStudio projects with sub-directories R - R code. data/raw - data external to the project. data/processed -...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -45,7 +45,8 @@
 <li><a class="" href="setup-of-the-forecastr-project.html"><span class="header-section-number">4</span> Setup of the forecastr project</a></li>
 <li><a class="" href="user-defined-utility-functions.html"><span class="header-section-number">5</span> User defined utility functions</a></li>
 <li><a class="" href="best-practices-for-time-series-data-manipulation.html"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></li>
-<li><a class="active" href="notes.html"><span class="header-section-number">7</span> Notes</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">7</span> Model selection</a></li>
+<li><a class="active" href="notes.html"><span class="header-section-number">8</span> Notes</a></li>
 </ul>
 
         <div class="book-extra">
@@ -53,13 +54,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="notes" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="notes" class="section level1" number="8">
 <h1>
-<span class="header-section-number">7</span> Notes<a class="anchor" aria-label="anchor" href="#notes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Notes<a class="anchor" aria-label="anchor" href="#notes"><i class="fas fa-link"></i></a>
 </h1>
-<div id="project-setup-1" class="section level2" number="7.1">
+<div id="project-setup-1" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">7.1</span> Project setup<a class="anchor" aria-label="anchor" href="#project-setup-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Project setup<a class="anchor" aria-label="anchor" href="#project-setup-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Coding Conventions in R:</p>
 <p>Basic ideas for a reproducible workflow:</p>
@@ -76,16 +77,16 @@
 </ul>
 <p>Preference settings:</p>
 </div>
-<div id="git-1" class="section level2" number="7.2">
+<div id="git-1" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">7.2</span> Git<a class="anchor" aria-label="anchor" href="#git-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Git<a class="anchor" aria-label="anchor" href="#git-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>A quick overview:
 <a href="https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md" class="uri">https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md</a></p>
 </div>
-<div id="git-step-by-step-1" class="section level2" number="7.3">
+<div id="git-step-by-step-1" class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">7.3</span> Git step by step<a class="anchor" aria-label="anchor" href="#git-step-by-step-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Git step by step<a class="anchor" aria-label="anchor" href="#git-step-by-step-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you don’t have Git, install it:<br><a href="https://happygitwithr.com/install-git.html" class="uri">https://happygitwithr.com/install-git.html</a></p>
 <p>Make sure .gitignore contains the following files:<br>
@@ -248,15 +249,15 @@ Existing project under local version control:<br><a href="https://happygitwithr.
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="best-practices-for-time-series-data-manipulation.html"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></div>
+<div class="prev"><a href="model-selection.html"><span class="header-section-number">7</span> Model selection</a></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#notes"><span class="header-section-number">7</span> Notes</a></li>
-<li><a class="nav-link" href="#project-setup-1"><span class="header-section-number">7.1</span> Project setup</a></li>
-<li><a class="nav-link" href="#git-1"><span class="header-section-number">7.2</span> Git</a></li>
-<li><a class="nav-link" href="#git-step-by-step-1"><span class="header-section-number">7.3</span> Git step by step</a></li>
+<li><a class="nav-link" href="#notes"><span class="header-section-number">8</span> Notes</a></li>
+<li><a class="nav-link" href="#project-setup-1"><span class="header-section-number">8.1</span> Project setup</a></li>
+<li><a class="nav-link" href="#git-1"><span class="header-section-number">8.2</span> Git</a></li>
+<li><a class="nav-link" href="#git-step-by-step-1"><span class="header-section-number">8.3</span> Git step by step</a></li>
 </ul>
 
       <div class="book-extra">
@@ -274,7 +275,7 @@ Existing project under local version control:<br><a href="https://happygitwithr.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>User guide to UHERO’s forecast processes</strong>" was written by Peter Fuleky. It was last built on 2022-01-04.</p>
+    <p>"<strong>User guide to UHERO’s forecast processes</strong>" was written by Peter Fuleky. It was last built on 2022-01-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

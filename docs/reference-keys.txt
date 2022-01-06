@@ -37,6 +37,11 @@ qtom1
 qtrs
 best-practices-for-time-series-data-manipulation
 harness-the-power-of-tsbox
+model-selection
+main-user-settings
+data-preparation-tidyverse
+model-selection-steps-gets
+produce-a-quasi-forecast-with-the-selected-model-bimets
 notes
 project-setup-1
 git-1

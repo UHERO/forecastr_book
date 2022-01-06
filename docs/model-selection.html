@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Model selection | User guide to UHERO’s forecast processes</title>
+<meta name="author" content="Peter Fuleky">
+<meta name="description" content="The model selection process can be run lin-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Model selection | User guide to UHERO’s forecast processes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="The model selection process can be run lin-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Model selection | User guide to UHERO’s forecast processes">
+<meta name="twitter:description" content="The model selection process can be run lin-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">User guide to UHERO’s forecast processes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="project-setup.html"><span class="header-section-number">2</span> Project setup</a></li>
+<li><a class="" href="git.html"><span class="header-section-number">3</span> Git</a></li>
+<li><a class="" href="setup-of-the-forecastr-project.html"><span class="header-section-number">4</span> Setup of the forecastr project</a></li>
+<li><a class="" href="user-defined-utility-functions.html"><span class="header-section-number">5</span> User defined utility functions</a></li>
+<li><a class="" href="best-practices-for-time-series-data-manipulation.html"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></li>
+<li><a class="active" href="model-selection.html"><span class="header-section-number">7</span> Model selection</a></li>
+<li><a class="" href="notes.html"><span class="header-section-number">8</span> Notes</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UHERO/forecastr_book">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="model-selection" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Model selection<a class="anchor" aria-label="anchor" href="#model-selection"><i class="fas fa-link"></i></a>
+</h1>
+<p>The model selection process can be run lin-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model selection results in an easier to digest html file. Running the full script (source) takes about 1 minute.</p>
+<div id="main-user-settings" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Main user settings<a class="anchor" aria-label="anchor" href="#main-user-settings"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>End of period used for model selection.<br>
+</li>
+<li>End of period used for estimation (selected model can be re-estimated for different sample).<br>
+</li>
+<li>Start of quasi-forecast period (for model evaluation).<br>
+</li>
+<li>End of quasi-forecast period (or NULL for the end of history).<br>
+</li>
+<li>Response variable.<br>
+</li>
+<li>List of predictors.</li>
+</ul>
+</div>
+<div id="data-preparation-tidyverse" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Data preparation (<code>tidyverse</code>)<a class="anchor" aria-label="anchor" href="#data-preparation-tidyverse"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Download all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.<br>
+</li>
+<li>Log-transform all variables.<br>
+</li>
+<li>Load (create) all indicators (dummies for impulse, level shift, seasonal) and trend.<br>
+</li>
+<li>Combine all variables into a single dataset.<br>
+</li>
+<li>Set date range for model selection.<br>
+</li>
+<li>Generate 8 lags of predictors.<br>
+</li>
+<li>Filter data set down to specific variables considered in a particular model, including trend and season dummies.</li>
+</ul>
+</div>
+<div id="model-selection-steps-gets" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Model selection steps (<code>gets</code>)<a class="anchor" aria-label="anchor" href="#model-selection-steps-gets"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Formulate a general unrestricted model.<br>
+</li>
+<li>Run the gets (general to specific) model selection algorithm.<br>
+</li>
+<li>Identify outliers in the relationship.<br>
+</li>
+<li>Repeat gets model selection over specific model and outliers.<br>
+</li>
+<li>Verify that no additional outliers arise due to greater model parsimony.<br>
+</li>
+<li>If estimation period is shorter than model selection period, remove predictors containing zeros only (e.g. outlier past the end of estimation period).<br>
+</li>
+<li>Re-estimate final model.<br>
+</li>
+<li>Save model equation as a txt file (not plugging in estimated coefficients here). If happy with the model, copy this equation into file containing all model equations.</li>
+</ul>
+</div>
+<div id="produce-a-quasi-forecast-with-the-selected-model-bimets" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)<a class="anchor" aria-label="anchor" href="#produce-a-quasi-forecast-with-the-selected-model-bimets"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Load model from txt file.<br>
+</li>
+<li>Load data used by the model.<br>
+</li>
+<li>Estimate the model (if estimation period ends before the last data point also run a Chow test of model stability).<br>
+</li>
+<li>Simulate model.<br>
+</li>
+<li>Evaluate simulation by plotting quasi-forecast and actual history.</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="best-practices-for-time-series-data-manipulation.html"><span class="header-section-number">6</span> Best practices for time series data manipulation</a></div>
+<div class="next"><a href="notes.html"><span class="header-section-number">8</span> Notes</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#model-selection"><span class="header-section-number">7</span> Model selection</a></li>
+<li><a class="nav-link" href="#main-user-settings"><span class="header-section-number">7.1</span> Main user settings</a></li>
+<li><a class="nav-link" href="#data-preparation-tidyverse"><span class="header-section-number">7.2</span> Data preparation (tidyverse)</a></li>
+<li><a class="nav-link" href="#model-selection-steps-gets"><span class="header-section-number">7.3</span> Model selection steps (gets)</a></li>
+<li><a class="nav-link" href="#produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">7.4</span> Produce a quasi-forecast with the selected model (bimets)</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UHERO/forecastr_book/blob/main/06-modselect.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UHERO/forecastr_book/edit/main/06-modselect.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>User guide to UHERO’s forecast processes</strong>" was written by Peter Fuleky. It was last built on 2022-01-05.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
