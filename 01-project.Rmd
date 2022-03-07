@@ -81,3 +81,6 @@ Do not store/assign the retrieved credentials to a variable:
 Look at the `targets` package for workflow automation:  
 https://docs.ropensci.org/targets/index.html  
 
+Look at the Efficient R programming book:  
+https://csgillespie.github.io/efficientR/  
+

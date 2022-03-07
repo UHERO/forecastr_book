@@ -5,3 +5,5 @@ This document describes the setup and components of the `forecastr` project. The
 ## Usage
 
 Chapters 2-3 discuss the general setup of a collaborative project under version control. Chapter 4 deals with the setup file that configures the most general aspects of the `forecastr` project. Chapter 5 describes user defined helper functions for the `forecastr` project. Chapter 6 gives examples of best practices for time series manipulation.
+
+Read this guide [here](https://uhero.github.io/forecastr_book/).
