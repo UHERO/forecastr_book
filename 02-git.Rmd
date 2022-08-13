@@ -20,14 +20,14 @@ Make sure .gitignore contains the following files:
 
 Introduce yourself to Git:  
 In the shell (Terminal tab in RStudio):  
-git config --global user.name 'Jane Doe'  
+git config --global user.name 'Jane_Doe'  
 git config --global user.email 'jane@example.com'  
 git config --global --list  
 
 For more advanced tasks, use GitHub Desktop:  
 https://desktop.github.com  
 
-Store your GitHub PAT (Personal Access Token):  
+Generate and store your GitHub PAT (Personal Access Token):  
 https://happygitwithr.com/https-pat.html  
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token  
 
