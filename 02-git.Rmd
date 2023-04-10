@@ -64,5 +64,8 @@ https://happygitwithr.com/ideas-for-content.html
 3) Commit changes, pull, resolve issues, push.  
 3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.  
 
-Research workflow based on Github: 
+See this very detailed guide:
+https://inbo.github.io/git-course/index.html
+
+Another research workflow based on Github: 
 https://www.carlboettiger.info/2012/05/06/research-workflow.html 

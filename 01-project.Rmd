@@ -84,3 +84,6 @@ https://docs.ropensci.org/targets/index.html
 Look at the Efficient R programming book:  
 https://csgillespie.github.io/efficientR/  
 
+Also look at the Stanford Guide:
+http://dcl-workflow.stanford.edu
+
