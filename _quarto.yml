@@ -1,6 +1,8 @@
 project:
-  type: book
-  output-dir: _book
+  # type: book
+  # output-dir: _book
+  type: website
+  output-dir: docs
 
 book:
   title: "User guide to UHERO's forecast processes"
@@ -47,11 +49,11 @@ format:
     author-meta: "Peter Fuleky"
     callout-appearance: simple
 
-  pdf:
-    documentclass: scrreport
-    keep-tex: true
-
-  epub:
-    toc: true
+  # pdf:
+  #   documentclass: scrreport
+  #   keep-tex: true
+  # 
+  # epub:
+  #   toc: true
 
 editor: visual

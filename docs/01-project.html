@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Peter Fuleky">
+
+<title>project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="project-setup" class="level1">
+<h1>Project setup</h1>
+<p>A project is self-contained in a folder (the project folder).</p>
+<section id="a-quick-overview" class="level2">
+<h2 class="anchored" data-anchor-id="a-quick-overview">A quick overview:</h2>
+<p>TL;DR:<br>
+https://kdestasio.github.io/post/r_best_practices/</p>
+</section>
+<section id="basic-ideas-for-a-reproducible-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="basic-ideas-for-a-reproducible-workflow">Basic ideas for a reproducible workflow</h2>
+<p>Set up your work in projects:<br>
+https://r4ds.hadley.nz/workflow-projects.html</p>
+<p>Read section I in WTF: https://rstats.wtf/save-source.html</p>
+<p>A good list of consideration for structuring projects: https://www.r-bloggers.com/2018/08/structuring-r-projects/</p>
+<p>Use RStudio projects with sub-directories - R - R code. - data/raw - data external to the project. - data/processed - intermediate processed data. - notes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc. - output - reports, tables, etc. - output/plots - plots. - renv - used for library management (don’t edit). - man - help files (don’t edit).</p>
+<p>Coding Conventions in R</p>
+<p>Follow the <code>tidyverse</code> style guide: https://style.tidyverse.org/index.html</p>
+<p>Add 4 dashes after a section header for it to show up in the outline:</p>
+<pre><code># *************************
+#  setup ----
+# *************************</code></pre>
+<p>Package management with <code>renv</code>: https://rstudio.github.io/renv/articles/renv.html</p>
+<p>Collaborating with <code>renv</code>: https://rstudio.github.io/renv/articles/collaborating.html</p>
+</section>
+<section id="produce-output-via-r-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="produce-output-via-r-markdown">Produce output via R Markdown</h2>
+<p>Preference settings: https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html</p>
+<p>Render results from R scripts via Rmd: 1) source your R code from within Rmd https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html 1*) save output from R script and load it in Rmd setup chunk 2) only render important results in Rmd chunks</p>
+</section>
+<section id="dealing-with-credentials" class="level2">
+<h2 class="anchored" data-anchor-id="dealing-with-credentials">Dealing with credentials</h2>
+<p>Store your credentials and sensitive info in project specific .Renviron file (project’s root directory, must end with <code>\n</code>):</p>
+<pre><code>udaman_token = "&lt;your udaman token&gt;"
+udaman_user = "&lt;your user name&gt;"
+udaman_pwd = "&lt;your password&gt;"
+GITHUB_PAT = "&lt;your github pat&gt;"</code></pre>
+<p>Retrieve credentials on demand. Do not store/assign the retrieved credentials to a variable: <code>req &lt;- httr::GET(url, httr::add_headers(Authorization = paste("Bearer", Sys.getenv("udaman_token"))))</code></p>
+</section>
+<section id="additonal-resources" class="level2">
+<h2 class="anchored" data-anchor-id="additonal-resources">Additonal resources:</h2>
+<p>Look at the <code>targets</code> package for workflow automation: https://docs.ropensci.org/targets/index.html</p>
+<p>Look at the Efficient R programming book: https://csgillespie.github.io/efficientR/</p>
+<p>Also look at the Stanford Guide: http://dcl-workflow.stanford.edu</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
