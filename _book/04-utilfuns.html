@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Peter Fuleky">
+
+<title>User guide to UHERO’s forecast processes - 5&nbsp; User defined utility functions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-bestpract.html" rel="next">
+<link href="./03-setup.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">User guide to UHERO’s forecast processes</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/UHERO/forecastr_book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./forecastr.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./forecastr.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-project.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-git.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-utilfuns.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-bestpract.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-modselect.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-simulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#atoq" id="toc-atoq" class="nav-link active" data-scroll-target="#atoq"><span class="toc-section-number">5.1</span>  AtoQ</a></li>
+  <li><a href="#explode_xts" id="toc-explode_xts" class="nav-link" data-scroll-target="#explode_xts"><span class="toc-section-number">5.2</span>  explode_xts</a></li>
+  <li><a href="#find_end" id="toc-find_end" class="nav-link" data-scroll-target="#find_end"><span class="toc-section-number">5.3</span>  find_end</a></li>
+  <li><a href="#find_start" id="toc-find_start" class="nav-link" data-scroll-target="#find_start"><span class="toc-section-number">5.4</span>  find_start</a></li>
+  <li><a href="#get_series" id="toc-get_series" class="nav-link" data-scroll-target="#get_series"><span class="toc-section-number">5.5</span>  get_series</a></li>
+  <li><a href="#get_series1" id="toc-get_series1" class="nav-link" data-scroll-target="#get_series1"><span class="toc-section-number">5.6</span>  get_series1</a></li>
+  <li><a href="#get_series_exp" id="toc-get_series_exp" class="nav-link" data-scroll-target="#get_series_exp"><span class="toc-section-number">5.7</span>  get_series_exp</a></li>
+  <li><a href="#get_var" id="toc-get_var" class="nav-link" data-scroll-target="#get_var"><span class="toc-section-number">5.8</span>  get_var</a></li>
+  <li><a href="#make_xts" id="toc-make_xts" class="nav-link" data-scroll-target="#make_xts"><span class="toc-section-number">5.9</span>  make_xts</a></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p"><span class="toc-section-number">5.10</span>  p</a></li>
+  <li><a href="#pca_to_pc" id="toc-pca_to_pc" class="nav-link" data-scroll-target="#pca_to_pc"><span class="toc-section-number">5.11</span>  pca_to_pc</a></li>
+  <li><a href="#pchmy" id="toc-pchmy" class="nav-link" data-scroll-target="#pchmy"><span class="toc-section-number">5.12</span>  pchmy</a></li>
+  <li><a href="#plot_1" id="toc-plot_1" class="nav-link" data-scroll-target="#plot_1"><span class="toc-section-number">5.13</span>  plot_1</a></li>
+  <li><a href="#plot_comp" id="toc-plot_comp" class="nav-link" data-scroll-target="#plot_comp"><span class="toc-section-number">5.14</span>  plot_comp</a></li>
+  <li><a href="#plot_comp_2" id="toc-plot_comp_2" class="nav-link" data-scroll-target="#plot_comp_2"><span class="toc-section-number">5.15</span>  plot_comp_2</a></li>
+  <li><a href="#qtoa" id="toc-qtoa" class="nav-link" data-scroll-target="#qtoa"><span class="toc-section-number">5.16</span>  QtoA</a></li>
+  <li><a href="#qtom" id="toc-qtom" class="nav-link" data-scroll-target="#qtom"><span class="toc-section-number">5.17</span>  QtoM</a></li>
+  <li><a href="#qtom1" id="toc-qtom1" class="nav-link" data-scroll-target="#qtom1"><span class="toc-section-number">5.18</span>  QtoM1</a></li>
+  <li><a href="#qtrs" id="toc-qtrs" class="nav-link" data-scroll-target="#qtrs"><span class="toc-section-number">5.19</span>  qtrs</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/UHERO/forecastr_book/edit/main/04-utilfuns.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/UHERO/forecastr_book/blob/main/04-utilfuns.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Functions not available in existing packages are stored in util_funs.R. A pdf version of this document is available <a href="util_funs.pdf">here</a>.</p>
+<section id="atoq" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="atoq"><span class="header-section-number">5.1</span> AtoQ</h2>
+<p>Description:</p>
+<pre><code> Linear interpolation based on aremos command reference page 292</code></pre>
+<p>Usage:</p>
+<pre><code> AtoQ(ser_in, aggr = "mean")
+ </code></pre>
+<p>Arguments:</p>
+<pre><code>ser_in: the xts series to be interpolated (freq = a)
+
+aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
+<p>Value:</p>
+<pre><code> interpolated xts series (freq = q)</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ </code></pre>
+</section>
+<section id="explode_xts" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="explode_xts"><span class="header-section-number">5.2</span> explode_xts</h2>
+<p>Description:</p>
+<pre><code> Splitting of xts matrix to individual xts vectors (don't use,
+ pollutes global environment)</code></pre>
+<p>Usage:</p>
+<pre><code> explode_xts(xts_in)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> xts_in: the xts matrix to be split into individual xts vectors</code></pre>
+<p>Value:</p>
+<pre><code> nothing (silently store split series in global environment)</code></pre>
+<p>Examples:</p>
+<pre><code> get_series_exp(74, save_loc = NULL) %&gt;%
+   ts_long() %&gt;%
+   ts_xts() %&gt;%
+   explode_xts()
+ rm(list = ls(pattern = glob2rx("*@HI.Q")))
+ </code></pre>
+</section>
+<section id="find_end" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="find_end"><span class="header-section-number">5.3</span> find_end</h2>
+<p>Description:</p>
+<pre><code> Find the date of the last observation (NAs are dropped)</code></pre>
+<p>Usage:</p>
+<pre><code> find_end(ser_in)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser_in: an xts series</code></pre>
+<p>Value:</p>
+<pre><code> date associated with last observation</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2060, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2018"] &lt;- c(323127513, 325511184, 327891911)
+ find_end(`ncen@us.sola`)
+ </code></pre>
+</section>
+<section id="find_start" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="find_start"><span class="header-section-number">5.4</span> find_start</h2>
+<p>Description:</p>
+<pre><code> Find the date of the first observation (NAs are dropped)</code></pre>
+<p>Usage:</p>
+<pre><code> find_start(ser_in)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser_in: an xts series</code></pre>
+<p>Value:</p>
+<pre><code> date associated with first observation</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2017/2021"] &lt;- c(325511184, 327891911, 330268840, 332639102, 334998398)
+ find_start(`ncen@us.sola`)
+ </code></pre>
+</section>
+<section id="get_series" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="get_series"><span class="header-section-number">5.5</span> get_series</h2>
+<p>Description:</p>
+<pre><code> Download a set of series from udaman using series names</code></pre>
+<p>Usage:</p>
+<pre><code> get_series(ser_id_vec)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser_id_vec: vector of series names</code></pre>
+<p>Value:</p>
+<pre><code> time and data for all series combined in a tibble</code></pre>
+<p>Examples:</p>
+<pre><code> get_series(c("VISNS@HI.M", "VAPNS@HI.M"))
+ </code></pre>
+</section>
+<section id="get_series1" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="get_series1"><span class="header-section-number">5.6</span> get_series1</h2>
+<p>Description:</p>
+<pre><code> Download a single series from udaman using series name</code></pre>
+<p>Usage:</p>
+<pre><code> get_series1(ser_id)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser_id: udaman series name</code></pre>
+<p>Value:</p>
+<pre><code> time and data for a single series combined in a tibble</code></pre>
+<p>Examples:</p>
+<pre><code> get_series("VISNS@HI.M")
+ </code></pre>
+</section>
+<section id="get_series_exp" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="get_series_exp"><span class="header-section-number">5.7</span> get_series_exp</h2>
+<p>Description:</p>
+<pre><code> Download series listed in an export table from udaman</code></pre>
+<p>Usage:</p>
+<pre><code> get_series_exp(exp_id, save_loc = "data/raw")
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> exp_id: export id
+
+ save_loc: location to save the csv of the retrieved data, set to NULL
+      to avoid saving</code></pre>
+<p>Value:</p>
+<pre><code> time and data for all series combined in a tibble</code></pre>
+<p>Examples:</p>
+<pre><code> get_series_exp(74)
+ get_series_exp(74, save_loc = NULL)
+ </code></pre>
+</section>
+<section id="get_var" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="get_var"><span class="header-section-number">5.8</span> get_var</h2>
+<p>Description:</p>
+<pre><code> Construct a series name from variable components and retrieve the
+ series</code></pre>
+<p>Usage:</p>
+<pre><code> get_var(ser_in, env = parent.frame())
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser_in: a variable name (string with substituted expressions)
+
+ env: environment where the expression should be evaluated</code></pre>
+<p>Value:</p>
+<pre><code> variable</code></pre>
+<p>Examples:</p>
+<pre><code> ser_i &lt;- "_NF"
+ cnty_i &lt;- "HI"
+ get_series_exp(74, save_loc = NULL) %&gt;%
+   ts_long() %&gt;%
+   ts_xts() %$% get_var("E{ser_i}@{cnty_i}.Q")
+ </code></pre>
+</section>
+<section id="make_xts" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="make_xts"><span class="header-section-number">5.9</span> make_xts</h2>
+<p>Description:</p>
+<pre><code> Create xts and fill with values</code></pre>
+<p>Usage:</p>
+<pre><code> make_xts(start = bnk_start, end = bnk_end, per = "year", val = NA)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> start: date of series start (string: "yyyy-mm-dd")
+
+ end: date of series end (string: "yyyy-mm-dd")
+
+ per: periodicity of series (string: "quarter", "year")
+
+ val: values to fill in (scalar or vector)</code></pre>
+<p>Value:</p>
+<pre><code> an xts series</code></pre>
+<p>Examples:</p>
+<pre><code> make_xts()
+ make_xts(start = ymd("2010-01-01"), per = "quarter", val = 0)
+ </code></pre>
+</section>
+<section id="p" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="p"><span class="header-section-number">5.10</span> p</h2>
+<p>Description:</p>
+<pre><code> Concatenate dates to obtain period</code></pre>
+<p>Usage:</p>
+<pre><code> p(dat1, dat2)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> dat1: date of period start (string: yyyy-mm-dd)
+
+ dat2: date of period end (string: yyyy-mm-dd)</code></pre>
+<p>Value:</p>
+<pre><code> string containing date range</code></pre>
+<p>Examples:</p>
+<pre><code> p("2010-01-01", "2020-01-01")
+ 
+ </code></pre>
+</section>
+<section id="pca_to_pc" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="pca_to_pc"><span class="header-section-number">5.11</span> pca_to_pc</h2>
+<p>Description:</p>
+<pre><code> Convert annualized growth to quarterly growth</code></pre>
+<p>Usage:</p>
+<pre><code> pca_to_pc(ser_in)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser_in: the series containing annualized growth (in percent)</code></pre>
+<p>Value:</p>
+<pre><code> series containing quarterly growth (in percent)</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ ts_c(test1 %&gt;% ts_pca() %&gt;% pca_to_pc(), test1 %&gt;% ts_pc())</code></pre>
+</section>
+<section id="pchmy" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="pchmy"><span class="header-section-number">5.12</span> pchmy</h2>
+<p>Description:</p>
+<pre><code> Calculate multi-period average growth</code></pre>
+<p>Usage:</p>
+<pre><code> pchmy(ser_in, lag_in = 1)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code>ser_in: name of xts series for which growth is calculated
+
+lag_in: length of period over which growth is calculated</code></pre>
+<p>Value:</p>
+<pre><code> series containing the average growth of ser_in (in percent)</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ ts_c(pchmy(`ncen@us.sola`, lag_in = 3), ts_pc(`ncen@us.sola`))
+ ts_c(pchmy(test1, lag_in = 4), ts_pcy(test1), ts_pca(test1), ts_pc(test1))
+ </code></pre>
+</section>
+<section id="plot_1" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="plot_1"><span class="header-section-number">5.13</span> plot_1</h2>
+<p>Description:</p>
+<pre><code> Interactive plot of a single variable with level and growth rate</code></pre>
+<p>Usage:</p>
+<pre><code> plot_1(
+   ser,
+   rng_start = as.character(Sys.Date() - years(15)),
+   height = 300,
+   width = 900
+ )
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser: time series to plot
+
+ rng_start: start of zoom range ("YYYY-MM-DD")
+
+ height: height of a single panel (px)
+
+ width: width of a single panel (px)</code></pre>
+<p>Value:</p>
+<pre><code> a dygraph plot</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ plot_1(`ncen@us.sola`, rng_start = "2017-01-01")
+ plot_1(test1, rng_start = "2017-01-01")
+ </code></pre>
+</section>
+<section id="plot_comp" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="plot_comp"><span class="header-section-number">5.14</span> plot_comp</h2>
+<p>Description:</p>
+<pre><code> Three-panel plot of levels, index, and growth rates</code></pre>
+<p>Usage:</p>
+<pre><code> plot_comp(
+   sers,
+   rng_start = as.character(Sys.Date() - years(15)),
+   rng_end = as.character(Sys.Date()),
+   height = 300,
+   width = 900
+ )
+ </code></pre>
+<p>Arguments:</p>
+<pre><code>sers: a vector of series to plot
+
+rng_start: start of the zoom range ("YYYY-MM-DD")
+
+rng_end: end of the zoom range ("YYYY-MM-DD")
+
+height: height of a single panel (px)
+
+width: width of a single panel (px)</code></pre>
+<p>Value:</p>
+<pre><code> a list with three dygraph plots (level, index, growth)</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ plot_comp(ts_c(`ncen@us.sola`, test1), rng_start = "2017-01-01")
+ get_series_exp(74, save_loc = NULL) %&gt;%
+   ts_long() %&gt;%
+   ts_xts() %&gt;%
+   extract(, c("E_NF@HI.Q", "ECT@HI.Q", "EMN@HI.Q")) %&gt;%
+   plot_comp()
+ </code></pre>
+</section>
+<section id="plot_comp_2" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="plot_comp_2"><span class="header-section-number">5.15</span> plot_comp_2</h2>
+<p>Description:</p>
+<pre><code> Two-panel plot of levels, index, and growth rates</code></pre>
+<p>Usage:</p>
+<pre><code> plot_comp_2(
+   sers,
+   rng_start = as.character(Sys.Date() - years(15)),
+   rng_end = as.character(Sys.Date()),
+   height = 300,
+   width = 900
+ )
+ </code></pre>
+<p>Arguments:</p>
+<pre><code>sers: a vector of series to plot
+
+rng_start: start of the zoom range ("YYYY-MM-DD")
+
+rng_end: end of the zoom range ("YYYY-MM-DD")
+
+height: height of a single panel (px)
+
+width: width of a single panel (px)</code></pre>
+<p>Value:</p>
+<pre><code> a list with two dygraph plots (level, index, growth)</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ plot_comp_2(ts_c(`ncen@us.sola`, test1), rng_start = "2017-01-01")
+ get_series_exp(74, save_loc = NULL) %&gt;%
+   ts_long() %&gt;%
+   ts_xts() %&gt;%
+   extract(, c("E_NF@HI.Q", "ECT@HI.Q", "EMN@HI.Q")) %&gt;%
+   plot_comp_2()
+ </code></pre>
+</section>
+<section id="qtoa" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="qtoa"><span class="header-section-number">5.16</span> QtoA</h2>
+<p>Description:</p>
+<pre><code> Conversion from quarterly to annual frequency</code></pre>
+<p>Usage:</p>
+<pre><code> QtoA(ser_in, aggr = "mean")
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> ser_in: the xts series to be converted (freq = q)
+
+ aggr: aggregate via mean (default) or sum</code></pre>
+<p>Value:</p>
+<pre><code> converted xts series (freq = a)</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ test2 &lt;- QtoA(test1) # for stock type variables mean, for flow type variables sum
+ print(test1)
+ print(cbind(`ncen@us.sola`, test2))
+ </code></pre>
+</section>
+<section id="qtom" class="level2" data-number="5.17">
+<h2 data-number="5.17" class="anchored" data-anchor-id="qtom"><span class="header-section-number">5.17</span> QtoM</h2>
+<p>Description:</p>
+<pre><code> Interpolate a tibble of series from quaterly to monthly freq</code></pre>
+<p>Usage:</p>
+<pre><code> QtoM(data_q, conv_type)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> data_q: tibble containing variables at quarterly freq
+
+ conv_type: match the quarterly value via "first", "last", "sum",
+      "average"</code></pre>
+<p>Value:</p>
+<pre><code> tibble containing variables at monthly freq</code></pre>
+<p>Examples:</p>
+<pre><code> `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 &lt;- AtoQ(`ncen@us.sola`)
+ QtoM(ts_tbl(test1), "average")
+ ts_frequency(QtoM(ts_tbl(test1), "average") %&gt;% ts_xts())
+ </code></pre>
+</section>
+<section id="qtom1" class="level2" data-number="5.18">
+<h2 data-number="5.18" class="anchored" data-anchor-id="qtom1"><span class="header-section-number">5.18</span> QtoM1</h2>
+<p>Description:</p>
+<pre><code> Interpolate a single series from quarterly to monthly freq</code></pre>
+<p>Usage:</p>
+<pre><code> QtoM1(var_q, ts_start, conv_type)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> var_q: vector containing a single variable at quarterly freq
+
+ ts_start: starting period as c(year, quarter) e.g. c(2001, 1)
+
+ conv_type: match the quarterly value via "first", "last", "sum",
+      "average"</code></pre>
+<p>Value:</p>
+<pre><code> vector containing a single variable at monthly freq</code></pre>
+<p>Examples:</p>
+<pre><code> QtoM1(test1, c(2010, 1), "average")
+ </code></pre>
+</section>
+<section id="qtrs" class="level2" data-number="5.19">
+<h2 data-number="5.19" class="anchored" data-anchor-id="qtrs"><span class="header-section-number">5.19</span> qtrs</h2>
+<p>Description:</p>
+<pre><code> Convert period in quarters to period months</code></pre>
+<p>Usage:</p>
+<pre><code> qtrs(nr_quarters)
+ </code></pre>
+<p>Arguments:</p>
+<pre><code> nr_quarters: number of quarters in period (integer)</code></pre>
+<p>Value:</p>
+<pre><code> number of months in period</code></pre>
+<p>Examples:</p>
+<pre><code> qtrs(3)
+ ymd("2020-01-01") + qtrs(3)
+ </code></pre>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-setup.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-bestpract.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Author: Peter Fuleky</div>   
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

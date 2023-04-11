@@ -1,0 +1,57 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "User guide to UHERO's forecast processes"
+  reader-mode: true
+
+  page-footer:
+    left: |
+      Author: Peter Fuleky
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>
+
+  output-file: forecastr
+  author: "Peter Fuleky"
+  date: last-modified
+  
+  search: true
+  repo-url: https://github.com/UHERO/forecastr_book/
+  repo-actions: [edit, issue, source]
+  downloads: [pdf, epub]
+  # sharing: [twitter, facebook]
+  sidebar:
+    style: floating
+  chapters:
+    - index.qmd
+    - 01-project.qmd
+    - 02-git.qmd
+    - 03-setup.qmd
+    - 04-utilfuns.qmd
+    - 05-bestpract.qmd
+    - 06-modselect.qmd
+    - 07-simulation.qmd
+    - 08-notes.qmd
+
+comments:
+  hypothesis: false
+
+format:
+  html:
+    theme: cosmo
+    code-copy: true
+    code-link: true
+    css: style.css
+    
+    author-meta: "Peter Fuleky"
+    callout-appearance: simple
+
+  pdf:
+    documentclass: scrreport
+    keep-tex: true
+
+  epub:
+    toc: true
+
+editor: visual

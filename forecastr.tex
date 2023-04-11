@@ -1,0 +1,2099 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreport}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={User guide to UHERO's forecast processes},
+  pdfauthor={Peter Fuleky},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{User guide to UHERO's forecast processes}
+\author{Peter Fuleky}
+\date{4/10/23}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, breakable, frame hidden, interior hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\bookmarksetup{startatroot}
+
+\hypertarget{about}{%
+\chapter{About}\label{about}}
+
+This document describes the setup and components of the
+\texttt{forecastr} project. The focus of the project is forecasting
+using multi-equation behavioral models. The project encompasses data
+preparation, model selection (work in progress), external forecast
+generation, local forecast generation (planned), simulations (planned),
+and forecast distribution to a more granular scale.
+
+\hypertarget{contents}{%
+\section{Contents}\label{contents}}
+
+Chapters 2-3 discuss the general setup of a collaborative project under
+version control. Chapter 4 deals with the setup file that configures the
+most general aspects of the \texttt{forecastr} project. Chapter 5
+describes user defined helper functions for the \texttt{forecastr}
+project. Chapter 6 gives examples of best practices for time series
+manipulation.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{project-setup}{%
+\chapter{Project setup}\label{project-setup}}
+
+A project is self-contained in a folder (the project folder).
+
+\hypertarget{a-quick-overview}{%
+\section{A quick overview:}\label{a-quick-overview}}
+
+TL;DR:\\
+https://kdestasio.github.io/post/r\_best\_practices/
+
+\hypertarget{basic-ideas-for-a-reproducible-workflow}{%
+\section{Basic ideas for a reproducible
+workflow}\label{basic-ideas-for-a-reproducible-workflow}}
+
+Set up your work in projects:\\
+https://r4ds.hadley.nz/workflow-projects.html
+
+Read section I in WTF: https://rstats.wtf/save-source.html
+
+A good list of consideration for structuring projects:
+https://www.r-bloggers.com/2018/08/structuring-r-projects/
+
+Use RStudio projects with sub-directories - R - R code. - data/raw -
+data external to the project. - data/processed - intermediate processed
+data. - notes - Rmd, and Rmd output, notes, papers, supporting
+documents, Rmd, etc. - output - reports, tables, etc. - output/plots -
+plots. - renv - used for library management (don't edit). - man - help
+files (don't edit).
+
+Coding Conventions in R
+
+Follow the \texttt{tidyverse} style guide:
+https://style.tidyverse.org/index.html
+
+Add 4 dashes after a section header for it to show up in the outline:
+
+\begin{verbatim}
+# *************************
+#  setup ----
+# *************************
+\end{verbatim}
+
+Package management with \texttt{renv}:
+https://rstudio.github.io/renv/articles/renv.html
+
+Collaborating with \texttt{renv}:
+https://rstudio.github.io/renv/articles/collaborating.html
+
+\hypertarget{produce-output-via-r-markdown}{%
+\section{Produce output via R
+Markdown}\label{produce-output-via-r-markdown}}
+
+Preference settings:
+https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html
+
+Render results from R scripts via Rmd: 1) source your R code from within
+Rmd https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html 1*)
+save output from R script and load it in Rmd setup chunk 2) only render
+important results in Rmd chunks
+
+\hypertarget{dealing-with-credentials}{%
+\section{Dealing with credentials}\label{dealing-with-credentials}}
+
+Store your credentials and sensitive info in project specific .Renviron
+file (project's root directory, must end with
+\texttt{\textbackslash{}n}):
+
+\begin{verbatim}
+udaman_token = "<your udaman token>"
+udaman_user = "<your user name>"
+udaman_pwd = "<your password>"
+GITHUB_PAT = "<your github pat>"
+\end{verbatim}
+
+Retrieve credentials on demand. Do not store/assign the retrieved
+credentials to a variable:
+\texttt{req\ \textless{}-\ httr::GET(url,\ httr::add\_headers(Authorization\ =\ paste("Bearer",\ Sys.getenv("udaman\_token"))))}
+
+\hypertarget{additonal-resources}{%
+\section{Additonal resources:}\label{additonal-resources}}
+
+Look at the \texttt{targets} package for workflow automation:
+https://docs.ropensci.org/targets/index.html
+
+Look at the Efficient R programming book:
+https://csgillespie.github.io/efficientR/
+
+Also look at the Stanford Guide: http://dcl-workflow.stanford.edu
+
+\bookmarksetup{startatroot}
+
+\hypertarget{git}{%
+\chapter{Git}\label{git}}
+
+Set up version control for a project.
+
+\hypertarget{a-quick-overview-1}{%
+\section{A quick overview:}\label{a-quick-overview-1}}
+
+TL;DR: https://inbo.github.io/git-course/index.html
+
+\hypertarget{git-step-by-step}{%
+\section{Git step by step}\label{git-step-by-step}}
+
+If you don't have Git, install it:\\
+https://happygitwithr.com/install-git.html
+
+Make sure .gitignore contains the following files:\\
+.Renviron\\
+.Rprofile
+
+Introduce yourself to Git:\\
+In the shell (Terminal tab in RStudio):\\
+git config --global user.name `Jane\_Doe'\\
+git config --global user.email `jane@example.com'\\
+git config --global --list
+
+For more advanced tasks, use GitHub Desktop:\\
+https://desktop.github.com
+
+Generate and store your GitHub PAT (Personal Access Token):\\
+https://happygitwithr.com/https-pat.html\\
+https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
+Use one of three ways to add your project to GitHub:\\
+Brand new project:\\
+https://happygitwithr.com/new-github-first.html\\
+Existing project without version control:\\
+https://happygitwithr.com/existing-github-first.html\\
+Existing project under local version control:\\
+https://happygitwithr.com/existing-github-last.html
+
+Troubleshooting if RStudio can't detect Git:\\
+https://happygitwithr.com/rstudio-see-git.html
+
+Git vocabulary:\\
+https://happygitwithr.com/git-basics.html
+
+Remote setups (try to stick to GitHub first discussed above):\\
+https://happygitwithr.com/common-remote-setups.html
+
+Useful Git workflows and dealing with conflicts:\\
+https://happygitwithr.com/workflows-intro.html\\
+https://happygitwithr.com/push-rejected.html\\
+https://happygitwithr.com/pull-tricky.html
+
+Additional resources:\\
+https://happygitwithr.com/ideas-for-content.html
+
+\hypertarget{suggested-workflow}{%
+\section{Suggested workflow}\label{suggested-workflow}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Initialize repository on GitHub.com under the UHERO account.\\
+\item
+  Clone it via RStudio project setup.\\
+\item
+  Commit changes, pull, resolve issues, push.\\
+  3*) If work in a branch (create in RStudio), commit to branch, (pull)
+  push to remote, pull request on GitHub.com from branch to main, merge,
+  delete branch on GitHub.com.
+\end{enumerate}
+
+See these detailed guides: https://inbo.github.io/git-course/index.html
+https://github.com/llendway/github\_for\_collaboration/blob/master/github\_for\_collaboration.md
+
+Another research workflow based on Github:
+https://www.carlboettiger.info/2012/05/06/research-workflow.html
+
+\bookmarksetup{startatroot}
+
+\hypertarget{setup-of-the-forecastr-project}{%
+\chapter{Setup of the forecastr
+project}\label{setup-of-the-forecastr-project}}
+
+The \texttt{setup.R} file contains general information used throughout
+the project. The contents are listed below.
+
+\hypertarget{start-with-a-clean-slate}{%
+\section{Start with a clean slate}\label{start-with-a-clean-slate}}
+
+First remove all objects from global environment:\\
+\texttt{rm(list\ =\ ls())}
+
+If only some objects need to be removed, search for them via
+wildcards:\\
+\texttt{rm(list\ =\ ls(pattern\ =\ glob2rx("*\_\_*")))}
+
+Detach all loaded packages:
+
+\begin{verbatim}
+if (!is.null(names(sessionInfo()$otherPkgs))) {
+invisible(
+  suppressMessages(
+    suppressWarnings(
+      lapply(
+        paste("package:", names(sessionInfo()$otherPkgs), sep=""), 
+        detach, 
+        character.only = TRUE, 
+        unload = TRUE
+        )
+      )
+    )
+  )
+}
+\end{verbatim}
+
+\hypertarget{packages}{%
+\section{Packages}\label{packages}}
+
+The setup file clarifies its own location relative to the project root
+and loads the necessary packages.
+
+Navigate within a project using the \texttt{here()} package. Start by
+specifying:\\
+\texttt{here::i\_am("R/setup.R")}
+
+Then load necessary packages
+
+\begin{verbatim}
+library(here) # navigation within the project
+library(conflicted) # detect conflicts across packages
+library(tidyverse) # a set of frequently used data-wrangling tools
+library(magrittr) # more than just pipes
+library(lubridate) # dealing with dates
+library(tsbox) # dealing with time series
+# library(bimets)
+\end{verbatim}
+
+Detect conflicts across packages and assign preferences
+
+\begin{verbatim}
+conflict_scout()
+conflict_prefer("filter", "dplyr") # dplyr v stats
+conflict_prefer("first", "dplyr") # dplyr v xts
+conflict_prefer("lag", "dplyr") # dplyr v stats
+conflict_prefer("last", "dplyr") # dplyr v xts
+conflict_prefer("extract", "magrittr") # magrittr vs tidyr
+\end{verbatim}
+
+Verify top level project directory\\
+\texttt{here()}
+
+\hypertarget{package-descriptions}{%
+\section{Package descriptions}\label{package-descriptions}}
+
+Use the \texttt{here} package to deal with file paths:\\
+https://here.r-lib.org
+
+Suppose you have a dataset in csv format. Use:\\
+\texttt{readr::read\_csv(here::here("\textless{}The\ subfolder\ where\ your\ csv\ file\ resides\textgreater{}",\ "\textless{}The\ CSV\ file.csv\textgreater{}"))}
+
+Only load essential packages with many useful functions (don't load a
+whole package to access a single function).\\
+Refer to individual functions in not loaded packages by
+\texttt{namespace::function()}
+
+Resolve conflicts across multiple packages with \texttt{conflicted}:\\
+https://conflicted.r-lib.org
+
+Core \texttt{tidyverse} packages:\\
+https://www.tidyverse.org
+
+Non-core \texttt{tidyverse} packages (need to be loaded separately):\\
+https://magrittr.tidyverse.org\\
+https://lubridate.tidyverse.org
+
+Time series tools in \texttt{tsbox} (learn them and use them, very
+useful). All start with \texttt{ts\_}.\\
+https://www.tsbox.help
+
+Forecasting with multi-equation behavioral models (only load
+\texttt{bimets} if actually doing forecasts, no need for data
+manipulation):\\
+https://cran.r-project.org/web/packages/bimets/index.html
+
+\texttt{bimets} depends on \texttt{xts} (if not loaded, can access
+necessary functions via \texttt{xts::function()}):\\
+https://cran.r-project.org/web/packages/xts/index.html
+
+Prefer using \texttt{tsbox} and \texttt{tidyverse} functions whenever
+possible, but understand the components and behavior of \texttt{xts}
+objects: https://rc2e.com/timeseriesanalysis
+
+\hypertarget{additional-info-in-setup}{%
+\section{Additional info in setup}\label{additional-info-in-setup}}
+
+Define project-wide constants:
+
+\begin{verbatim}
+bnk_start <- ymd("1900-01-01")
+bnk_end <- ymd("2060-12-31")
+\end{verbatim}
+
+Load user defined utility functions (details in next section):\\
+\texttt{source(here("R",\ "util\_funs.R"))}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{user-defined-utility-functions}{%
+\chapter{User defined utility
+functions}\label{user-defined-utility-functions}}
+
+Functions not available in existing packages are stored in util\_funs.R.
+A pdf version of this document is available \href{util_funs.pdf}{here}.
+
+\hypertarget{atoq}{%
+\section{AtoQ}\label{atoq}}
+
+Description:
+
+\begin{verbatim}
+ Linear interpolation based on aremos command reference page 292
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ AtoQ(ser_in, aggr = "mean")
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ser_in: the xts series to be interpolated (freq = a)
+
+aggr: interpolation method: aggregate via mean (default) or sum
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ interpolated xts series (freq = q)
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ 
+\end{verbatim}
+
+\hypertarget{explode_xts}{%
+\section{explode\_xts}\label{explode_xts}}
+
+Description:
+
+\begin{verbatim}
+ Splitting of xts matrix to individual xts vectors (don't use,
+ pollutes global environment)
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ explode_xts(xts_in)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ xts_in: the xts matrix to be split into individual xts vectors
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ nothing (silently store split series in global environment)
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ get_series_exp(74, save_loc = NULL) %>%
+   ts_long() %>%
+   ts_xts() %>%
+   explode_xts()
+ rm(list = ls(pattern = glob2rx("*@HI.Q")))
+ 
+\end{verbatim}
+
+\hypertarget{find_end}{%
+\section{find\_end}\label{find_end}}
+
+Description:
+
+\begin{verbatim}
+ Find the date of the last observation (NAs are dropped)
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ find_end(ser_in)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser_in: an xts series
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ date associated with last observation
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2060, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2018"] <- c(323127513, 325511184, 327891911)
+ find_end(`ncen@us.sola`)
+ 
+\end{verbatim}
+
+\hypertarget{find_start}{%
+\section{find\_start}\label{find_start}}
+
+Description:
+
+\begin{verbatim}
+ Find the date of the first observation (NAs are dropped)
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ find_start(ser_in)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser_in: an xts series
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ date associated with first observation
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2017/2021"] <- c(325511184, 327891911, 330268840, 332639102, 334998398)
+ find_start(`ncen@us.sola`)
+ 
+\end{verbatim}
+
+\hypertarget{get_series}{%
+\section{get\_series}\label{get_series}}
+
+Description:
+
+\begin{verbatim}
+ Download a set of series from udaman using series names
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ get_series(ser_id_vec)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser_id_vec: vector of series names
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ time and data for all series combined in a tibble
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ get_series(c("VISNS@HI.M", "VAPNS@HI.M"))
+ 
+\end{verbatim}
+
+\hypertarget{get_series1}{%
+\section{get\_series1}\label{get_series1}}
+
+Description:
+
+\begin{verbatim}
+ Download a single series from udaman using series name
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ get_series1(ser_id)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser_id: udaman series name
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ time and data for a single series combined in a tibble
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ get_series("VISNS@HI.M")
+ 
+\end{verbatim}
+
+\hypertarget{get_series_exp}{%
+\section{get\_series\_exp}\label{get_series_exp}}
+
+Description:
+
+\begin{verbatim}
+ Download series listed in an export table from udaman
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ get_series_exp(exp_id, save_loc = "data/raw")
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ exp_id: export id
+
+ save_loc: location to save the csv of the retrieved data, set to NULL
+      to avoid saving
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ time and data for all series combined in a tibble
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ get_series_exp(74)
+ get_series_exp(74, save_loc = NULL)
+ 
+\end{verbatim}
+
+\hypertarget{get_var}{%
+\section{get\_var}\label{get_var}}
+
+Description:
+
+\begin{verbatim}
+ Construct a series name from variable components and retrieve the
+ series
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ get_var(ser_in, env = parent.frame())
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser_in: a variable name (string with substituted expressions)
+
+ env: environment where the expression should be evaluated
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ variable
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ ser_i <- "_NF"
+ cnty_i <- "HI"
+ get_series_exp(74, save_loc = NULL) %>%
+   ts_long() %>%
+   ts_xts() %$% get_var("E{ser_i}@{cnty_i}.Q")
+ 
+\end{verbatim}
+
+\hypertarget{make_xts}{%
+\section{make\_xts}\label{make_xts}}
+
+Description:
+
+\begin{verbatim}
+ Create xts and fill with values
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ make_xts(start = bnk_start, end = bnk_end, per = "year", val = NA)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ start: date of series start (string: "yyyy-mm-dd")
+
+ end: date of series end (string: "yyyy-mm-dd")
+
+ per: periodicity of series (string: "quarter", "year")
+
+ val: values to fill in (scalar or vector)
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ an xts series
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ make_xts()
+ make_xts(start = ymd("2010-01-01"), per = "quarter", val = 0)
+ 
+\end{verbatim}
+
+\hypertarget{p}{%
+\section{p}\label{p}}
+
+Description:
+
+\begin{verbatim}
+ Concatenate dates to obtain period
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ p(dat1, dat2)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ dat1: date of period start (string: yyyy-mm-dd)
+
+ dat2: date of period end (string: yyyy-mm-dd)
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ string containing date range
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ p("2010-01-01", "2020-01-01")
+ 
+ 
+\end{verbatim}
+
+\hypertarget{pca_to_pc}{%
+\section{pca\_to\_pc}\label{pca_to_pc}}
+
+Description:
+
+\begin{verbatim}
+ Convert annualized growth to quarterly growth
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ pca_to_pc(ser_in)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser_in: the series containing annualized growth (in percent)
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ series containing quarterly growth (in percent)
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ ts_c(test1 %>% ts_pca() %>% pca_to_pc(), test1 %>% ts_pc())
+\end{verbatim}
+
+\hypertarget{pchmy}{%
+\section{pchmy}\label{pchmy}}
+
+Description:
+
+\begin{verbatim}
+ Calculate multi-period average growth
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ pchmy(ser_in, lag_in = 1)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ser_in: name of xts series for which growth is calculated
+
+lag_in: length of period over which growth is calculated
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ series containing the average growth of ser_in (in percent)
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ ts_c(pchmy(`ncen@us.sola`, lag_in = 3), ts_pc(`ncen@us.sola`))
+ ts_c(pchmy(test1, lag_in = 4), ts_pcy(test1), ts_pca(test1), ts_pc(test1))
+ 
+\end{verbatim}
+
+\hypertarget{plot_1}{%
+\section{plot\_1}\label{plot_1}}
+
+Description:
+
+\begin{verbatim}
+ Interactive plot of a single variable with level and growth rate
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ plot_1(
+   ser,
+   rng_start = as.character(Sys.Date() - years(15)),
+   height = 300,
+   width = 900
+ )
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser: time series to plot
+
+ rng_start: start of zoom range ("YYYY-MM-DD")
+
+ height: height of a single panel (px)
+
+ width: width of a single panel (px)
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ a dygraph plot
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ plot_1(`ncen@us.sola`, rng_start = "2017-01-01")
+ plot_1(test1, rng_start = "2017-01-01")
+ 
+\end{verbatim}
+
+\hypertarget{plot_comp}{%
+\section{plot\_comp}\label{plot_comp}}
+
+Description:
+
+\begin{verbatim}
+ Three-panel plot of levels, index, and growth rates
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ plot_comp(
+   sers,
+   rng_start = as.character(Sys.Date() - years(15)),
+   rng_end = as.character(Sys.Date()),
+   height = 300,
+   width = 900
+ )
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+sers: a vector of series to plot
+
+rng_start: start of the zoom range ("YYYY-MM-DD")
+
+rng_end: end of the zoom range ("YYYY-MM-DD")
+
+height: height of a single panel (px)
+
+width: width of a single panel (px)
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ a list with three dygraph plots (level, index, growth)
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ plot_comp(ts_c(`ncen@us.sola`, test1), rng_start = "2017-01-01")
+ get_series_exp(74, save_loc = NULL) %>%
+   ts_long() %>%
+   ts_xts() %>%
+   extract(, c("E_NF@HI.Q", "ECT@HI.Q", "EMN@HI.Q")) %>%
+   plot_comp()
+ 
+\end{verbatim}
+
+\hypertarget{plot_comp_2}{%
+\section{plot\_comp\_2}\label{plot_comp_2}}
+
+Description:
+
+\begin{verbatim}
+ Two-panel plot of levels, index, and growth rates
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ plot_comp_2(
+   sers,
+   rng_start = as.character(Sys.Date() - years(15)),
+   rng_end = as.character(Sys.Date()),
+   height = 300,
+   width = 900
+ )
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+sers: a vector of series to plot
+
+rng_start: start of the zoom range ("YYYY-MM-DD")
+
+rng_end: end of the zoom range ("YYYY-MM-DD")
+
+height: height of a single panel (px)
+
+width: width of a single panel (px)
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ a list with two dygraph plots (level, index, growth)
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ plot_comp_2(ts_c(`ncen@us.sola`, test1), rng_start = "2017-01-01")
+ get_series_exp(74, save_loc = NULL) %>%
+   ts_long() %>%
+   ts_xts() %>%
+   extract(, c("E_NF@HI.Q", "ECT@HI.Q", "EMN@HI.Q")) %>%
+   plot_comp_2()
+ 
+\end{verbatim}
+
+\hypertarget{qtoa}{%
+\section{QtoA}\label{qtoa}}
+
+Description:
+
+\begin{verbatim}
+ Conversion from quarterly to annual frequency
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ QtoA(ser_in, aggr = "mean")
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ ser_in: the xts series to be converted (freq = q)
+
+ aggr: aggregate via mean (default) or sum
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ converted xts series (freq = a)
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ test2 <- QtoA(test1) # for stock type variables mean, for flow type variables sum
+ print(test1)
+ print(cbind(`ncen@us.sola`, test2))
+ 
+\end{verbatim}
+
+\hypertarget{qtom}{%
+\section{QtoM}\label{qtom}}
+
+Description:
+
+\begin{verbatim}
+ Interpolate a tibble of series from quaterly to monthly freq
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ QtoM(data_q, conv_type)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ data_q: tibble containing variables at quarterly freq
+
+ conv_type: match the quarterly value via "first", "last", "sum",
+      "average"
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ tibble containing variables at monthly freq
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% 
+   ts_xts()
+ `ncen@us.sola`["2016/2021"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)
+ test1 <- AtoQ(`ncen@us.sola`)
+ QtoM(ts_tbl(test1), "average")
+ ts_frequency(QtoM(ts_tbl(test1), "average") %>% ts_xts())
+ 
+\end{verbatim}
+
+\hypertarget{qtom1}{%
+\section{QtoM1}\label{qtom1}}
+
+Description:
+
+\begin{verbatim}
+ Interpolate a single series from quarterly to monthly freq
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ QtoM1(var_q, ts_start, conv_type)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ var_q: vector containing a single variable at quarterly freq
+
+ ts_start: starting period as c(year, quarter) e.g. c(2001, 1)
+
+ conv_type: match the quarterly value via "first", "last", "sum",
+      "average"
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ vector containing a single variable at monthly freq
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ QtoM1(test1, c(2010, 1), "average")
+ 
+\end{verbatim}
+
+\hypertarget{qtrs}{%
+\section{qtrs}\label{qtrs}}
+
+Description:
+
+\begin{verbatim}
+ Convert period in quarters to period months
+\end{verbatim}
+
+Usage:
+
+\begin{verbatim}
+ qtrs(nr_quarters)
+ 
+\end{verbatim}
+
+Arguments:
+
+\begin{verbatim}
+ nr_quarters: number of quarters in period (integer)
+\end{verbatim}
+
+Value:
+
+\begin{verbatim}
+ number of months in period
+\end{verbatim}
+
+Examples:
+
+\begin{verbatim}
+ qtrs(3)
+ ymd("2020-01-01") + qtrs(3)
+ 
+\end{verbatim}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{best-practices-for-time-series-data-manipulation}{%
+\chapter{Best practices for time series data
+manipulation}\label{best-practices-for-time-series-data-manipulation}}
+
+Use capital letters for series names. Special characters in variable
+names require putting the name between backticks (e.g.~\texttt{N@US.A}).
+Eliminate special characters using a long tibble.
+
+\begin{verbatim}
+hist_q_mod <- hist_q %>%
+  ts_tbl() %>%
+  mutate(id = str_replace_all(id, c("@" = "_AT_", "\\." = "_")))
+  
+# revert back to udaman notation
+hist_q <- hist_q_mod %>%
+  ts_tbl() %>%
+  mutate(id = str_replace_all(id, c("_AT_" = "@", "_Q" = "\\.Q")))
+\end{verbatim}
+
+Use the \texttt{xts} format whenever possible. Observations in a
+multivariate \texttt{xts} can be accessed by time and series name in two
+ways: \texttt{mul\_var\_xts{[}time,\ ser\_name{]}} or
+\texttt{mul\_var\_xts\$ser\_name{[}time{]}}.
+
+Make sure all series are defined on the same range (default start =
+bnk\_start, end = bnk\_end). Take advantage of \texttt{make\_xts()} (and
+its defaults, e.g.~start and end period).
+
+\begin{verbatim}
+import_xts <- read_csv(here("data/raw", str_glue("{exp_id_a}.csv"))) %>%
+  arrange(time) %>%
+  ts_long() %>%
+  ts_xts() %>%
+  ts_c(
+    temp = make_xts(per = "year") # temporary variable to force start and end in import_xts
+  ) %>%
+  extract(, str_subset(colnames(.), "temp", negate = TRUE)) # remove temp
+\end{verbatim}
+
+Don't break up multivariate time series (think databank) into individual
+series in the global environment.
+
+If referring directly to a series with a static name, use the
+\texttt{bank\$series} notation (this can be used on both the right and
+the left hand side of the assignment, while \texttt{bank{[},\ series{]}}
+can only be used for existing series in bank).
+
+\begin{verbatim}
+# find the last value in history
+dat_end <- find_end(hist_q$N_AT_US_Q)
+# same as
+dat_end <- find_end(hist_q[, N_AT_US_Q])
+\end{verbatim}
+
+Use \texttt{{[}p(){]}} to select a period in \texttt{xts} objects,
+otherwise use \texttt{ts\_span()}.
+
+\begin{verbatim}
+# extend series with addfactored level
+sol_q$N_AT_US_SOLQ <- hist_q$N_AT_US_Q[p("", dat_end)] %>%
+  ts_bind(sol_q$NCEN_AT_US_SOLQ[p(dat_end, "")] +
+    as.numeric(sol_q$N_AT_US_SOLQ_ADDLEV[dat_end]))
+    
+# addfactor for growth
+sol_q$N_AT_US_SOLQ_ADDGRO[p(dat_end + qtrs(1), dat_end + qtrs(4))] <- -0.35
+
+# extend history using growth rate
+sol_q$N_AT_US_SOLQ <- sol_q$N_AT_US_SOLQ[p("", dat_end)] %>%
+  ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))
+\end{verbatim}
+
+The \texttt{bank{[},seriesname{]}} notation only works for
+\emph{existing} \texttt{xts} series on the left of the assignment (it
+can also be used on the right). \texttt{seriesname} can be determined at
+runtime
+
+\begin{verbatim}
+# initialize the lhs series in the "bank"
+hist_a$temp <- make_xts()
+names(hist_a)[names(hist_a) == "temp"] <- str_glue("E{ser_i}_AT_{cnty_i}_ADD")
+
+# calculate expression and assign to lhs
+hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] <- 
+  (hist_a[, str_glue("E{ser_i}_AT_{cnty_i}")] / hist_a[, str_glue("E_NF_AT_{cnty_i}")])
+\end{verbatim}
+
+Alternatively, make multiple series in \emph{bank} available by
+\texttt{\%\$\%} and retrieve inividual series by \texttt{get\_var()} on
+the right.
+
+\begin{verbatim}
+hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] <- hist_a %$%
+  (get_var("E{ser_i}_AT_{cnty_i}") / get_var("E_NF_AT_{cnty_i}"))
+\end{verbatim}
+
+Bimets requires data in a particular \texttt{tslist} format. Convert
+\texttt{xts} to \texttt{tslist} using \texttt{ts\_tslist()}.
+
+\begin{verbatim}
+# store series as tslist
+hist_a_lst <- hist_a %>% 
+  ts_tslist() %>% 
+
+# convert series to bimets format
+hist_a_bimets <- hist_a_lst %>%
+  map(as.bimets)
+
+# bimets strips the attributes, need to reset them for further manipulation by tsbox
+hist_a <- hist_a_bimets %>% 
+  set_attr("class", c("tslist", "list")) %>% 
+  ts_xts()
+\end{verbatim}
+
+For series collected in a \texttt{tslist} on the left of the assignment
+use the \texttt{bank{[}{[}seriesname{]}{]}} notation (it can also be
+used on the right). Here the lhs series \texttt{seriesname} does not
+need to exist, and it might easier to work with \texttt{tslist} than
+\texttt{xts} when variable names are determined at runtime.
+
+\begin{verbatim}
+# similar to above with a tslist variable
+hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] <- hist_a_lst %$%
+  (get_var("E{ser_i}_AT_{cnty_i}") - get_var("E_NF_AT_{cnty_i}"))
+\end{verbatim}
+
+\hypertarget{harness-the-power-of-tsbox}{%
+\section{Harness the power of tsbox}\label{harness-the-power-of-tsbox}}
+
+Use the converter functions in
+\href{https://www.tsbox.help/reference/index.html}{\texttt{tsbox}} to
+shift between various data types (\texttt{ts\_tbl()},
+\texttt{ts\_xts()}, \texttt{ts\_ts()}, \texttt{ts\_tslist()}) and
+reshaping to the long and wide format (\texttt{ts\_long()},
+\texttt{ts\_wide()}). \texttt{tsbox} further contains funtions for time
+period selection (\texttt{ts\_span()}), merging and extension operations
+(\texttt{ts\_c()}, \texttt{ts\_bind()}, \texttt{ts\_chain()}),
+transformations (\texttt{ts\_lag()}, \texttt{ts\_pc()},
+\texttt{ts\_pca()}, \texttt{ts\_pcy()}, \texttt{ts\_diff()},
+\texttt{ts\_diffy()}), and index construction (\texttt{ts\_compound()},
+\texttt{ts\_index()}). Consider these before turning to solutions that
+are specific to the \texttt{xts}, \texttt{ts}, \texttt{dplyr} or
+\texttt{tidyr} packages.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{model-selection}{%
+\chapter{Model selection}\label{model-selection}}
+
+The model selection process can be run line-by-line from an R script
+directly (R/gets\_model\_select.R) or via sourcing an Rmd document
+(notes/gets\_model\_select.Rmd) which collects all model selection
+results in an easier to digest html file. Running the full script
+(source) takes about 1 minute.
+
+\hypertarget{main-user-settings}{%
+\section{Main user settings}\label{main-user-settings}}
+
+\begin{itemize}
+\tightlist
+\item
+  Start and end of period used for model selection.\\
+\item
+  End of period used for estimation (selected model can be re-estimated
+  for different sample).\\
+\item
+  Start and end of quasi-forecast period (for model evaluation).\\
+\item
+  Maximum number of lags considered in models.\\
+\item
+  Response variable.\\
+\item
+  List of predictors.
+\end{itemize}
+
+\hypertarget{data-preparation-tidyverse}{%
+\section{\texorpdfstring{Data preparation
+(\texttt{tidyverse})}{Data preparation (tidyverse)}}\label{data-preparation-tidyverse}}
+
+\begin{itemize}
+\tightlist
+\item
+  Download all series used in the model selection process from UDAMAN
+  (about 500 rows and 1200 columns) and eliminate special characters
+  from the series names.\\
+\item
+  Log-transform all variables.\\
+\item
+  Load (create) all indicators (dummies for impulse, level shift,
+  seasonal) and trend.\\
+\item
+  Combine all variables into a single dataset.\\
+\item
+  Set date range for model selection.\\
+\item
+  Generate 8 lags of predictors.\\
+\item
+  Filter data set down to specific variables considered in a particular
+  model, including trend and season dummies.
+\end{itemize}
+
+\hypertarget{model-selection-steps-gets}{%
+\section{\texorpdfstring{Model selection steps
+(\texttt{gets})}{Model selection steps (gets)}}\label{model-selection-steps-gets}}
+
+\url{https://cran.r-project.org/web/packages/gets/index.html}\strut \\
+- Formulate a general unrestricted model.\\
+- Run the gets (general to specific) model selection algorithm.\\
+- Identify outliers in the relationship.\\
+- Repeat gets model selection over specific model and outliers.\\
+- Verify that no additional outliers arise due to greater model
+parsimony.\\
+- If estimation period is shorter than model selection period, remove
+predictors containing zeros only (e.g.~outlier past the end of
+estimation period).\\
+- Re-estimate final model.\\
+- Save model equation as a txt file (not plugging in estimated
+coefficients here to keep it general). If happy with the model, copy
+this equation into file containing all model equations.
+
+\hypertarget{produce-a-quasi-forecast-with-the-selected-model-bimets}{%
+\section{\texorpdfstring{Produce a quasi-forecast with the selected
+model
+(\texttt{bimets})}{Produce a quasi-forecast with the selected model (bimets)}}\label{produce-a-quasi-forecast-with-the-selected-model-bimets}}
+
+\url{https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf}\strut \\
+- Load model from txt file.\\
+- Load data used by the model.\\
+- Estimate the model (if estimation period ends before the last data
+point also run a Chow test of model stability).\\
+- Simulate model.\\
+- Evaluate simulation by plotting quasi-forecast and actual history.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{stochastic-simulations}{%
+\chapter{Stochastic simulations}\label{stochastic-simulations}}
+
+The model selection process stores a set of general equations
+(coefficient estimates are not plugged in) in a text file. Before
+simulation can commence, several steps need to take place: compile the
+system of equations, add data to the equations, estimate equations.
+\texttt{bimets} does not automatically adjust the sample for missing
+data points, so need to identify the time period with a rectangular
+sample for the estimation of each equation. For forecasting, deal with
+the ragged edge of the data by finding the last data point for each
+series and ``exogenize'' the series up to that point (use actuals in
+simulation).
+
+\hypertarget{main-user-settings-1}{%
+\section{Main user settings}\label{main-user-settings-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  Start of forecast period.\\
+\item
+  End of forecast period.\\
+\item
+  End of estimation period.\\
+\item
+  Maximum number of lags in models.
+\end{itemize}
+
+\hypertarget{data-preparation}{%
+\section{Data preparation}\label{data-preparation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Download all series used in the model selection process from UDAMAN
+  (about 500 rows and 1200 columns) and eliminate special characters
+  from the series names.\\
+\item
+  Load (create) all indicators (dummies for impulse, level shift,
+  seasonal) and trend.\\
+\item
+  Combine all variables into a single dataset.
+\end{itemize}
+
+\hypertarget{simulation-prep}{%
+\section{Simulation prep}\label{simulation-prep}}
+
+\begin{itemize}
+\tightlist
+\item
+  Compile model (load equations from text file and let \texttt{bimets}
+  digest the info).
+\item
+  Add variables to model.
+\item
+  Set date range for estimation (\texttt{bimets} does not automatically
+  drop periods with NA's).
+\item
+  Set exogenization range to deal with ragged edge in simulation.\\
+\item
+  Estimate model equations and save estimation results to text file for
+  inspection.
+\item
+  Set add factors.
+\end{itemize}
+
+\hypertarget{simulation}{%
+\section{Simulation}\label{simulation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate model deterministically to obtain mean forecast.
+\item
+  Extract forecast and combine it with history.
+\item
+  Inspect the forecast via plots.
+\item
+  Set parameters for stochastic simulations.
+\item
+  Run stochastic simulation.
+\item
+  Extract simulated paths and obtain deviations from the mean forecast.
+\item
+  Inspect the paths via plots.
+\end{itemize}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{notes}{%
+\chapter{Notes}\label{notes}}
+
+\hypertarget{project-setup-1}{%
+\section{Project setup}\label{project-setup-1}}
+
+Coding Conventions in R:
+
+Basic ideas for a reproducible workflow:
+
+Use RStudio projects with sub-directories
+
+\begin{itemize}
+\tightlist
+\item
+  R - R code.
+\item
+  data/raw - data external to the project.
+\item
+  data/processed - intermediate processed data.
+\item
+  notes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd,
+  etc.
+\item
+  output - reports, tables, etc.
+\item
+  output/plots - plots.
+\item
+  renv - used for library management (don't edit).
+\item
+  man - help files (don't edit).
+\end{itemize}
+
+Preference settings:
+
+\hypertarget{git-1}{%
+\section{Git}\label{git-1}}
+
+A quick overview:
+https://github.com/llendway/github\_for\_collaboration/blob/master/github\_for\_collaboration.md
+
+\hypertarget{git-step-by-step-1}{%
+\section{Git step by step}\label{git-step-by-step-1}}
+
+If you don't have Git, install it:\\
+https://happygitwithr.com/install-git.html
+
+Make sure .gitignore contains the following files:\\
+.Renviron .Rprofile
+
+Introduce yourself to Git:\\
+In the shell (Terminal tab in RStudio):\\
+git config --global user.name `Jane Doe'\\
+git config --global user.email `jane@example.com'\\
+git config --global --list
+
+For more advanced tasks, use GitHub Desktop:\\
+https://desktop.github.com
+
+Store your GitHub PAT (Personal Access Token):\\
+https://happygitwithr.com/https-pat.html
+
+Use one of three ways to add your project to GitHub:\\
+Brand new project:\\
+https://happygitwithr.com/new-github-first.html\\
+Existing project without version control:\\
+https://happygitwithr.com/existing-github-first.html\\
+Existing project under local version control:\\
+https://happygitwithr.com/existing-github-last.html
+
+Troubleshooting if RStudio can't detect Git:\\
+https://happygitwithr.com/rstudio-see-git.html
+
+Git vocabulary:\\
+https://happygitwithr.com/git-basics.html
+
+Remote setups (try to stick to GitHub first discussed above):\\
+https://happygitwithr.com/common-remote-setups.html
+
+Useful Git workflows and dealing with conflicts:\\
+https://happygitwithr.com/workflows-intro.html\\
+https://happygitwithr.com/push-rejected.html\\
+https://happygitwithr.com/pull-tricky.html
+
+Additional resources:\\
+https://happygitwithr.com/ideas-for-content.html
+
+Suggested workflow:\\
+1) Initialize repository on GitHub.com under the UHERO account.\\
+2) Clone it via RStudio project setup.\\
+3) Commit changes, pull, resolve issues, push. 3*) If work in a branch
+(create in RStudio), commit to branch, (pull) push to remote, pull
+request on GitHub.com from branch to main, merge, delete branch on
+GitHub.com.
+
+Render results from R scripts via Rmd: 1) source your R code from within
+Rmd 2) only render important results in Rmd chunks
+
+Use here() from the here package to write file paths
+
+Suppose you have a dataset in csv format. Use
+readr::read\_csv(here::here(``The subfolder where your csv file
+resides'', ``The CSV file.csv''))
+
+Do not use setwd() and rm(list = ls())
+
+Do not save the workspace to the .Rdta file
+
+Use library() not require()
+
+Use version control (useful for recording changes between different
+versions of a file over time - see below for Git integration)
+
+See the resources below:
+
+Best Practices \& Style Guide for Writing R Code:
+https://github.com/kmishra9/Best-Practices-for-Writing-R-Code
+
+R Code -- Best practices:
+https://www.r-bloggers.com/2018/09/r-code-best-practices/
+
+R Best Practices by Krista L. DeStasio:
+https://kdestasio.github.io/post/r\_best\_practices/
+
+Project-oriented workflow:
+https://www.tidyverse.org/blog/2017/12/workflow-vs-script/
+
+R coding style best practices:
+https://www.datanovia.com/en/blog/r-coding-style-best-practices/
+
+What They Forgot to Teach You About R by Jennifer Bryan and Jim Hester:
+https://rstats.wtf/save-source.html
+
+Conflicted: a new approach to resolving ambiguity:
+https://www.tidyverse.org/blog/2018/06/conflicted/
+
+Introduction to renv package:
+https://rstudio.github.io/renv/articles/renv.html\#future-work-1
+
+Row-oriented workflows in R with the tidyverse:
+https://github.com/jennybc/row-oriented-workflows\#readme
+
+Structuring R projects:
+https://www.r-bloggers.com/2018/08/structuring-r-projects/
+
+Defensive Programming in R:
+https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/\#8
+
+Nice R code: https://nicercode.github.io/blog/2013-04-05-projects/
+
+Workflow basics: https://r4ds.had.co.nz/workflow-basics.html
+
+Namespace package: https://r-pkgs.org/namespace.html
+
+Writing R packages in RStudio:
+https://ourcodingclub.github.io/tutorials/writing-r-package/
+
+It is dangerous to change state:
+https://withr.r-lib.org/articles/changing-and-restoring-state.html
+
+The targets R Package User Manual: https://books.ropensci.org/targets/
+
+Github and R:
+
+Install git on the R system from here: https://git-scm.com/downloads
+
+Go to RStudio → Global Options → Git/SVN → Make sure the box ``Enable
+version control interface for RStudio projects'' is checked
+
+Tell RStudio where your Git executable is in the Git/SVN under Global
+Options
+
+Create a new project in R (make sure the check box ``Create a git
+repository'' is checked)
+
+Create a new task file in R (New File → Rscript) and save it as a .R
+file
+
+To use Git version control on the .R file we need to commit that file
+
+To commit a file with Git in RStudio go to the Git tab in the top right
+pane in R → Select one or more files by checking the box
+
+Checking the box means that it is ready to be committed
+
+To actually commit the file click the ``Commit'' button (will open up a
+commit window)
+
+Include a commit message then click on the second ``Commit'' button
+
+For collaboration on Github:
+
+Load the usethis package and type in ?use\_github in the R console
+
+In the Authentication section, click on GitHub personal access token
+(PAT)
+
+Click on the button to generate a new token
+
+Put a Note and use repo permission for your token and then click on
+``Generate token''
+
+Copy the token ID number (needs to be stored)
+
+Type in edit\_r\_environ() in the R console and then type in GITHUB\_PAT
+=`copy and paste token ID number here'
+
+In R console type in use\_github(protocol =`https', auth\_token =
+Sys.getenv(``GITHUB\_PAT''))
+
+Run it and will ask if you are sure. Select 3
+
+This will create a Github repository and will set up the syncing
+
+Another way to collaborate on Github (easier so follow this!):
+
+Go to http://github.com and create an account
+
+Create a new repository and give it a name (click ``Add a README file)
+
+Go to R → Install the usethis package and include library(usethis) →
+Type in use\_git\_config(user.name = ``Your Name on the GitHub
+account'', user.email = ``Your email address on the GitHub account'')
+
+In the newly created repository, click the ``Code'' button on GitHub.
+Copy the URL under the ``Clone with HTTPS''
+
+Go to R → New Project → Version Control → Git → Repository URL (copy and
+paste the HTTP URL from your Github repository) - this will connect
+what's on the cloud on Github to your computer (also called cloning your
+repository)
+
+Can start a new R script and would be able to see the Git tab in R
+
+Can commit and include a commit message (will add the files to your
+depository)
+
+Need to push to fully make the changes go through and to show up on your
+GitHub account
+
+Under the History tab you would be able to see the changes you made and
+committed
+
+Can link the SSH keys from settings on your account and into R under the
+Git/SVN tab (have to create a SSH RSA key if it has not been created
+already)
+
+If there is a merge conflict when collaborating on making simultaneous
+changes together then pull first and then fix the merge conflict. Then
+can commit by finalizing on which changes to keep by eliminating the
+``===='' and ``\textgreater\textgreater\textgreater\textgreater{}'' and
+push it out. The other person will have to pull in the changes in her
+hand.
+
+Creating a new branch will allow you to do things on your own. Click on
+the branch button to create a new branch and name it. A new branch will
+allow you to make changes on it and work separately on it. The other
+person will have to pull to see the new branch and your changes on it.
+In this way, we can work independently when working together at the same
+time. Then will have to merge the independent branches.
+
+Open a pull request by clicking on the Compare and pull request button
+on the Github site to merge the separate branches together. Can delete
+your separate branch if desired. Then go to R and pull the changes down.
+
+For .Renviron have to use specific user credentials such as user name,
+password, Github and udaman tokens.
+
+The .Rprofile can be ignored in gitignore if there is a problem with
+different paths across Macs and PCs.
+
+Resources:
+
+Happy Git and GitHub for the useR: https://happygitwithr.com/
+
+Github for collaboration:
+https://github.com/llendway/github\_for\_collaboration/blob/master/github\_for\_collaboration.md
+
+My research workflow, based on Github:
+https://www.carlboettiger.info/2012/05/06/research-workflow.html
+
+Collaborating with renv:
+https://rstudio.github.io/renv/articles/collaborating.html
+
+R style guide: http://adv-r.had.co.nz/Style.html
+
+UHERO R style guide:
+
+Use block letters for R file names (because the NAS file server is case
+sensitive)
+
+Comment your code
+
+Time Series Modeling:
+
+Forecasting: Principles and Practice (3rd ed) by Rob J Hyndman and
+George Athanasopoulos : https://otexts.com/fpp3/index.html
+
+An Introduction to Statistical Learning (1st ed):
+https://www.statlearning.com
+
+Manipulating Time Series Data in R with xts \& zoo:
+https://rstudio-pubs-static.s3.amazonaws.com/288218\_117e183e74964557a5da4fc5902fc671.html
+https://rpubs.com/mpfoley73/504487 Time Series in R, The Power of xts
+and zoo:
+https://ugoproto.github.io/ugo\_r\_doc/time\_series\_in\_r\_the\_power\_of\_xts\_and\_zoo/
+xts Cheat Sheet: Time Series in R:
+https://www.r-bloggers.com/2017/05/xts-cheat-sheet-time-series-in-r/
+
+R For Data Science Cheat Sheet by DataCamp:
+https://s3.amazonaws.com/assets.datacamp.com/blog\_assets/xts\_Cheat\_Sheet\_R.pdf
+
+Evaluate the R packages: gets, ARDL, etc.
+
+The gets package is used for Multi-path General-to-Specific (GETS)
+modelling of the mean and/or variance of a regression, and Indicator
+Saturation (ISAT) methods for detecting structural breaks in the
+mean.https://cran.r-project.org/web/packages/gets/index.html
+
+The ARDL package creates complex autoregressive distributed lag (ARDL)
+models providing just the order and automatically constructs the
+underlying unrestricted and restricted error correction model (ECM). It
+also performs the bounds-test for cointegration as described in Pesaran
+et al.~(2001). https://cran.r-project.org/web/packages/ARDL/index.html
+https://github.com/Natsiopoulos/ARDL
+
+Tidy tools for time series modeling under tidyverts:
+https://tidyverts.org - The fable package applies tidyverse principles
+to time series modeling used for forecasting:
+https://fable.tidyverts.org/ - The tsibble package provides a tidy data
+structure for time series:
+https://cran.r-project.org/web/packages/tsibble/index.html - The
+tsibbledata package provide a different types of datasets in the tsibble
+data structure:
+https://cran.r-project.org/web/packages/tsibbledata/index.html - The
+tsibbletalk package introduces shared key to the tsibble, to easily
+\{crosstalk\} between plots on both client and server sides (i.e.~with
+or without shiny):
+https://cran.r-project.org/web/packages/tsibbletalk/tsibbletalk.pdf- The
+feasts package provides a collection of features, decomposition methods,
+statistical summaries and graphics functions for the analysing tidy time
+series data: https://cran.r-project.org/web/packages/feasts/index.html -
+The fable.prohphet package provides an interface allowing the prophet
+forecasting procedure to be used within the fable framework:
+https://cran.r-project.org/web/packages/fable.prophet/vignettes/intro.html
+
+The xts or Extensible Time Series package provides an extensible time
+series class, enabling uniform handling of many R time series classes :
+https://cran.r-project.org/web/packages/xts/index.html xts: Extensible
+Time Series:
+https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf
+
+Think about dummies, breaks, outliers
+
+Figure out how bimets deals with ragged edge, add-factors, goal search
+
+The bimets is an R package developed with the aim of easing time series
+analysis and building up a framework that facilitates the definition,
+estimation and simulation of simultaneous equation models:
+https://cran.r-project.org/web/packages/bimets/index.htmlbimets - Time
+Series And Econometric Modeling In R: https://github.com/cran/bimets
+https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf
+
+Structural Equation Models (SEM):
+https://rviews.rstudio.com/2021/01/22/sem-time-series-modeling/
+
+Look at tidy models
+
+The tidymodels package is a collection of packages for modeling and
+machine learning using tidyverse principles: https://www.tidymodels.org
+
+Port the Gekko code into R: http://t-t.dk/gekko/
+
+Look at DiagrammeR package, also the Gantt charts it can produce
+
+https://rich-iannone.github.io/DiagrammeR/
+
+A Beginner's Guide to Learning R:
+
+A (very) short introduction to R:
+https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf
+
+Rstudio Education: https://github.com/rstudio-education
+
+Remaster the tidyverse:
+https://github.com/rstudio-education/remaster-the-tidyverse
+
+Introduction to R and Rstudio:
+https://jules32.github.io/2016-07-12-Oxford/R\_RStudio/
+
+An intro to R for new programmers: https://rforcats.net
+
+fasteR: Fast Lane to Learning R!: https://github.com/matloff/fasteR
+
+RStudio Cheatsheets: https://rstudio.com/resources/cheatsheets/
+
+R for Data Science: https://r4ds.had.co.nz
+
+Data wrangling, exploration, and analysis with R: https://stat545.com
+
+R Markdown: The Definitive Guide: https://bookdown.org/yihui/rmarkdown/
+
+Data Visualization with R: https://rkabacoff.github.io/datavis/
+
+Modern R with the tidyverse: https://b-rodrigues.github.io/modern\_R/
+
+R Cookbook, 2nd Edition: https://rc2e.com
+
+Advanced R by Hadley Wickham: http://adv-r.had.co.nz
+
+UC Business Analytics R Programming Guide:
+http://uc-r.github.io/descriptive
+
+R Programming for Data Science:
+https://bookdown.org/rdpeng/rprogdatascience/
+
+Hands-On Programming with R: https://rstudio-education.github.io/hopr/
+
+Efficient R programming:
+https://csgillespie.github.io/efficientR/index.html
+
+R for Fledglings:
+http://www.uvm.edu/\textasciitilde tdonovan/RforFledglings/index.html
+
+R Intermediate Level (includes applications):
+
+Advanced Statistical Computing: https://bookdown.org/rdpeng/advstatcomp/
+
+Feature Engineering and Selection: A Practical Approach for Predictive
+Models: http://www.feat.engineering/index.html
+
+Advanced Quantitative Methods:
+https://uclspp.github.io/PUBLG088/index.html
+
+Principles of Econometrics with R:
+https://bookdown.org/ccolonescu/RPoE4/
+
+Modern Data Analysis for Economics:
+https://jiamingmao.github.io/data-analysis/Resources/
+
+Data Science for Economists: https://github.com/uo-ec607/lectures
+
+Data Science for Psychologists:
+https://bookdown.org/hneth/ds4psy/10-time.html
+
+Rewriting R code in C++: https://adv-r.hadley.nz/rcpp.html
+
+Writing R Extensions:
+https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html
+
+Other R packages for data analysis:
+
+The data.table package is used for fast aggregation of large data
+(e.g.~100GB in RAM), fast ordered joins, fast add/modify/delete of
+columns by group using no copies at all, list columns, friendly and fast
+character- separated-value read/write:
+https://cran.r-project.org/web/packages/data.table/
+
+The mlr3 (Lang et al.~2019) package and ecosystem provide a generic,
+object-oriented, and extensible framework for classification,
+regression, survival analysis, and other machine learning tasks for the
+R: https://mlr3book.mlr-org.com
+
+purr package tutorial: https://jennybc.github.io/purrr-tutorial/
+
+Data Visualization with R:
+
+Data Analysis and Visualization Using R:
+http://varianceexplained.org/RData/
+
+Data Analysis and Visualization in R for Ecologists:
+https://datacarpentry.org/R-ecology-lesson/
+
+Data Visualization with R by Rob Kabacoff:
+https://rkabacoff.github.io/datavis/
+
+R Graphics Cookbook, 2nd edition: https://r-graphics.org
+
+ggplot2: elegant graphics for data analysis: https://ggplot2-book.org
+
+
+
+\end{document}
