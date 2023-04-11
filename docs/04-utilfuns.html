@@ -8,7 +8,7 @@
 
 <meta name="author" content="Peter Fuleky">
 
-<title>utilfuns</title>
+<title>User guide to UHERO’s forecast processes - 5&nbsp; User defined utility functions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,11 +25,14 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./05-bestpract.html" rel="next">
+<link href="./03-setup.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -63,24 +66,157 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">User guide to UHERO’s forecast processes</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/UHERO/forecastr_book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./forecastr.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./forecastr.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-project.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-git.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-utilfuns.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-bestpract.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-modselect.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-simulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#atoq" id="toc-atoq" class="nav-link active" data-scroll-target="#atoq"><span class="toc-section-number">5.1</span>  AtoQ</a></li>
+  <li><a href="#explode_xts" id="toc-explode_xts" class="nav-link" data-scroll-target="#explode_xts"><span class="toc-section-number">5.2</span>  explode_xts</a></li>
+  <li><a href="#find_end" id="toc-find_end" class="nav-link" data-scroll-target="#find_end"><span class="toc-section-number">5.3</span>  find_end</a></li>
+  <li><a href="#find_start" id="toc-find_start" class="nav-link" data-scroll-target="#find_start"><span class="toc-section-number">5.4</span>  find_start</a></li>
+  <li><a href="#get_series" id="toc-get_series" class="nav-link" data-scroll-target="#get_series"><span class="toc-section-number">5.5</span>  get_series</a></li>
+  <li><a href="#get_series1" id="toc-get_series1" class="nav-link" data-scroll-target="#get_series1"><span class="toc-section-number">5.6</span>  get_series1</a></li>
+  <li><a href="#get_series_exp" id="toc-get_series_exp" class="nav-link" data-scroll-target="#get_series_exp"><span class="toc-section-number">5.7</span>  get_series_exp</a></li>
+  <li><a href="#get_var" id="toc-get_var" class="nav-link" data-scroll-target="#get_var"><span class="toc-section-number">5.8</span>  get_var</a></li>
+  <li><a href="#make_xts" id="toc-make_xts" class="nav-link" data-scroll-target="#make_xts"><span class="toc-section-number">5.9</span>  make_xts</a></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p"><span class="toc-section-number">5.10</span>  p</a></li>
+  <li><a href="#pca_to_pc" id="toc-pca_to_pc" class="nav-link" data-scroll-target="#pca_to_pc"><span class="toc-section-number">5.11</span>  pca_to_pc</a></li>
+  <li><a href="#pchmy" id="toc-pchmy" class="nav-link" data-scroll-target="#pchmy"><span class="toc-section-number">5.12</span>  pchmy</a></li>
+  <li><a href="#plot_1" id="toc-plot_1" class="nav-link" data-scroll-target="#plot_1"><span class="toc-section-number">5.13</span>  plot_1</a></li>
+  <li><a href="#plot_comp" id="toc-plot_comp" class="nav-link" data-scroll-target="#plot_comp"><span class="toc-section-number">5.14</span>  plot_comp</a></li>
+  <li><a href="#plot_comp_2" id="toc-plot_comp_2" class="nav-link" data-scroll-target="#plot_comp_2"><span class="toc-section-number">5.15</span>  plot_comp_2</a></li>
+  <li><a href="#qtoa" id="toc-qtoa" class="nav-link" data-scroll-target="#qtoa"><span class="toc-section-number">5.16</span>  QtoA</a></li>
+  <li><a href="#qtom" id="toc-qtom" class="nav-link" data-scroll-target="#qtom"><span class="toc-section-number">5.17</span>  QtoM</a></li>
+  <li><a href="#qtom1" id="toc-qtom1" class="nav-link" data-scroll-target="#qtom1"><span class="toc-section-number">5.18</span>  QtoM1</a></li>
+  <li><a href="#qtrs" id="toc-qtrs" class="nav-link" data-scroll-target="#qtrs"><span class="toc-section-number">5.19</span>  qtrs</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/UHERO/forecastr_book/edit/main/04-utilfuns.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/UHERO/forecastr_book/blob/main/04-utilfuns.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></h1>
+</div>
 
 
-<section id="user-defined-utility-functions" class="level1">
-<h1>User defined utility functions</h1>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <p>Functions not available in existing packages are stored in util_funs.R. A pdf version of this document is available <a href="util_funs.pdf">here</a>.</p>
-<section id="atoq" class="level2">
-<h2 class="anchored" data-anchor-id="atoq">AtoQ</h2>
+<section id="atoq" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="atoq"><span class="header-section-number">5.1</span> AtoQ</h2>
 <p>Description:</p>
 <pre><code> Linear interpolation based on aremos command reference page 292</code></pre>
 <p>Usage:</p>
@@ -99,8 +235,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  test1 &lt;- AtoQ(`ncen@us.sola`)
  </code></pre>
 </section>
-<section id="explode_xts" class="level2">
-<h2 class="anchored" data-anchor-id="explode_xts">explode_xts</h2>
+<section id="explode_xts" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="explode_xts"><span class="header-section-number">5.2</span> explode_xts</h2>
 <p>Description:</p>
 <pre><code> Splitting of xts matrix to individual xts vectors (don't use,
  pollutes global environment)</code></pre>
@@ -119,8 +255,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  rm(list = ls(pattern = glob2rx("*@HI.Q")))
  </code></pre>
 </section>
-<section id="find_end" class="level2">
-<h2 class="anchored" data-anchor-id="find_end">find_end</h2>
+<section id="find_end" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="find_end"><span class="header-section-number">5.3</span> find_end</h2>
 <p>Description:</p>
 <pre><code> Find the date of the last observation (NAs are dropped)</code></pre>
 <p>Usage:</p>
@@ -137,8 +273,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  find_end(`ncen@us.sola`)
  </code></pre>
 </section>
-<section id="find_start" class="level2">
-<h2 class="anchored" data-anchor-id="find_start">find_start</h2>
+<section id="find_start" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="find_start"><span class="header-section-number">5.4</span> find_start</h2>
 <p>Description:</p>
 <pre><code> Find the date of the first observation (NAs are dropped)</code></pre>
 <p>Usage:</p>
@@ -155,8 +291,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  find_start(`ncen@us.sola`)
  </code></pre>
 </section>
-<section id="get_series" class="level2">
-<h2 class="anchored" data-anchor-id="get_series">get_series</h2>
+<section id="get_series" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="get_series"><span class="header-section-number">5.5</span> get_series</h2>
 <p>Description:</p>
 <pre><code> Download a set of series from udaman using series names</code></pre>
 <p>Usage:</p>
@@ -170,8 +306,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
 <pre><code> get_series(c("VISNS@HI.M", "VAPNS@HI.M"))
  </code></pre>
 </section>
-<section id="get_series1" class="level2">
-<h2 class="anchored" data-anchor-id="get_series1">get_series1</h2>
+<section id="get_series1" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="get_series1"><span class="header-section-number">5.6</span> get_series1</h2>
 <p>Description:</p>
 <pre><code> Download a single series from udaman using series name</code></pre>
 <p>Usage:</p>
@@ -185,8 +321,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
 <pre><code> get_series("VISNS@HI.M")
  </code></pre>
 </section>
-<section id="get_series_exp" class="level2">
-<h2 class="anchored" data-anchor-id="get_series_exp">get_series_exp</h2>
+<section id="get_series_exp" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="get_series_exp"><span class="header-section-number">5.7</span> get_series_exp</h2>
 <p>Description:</p>
 <pre><code> Download series listed in an export table from udaman</code></pre>
 <p>Usage:</p>
@@ -204,8 +340,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  get_series_exp(74, save_loc = NULL)
  </code></pre>
 </section>
-<section id="get_var" class="level2">
-<h2 class="anchored" data-anchor-id="get_var">get_var</h2>
+<section id="get_var" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="get_var"><span class="header-section-number">5.8</span> get_var</h2>
 <p>Description:</p>
 <pre><code> Construct a series name from variable components and retrieve the
  series</code></pre>
@@ -226,8 +362,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
    ts_xts() %$% get_var("E{ser_i}@{cnty_i}.Q")
  </code></pre>
 </section>
-<section id="make_xts" class="level2">
-<h2 class="anchored" data-anchor-id="make_xts">make_xts</h2>
+<section id="make_xts" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="make_xts"><span class="header-section-number">5.9</span> make_xts</h2>
 <p>Description:</p>
 <pre><code> Create xts and fill with values</code></pre>
 <p>Usage:</p>
@@ -248,8 +384,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  make_xts(start = ymd("2010-01-01"), per = "quarter", val = 0)
  </code></pre>
 </section>
-<section id="p" class="level2">
-<h2 class="anchored" data-anchor-id="p">p</h2>
+<section id="p" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="p"><span class="header-section-number">5.10</span> p</h2>
 <p>Description:</p>
 <pre><code> Concatenate dates to obtain period</code></pre>
 <p>Usage:</p>
@@ -266,8 +402,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  
  </code></pre>
 </section>
-<section id="pca_to_pc" class="level2">
-<h2 class="anchored" data-anchor-id="pca_to_pc">pca_to_pc</h2>
+<section id="pca_to_pc" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="pca_to_pc"><span class="header-section-number">5.11</span> pca_to_pc</h2>
 <p>Description:</p>
 <pre><code> Convert annualized growth to quarterly growth</code></pre>
 <p>Usage:</p>
@@ -284,8 +420,8 @@ aggr: interpolation method: aggregate via mean (default) or sum</code></pre>
  test1 &lt;- AtoQ(`ncen@us.sola`)
  ts_c(test1 %&gt;% ts_pca() %&gt;% pca_to_pc(), test1 %&gt;% ts_pc())</code></pre>
 </section>
-<section id="pchmy" class="level2">
-<h2 class="anchored" data-anchor-id="pchmy">pchmy</h2>
+<section id="pchmy" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="pchmy"><span class="header-section-number">5.12</span> pchmy</h2>
 <p>Description:</p>
 <pre><code> Calculate multi-period average growth</code></pre>
 <p>Usage:</p>
@@ -306,8 +442,8 @@ lag_in: length of period over which growth is calculated</code></pre>
  ts_c(pchmy(test1, lag_in = 4), ts_pcy(test1), ts_pca(test1), ts_pc(test1))
  </code></pre>
 </section>
-<section id="plot_1" class="level2">
-<h2 class="anchored" data-anchor-id="plot_1">plot_1</h2>
+<section id="plot_1" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="plot_1"><span class="header-section-number">5.13</span> plot_1</h2>
 <p>Description:</p>
 <pre><code> Interactive plot of a single variable with level and growth rate</code></pre>
 <p>Usage:</p>
@@ -337,8 +473,8 @@ lag_in: length of period over which growth is calculated</code></pre>
  plot_1(test1, rng_start = "2017-01-01")
  </code></pre>
 </section>
-<section id="plot_comp" class="level2">
-<h2 class="anchored" data-anchor-id="plot_comp">plot_comp</h2>
+<section id="plot_comp" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="plot_comp"><span class="header-section-number">5.14</span> plot_comp</h2>
 <p>Description:</p>
 <pre><code> Three-panel plot of levels, index, and growth rates</code></pre>
 <p>Usage:</p>
@@ -375,8 +511,8 @@ width: width of a single panel (px)</code></pre>
    plot_comp()
  </code></pre>
 </section>
-<section id="plot_comp_2" class="level2">
-<h2 class="anchored" data-anchor-id="plot_comp_2">plot_comp_2</h2>
+<section id="plot_comp_2" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="plot_comp_2"><span class="header-section-number">5.15</span> plot_comp_2</h2>
 <p>Description:</p>
 <pre><code> Two-panel plot of levels, index, and growth rates</code></pre>
 <p>Usage:</p>
@@ -413,8 +549,8 @@ width: width of a single panel (px)</code></pre>
    plot_comp_2()
  </code></pre>
 </section>
-<section id="qtoa" class="level2">
-<h2 class="anchored" data-anchor-id="qtoa">QtoA</h2>
+<section id="qtoa" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="qtoa"><span class="header-section-number">5.16</span> QtoA</h2>
 <p>Description:</p>
 <pre><code> Conversion from quarterly to annual frequency</code></pre>
 <p>Usage:</p>
@@ -436,8 +572,8 @@ width: width of a single panel (px)</code></pre>
  print(cbind(`ncen@us.sola`, test2))
  </code></pre>
 </section>
-<section id="qtom" class="level2">
-<h2 class="anchored" data-anchor-id="qtom">QtoM</h2>
+<section id="qtom" class="level2" data-number="5.17">
+<h2 data-number="5.17" class="anchored" data-anchor-id="qtom"><span class="header-section-number">5.17</span> QtoM</h2>
 <p>Description:</p>
 <pre><code> Interpolate a tibble of series from quaterly to monthly freq</code></pre>
 <p>Usage:</p>
@@ -459,8 +595,8 @@ width: width of a single panel (px)</code></pre>
  ts_frequency(QtoM(ts_tbl(test1), "average") %&gt;% ts_xts())
  </code></pre>
 </section>
-<section id="qtom1" class="level2">
-<h2 class="anchored" data-anchor-id="qtom1">QtoM1</h2>
+<section id="qtom1" class="level2" data-number="5.18">
+<h2 data-number="5.18" class="anchored" data-anchor-id="qtom1"><span class="header-section-number">5.18</span> QtoM1</h2>
 <p>Description:</p>
 <pre><code> Interpolate a single series from quarterly to monthly freq</code></pre>
 <p>Usage:</p>
@@ -479,8 +615,8 @@ width: width of a single panel (px)</code></pre>
 <pre><code> QtoM1(test1, c(2010, 1), "average")
  </code></pre>
 </section>
-<section id="qtrs" class="level2">
-<h2 class="anchored" data-anchor-id="qtrs">qtrs</h2>
+<section id="qtrs" class="level2" data-number="5.19">
+<h2 data-number="5.19" class="anchored" data-anchor-id="qtrs"><span class="header-section-number">5.19</span> qtrs</h2>
 <p>Description:</p>
 <pre><code> Convert period in quarters to period months</code></pre>
 <p>Usage:</p>
@@ -496,7 +632,6 @@ width: width of a single panel (px)</code></pre>
  </code></pre>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -633,7 +768,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-setup.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-bestpract.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Author: Peter Fuleky</div>   
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a></div>
+  </div>
+</footer>
 
 
 
