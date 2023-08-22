@@ -1,6 +1,7 @@
 project:
   type: book
   output-dir: _book
+  # copy contents of _book into docs folder to show on github pages
 
 book:
   title: "User guide to UHERO's forecast processes"
