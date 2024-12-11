@@ -1,66 +1,35 @@
 # Project setup
 
-A project is self-contained in a folder (the project folder).
+A [project](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects) is a self-contained set of files in a folder (the project folder). Create a new project in RStudio under the File menu or using `usethis::create_project("proj_dir")`. The *.Rproj* file contains the project settings. Open the project by double clicking this file in Finder. The minimum structure of a project includes an *R* folder for scripts, a *data* folder for data, and an *output* folder for reports and plots. If present, the *data/raw* folder contains data external to the project and the *data/processed* folder contains intermediate processed data. 
 
-## A quick overview:
+Use the [renv](https://rstudio.github.io/renv/articles/renv.html) package to store information in the project folder about the libraries used in the project. Use the [here](https://here.r-lib.org) package to create paths relative to the project root. For example, `here::here("data", "raw/file.csv")` returns the path to the file *file.csv* in the *data/raw* folder. Load libraries and put hard coded lines at the top of the script. Use the [conflicted](https://conflicted.r-lib.org) package to detect conflicts across packages and assign preferences. For example, `conflict_prefer("filter", "dplyr")` assigns preference to the `filter` function in the dplyr package over the `filter` function in the stats package. Don't save the workspace on exit (Tools > Global Options > General > Save workspace to .RData on exit > Never or `usethis::use_blank_slate()`). 
 
-TL;DR:\
-https://kdestasio.github.io/post/r_best_practices/
+Start each pipe with a comment, and if necessary add comments to each line. Enable [Github Copilot](https://docs.posit.co/ide/user/ide/guide/tools/copilot.html) for RStudio; it is free for higher education users. Github Copilot will suggest code based on comments. Use sectioning comments (comments followed by at least four dashes) to separate different parts of the script (they show up in the outline section of the editor pane). Use the [styler](https://styler.r-lib.org) package to format the code. Stick to the `tidyverse` "dialect" and [syntax](https://style.tidyverse.org) as much as possible. 
 
-https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/
+Use R scripts for coding; don't put the analysis into chunks in markdown documents. Results from R scripts can be rendered in quarto (*qmd*) or Rmarkdown (*Rmd*) documents. Within a *qmd* or *Rmd* document [source the R code](https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html) with the analysis. Alternatively, save the entire workspace or individual objects from the R script containing the analysis, and then load these in the appropriate code chunks of the markdown document. Only render important results in markdown chunks. Make sure the code chunks are looking for [objects in the correct working directory](https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html). 
 
-## Basic ideas for a reproducible workflow
+Store secrets, passwords, and keys with the [keyring](https://keyring.r-lib.org/index.html) package. For example, set the UDAMAN token with  `keyring::key_set_with_value(service = "udaman_token", password = "-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=")` and retrieve it with `keyring::key_get("udaman_token")`. Do not store/assign the retrieved credentials to a variable. Environment variables such as API keys can also be stored in a project specific *.Renviron* file; it must end with `\n`. In addition to *.Renviron*, the *.Rprofile* file is also executed each time R starts up. The latter typically contains a script with options and startup tasks. Both files are located in the project root folder. 
+
+
+## Additional resources
+
+Overview of R setup:\
+[https://rstats.wtf](https://rstats.wtf)
+
+Best practices:\
+[https://kdestasio.github.io/post/r_best_practices/](https://kdestasio.github.io/post/r_best_practices/)
+
+Considerations for structuring projects:\
+[https://www.r-bloggers.com/2018/08/structuring-r-projects/](https://www.r-bloggers.com/2018/08/structuring-r-projects/)
 
 Set up your work in projects:\
-https://r4ds.hadley.nz/workflow-projects.html
+[https://r4ds.hadley.nz/workflow-scripts#projects](https://r4ds.hadley.nz/workflow-scripts#projects)
 
-Read section I in WTF: https://rstats.wtf/save-source.html
+Efficient data management in R:\
+[https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/](https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/)
 
-A good list of consideration for structuring projects: https://www.r-bloggers.com/2018/08/structuring-r-projects/
+Efficient R programming:\
+[https://csgillespie.github.io/efficientR/](https://csgillespie.github.io/efficientR/)
 
-And this set of lectures: https://r-cubed.rostools.org/index.html
-
-Use RStudio projects with sub-directories - R - R code. - data/raw - data external to the project. - data/processed - intermediate processed data. - notes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc. - output - reports, tables, etc. - output/plots - plots. - renv - used for library management (don't edit). - man - help files (don't edit).
-
-Coding Conventions in R
-
-Follow the `tidyverse` style guide: https://style.tidyverse.org/index.html
-
-Add 4 dashes after a section header for it to show up in the outline:
-
-```         
-# *************************
-#  setup ----
-# *************************
-```
-
-Package management with `renv`: https://rstudio.github.io/renv/articles/renv.html
-
-Collaborating with `renv`: https://rstudio.github.io/renv/articles/collaborating.html
-
-## Produce output via R Markdown
-
-Preference settings: https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html
-
-Render results from R scripts via Rmd: 1) source your R code from within Rmd https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html 1\*) save output from R script and load it in Rmd setup chunk 2) only render important results in Rmd chunks
-
-## Dealing with credentials
-
-Store your credentials and sensitive info in project specific .Renviron file (project's root directory, must end with `\n`):
-
-```         
-udaman_token = "<your udaman token>"
-udaman_user = "<your user name>"
-udaman_pwd = "<your password>"
-GITHUB_PAT = "<your github pat>"
-```
-
-Retrieve credentials on demand. Do not store/assign the retrieved credentials to a variable: `req <- httr::GET(url, httr::add_headers(Authorization = paste("Bearer", Sys.getenv("udaman_token"))))`
-
-## Additonal resources:
-
-Look at the `targets` package for workflow automation: https://docs.ropensci.org/targets/index.html
-
-Look at the Efficient R programming book: https://csgillespie.github.io/efficientR/
-
-Also look at the Stanford Guide: http://dcl-workflow.stanford.edu
+Data science workflow: \
+[http://dcl-workflow.stanford.edu](http://dcl-workflow.stanford.edu)
