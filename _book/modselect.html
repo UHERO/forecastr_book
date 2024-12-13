@@ -8,7 +8,7 @@
 
 <meta name="author" content="Peter Fuleky">
 
-<title>2&nbsp; Project setup – User guide to UHERO's forecast processes</title>
+<title>8&nbsp; Model selection – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-git.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./simulation.html" rel="next">
+<link href="./bestpract.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-project.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modselect.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -141,50 +141,56 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-project.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></span></a>
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></span></a>
+  <a href="./git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
+  <a href="./renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-bestpract.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
+  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  <a href="./bestpract.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  <a href="./modselect.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
   </div>
 </li>
     </ul>
@@ -197,16 +203,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link active" data-scroll-target="#additional-resources"><span class="header-section-number">2.1</span> Additional resources</a></li>
+  <li><a href="#main-user-settings" id="toc-main-user-settings" class="nav-link active" data-scroll-target="#main-user-settings"><span class="header-section-number">8.1</span> Main user settings</a></li>
+  <li><a href="#data-preparation-tidyverse" id="toc-data-preparation-tidyverse" class="nav-link" data-scroll-target="#data-preparation-tidyverse"><span class="header-section-number">8.2</span> Data preparation (<code>tidyverse</code>)</a></li>
+  <li><a href="#model-selection-steps-gets" id="toc-model-selection-steps-gets" class="nav-link" data-scroll-target="#model-selection-steps-gets"><span class="header-section-number">8.3</span> Model selection steps (<code>gets</code>)</a></li>
+  <li><a href="#produce-a-quasi-forecast-with-the-selected-model-bimets" id="toc-produce-a-quasi-forecast-with-the-selected-model-bimets" class="nav-link" data-scroll-target="#produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">8.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/01-project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/01-project.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/modselect.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/modselect.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
 </div>
 
 
@@ -223,27 +232,61 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>A <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">project</a> is a self-contained set of files in a folder (the project folder). Create a new project in RStudio under the File menu or using <code>usethis::create_project()</code>. The <em>.Rproj</em> file contains the project settings. Open the project by double clicking this file in Finder. The minimum structure of a project includes an <em>R</em> folder for scripts, a <em>data</em> folder for data, and an <em>output</em> folder for reports and plots. If present, the <em>data/raw</em> folder contains data external to the project and the <em>data/processed</em> folder contains intermediate processed data.</p>
-<p>Use the <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> package to store information in the project folder about the libraries used in the project. Use the <a href="https://here.r-lib.org">here</a> package to create paths relative to the project root. For example, <code>here::here("data", "raw/file.csv")</code> returns the path to the file <em>file.csv</em> in the <em>data/raw</em> folder. Load libraries and put hard coded lines at the top of the script. Use the <a href="https://conflicted.r-lib.org">conflicted</a> package to detect conflicts across packages and assign preferences. For example, <code>conflict_prefer("filter", "dplyr")</code> assigns preference to the <code>filter</code> function in the <code>dplyr</code> package over the <code>filter</code> function in the <code>stats</code> package. Don’t save the workspace on exit (RStudio &gt; Global Options &gt; General &gt; Save workspace to .RData on exit &gt; Never or <code>usethis::use_blank_slate()</code>).</p>
-<p>Start each pipe with a comment, and if necessary add comments to each line. Enable <a href="https://docs.posit.co/ide/user/ide/guide/tools/copilot.html">Github Copilot</a> for RStudio; it is free for higher education users. Github Copilot will suggest code based on comments. Use sectioning comments (comments followed by at least four dashes) to separate different parts of the script (they show up in the outline section of the editor pane). Use the <a href="https://styler.r-lib.org">styler</a> package to format the code. Stick to the <code>tidyverse</code> “dialect” and <a href="https://style.tidyverse.org">syntax</a> as much as possible.</p>
-<p>Use R scripts for coding; don’t put the analysis into chunks in markdown documents. Results from R scripts can be rendered in quarto (<em>qmd</em>) or Rmarkdown (<em>Rmd</em>) documents. Within a <em>qmd</em> or <em>Rmd</em> document <a href="https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html">source the R code</a> with the analysis. Alternatively, save the entire workspace or individual objects from the R script containing the analysis, and then load these in the appropriate code chunks of the markdown document. Only render important results in markdown chunks. Make sure the code chunks are looking for <a href="https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html">objects in the correct working directory</a>.</p>
-<p>Store secrets, passwords, and keys with the <a href="https://keyring.r-lib.org/index.html">keyring</a> package. For example, set the UDAMAN token with <code>keyring::key_set_with_value(service = "udaman_token", password = "-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=")</code> and retrieve it with <code>keyring::key_get("udaman_token")</code>. Do not store/assign the retrieved credentials to a variable. Environment variables such as API keys can also be stored in a project specific <em>.Renviron</em> file; it must end with <code>\n</code>. In addition to <em>.Renviron</em>, the <em>.Rprofile</em> file is also executed each time R starts up. The latter typically contains a script with options and startup tasks. Both files are located in the project root folder.</p>
-<section id="additional-resources" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">2.1</span> Additional resources</h2>
-<p>Best practices:<br>
-<a href="https://kdestasio.github.io/post/r_best_practices/">https://kdestasio.github.io/post/r_best_practices/</a></p>
-<p>Considerations for structuring projects:<br>
-<a href="https://www.r-bloggers.com/2018/08/structuring-r-projects/">https://www.r-bloggers.com/2018/08/structuring-r-projects/</a></p>
-<p>Comprehensive overview of R setup:<br>
-<a href="https://rstats.wtf">https://rstats.wtf</a></p>
-<p>Set up your work in projects:<br>
-<a href="https://r4ds.hadley.nz/workflow-scripts#projects">https://r4ds.hadley.nz/workflow-scripts#projects</a></p>
-<p>Efficient data management in R:<br>
-<a href="https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/">https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/</a></p>
-<p>Efficient R programming:<br>
-<a href="https://csgillespie.github.io/efficientR/">https://csgillespie.github.io/efficientR/</a></p>
-<p>Data science workflow:<br>
-<a href="http://dcl-workflow.stanford.edu">http://dcl-workflow.stanford.edu</a></p>
+<p>The model selection process can be run line-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model selection results in an easier to digest html file. Running the full script (source) takes about 1 minute.</p>
+<section id="main-user-settings" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="main-user-settings"><span class="header-section-number">8.1</span> Main user settings</h2>
+<ul>
+<li>Start and end of period used for model selection.<br>
+</li>
+<li>End of period used for estimation (selected model can be re-estimated for different sample).<br>
+</li>
+<li>Start and end of quasi-forecast period (for model evaluation).<br>
+</li>
+<li>Maximum number of lags considered in models.<br>
+</li>
+<li>Response variable.<br>
+</li>
+<li>List of predictors.</li>
+</ul>
+</section>
+<section id="data-preparation-tidyverse" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="data-preparation-tidyverse"><span class="header-section-number">8.2</span> Data preparation (<code>tidyverse</code>)</h2>
+<ul>
+<li>Download all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.<br>
+</li>
+<li>Log-transform all variables.<br>
+</li>
+<li>Load (create) all indicators (dummies for impulse, level shift, seasonal) and trend.<br>
+</li>
+<li>Combine all variables into a single dataset.<br>
+</li>
+<li>Set date range for model selection.<br>
+</li>
+<li>Generate 8 lags of predictors.<br>
+</li>
+<li>Filter data set down to specific variables considered in a particular model, including trend and season dummies.</li>
+</ul>
+</section>
+<section id="model-selection-steps-gets" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="model-selection-steps-gets"><span class="header-section-number">8.3</span> Model selection steps (<code>gets</code>)</h2>
+<p><a href="https://cran.r-project.org/web/packages/gets/index.html" class="uri">https://cran.r-project.org/web/packages/gets/index.html</a><br>
+- Formulate a general unrestricted model.<br>
+- Run the gets (general to specific) model selection algorithm.<br>
+- Identify outliers in the relationship.<br>
+- Repeat gets model selection over specific model and outliers.<br>
+- Verify that no additional outliers arise due to greater model parsimony.<br>
+- If estimation period is shorter than model selection period, remove predictors containing zeros only (e.g.&nbsp;outlier past the end of estimation period).<br>
+- Re-estimate final model.<br>
+- Save model equation as a txt file (not plugging in estimated coefficients here to keep it general). If happy with the model, copy this equation into file containing all model equations.</p>
+</section>
+<section id="produce-a-quasi-forecast-with-the-selected-model-bimets" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">8.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)</h2>
+<p><a href="https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf" class="uri">https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf</a><br>
+- Load model from txt file.<br>
+- Load data used by the model.<br>
+- Estimate the model (if estimation period ends before the last data point also run a Chow test of model stability).<br>
+- Simulate model.<br>
+- Evaluate simulation by plotting quasi-forecast and actual history.</p>
 
 
 </section>
@@ -671,13 +714,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="About">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></span>
+      <a href="./bestpract.html" class="pagination-link" aria-label="Best practices for time series data manipulation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-git.html" class="pagination-link" aria-label="Git">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./simulation.html" class="pagination-link" aria-label="Stochastic simulations">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -689,7 +732,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/01-project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/01-project.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/modselect.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/modselect.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

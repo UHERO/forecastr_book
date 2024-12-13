@@ -8,7 +8,7 @@
 
 <meta name="author" content="Peter Fuleky">
 
-<title>3&nbsp; Git – User guide to UHERO's forecast processes</title>
+<title>4&nbsp; Package management – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03-setup.html" rel="next">
-<link href="./01-project.html" rel="prev">
+<link href="./setup.html" rel="next">
+<link href="./git.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-git.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -141,50 +141,56 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></span></a>
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-git.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></span></a>
+  <a href="./git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
+  <a href="./renv.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-bestpract.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
+  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  <a href="./bestpract.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  <a href="./modselect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
   </div>
 </li>
     </ul>
@@ -197,18 +203,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-quick-overview" id="toc-a-quick-overview" class="nav-link active" data-scroll-target="#a-quick-overview"><span class="header-section-number">3.1</span> A quick overview:</a></li>
-  <li><a href="#git-step-by-step" id="toc-git-step-by-step" class="nav-link" data-scroll-target="#git-step-by-step"><span class="header-section-number">3.2</span> Git step by step</a></li>
-  <li><a href="#suggested-workflow" id="toc-suggested-workflow" class="nav-link" data-scroll-target="#suggested-workflow"><span class="header-section-number">3.3</span> Suggested workflow</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started"><span class="header-section-number">4.1</span> Getting started</a></li>
+  <li><a href="#collaboration" id="toc-collaboration" class="nav-link" data-scroll-target="#collaboration"><span class="header-section-number">4.2</span> Collaboration</a></li>
+  <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages"><span class="header-section-number">4.3</span> Installing packages</a></li>
+  <li><a href="#updating-packages" id="toc-updating-packages" class="nav-link" data-scroll-target="#updating-packages"><span class="header-section-number">4.4</span> Updating packages</a></li>
+  <li><a href="#workflow-for-setting-up-a-project-with-version-control-and-renv" id="toc-workflow-for-setting-up-a-project-with-version-control-and-renv" class="nav-link" data-scroll-target="#workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.5</span> Workflow for setting up a project with version control and renv</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">4.6</span> Additional resources</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/02-git.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/02-git.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/renv.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/renv.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></h1>
+<h1 class="title"><span id="sec-renv" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></h1>
 </div>
 
 
@@ -225,71 +234,67 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>RStudio has built in support for Git-based version control for a project. Check if Git is <a href="https://happygitwithr.com/install-git">installed</a> by running <code>git --version</code> in the terminal. Git is included in Xcode command line tools, which can be installed by running <code>xcode-select --install</code> in the terminal. Provide your GitHub <a href="https://happygitwithr.com/hello-git">user name and email</a> to Git via <code>usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")</code>. Next, <a href="https://happygitwithr.com/https-pat#tldr">generate and store</a> a personal access token on GitHub via <code>usethis::create_github_token()</code> and <code>gitcreds::gitcreds_set()</code>, respectively.</p>
-<section id="a-quick-overview" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="a-quick-overview"><span class="header-section-number">3.1</span> A quick overview:</h2>
-<p>TL;DR: https://inbo.github.io/git-course/index.html</p>
+<p>The <a href="https://rstudio.github.io/renv/articles/renv.html">renv package</a> helps create <strong>r</strong>eproducible <strong>env</strong>ironments for your R projects. Use renv to make R projects more isolated, portable and reproducible.</p>
+<ul>
+<li><p><strong>Isolated</strong>: Installing a new or updated package for one project won’t break other projects, and vice versa. That’s because renv gives each project its own private library.</p></li>
+<li><p><strong>Portable</strong>: Easily transport projects from one computer to another, even across different platforms. renv makes it easy to install the packages the project depends on.</p></li>
+<li><p><strong>Reproducible</strong>: renv records the exact package versions the project depends on, and ensures those exact versions get installed by others who work on the project.</p></li>
+</ul>
+<section id="getting-started" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">4.1</span> Getting started</h2>
+<p>To convert a project to use renv, call <code>renv::init()</code>. This adds three new files and directories to the project:</p>
+<ul>
+<li><p>The project library, <em>renv/library</em>, is a library that contains all packages currently used by the project<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This is the key magic that makes renv work: instead of having one library containing the packages used in every project, renv gives you a separate library for each project. This provides the benefits of isolation: different projects can use different versions of packages, and installing, updating, or removing packages in one project doesn’t affect any other project.</p></li>
+<li><p>The lockfile, <em>renv.lock</em>, records enough metadata about every package that it can be re-installed on a new machine.</p></li>
+<li><p>renv uses <em>.Rprofile</em> to configure the R session to use the project library. This ensures that once renv is turned on for a project, it stays on, until it is deliberately turned off.</p></li>
+</ul>
+<p>The next important pair of tools is <code>renv::snapshot()</code> and <code>renv::restore()</code>. <code>snapshot()</code> updates the lockfile with metadata about the currently-used packages in the project library. Sharing the lockfile allows other people or other computers to reproduce the current project environment by running <code>restore()</code>, which uses the metadata from the lockfile to install exactly the same version of every package. This pair of functions provides the benefits of reproducibility and portability: you are now tracking exactly which package versions you have installed so you can recreate them on other machines.</p>
 </section>
-<section id="git-step-by-step" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="git-step-by-step"><span class="header-section-number">3.2</span> Git step by step</h2>
-<p>If you don’t have Git, install it:<br>
-https://happygitwithr.com/install-git.html</p>
-<p>Make sure .gitignore contains the following files:<br>
-.Renviron<br>
-.Rprofile</p>
-<p>Introduce yourself to Git:<br>
-In the shell (Terminal tab in RStudio):<br>
-git config –global user.name ‘Jane_Doe’<br>
-git config –global user.email ‘jane@example.com’<br>
-git config –global –list</p>
-<p>library(usethis) use_git_config(user.name = “Jane Doe”, user.email = “jane@example.org”)<br>
-</p>
-<p>For more advanced tasks, use GitHub Desktop:<br>
-https://desktop.github.com</p>
-<p>Generate and store your GitHub PAT (Personal Access Token):<br>
-https://happygitwithr.com/https-pat.html<br>
-https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token</p>
-<p>Use one of three ways to add your project to GitHub:<br>
-Brand new project:<br>
-https://happygitwithr.com/new-github-first.html<br>
-Existing project without version control:<br>
-https://happygitwithr.com/existing-github-first.html<br>
-Existing project under local version control:<br>
-https://happygitwithr.com/existing-github-last.html</p>
-<p>Troubleshooting if RStudio can’t detect Git:<br>
-https://happygitwithr.com/rstudio-see-git.html</p>
-<p>Git vocabulary:<br>
-https://happygitwithr.com/git-basics.html</p>
-<p>Remote setups (try to stick to GitHub first discussed above):<br>
-https://happygitwithr.com/common-remote-setups.html</p>
-<p>Useful Git workflows and dealing with conflicts:<br>
-https://happygitwithr.com/workflows-intro.html<br>
-https://happygitwithr.com/push-rejected.html<br>
-https://happygitwithr.com/pull-tricky.html</p>
-<p>Additional resources:<br>
-https://happygitwithr.com/ideas-for-content.html</p>
+<section id="collaboration" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="collaboration"><span class="header-section-number">4.2</span> Collaboration</h2>
+<p>One of the reasons to use renv is to make it easier to share code in such a way that everyone gets exactly the same package versions. As above, start by calling <code>renv::init()</code>. You’ll then need to commit <em>renv.lock</em>, <em>.Rprofile</em>, <em>renv/settings.json</em> and <em>renv/activate.R</em> to version control, ensuring that others can recreate your project environment. If you’re using git, this is particularly simple because renv will create a <em>.gitignore</em>, and you can just commit all suggested files.</p>
+<p>Now when one of your collaborators opens this project, renv will automatically bootstrap itself, downloading and installing the appropriate version of renv. It will also ask them if they want to download and install all the packages it needs by running <code>renv::restore()</code>.</p>
 </section>
-<section id="suggested-workflow" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="suggested-workflow"><span class="header-section-number">3.3</span> Suggested workflow</h2>
+<section id="installing-packages" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="installing-packages"><span class="header-section-number">4.3</span> Installing packages</h2>
+<p>If you use renv for multiple projects, you’ll have multiple libraries, meaning that you’ll often need to install the same package in multiple places. It would be annoying if you had to download (or worse, compile) the package repeatedly, so renv uses a package cache. That means you only ever have to download and install a package once, and for each subsequent install, renv will just add a link from the project library to the global cache. You can learn more about the cache in <code>vignette("package-install")</code>.</p>
+<p>After installing the package and checking that the code works, you should call <code>renv::snapshot()</code> to record the latest package versions in your lockfile. If you’re collaborating with others, you’ll need to commit those changes to git, and let them know that you’ve updated the lockfile and they should call <code>renv::restore()</code> when they’re next working on a project.</p>
+</section>
+<section id="updating-packages" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="updating-packages"><span class="header-section-number">4.4</span> Updating packages</h2>
+<p>Regularly (at least once a year) update the packages in your project to get the latest versions of all dependencies. Similarly, if you’re making major changes to a project that you haven’t worked on for a while, it’s often a good idea to start with an <code>renv::update()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> before making any changes to the code.</p>
+<p>After calling <code>renv::update()</code>, you should run the code in your project and verify that it still works (or make any changes needed to get it working). Then call <code>renv::snapshot()</code> to record the new versions in the lockfile. If you get stuck, and can’t get the project to work with the new versions, you can call <code>renv::restore()</code> to roll back changes to the project library and revert to the known good state recorded in your lockfile. If you need to roll back to an even older version, take a look at <code>renv::history()</code> and <code>renv::revert()</code>. <code>renv::update()</code> will also update renv itself, ensuring that you get all the latest features.</p>
+</section>
+<section id="workflow-for-setting-up-a-project-with-version-control-and-renv" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.5</span> Workflow for setting up a project with version control and renv</h2>
+<p>The ideal sequence of steps to set up a project with version control and renv is as follows:</p>
 <ol type="1">
-<li>Initialize repository on GitHub.com under the UHERO account.<br>
-</li>
-<li>Clone it via RStudio project setup.<br>
-</li>
-<li>Commit changes, pull, resolve issues, push.<br>
-3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.</li>
+<li><p>github</p></li>
+<li><p>usethis::create_from_github()</p></li>
+<li><p>renv::init() or renv::restore() git::pull …</p></li>
+<li><p>get work done</p></li>
+<li><p>renv::snapshot()</p></li>
+<li><p>git</p></li>
 </ol>
-<p>See these detailed guides: https://inbo.github.io/git-course/index.html https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md</p>
-<p>Another research workflow based on Github: https://www.carlboettiger.info/2012/05/06/research-workflow.html</p>
-<p>Let’s start a new project:</p>
-<p>Start a new project on GitHub: Login to your GitHub account. Click on New on the left side where your repositories are displayed. Give your project repository a meaningful name. For this course you could name it: efficient-data-management. Click Create repository. Copy the URL to the repository, it will look something like this: https://github.com/<username>/efficient-data-management.git Open the project in RStudio: Open RStudio. Click on File &gt; New Project…. Create a new project from Version Control. Choose Git. Paste the URL to the repository in Repository URL. Choose a folder on your computer where the project will be stored locally. And finally click on Create.</username></p>
-<p>The <a href=""><code>renv</code> package</a> facilitates sharing a project and maintaining the same behavior on different machines. It creates a local package directory for the project. This means that it keeps track of all the packages and package versions that are used in the project. If someone else wants to work with the exact same package environment to reproduce the results, they can restore it from the <code>renv</code> package directory.</p>
+</section>
+<section id="additional-resources" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">4.6</span> Additional resources</h2>
+<p>Overview of <code>renv</code>:<br>
+<a href="https://rstudio.github.io/renv/articles/renv.html" class="uri">https://rstudio.github.io/renv/articles/renv.html</a></p>
 <p>Leveraging git and renv at the end of a working session</p>
 <p>Now that we have our nice project setup, we should not forget to leverage it. At the end of a working session you should follow the following steps:</p>
 <p>Create a renv::snapshot() to save all the packages you used to your local package directory. Commit all your changes to git. This can be easily done by using the Git pane in RStudio. Push everything to GitHub. Whenever you re-open your Rproject, make sure to start your working session with a Pull from GitHub. That way, you will always work with the most recent version of your project.</p>
 <p>Collaborating with <code>renv</code>: https://rstudio.github.io/renv/articles/collaborating.html</p>
+<p>TL;DR: https://inbo.github.io/git-course/index.html https://happygitwithr.com/</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>If you’d like to skip dependency discovery, you can call <code>renv::init(bare = TRUE)</code> to initialize a project with an empty project library.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>You can also use <code>update.packages()</code>, but <code>renv::update()</code> works with the same sources that <code>renv::install()</code> supports.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -715,13 +720,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01-project.html" class="pagination-link" aria-label="Project setup">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></span>
+      <a href="./git.html" class="pagination-link" aria-label="Version control">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-setup.html" class="pagination-link" aria-label="Setup of the forecastr project">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./setup.html" class="pagination-link" aria-label="Setup of the forecastr project">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -733,7 +738,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/02-git.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/02-git.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/renv.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/renv.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

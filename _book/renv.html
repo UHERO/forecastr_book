@@ -8,7 +8,7 @@
 
 <meta name="author" content="Peter Fuleky">
 
-<title>6&nbsp; Best practices for time series data manipulation – User guide to UHERO's forecast processes</title>
+<title>4&nbsp; Package management – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./06-modselect.html" rel="next">
-<link href="./04-utilfuns.html" rel="prev">
+<link href="./setup.html" rel="next">
+<link href="./git.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-bestpract.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./renv.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -141,50 +141,56 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></span></a>
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></span></a>
+  <a href="./git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
+  <a href="./renv.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-bestpract.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
+  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  <a href="./bestpract.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  <a href="./modselect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
   </div>
 </li>
     </ul>
@@ -197,16 +203,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#harness-the-power-of-tsbox" id="toc-harness-the-power-of-tsbox" class="nav-link active" data-scroll-target="#harness-the-power-of-tsbox"><span class="header-section-number">6.1</span> Harness the power of tsbox</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started"><span class="header-section-number">4.1</span> Getting started</a></li>
+  <li><a href="#collaboration" id="toc-collaboration" class="nav-link" data-scroll-target="#collaboration"><span class="header-section-number">4.2</span> Collaboration</a></li>
+  <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages"><span class="header-section-number">4.3</span> Installing packages</a></li>
+  <li><a href="#updating-packages" id="toc-updating-packages" class="nav-link" data-scroll-target="#updating-packages"><span class="header-section-number">4.4</span> Updating packages</a></li>
+  <li><a href="#workflow-for-setting-up-a-project-with-version-control-and-renv" id="toc-workflow-for-setting-up-a-project-with-version-control-and-renv" class="nav-link" data-scroll-target="#workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.5</span> Workflow for setting up a project with version control and renv</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">4.6</span> Additional resources</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/05-bestpract.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/05-bestpract.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/renv.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/renv.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></h1>
+<h1 class="title"><span id="sec-renv" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></h1>
 </div>
 
 
@@ -223,76 +234,67 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g.&nbsp;<code>N@US.A</code>). Eliminate special characters using a long tibble.</p>
-<pre><code>hist_q_mod &lt;- hist_q %&gt;%
-  ts_tbl() %&gt;%
-  mutate(id = str_replace_all(id, c("@" = "_AT_", "\\." = "_")))
-  
-# revert back to udaman notation
-hist_q &lt;- hist_q_mod %&gt;%
-  ts_tbl() %&gt;%
-  mutate(id = str_replace_all(id, c("_AT_" = "@", "_Q" = "\\.Q")))</code></pre>
-<p>Use the <code>xts</code> format whenever possible. Observations in a multivariate <code>xts</code> can be accessed by time and series name in two ways: <code>mul_var_xts[time, ser_name]</code> or <code>mul_var_xts$ser_name[time]</code>.</p>
-<p>Make sure all series are defined on the same range (default start = bnk_start, end = bnk_end). Take advantage of <code>make_xts()</code> (and its defaults, e.g.&nbsp;start and end period).</p>
-<pre><code>import_xts &lt;- read_csv(here("data/raw", str_glue("{exp_id_a}.csv"))) %&gt;%
-  arrange(time) %&gt;%
-  ts_long() %&gt;%
-  ts_xts() %&gt;%
-  ts_c(
-    temp = make_xts(per = "year") # temporary variable to force start and end in import_xts
-  ) %&gt;%
-  extract(, str_subset(colnames(.), "temp", negate = TRUE)) # remove temp</code></pre>
-<p>Don’t break up multivariate time series (think databank) into individual series in the global environment.</p>
-<p>If referring directly to a series with a static name, use the <code>bank$series</code> notation (this can be used on both the right and the left hand side of the assignment, while <code>bank[, series]</code> can only be used for existing series in bank).</p>
-<pre><code># find the last value in history
-dat_end &lt;- find_end(hist_q$N_AT_US_Q)
-# same as
-dat_end &lt;- find_end(hist_q[, N_AT_US_Q])</code></pre>
-<p>Use <code>[p()]</code> to select a period in <code>xts</code> objects, otherwise use <code>ts_span()</code>.</p>
-<pre><code># extend series with addfactored level
-sol_q$N_AT_US_SOLQ &lt;- hist_q$N_AT_US_Q[p("", dat_end)] %&gt;%
-  ts_bind(sol_q$NCEN_AT_US_SOLQ[p(dat_end, "")] +
-    as.numeric(sol_q$N_AT_US_SOLQ_ADDLEV[dat_end]))
-    
-# addfactor for growth
-sol_q$N_AT_US_SOLQ_ADDGRO[p(dat_end + qtrs(1), dat_end + qtrs(4))] &lt;- -0.35
-
-# extend history using growth rate
-sol_q$N_AT_US_SOLQ &lt;- sol_q$N_AT_US_SOLQ[p("", dat_end)] %&gt;%
-  ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))</code></pre>
-<p>The <code>bank[,seriesname]</code> notation only works for <em>existing</em> <code>xts</code> series on the left of the assignment (it can also be used on the right). <code>seriesname</code> can be determined at runtime</p>
-<pre><code># initialize the lhs series in the "bank"
-hist_a$temp &lt;- make_xts()
-names(hist_a)[names(hist_a) == "temp"] &lt;- str_glue("E{ser_i}_AT_{cnty_i}_ADD")
-
-# calculate expression and assign to lhs
-hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- 
-  (hist_a[, str_glue("E{ser_i}_AT_{cnty_i}")] / hist_a[, str_glue("E_NF_AT_{cnty_i}")])</code></pre>
-<p>Alternatively, make multiple series in <em>bank</em> available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code> on the right.</p>
-<pre><code>hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- hist_a %$%
-  (get_var("E{ser_i}_AT_{cnty_i}") / get_var("E_NF_AT_{cnty_i}"))</code></pre>
-<p>Bimets requires data in a particular <code>tslist</code> format. Convert <code>xts</code> to <code>tslist</code> using <code>ts_tslist()</code>.</p>
-<pre><code># store series as tslist
-hist_a_lst &lt;- hist_a %&gt;% 
-  ts_tslist() %&gt;% 
-
-# convert series to bimets format
-hist_a_bimets &lt;- hist_a_lst %&gt;%
-  map(as.bimets)
-
-# bimets strips the attributes, need to reset them for further manipulation by tsbox
-hist_a &lt;- hist_a_bimets %&gt;% 
-  set_attr("class", c("tslist", "list")) %&gt;% 
-  ts_xts()</code></pre>
-<p>For series collected in a <code>tslist</code> on the left of the assignment use the <code>bank[[seriesname]]</code> notation (it can also be used on the right). Here the lhs series <code>seriesname</code> does not need to exist, and it might easier to work with <code>tslist</code> than <code>xts</code> when variable names are determined at runtime.</p>
-<pre><code># similar to above with a tslist variable
-hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] &lt;- hist_a_lst %$%
-  (get_var("E{ser_i}_AT_{cnty_i}") - get_var("E_NF_AT_{cnty_i}"))</code></pre>
-<section id="harness-the-power-of-tsbox" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="harness-the-power-of-tsbox"><span class="header-section-number">6.1</span> Harness the power of tsbox</h2>
-<p>Use the converter functions in <a href="https://www.tsbox.help/reference/index.html"><code>tsbox</code></a> to shift between various data types (<code>ts_tbl()</code>, <code>ts_xts()</code>, <code>ts_ts()</code>, <code>ts_tslist()</code>) and reshaping to the long and wide format (<code>ts_long()</code>, <code>ts_wide()</code>). <code>tsbox</code> further contains funtions for time period selection (<code>ts_span()</code>), merging and extension operations (<code>ts_c()</code>, <code>ts_bind()</code>, <code>ts_chain()</code>), transformations (<code>ts_lag()</code>, <code>ts_pc()</code>, <code>ts_pca()</code>, <code>ts_pcy()</code>, <code>ts_diff()</code>, <code>ts_diffy()</code>), and index construction (<code>ts_compound()</code>, <code>ts_index()</code>). Consider these before turning to solutions that are specific to the <code>xts</code>, <code>ts</code>, <code>dplyr</code> or <code>tidyr</code> packages.</p>
+<p>The <a href="https://rstudio.github.io/renv/articles/renv.html">renv package</a> helps create <strong>r</strong>eproducible <strong>env</strong>ironments for your R projects. Use renv to make R projects more isolated, portable and reproducible.</p>
+<ul>
+<li><p><strong>Isolated</strong>: Installing a new or updated package for one project won’t break other projects, and vice versa. That’s because renv gives each project its own private library.</p></li>
+<li><p><strong>Portable</strong>: Easily transport projects from one computer to another, even across different platforms. renv makes it easy to install the packages the project depends on.</p></li>
+<li><p><strong>Reproducible</strong>: renv records the exact package versions the project depends on, and ensures those exact versions get installed by others who work on the project.</p></li>
+</ul>
+<section id="getting-started" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">4.1</span> Getting started</h2>
+<p>To convert a project to use renv, call <code>renv::init()</code>. This adds three new files and directories to the project:</p>
+<ul>
+<li><p>The project library, <em>renv/library</em>, is a library that contains all packages currently used by the project<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This is the key magic that makes renv work: instead of having one library containing the packages used in every project, renv gives you a separate library for each project. This provides the benefits of isolation: different projects can use different versions of packages, and installing, updating, or removing packages in one project doesn’t affect any other project.</p></li>
+<li><p>The lockfile, <em>renv.lock</em>, records enough metadata about every package that it can be re-installed on a new machine.</p></li>
+<li><p>renv uses <em>.Rprofile</em> to configure the R session to use the project library. This ensures that once renv is turned on for a project, it stays on, until it is deliberately turned off.</p></li>
+</ul>
+<p>The next important pair of tools is <code>renv::snapshot()</code> and <code>renv::restore()</code>. <code>snapshot()</code> updates the lockfile with metadata about the currently-used packages in the project library. Sharing the lockfile allows other people or other computers to reproduce the current project environment by running <code>restore()</code>, which uses the metadata from the lockfile to install exactly the same version of every package. This pair of functions provides the benefits of reproducibility and portability: you are now tracking exactly which package versions you have installed so you can recreate them on other machines.</p>
+</section>
+<section id="collaboration" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="collaboration"><span class="header-section-number">4.2</span> Collaboration</h2>
+<p>One of the reasons to use renv is to make it easier to share code in such a way that everyone gets exactly the same package versions. As above, start by calling <code>renv::init()</code>. You’ll then need to commit <em>renv.lock</em>, <em>.Rprofile</em>, <em>renv/settings.json</em> and <em>renv/activate.R</em> to version control, ensuring that others can recreate your project environment. If you’re using git, this is particularly simple because renv will create a <em>.gitignore</em>, and you can just commit all suggested files.</p>
+<p>Now when one of your collaborators opens this project, renv will automatically bootstrap itself, downloading and installing the appropriate version of renv. It will also ask them if they want to download and install all the packages it needs by running <code>renv::restore()</code>.</p>
+</section>
+<section id="installing-packages" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="installing-packages"><span class="header-section-number">4.3</span> Installing packages</h2>
+<p>If you use renv for multiple projects, you’ll have multiple libraries, meaning that you’ll often need to install the same package in multiple places. It would be annoying if you had to download (or worse, compile) the package repeatedly, so renv uses a package cache. That means you only ever have to download and install a package once, and for each subsequent install, renv will just add a link from the project library to the global cache. You can learn more about the cache in <code>vignette("package-install")</code>.</p>
+<p>After installing the package and checking that the code works, you should call <code>renv::snapshot()</code> to record the latest package versions in your lockfile. If you’re collaborating with others, you’ll need to commit those changes to git, and let them know that you’ve updated the lockfile and they should call <code>renv::restore()</code> when they’re next working on a project.</p>
+</section>
+<section id="updating-packages" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="updating-packages"><span class="header-section-number">4.4</span> Updating packages</h2>
+<p>Regularly (at least once a year) update the packages in your project to get the latest versions of all dependencies. Similarly, if you’re making major changes to a project that you haven’t worked on for a while, it’s often a good idea to start with an <code>renv::update()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> before making any changes to the code.</p>
+<p>After calling <code>renv::update()</code>, you should run the code in your project and verify that it still works (or make any changes needed to get it working). Then call <code>renv::snapshot()</code> to record the new versions in the lockfile. If you get stuck, and can’t get the project to work with the new versions, you can call <code>renv::restore()</code> to roll back changes to the project library and revert to the known good state recorded in your lockfile. If you need to roll back to an even older version, take a look at <code>renv::history()</code> and <code>renv::revert()</code>. <code>renv::update()</code> will also update renv itself, ensuring that you get all the latest features.</p>
+</section>
+<section id="workflow-for-setting-up-a-project-with-version-control-and-renv" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.5</span> Workflow for setting up a project with version control and renv</h2>
+<p>The ideal sequence of steps to set up a project with version control and renv is as follows:</p>
+<ol type="1">
+<li><p>github</p></li>
+<li><p>usethis::create_from_github()</p></li>
+<li><p>renv::init() or renv::restore() git::pull …</p></li>
+<li><p>get work done</p></li>
+<li><p>renv::snapshot()</p></li>
+<li><p>git</p></li>
+</ol>
+</section>
+<section id="additional-resources" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">4.6</span> Additional resources</h2>
+<p>Overview of <code>renv</code>:<br>
+<a href="https://rstudio.github.io/renv/articles/renv.html" class="uri">https://rstudio.github.io/renv/articles/renv.html</a></p>
+<p>Leveraging git and renv at the end of a working session</p>
+<p>Now that we have our nice project setup, we should not forget to leverage it. At the end of a working session you should follow the following steps:</p>
+<p>Create a renv::snapshot() to save all the packages you used to your local package directory. Commit all your changes to git. This can be easily done by using the Git pane in RStudio. Push everything to GitHub. Whenever you re-open your Rproject, make sure to start your working session with a Pull from GitHub. That way, you will always work with the most recent version of your project.</p>
+<p>Collaborating with <code>renv</code>: https://rstudio.github.io/renv/articles/collaborating.html</p>
+<p>TL;DR: https://inbo.github.io/git-course/index.html https://happygitwithr.com/</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>If you’d like to skip dependency discovery, you can call <code>renv::init(bare = TRUE)</code> to initialize a project with an empty project library.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>You can also use <code>update.packages()</code>, but <code>renv::update()</code> works with the same sources that <code>renv::install()</code> supports.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -718,13 +720,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./04-utilfuns.html" class="pagination-link" aria-label="User defined utility functions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span>
+      <a href="./git.html" class="pagination-link" aria-label="Version control">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./06-modselect.html" class="pagination-link" aria-label="Model selection">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./setup.html" class="pagination-link" aria-label="Setup of the forecastr project">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -736,7 +738,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/05-bestpract.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/05-bestpract.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/renv.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/renv.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

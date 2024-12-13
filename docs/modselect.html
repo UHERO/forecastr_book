@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Peter Fuleky">
-<meta name="dcterms.date" content="2024-12-13">
 
-<title>User guide to UHERO’s forecast processes</title>
+<title>8&nbsp; Model selection – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./project.html" rel="next">
+<link href="./simulation.html" rel="next">
+<link href="./bestpract.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modselect.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></span></a>
   </div>
 </li>
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./modselect.html" class="sidebar-item-text sidebar-link">
+  <a href="./modselect.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
@@ -203,38 +203,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">1</span> About</a>
-  <ul class="collapse">
-  <li><a href="#contents" id="toc-contents" class="nav-link" data-scroll-target="#contents"><span class="header-section-number">1.1</span> Contents</a></li>
-  </ul></li>
+  <li><a href="#main-user-settings" id="toc-main-user-settings" class="nav-link active" data-scroll-target="#main-user-settings"><span class="header-section-number">8.1</span> Main user settings</a></li>
+  <li><a href="#data-preparation-tidyverse" id="toc-data-preparation-tidyverse" class="nav-link" data-scroll-target="#data-preparation-tidyverse"><span class="header-section-number">8.2</span> Data preparation (<code>tidyverse</code>)</a></li>
+  <li><a href="#model-selection-steps-gets" id="toc-model-selection-steps-gets" class="nav-link" data-scroll-target="#model-selection-steps-gets"><span class="header-section-number">8.3</span> Model selection steps (<code>gets</code>)</a></li>
+  <li><a href="#produce-a-quasi-forecast-with-the-selected-model-bimets" id="toc-produce-a-quasi-forecast-with-the-selected-model-bimets" class="nav-link" data-scroll-target="#produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">8.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/modselect.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/modselect.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">User guide to UHERO’s forecast processes</h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Peter Fuleky </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 13, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -244,15 +232,63 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="about" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> About</h1>
-<p>This document describes some useful practices for using R for applied research, especially in the time series and forecasting domain. It also serves as a guide for contributors to the <code>forecastr</code> R project. The focus of the project is forecasting using multi-equation behavioral models. The project encompasses data preparation, model selection (work in progress), external forecast generation, local forecast generation (planned), simulations (planned), and forecast distribution to a more granular scale.</p>
-<section id="contents" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="contents"><span class="header-section-number">1.1</span> Contents</h2>
-<p><a href="project.html" class="quarto-xref">Chapters&nbsp;<span>2</span></a> <a href="renv.html" class="quarto-xref">-&nbsp;<span>4</span></a> discuss the general setup of a collaborative project under version control. Chapter 4 deals with the setup file that configures the most general aspects of the <code>forecastr</code> project. Chapter 5 describes user defined helper functions for the <code>forecastr</code> project. Chapter 6 gives examples of best practices for time series manipulation.</p>
-
-
+<p>The model selection process can be run line-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model selection results in an easier to digest html file. Running the full script (source) takes about 1 minute.</p>
+<section id="main-user-settings" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="main-user-settings"><span class="header-section-number">8.1</span> Main user settings</h2>
+<ul>
+<li>Start and end of period used for model selection.<br>
+</li>
+<li>End of period used for estimation (selected model can be re-estimated for different sample).<br>
+</li>
+<li>Start and end of quasi-forecast period (for model evaluation).<br>
+</li>
+<li>Maximum number of lags considered in models.<br>
+</li>
+<li>Response variable.<br>
+</li>
+<li>List of predictors.</li>
+</ul>
 </section>
+<section id="data-preparation-tidyverse" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="data-preparation-tidyverse"><span class="header-section-number">8.2</span> Data preparation (<code>tidyverse</code>)</h2>
+<ul>
+<li>Download all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.<br>
+</li>
+<li>Log-transform all variables.<br>
+</li>
+<li>Load (create) all indicators (dummies for impulse, level shift, seasonal) and trend.<br>
+</li>
+<li>Combine all variables into a single dataset.<br>
+</li>
+<li>Set date range for model selection.<br>
+</li>
+<li>Generate 8 lags of predictors.<br>
+</li>
+<li>Filter data set down to specific variables considered in a particular model, including trend and season dummies.</li>
+</ul>
+</section>
+<section id="model-selection-steps-gets" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="model-selection-steps-gets"><span class="header-section-number">8.3</span> Model selection steps (<code>gets</code>)</h2>
+<p><a href="https://cran.r-project.org/web/packages/gets/index.html" class="uri">https://cran.r-project.org/web/packages/gets/index.html</a><br>
+- Formulate a general unrestricted model.<br>
+- Run the gets (general to specific) model selection algorithm.<br>
+- Identify outliers in the relationship.<br>
+- Repeat gets model selection over specific model and outliers.<br>
+- Verify that no additional outliers arise due to greater model parsimony.<br>
+- If estimation period is shorter than model selection period, remove predictors containing zeros only (e.g.&nbsp;outlier past the end of estimation period).<br>
+- Re-estimate final model.<br>
+- Save model equation as a txt file (not plugging in estimated coefficients here to keep it general). If happy with the model, copy this equation into file containing all model equations.</p>
+</section>
+<section id="produce-a-quasi-forecast-with-the-selected-model-bimets" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">8.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)</h2>
+<p><a href="https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf" class="uri">https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf</a><br>
+- Load model from txt file.<br>
+- Load data used by the model.<br>
+- Estimate the model (if estimation period ends before the last data point also run a Chow test of model stability).<br>
+- Simulate model.<br>
+- Evaluate simulation by plotting quasi-forecast and actual history.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -678,10 +714,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./bestpract.html" class="pagination-link" aria-label="Best practices for time series data manipulation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./project.html" class="pagination-link" aria-label="Project">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./simulation.html" class="pagination-link" aria-label="Stochastic simulations">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -693,7 +732,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/modselect.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/modselect.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

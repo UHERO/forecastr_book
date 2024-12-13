@@ -4,314 +4,589 @@
     "href": "index.html",
     "title": "User guide to UHERO’s forecast processes",
     "section": "",
-    "text": "1 About\nThis document describes the setup and components of the forecastr project. The focus of the project is forecasting using multi-equation behavioral models. The project encompasses data preparation, model selection (work in progress), external forecast generation, local forecast generation (planned), simulations (planned), and forecast distribution to a more granular scale."
+    "text": "1 About\nThis document describes some useful practices for using R for applied research, especially in the time series and forecasting domain. It also serves as a guide for contributors to the forecastr R project. The focus of the project is forecasting using multi-equation behavioral models. The project encompasses data preparation, model selection (work in progress), external forecast generation, local forecast generation (planned), simulations (planned), and forecast distribution to a more granular scale.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>About</span>"
+    ]
   },
   {
     "objectID": "index.html#contents",
     "href": "index.html#contents",
     "title": "User guide to UHERO’s forecast processes",
     "section": "1.1 Contents",
-    "text": "1.1 Contents\nChapters 2-3 discuss the general setup of a collaborative project under version control. Chapter 4 deals with the setup file that configures the most general aspects of the forecastr project. Chapter 5 describes user defined helper functions for the forecastr project. Chapter 6 gives examples of best practices for time series manipulation."
+    "text": "1.1 Contents\nChapters 2 - 4 discuss the general setup of a collaborative project under version control. Chapter 4 deals with the setup file that configures the most general aspects of the forecastr project. Chapter 5 describes user defined helper functions for the forecastr project. Chapter 6 gives examples of best practices for time series manipulation.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>About</span>"
+    ]
   },
   {
-    "objectID": "01-project.html#a-quick-overview",
-    "href": "01-project.html#a-quick-overview",
-    "title": "2  Project setup",
-    "section": "2.1 A quick overview:",
-    "text": "2.1 A quick overview:\nTL;DR:\nhttps://kdestasio.github.io/post/r_best_practices/"
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "2  Project",
+    "section": "",
+    "text": "2.1 Project setup and conventions\nCreate a new project locally in RStudio under the File menu or using usethis::create_project(\"proj_dir\"). The .Rproj file contains the project settings. Open the project by double clicking this file in Finder. The minimum structure of a project includes an R folder for scripts, a data folder for data, and an output folder for reports and plots. If present, the data/raw folder contains data external to the project and the data/processed folder contains intermediate processed data. Although local projects are sometimes useful to explore an idea, whenever you consider version tracking or collaboration, the project should be initiated from GitHub (see Chapter 3 for details).\nUse the renv package to store information about the packages used in the project. The renv package facilitates sharing a project and maintaining the same behavior on different machines. It creates a local package directory for the project. This means that it keeps track of all the packages and package versions that are used in the project, and collaborators can restore the exact same package environment and reproduce the results (see Chapter 4 for details).\nUse the here package to create paths relative to the project root. For example, here::here(\"data\", \"raw/file.csv\") returns the path to the file file.csv in the data/raw folder. Load libraries and put hard coded lines at the top of the script. Use the conflicted package to detect conflicts across packages and assign preferences. For example, conflict_prefer(\"filter\", \"dplyr\") assigns preference to the filter function in the dplyr package over the filter function in the stats package. Don’t save the workspace on exit (Tools &gt; Global Options &gt; General &gt; Save workspace to .RData on exit &gt; Never or usethis::use_blank_slate()).\nStart each pipe with a comment, and if necessary add comments to each line. Enable Github Copilot for RStudio; it is free for higher education users. Github Copilot will suggest code based on comments, which you can accept with the tab key. Use sectioning comments (# comments followed by at least four dashes —-) to separate different parts of the script (they show up in the outline section of the editor pane). Use the addin provided by styler package to format the code. Follow the tidyverse “dialect” and syntax.\nUse R scripts for coding; don’t put the analysis into chunks in markdown documents. Only render important results in code chunks of quarto (qmd) or Rmarkdown (Rmd) documents. Within a qmd or Rmd document source the R script containing the analysis. Alternatively, save the entire workspace or individual objects from the R script, and then load these in the appropriate code chunks of the markdown document. Make sure the code chunks are looking for objects in the correct working directory.\nStore secrets, passwords, and keys with the keyring package. For example, set the UDAMAN token with keyring::key_set_with_value(service = \"udaman_token\", password = \"-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=\") and retrieve it with keyring::key_get(\"udaman_token\"). To avoid disclosing your secrets, do not store/assign the retrieved credentials to a variable. If security is not a concern, environment variables, such as API keys, can also be stored in a project specific .Renviron file; it must end with \\n. In addition to .Renviron, the .Rprofile file is also executed each time R starts up. The latter typically contains a script with options and startup tasks. Both files are located in the project root folder.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Project</span>"
+    ]
   },
   {
-    "objectID": "01-project.html#basic-ideas-for-a-reproducible-workflow",
-    "href": "01-project.html#basic-ideas-for-a-reproducible-workflow",
-    "title": "2  Project setup",
-    "section": "2.2 Basic ideas for a reproducible workflow",
-    "text": "2.2 Basic ideas for a reproducible workflow\nSet up your work in projects:\nhttps://r4ds.hadley.nz/workflow-projects.html\nRead section I in WTF: https://rstats.wtf/save-source.html\nA good list of consideration for structuring projects: https://www.r-bloggers.com/2018/08/structuring-r-projects/\nUse RStudio projects with sub-directories - R - R code. - data/raw - data external to the project. - data/processed - intermediate processed data. - notes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc. - output - reports, tables, etc. - output/plots - plots. - renv - used for library management (don’t edit). - man - help files (don’t edit).\nCoding Conventions in R\nFollow the tidyverse style guide: https://style.tidyverse.org/index.html\nAdd 4 dashes after a section header for it to show up in the outline:\n# *************************\n#  setup ----\n# *************************\nPackage management with renv: https://rstudio.github.io/renv/articles/renv.html\nCollaborating with renv: https://rstudio.github.io/renv/articles/collaborating.html"
+    "objectID": "project.html#additional-resources",
+    "href": "project.html#additional-resources",
+    "title": "2  Project",
+    "section": "2.2 Additional resources",
+    "text": "2.2 Additional resources\nOverview of R setup:\nhttps://rstats.wtf\nBest practices:\nhttps://kdestasio.github.io/post/r_best_practices/\nConsiderations for structuring projects:\nhttps://www.r-bloggers.com/2018/08/structuring-r-projects/\nSet up your work in projects:\nhttps://r4ds.hadley.nz/workflow-scripts#projects\nEfficient data management in R:\nhttps://www.r-bloggers.com/2020/02/efficient-data-management-in-r/\nEfficient R programming:\nhttps://csgillespie.github.io/efficientR/\nData science workflow:\nhttp://dcl-workflow.stanford.edu",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Project</span>"
+    ]
   },
   {
-    "objectID": "01-project.html#produce-output-via-r-markdown",
-    "href": "01-project.html#produce-output-via-r-markdown",
-    "title": "2  Project setup",
-    "section": "2.3 Produce output via R Markdown",
-    "text": "2.3 Produce output via R Markdown\nPreference settings: https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html\nRender results from R scripts via Rmd: 1) source your R code from within Rmd https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html 1*) save output from R script and load it in Rmd setup chunk 2) only render important results in Rmd chunks"
+    "objectID": "git.html",
+    "href": "git.html",
+    "title": "3  Version control",
+    "section": "",
+    "text": "3.1 Version control terms in Git(Hub)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Version control</span>"
+    ]
   },
   {
-    "objectID": "01-project.html#dealing-with-credentials",
-    "href": "01-project.html#dealing-with-credentials",
-    "title": "2  Project setup",
-    "section": "2.4 Dealing with credentials",
-    "text": "2.4 Dealing with credentials\nStore your credentials and sensitive info in project specific .Renviron file (project’s root directory, must end with \\n):\nudaman_token = \"<your udaman token>\"\nudaman_user = \"<your user name>\"\nudaman_pwd = \"<your password>\"\nGITHUB_PAT = \"<your github pat>\"\nRetrieve credentials on demand. Do not store/assign the retrieved credentials to a variable: req <- httr::GET(url, httr::add_headers(Authorization = paste(\"Bearer\", Sys.getenv(\"udaman_token\"))))"
+    "objectID": "git.html#version-control-terms-in-github",
+    "href": "git.html#version-control-terms-in-github",
+    "title": "3  Version control",
+    "section": "",
+    "text": ".gitignore: A file that specifies which files and directories should be excluded from version control.\nBranch: A separate line of development or parallel version of the repository. Branches are used to develop features or fix bugs without affecting the main branch.\nClone: A copy of a repository on your local machine. Cloning a repository allows you to work on the project locally.\nCommit: A snapshot of the project at a specific point in time. Commits are used to save changes to the repository.\nConflict: When two branches have made changes to the same line in a file, a conflict occurs. Conflicts need to be resolved before the changes can be merged.\nFork: A copy of a repository on GitHub. This copy is independent of the original and you can make changes to it without affecting the original project.\nHEAD: A reference to the most recent commit in the repository, tip of the branch that is currently checked out.\nMain or Master: The default branch in a Git repository.\nMerge: Combining changes from one branch into another branch.\nOrigin: The default name of primary version of the repository on GitHub.\nPull: Getting changes from GitHub to your local repository.\nPull request: A request to merge proposed changes from one branch into another branch. Pull requests are used to review and discuss changes before merging them into the main branch.\nPush: Sending changes from your local repository to GitHub.\nRemote: A remote repository on GitHub that you can pull from and push to.\nRepository: A folder that contains all the files and history of a project. There can be a local repository (on your computer) and a remote repository (hosted on GitHub).\nStage: Staging allows you to select which changes should be included in the next commit.\nUpstream: The original repository that you forked from on GitHub.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Version control</span>"
+    ]
   },
   {
-    "objectID": "01-project.html#additonal-resources",
-    "href": "01-project.html#additonal-resources",
-    "title": "2  Project setup",
-    "section": "2.5 Additonal resources:",
-    "text": "2.5 Additonal resources:\nLook at the targets package for workflow automation: https://docs.ropensci.org/targets/index.html\nLook at the Efficient R programming book: https://csgillespie.github.io/efficientR/\nAlso look at the Stanford Guide: http://dcl-workflow.stanford.edu"
+    "objectID": "git.html#version-control-setup",
+    "href": "git.html#version-control-setup",
+    "title": "3  Version control",
+    "section": "3.2 Version control setup",
+    "text": "3.2 Version control setup\nRStudio has built in support for Git-based version control for a project. Check if Git is installed by running git --version in the terminal. Git is included in Xcode command line tools, which can be installed by running xcode-select --install in the terminal. Provide your GitHub user name and email to Git via usethis::use_git_config(user.name = \"Jane Doe\", user.email = \"jane@example.org\"). Next, generate and store a personal access token for GitHub via usethis::create_github_token() and gitcreds::gitcreds_set(), respectively. Finally, make sure version control is enabled in RStudio (RStudio &gt; Global Options &gt; Git/SVN &gt; Enable version control interface for RStudio projects &gt; check box or usethis::use_blank_slate()). This concludes the setup for Git and GitHub, making it possible to establish a connection between RStudio and GitHub.\nAlways start setting up version control on GitHub. Even if you already have a project on your computer, begin by setting up a repository on GitHub. This can be done by clicking on the “+” in the top right corner of the GitHub website and selecting “New repository”. Give the repository a name and description, make it public or private, add a readme file, and choose the R template for .gitignore. After creating the repository, copy the URL and open RStudio. The next paragraph describes a robust local setup method with the usethis package, but there is also a menu based option: create a new project from version control by selecting File &gt; New Project &gt; Version Control &gt; Git and pasting the URL in the “Repository URL” field. Use the repository name as the project directory name. Choose a folder on your computer where the project will be stored locally and click “Create”. This will clone the repository to your computer and create a new RStudio project. The project is now connected to the repository on GitHub.\nThe local setup described above can be automated with usethis::create_from_github(\"repo_url\", \"proj_dir\"). If you have permission to push to the remote GitHub repository because you are an owner or collaborator on the project, then create_from_github will clone it. If you do not have parmission to push to the repository, create_from_github will fork and clone it. In either case, do not work in the main branch. Instead, create a “dev” branch in RStudio and work in that branch: in the Git pane, click on the “New Branch”, enter “dev” as the branch name, keep the remote origin, and chek the sync with remote box. This will create a new branch and switch to it.\nWhile in the dev branch, make changes to scripts or other files and save them. When you are ready to commit the changes, stage the files in the Git pane (“Command a” selects all files), click “Commit” at the top of the Git pane. In the pop-up window, the “Diff” button allows you to browse the changes made to the files in the repository, while the “History” button shows the commit history of the repository. These can be analyzed more conveniently on GitHub as described below in Section 3.3. Enter a commit message in the text box, and click the “Commit” button. Then push the changes to the remote repository. Go to the GitHub page of the dev branch and create a pull request to merge the dev branch into the main branch of the remote repository. After the pull request is merged, delete the dev branch on GitHub. Delete the local dev branch by executing git branch -d dev in the terminal. Finally, switch back to the main branch in RStudio and pull the changes from the remote repository.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Version control</span>"
+    ]
   },
   {
-    "objectID": "02-git.html#a-quick-overview",
-    "href": "02-git.html#a-quick-overview",
-    "title": "3  Git",
-    "section": "3.1 A quick overview:",
-    "text": "3.1 A quick overview:\nTL;DR: https://inbo.github.io/git-course/index.html"
+    "objectID": "git.html#sec-browse-commits",
+    "href": "git.html#sec-browse-commits",
+    "title": "3  Version control",
+    "section": "3.3 Time travel on GitHub",
+    "text": "3.3 Time travel on GitHub\nFrom your repo’s landing page, access commit history by clicking on “123 Commits” under the green Code button. Once you’re viewing the history, notice three ways to access more info for each commit:\n\nThe clipboard icon copies the SHA of the commit. This can be handy if you need to refer to this commit elsewhere, e.g. in an issue thread or a commit message or in a Git command you’re forming for local execution.\nClick on the abbreviated SHA itself in order to the view the diff associated with the commit.\nClick on the double angle brackets &lt;&gt; to browse the state of the entire repo at that point in history.\n\nBack out of any drilled down view by clicking on YOU/REPO to return to your repo’s landing page. This brings you back to the present state and top-level of your repo.\nOnce you’ve identified a relevant commit, diff, or file state, you can copy the current URL from your browser and use it to enhance online discussion elsewhere, i.e. to bring other people to this exact view of the repo. The hyperlink-iness of repos hosted on GitHub can make online discussion of a project much more precise and efficient.\nWhat if you’re interested in how a specific file came to be the way it is? First navigate to the file in the repo, then notice “Blame” on the left and “History” in the upper right.\n\nThe “blame” view of a file reveals who last touched each line of the file, how long ago, and the associated commit message. Click on the commit message to visit that commit. Or click the “stacked rectangles” icon to move further back in time, but staying in blame view. This is handy when doing forensics on a specific and small set of lines.\nThe “history” view for a file is very much like the overall commit history described above, except it only includes commits that affect the file of interest. This can be handy when your inquiry is rather diffuse and you’re trying to digest the general story arc for a file.\n\nWhen viewing a file on GitHub, you can click on a line number to highlight it. Use “click … shift-click” to select a range of lines. Notice your browser’s URL shows something of this form: https://github.com/OWNER/REPO/blob/SHA/path/to/file.R#L27-L31 If the URL does not contain the SHA, type “y” to toggle into that form. These file- and SHA-specific URLs are a great way to point people at particular lines of code in online conversations. It’s best practice to use the uglier links that contain the SHA, as they will stand the test of time.\nSearch is always available in the upper-righthand corner of GitHub. Once you enter some text in the search box, a dropdown provides the choice to search in the current repo (the default) or all of GitHub. GitHub searches the contents of files (described as “Code”), commit messages, and issues. Take advantage of the search hits across these different domains. Again, this is a powerful way to zoom in on specific lines of code, revisit an interesting time in project history, or re-discover a conversation thread.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Version control</span>"
+    ]
   },
   {
-    "objectID": "02-git.html#git-step-by-step",
-    "href": "02-git.html#git-step-by-step",
-    "title": "3  Git",
-    "section": "3.2 Git step by step",
-    "text": "3.2 Git step by step\nIf you don’t have Git, install it:\nhttps://happygitwithr.com/install-git.html\nMake sure .gitignore contains the following files:\n.Renviron\n.Rprofile\nIntroduce yourself to Git:\nIn the shell (Terminal tab in RStudio):\ngit config –global user.name ‘Jane_Doe’\ngit config –global user.email ‘jane@example.com’\ngit config –global –list\nFor more advanced tasks, use GitHub Desktop:\nhttps://desktop.github.com\nGenerate and store your GitHub PAT (Personal Access Token):\nhttps://happygitwithr.com/https-pat.html\nhttps://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token\nUse one of three ways to add your project to GitHub:\nBrand new project:\nhttps://happygitwithr.com/new-github-first.html\nExisting project without version control:\nhttps://happygitwithr.com/existing-github-first.html\nExisting project under local version control:\nhttps://happygitwithr.com/existing-github-last.html\nTroubleshooting if RStudio can’t detect Git:\nhttps://happygitwithr.com/rstudio-see-git.html\nGit vocabulary:\nhttps://happygitwithr.com/git-basics.html\nRemote setups (try to stick to GitHub first discussed above):\nhttps://happygitwithr.com/common-remote-setups.html\nUseful Git workflows and dealing with conflicts:\nhttps://happygitwithr.com/workflows-intro.html\nhttps://happygitwithr.com/push-rejected.html\nhttps://happygitwithr.com/pull-tricky.html\nAdditional resources:\nhttps://happygitwithr.com/ideas-for-content.html"
+    "objectID": "git.html#version-control-workflow",
+    "href": "git.html#version-control-workflow",
+    "title": "3  Version control",
+    "section": "3.4 Version control workflow",
+    "text": "3.4 Version control workflow\nAfter the initial setup, the workflow should always follow the following sequence:\n\nin the local/main branch, click on the “Pull” button in the Git pane to pull changes from the main branch of the remote repository, which is\n\nupstream if the repository was forked,\norigin if the repository was cloned,\n\nin the case of forked repo, after pulling from upstream, push to origin,\ncreate a new dev branch and switch to it,\nmake changes in the dev branch,\ncommit changes in the dev branch,\npush changes to the dev branch of the remote origin repository,\ncreate a pull request on GitHub to merge the origin dev branch a) into upstream main if the repository was forked, b) into origin main if the repository was cloned,\nmerge the pull request (or wait for it to be merged by the owner),\nafter merging, delete the dev branch on the remote and locally,\nrepeat step 1. (and then repeat it again before you resume your work on the project).\n\nThis workflow is recommended to avoid conflicts with other collaborators.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Version control</span>"
+    ]
   },
   {
-    "objectID": "02-git.html#suggested-workflow",
-    "href": "02-git.html#suggested-workflow",
-    "title": "3  Git",
-    "section": "3.3 Suggested workflow",
-    "text": "3.3 Suggested workflow\n\nInitialize repository on GitHub.com under the UHERO account.\n\nClone it via RStudio project setup.\n\nCommit changes, pull, resolve issues, push.\n3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.\n\nSee these detailed guides: https://inbo.github.io/git-course/index.html https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md\nAnother research workflow based on Github: https://www.carlboettiger.info/2012/05/06/research-workflow.html"
+    "objectID": "git.html#dealing-with-conflicts",
+    "href": "git.html#dealing-with-conflicts",
+    "title": "3  Version control",
+    "section": "3.5 Dealing with conflicts",
+    "text": "3.5 Dealing with conflicts\nIf a push is rejected, pull the changes from the remote repository. If there are conflicts, resolve them by editing the files and committing the changes. Every merge conflict inserts three delimiters:\n&lt;&lt;&lt;&lt;&lt;&lt; feature branch name, the start of the merge conflict\n====== the separator between the content of both branches\n&gt;&gt;&gt;&gt;&gt;&gt; base branch name, the end of the merge conflict\n\nFix the merge conflict by directly editing the script at the indicated locations. Often you can fix it by simply deleting the content of one of the branches within the conflict. Potentially you need to keep a mix of both. Don’t forget to also delete the three delimiters when you’re ready.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Version control</span>"
+    ]
   },
   {
-    "objectID": "03-setup.html#start-with-a-clean-slate",
-    "href": "03-setup.html#start-with-a-clean-slate",
-    "title": "4  Setup of the forecastr project",
-    "section": "4.1 Start with a clean slate",
-    "text": "4.1 Start with a clean slate\nFirst remove all objects from global environment:\nrm(list = ls())\nIf only some objects need to be removed, search for them via wildcards:\nrm(list = ls(pattern = glob2rx(\"*__*\")))\nDetach all loaded packages:\nif (!is.null(names(sessionInfo()$otherPkgs))) {\ninvisible(\n  suppressMessages(\n    suppressWarnings(\n      lapply(\n        paste(\"package:\", names(sessionInfo()$otherPkgs), sep=\"\"), \n        detach, \n        character.only = TRUE, \n        unload = TRUE\n        )\n      )\n    )\n  )\n}"
+    "objectID": "git.html#additional-resources",
+    "href": "git.html#additional-resources",
+    "title": "3  Version control",
+    "section": "3.6 Additional resources",
+    "text": "3.6 Additional resources\nVisual Git guide:\nhttps://inbo.github.io/git-course/index.html\nExhaustive discussion of Git for R users:\nhttps://happygitwithr.com\nA research workflow based on Github:\nhttps://www.carlboettiger.info/2012/05/06/research-workflow.html\nFor more advanced tasks, use GitHub Desktop:\nhttps://desktop.github.com",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Version control</span>"
+    ]
   },
   {
-    "objectID": "03-setup.html#packages",
-    "href": "03-setup.html#packages",
-    "title": "4  Setup of the forecastr project",
-    "section": "4.2 Packages",
-    "text": "4.2 Packages\nThe setup file clarifies its own location relative to the project root and loads the necessary packages.\nNavigate within a project using the here() package. Start by specifying:\nhere::i_am(\"R/setup.R\")\nThen load necessary packages\nlibrary(here) # navigation within the project\nlibrary(conflicted) # detect conflicts across packages\nlibrary(tidyverse) # a set of frequently used data-wrangling tools\nlibrary(magrittr) # more than just pipes\nlibrary(lubridate) # dealing with dates\nlibrary(tsbox) # dealing with time series\n# library(bimets)\nDetect conflicts across packages and assign preferences\nconflict_scout()\nconflict_prefer(\"filter\", \"dplyr\") # dplyr v stats\nconflict_prefer(\"first\", \"dplyr\") # dplyr v xts\nconflict_prefer(\"lag\", \"dplyr\") # dplyr v stats\nconflict_prefer(\"last\", \"dplyr\") # dplyr v xts\nconflict_prefer(\"extract\", \"magrittr\") # magrittr vs tidyr\nVerify top level project directory\nhere()"
+    "objectID": "renv.html",
+    "href": "renv.html",
+    "title": "4  Package management",
+    "section": "",
+    "text": "4.1 Getting started\nTo convert a project to use renv, call renv::init(). This adds three new files and directories to the project:\nThe next important pair of tools is renv::snapshot() and renv::restore(). snapshot() updates the lockfile with metadata about the currently-used packages in the project library. Sharing the lockfile allows other people or other computers to reproduce the current project environment by running restore(), which uses the metadata from the lockfile to install exactly the same version of every package. This pair of functions provides the benefits of reproducibility and portability: you are now tracking exactly which package versions you have installed so you can recreate them on other machines.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "03-setup.html#package-descriptions",
-    "href": "03-setup.html#package-descriptions",
-    "title": "4  Setup of the forecastr project",
-    "section": "4.3 Package descriptions",
-    "text": "4.3 Package descriptions\nUse the here package to deal with file paths:\nhttps://here.r-lib.org\nSuppose you have a dataset in csv format. Use:\nreadr::read_csv(here::here(\"<The subfolder where your csv file resides>\", \"<The CSV file.csv>\"))\nOnly load essential packages with many useful functions (don’t load a whole package to access a single function).\nRefer to individual functions in not loaded packages by namespace::function()\nResolve conflicts across multiple packages with conflicted:\nhttps://conflicted.r-lib.org\nCore tidyverse packages:\nhttps://www.tidyverse.org\nNon-core tidyverse packages (need to be loaded separately):\nhttps://magrittr.tidyverse.org\nhttps://lubridate.tidyverse.org\nTime series tools in tsbox (learn them and use them, very useful). All start with ts_.\nhttps://www.tsbox.help\nForecasting with multi-equation behavioral models (only load bimets if actually doing forecasts, no need for data manipulation):\nhttps://cran.r-project.org/web/packages/bimets/index.html\nbimets depends on xts (if not loaded, can access necessary functions via xts::function()):\nhttps://cran.r-project.org/web/packages/xts/index.html\nPrefer using tsbox and tidyverse functions whenever possible, but understand the components and behavior of xts objects: https://rc2e.com/timeseriesanalysis"
+    "objectID": "renv.html#getting-started",
+    "href": "renv.html#getting-started",
+    "title": "4  Package management",
+    "section": "",
+    "text": "The project library, renv/library, is a library that contains all packages currently used by the project1. This is the key magic that makes renv work: instead of having one library containing the packages used in every project, renv gives you a separate library for each project. This provides the benefits of isolation: different projects can use different versions of packages, and installing, updating, or removing packages in one project doesn’t affect any other project.\nThe lockfile, renv.lock, records enough metadata about every package that it can be re-installed on a new machine.\nrenv uses .Rprofile to configure the R session to use the project library. This ensures that once renv is turned on for a project, it stays on, until it is deliberately turned off.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "03-setup.html#additional-info-in-setup",
-    "href": "03-setup.html#additional-info-in-setup",
-    "title": "4  Setup of the forecastr project",
-    "section": "4.4 Additional info in setup",
-    "text": "4.4 Additional info in setup\nDefine project-wide constants:\nbnk_start <- ymd(\"1900-01-01\")\nbnk_end <- ymd(\"2060-12-31\")\nLoad user defined utility functions (details in next section):\nsource(here(\"R\", \"util_funs.R\"))"
+    "objectID": "renv.html#collaboration",
+    "href": "renv.html#collaboration",
+    "title": "4  Package management",
+    "section": "4.2 Collaboration",
+    "text": "4.2 Collaboration\nOne of the reasons to use renv is to make it easier to share code in such a way that everyone gets exactly the same package versions. As above, start by calling renv::init(). You’ll then need to commit renv.lock, .Rprofile, renv/settings.json and renv/activate.R to version control, ensuring that others can recreate your project environment. If you’re using git, this is particularly simple because renv will create a .gitignore, and you can just commit all suggested files.\nNow when one of your collaborators opens this project, renv will automatically bootstrap itself, downloading and installing the appropriate version of renv. It will also ask them if they want to download and install all the packages it needs by running renv::restore().",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#atoq",
-    "href": "04-utilfuns.html#atoq",
-    "title": "5  User defined utility functions",
-    "section": "5.1 AtoQ",
-    "text": "5.1 AtoQ\nDescription:\n Linear interpolation based on aremos command reference page 292\nUsage:\n AtoQ(ser_in, aggr = \"mean\")\n \nArguments:\nser_in: the xts series to be interpolated (freq = a)\n\naggr: interpolation method: aggregate via mean (default) or sum\nValue:\n interpolated xts series (freq = q)\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)"
+    "objectID": "renv.html#installing-packages",
+    "href": "renv.html#installing-packages",
+    "title": "4  Package management",
+    "section": "4.3 Installing packages",
+    "text": "4.3 Installing packages\nIf you use renv for multiple projects, you’ll have multiple libraries, meaning that you’ll often need to install the same package in multiple places. It would be annoying if you had to download (or worse, compile) the package repeatedly, so renv uses a package cache. That means you only ever have to download and install a package once, and for each subsequent install, renv will just add a link from the project library to the global cache. You can learn more about the cache in vignette(\"package-install\").\nAfter installing the package and checking that the code works, you should call renv::snapshot() to record the latest package versions in your lockfile. If you’re collaborating with others, you’ll need to commit those changes to git, and let them know that you’ve updated the lockfile and they should call renv::restore() when they’re next working on a project.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#explode_xts",
-    "href": "04-utilfuns.html#explode_xts",
-    "title": "5  User defined utility functions",
-    "section": "5.2 explode_xts",
-    "text": "5.2 explode_xts\nDescription:\n Splitting of xts matrix to individual xts vectors (don't use,\n pollutes global environment)\nUsage:\n explode_xts(xts_in)\n \nArguments:\n xts_in: the xts matrix to be split into individual xts vectors\nValue:\n nothing (silently store split series in global environment)\nExamples:\n get_series_exp(74, save_loc = NULL) %>%\n   ts_long() %>%\n   ts_xts() %>%\n   explode_xts()\n rm(list = ls(pattern = glob2rx(\"*@HI.Q\")))"
+    "objectID": "renv.html#updating-packages",
+    "href": "renv.html#updating-packages",
+    "title": "4  Package management",
+    "section": "4.4 Updating packages",
+    "text": "4.4 Updating packages\nRegularly (at least once a year) update the packages in your project to get the latest versions of all dependencies. Similarly, if you’re making major changes to a project that you haven’t worked on for a while, it’s often a good idea to start with an renv::update()2 before making any changes to the code.\nAfter calling renv::update(), you should run the code in your project and verify that it still works (or make any changes needed to get it working). Then call renv::snapshot() to record the new versions in the lockfile. If you get stuck, and can’t get the project to work with the new versions, you can call renv::restore() to roll back changes to the project library and revert to the known good state recorded in your lockfile. If you need to roll back to an even older version, take a look at renv::history() and renv::revert(). renv::update() will also update renv itself, ensuring that you get all the latest features.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#find_end",
-    "href": "04-utilfuns.html#find_end",
-    "title": "5  User defined utility functions",
-    "section": "5.3 find_end",
-    "text": "5.3 find_end\nDescription:\n Find the date of the last observation (NAs are dropped)\nUsage:\n find_end(ser_in)\n \nArguments:\n ser_in: an xts series\nValue:\n date associated with last observation\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2060, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2018\"] <- c(323127513, 325511184, 327891911)\n find_end(`ncen@us.sola`)"
+    "objectID": "renv.html#workflow-for-setting-up-a-project-with-version-control-and-renv",
+    "href": "renv.html#workflow-for-setting-up-a-project-with-version-control-and-renv",
+    "title": "4  Package management",
+    "section": "4.5 Workflow for setting up a project with version control and renv",
+    "text": "4.5 Workflow for setting up a project with version control and renv\nThe ideal sequence of steps to set up a project with version control and renv is as follows:\n\ngithub\nusethis::create_from_github()\nrenv::init() or renv::restore() git::pull …\nget work done\nrenv::snapshot()\ngit",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#find_start",
-    "href": "04-utilfuns.html#find_start",
-    "title": "5  User defined utility functions",
-    "section": "5.4 find_start",
-    "text": "5.4 find_start\nDescription:\n Find the date of the first observation (NAs are dropped)\nUsage:\n find_start(ser_in)\n \nArguments:\n ser_in: an xts series\nValue:\n date associated with first observation\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2017/2021\"] <- c(325511184, 327891911, 330268840, 332639102, 334998398)\n find_start(`ncen@us.sola`)"
+    "objectID": "renv.html#additional-resources",
+    "href": "renv.html#additional-resources",
+    "title": "4  Package management",
+    "section": "4.6 Additional resources",
+    "text": "4.6 Additional resources\nOverview of renv:\nhttps://rstudio.github.io/renv/articles/renv.html\nLeveraging git and renv at the end of a working session\nNow that we have our nice project setup, we should not forget to leverage it. At the end of a working session you should follow the following steps:\nCreate a renv::snapshot() to save all the packages you used to your local package directory. Commit all your changes to git. This can be easily done by using the Git pane in RStudio. Push everything to GitHub. Whenever you re-open your Rproject, make sure to start your working session with a Pull from GitHub. That way, you will always work with the most recent version of your project.\nCollaborating with renv: https://rstudio.github.io/renv/articles/collaborating.html\nTL;DR: https://inbo.github.io/git-course/index.html https://happygitwithr.com/",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#get_series",
-    "href": "04-utilfuns.html#get_series",
-    "title": "5  User defined utility functions",
-    "section": "5.5 get_series",
-    "text": "5.5 get_series\nDescription:\n Download a set of series from udaman using series names\nUsage:\n get_series(ser_id_vec)\n \nArguments:\n ser_id_vec: vector of series names\nValue:\n time and data for all series combined in a tibble\nExamples:\n get_series(c(\"VISNS@HI.M\", \"VAPNS@HI.M\"))"
+    "objectID": "renv.html#footnotes",
+    "href": "renv.html#footnotes",
+    "title": "4  Package management",
+    "section": "",
+    "text": "If you’d like to skip dependency discovery, you can call renv::init(bare = TRUE) to initialize a project with an empty project library.↩︎\nYou can also use update.packages(), but renv::update() works with the same sources that renv::install() supports.↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Package management</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#get_series1",
-    "href": "04-utilfuns.html#get_series1",
-    "title": "5  User defined utility functions",
-    "section": "5.6 get_series1",
-    "text": "5.6 get_series1\nDescription:\n Download a single series from udaman using series name\nUsage:\n get_series1(ser_id)\n \nArguments:\n ser_id: udaman series name\nValue:\n time and data for a single series combined in a tibble\nExamples:\n get_series(\"VISNS@HI.M\")"
+    "objectID": "setup.html",
+    "href": "setup.html",
+    "title": "5  Setup of the forecastr project",
+    "section": "",
+    "text": "5.1 Start with a clean slate\nFirst remove all objects from global environment:\nrm(list = ls())\nIf only some objects need to be removed, search for them via wildcards:\nrm(list = ls(pattern = glob2rx(\"*__*\")))\nDetach all loaded packages:",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Setup of the forecastr project</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#get_series_exp",
-    "href": "04-utilfuns.html#get_series_exp",
-    "title": "5  User defined utility functions",
-    "section": "5.7 get_series_exp",
-    "text": "5.7 get_series_exp\nDescription:\n Download series listed in an export table from udaman\nUsage:\n get_series_exp(exp_id, save_loc = \"data/raw\")\n \nArguments:\n exp_id: export id\n\n save_loc: location to save the csv of the retrieved data, set to NULL\n      to avoid saving\nValue:\n time and data for all series combined in a tibble\nExamples:\n get_series_exp(74)\n get_series_exp(74, save_loc = NULL)"
+    "objectID": "setup.html#start-with-a-clean-slate",
+    "href": "setup.html#start-with-a-clean-slate",
+    "title": "5  Setup of the forecastr project",
+    "section": "",
+    "text": "if (!is.null(names(sessionInfo()$otherPkgs))) {\ninvisible(\n  suppressMessages(\n    suppressWarnings(\n      lapply(\n        paste(\"package:\", names(sessionInfo()$otherPkgs), sep=\"\"), \n        detach, \n        character.only = TRUE, \n        unload = TRUE\n        )\n      )\n    )\n  )\n}",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Setup of the forecastr project</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#get_var",
-    "href": "04-utilfuns.html#get_var",
-    "title": "5  User defined utility functions",
-    "section": "5.8 get_var",
-    "text": "5.8 get_var\nDescription:\n Construct a series name from variable components and retrieve the\n series\nUsage:\n get_var(ser_in, env = parent.frame())\n \nArguments:\n ser_in: a variable name (string with substituted expressions)\n\n env: environment where the expression should be evaluated\nValue:\n variable\nExamples:\n ser_i <- \"_NF\"\n cnty_i <- \"HI\"\n get_series_exp(74, save_loc = NULL) %>%\n   ts_long() %>%\n   ts_xts() %$% get_var(\"E{ser_i}@{cnty_i}.Q\")"
+    "objectID": "setup.html#packages",
+    "href": "setup.html#packages",
+    "title": "5  Setup of the forecastr project",
+    "section": "5.2 Packages",
+    "text": "5.2 Packages\nThe setup file clarifies its own location relative to the project root and loads the necessary packages.\nNavigate within a project using the here() package. Start by specifying:\nhere::i_am(\"R/setup.R\")\nThen load necessary packages\nlibrary(here) # navigation within the project\nlibrary(conflicted) # detect conflicts across packages\nlibrary(tidyverse) # a set of frequently used data-wrangling tools\nlibrary(magrittr) # more than just pipes\nlibrary(lubridate) # dealing with dates\nlibrary(tsbox) # dealing with time series\n# library(bimets)\nDetect conflicts across packages and assign preferences\nconflict_scout()\nconflict_prefer(\"filter\", \"dplyr\") # dplyr v stats\nconflict_prefer(\"first\", \"dplyr\") # dplyr v xts\nconflict_prefer(\"lag\", \"dplyr\") # dplyr v stats\nconflict_prefer(\"last\", \"dplyr\") # dplyr v xts\nconflict_prefer(\"extract\", \"magrittr\") # magrittr vs tidyr\nVerify top level project directory\nhere()",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Setup of the forecastr project</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#make_xts",
-    "href": "04-utilfuns.html#make_xts",
-    "title": "5  User defined utility functions",
-    "section": "5.9 make_xts",
-    "text": "5.9 make_xts\nDescription:\n Create xts and fill with values\nUsage:\n make_xts(start = bnk_start, end = bnk_end, per = \"year\", val = NA)\n \nArguments:\n start: date of series start (string: \"yyyy-mm-dd\")\n\n end: date of series end (string: \"yyyy-mm-dd\")\n\n per: periodicity of series (string: \"quarter\", \"year\")\n\n val: values to fill in (scalar or vector)\nValue:\n an xts series\nExamples:\n make_xts()\n make_xts(start = ymd(\"2010-01-01\"), per = \"quarter\", val = 0)"
+    "objectID": "setup.html#package-descriptions",
+    "href": "setup.html#package-descriptions",
+    "title": "5  Setup of the forecastr project",
+    "section": "5.3 Package descriptions",
+    "text": "5.3 Package descriptions\nUse the here package to deal with file paths:\nhttps://here.r-lib.org\nSuppose you have a dataset in csv format. Use:\nreadr::read_csv(here::here(\"&lt;The subfolder where your csv file resides&gt;\", \"&lt;The CSV file.csv&gt;\"))\nOnly load essential packages with many useful functions (don’t load a whole package to access a single function).\nRefer to individual functions in not loaded packages by namespace::function()\nResolve conflicts across multiple packages with conflicted:\nhttps://conflicted.r-lib.org\nCore tidyverse packages:\nhttps://www.tidyverse.org\nNon-core tidyverse packages (need to be loaded separately):\nhttps://magrittr.tidyverse.org\nhttps://lubridate.tidyverse.org\nTime series tools in tsbox (learn them and use them, very useful). All start with ts_.\nhttps://www.tsbox.help\nForecasting with multi-equation behavioral models (only load bimets if actually doing forecasts, no need for data manipulation):\nhttps://cran.r-project.org/web/packages/bimets/index.html\nbimets depends on xts (if not loaded, can access necessary functions via xts::function()):\nhttps://cran.r-project.org/web/packages/xts/index.html\nPrefer using tsbox and tidyverse functions whenever possible, but understand the components and behavior of xts objects: https://rc2e.com/timeseriesanalysis",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Setup of the forecastr project</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#p",
-    "href": "04-utilfuns.html#p",
-    "title": "5  User defined utility functions",
-    "section": "5.10 p",
-    "text": "5.10 p\nDescription:\n Concatenate dates to obtain period\nUsage:\n p(dat1, dat2)\n \nArguments:\n dat1: date of period start (string: yyyy-mm-dd)\n\n dat2: date of period end (string: yyyy-mm-dd)\nValue:\n string containing date range\nExamples:\n p(\"2010-01-01\", \"2020-01-01\")"
+    "objectID": "setup.html#additional-info-in-setup",
+    "href": "setup.html#additional-info-in-setup",
+    "title": "5  Setup of the forecastr project",
+    "section": "5.4 Additional info in setup",
+    "text": "5.4 Additional info in setup\nDefine project-wide constants:\nbnk_start &lt;- ymd(\"1900-01-01\")\nbnk_end &lt;- ymd(\"2060-12-31\")\nLoad user defined utility functions (details in next section):\nsource(here(\"R\", \"util_funs.R\"))",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Setup of the forecastr project</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#pca_to_pc",
-    "href": "04-utilfuns.html#pca_to_pc",
-    "title": "5  User defined utility functions",
-    "section": "5.11 pca_to_pc",
-    "text": "5.11 pca_to_pc\nDescription:\n Convert annualized growth to quarterly growth\nUsage:\n pca_to_pc(ser_in)\n \nArguments:\n ser_in: the series containing annualized growth (in percent)\nValue:\n series containing quarterly growth (in percent)\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)\n ts_c(test1 %>% ts_pca() %>% pca_to_pc(), test1 %>% ts_pc())"
+    "objectID": "utilfuns.html",
+    "href": "utilfuns.html",
+    "title": "6  User defined utility functions",
+    "section": "",
+    "text": "6.1 AtoQ\nDescription:\nUsage:\nArguments:\nValue:\nExamples:",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#pchmy",
-    "href": "04-utilfuns.html#pchmy",
-    "title": "5  User defined utility functions",
-    "section": "5.12 pchmy",
-    "text": "5.12 pchmy\nDescription:\n Calculate multi-period average growth\nUsage:\n pchmy(ser_in, lag_in = 1)\n \nArguments:\nser_in: name of xts series for which growth is calculated\n\nlag_in: length of period over which growth is calculated\nValue:\n series containing the average growth of ser_in (in percent)\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)\n ts_c(pchmy(`ncen@us.sola`, lag_in = 3), ts_pc(`ncen@us.sola`))\n ts_c(pchmy(test1, lag_in = 4), ts_pcy(test1), ts_pca(test1), ts_pc(test1))"
+    "objectID": "utilfuns.html#atoq",
+    "href": "utilfuns.html#atoq",
+    "title": "6  User defined utility functions",
+    "section": "",
+    "text": "Linear interpolation based on aremos command reference page 292\n\n AtoQ(ser_in, aggr = \"mean\")\n \n\nser_in: the xts series to be interpolated (freq = a)\n\naggr: interpolation method: aggregate via mean (default) or sum\n\n interpolated xts series (freq = q)\n\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#plot_1",
-    "href": "04-utilfuns.html#plot_1",
-    "title": "5  User defined utility functions",
-    "section": "5.13 plot_1",
-    "text": "5.13 plot_1\nDescription:\n Interactive plot of a single variable with level and growth rate\nUsage:\n plot_1(\n   ser,\n   rng_start = as.character(Sys.Date() - years(15)),\n   height = 300,\n   width = 900\n )\n \nArguments:\n ser: time series to plot\n\n rng_start: start of zoom range (\"YYYY-MM-DD\")\n\n height: height of a single panel (px)\n\n width: width of a single panel (px)\nValue:\n a dygraph plot\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)\n plot_1(`ncen@us.sola`, rng_start = \"2017-01-01\")\n plot_1(test1, rng_start = \"2017-01-01\")"
+    "objectID": "utilfuns.html#explode_xts",
+    "href": "utilfuns.html#explode_xts",
+    "title": "6  User defined utility functions",
+    "section": "6.2 explode_xts",
+    "text": "6.2 explode_xts\nDescription:\n Splitting of xts matrix to individual xts vectors (don't use,\n pollutes global environment)\nUsage:\n explode_xts(xts_in)\n \nArguments:\n xts_in: the xts matrix to be split into individual xts vectors\nValue:\n nothing (silently store split series in global environment)\nExamples:\n get_series_exp(74, save_loc = NULL) %&gt;%\n   ts_long() %&gt;%\n   ts_xts() %&gt;%\n   explode_xts()\n rm(list = ls(pattern = glob2rx(\"*@HI.Q\")))",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#plot_comp",
-    "href": "04-utilfuns.html#plot_comp",
-    "title": "5  User defined utility functions",
-    "section": "5.14 plot_comp",
-    "text": "5.14 plot_comp\nDescription:\n Three-panel plot of levels, index, and growth rates\nUsage:\n plot_comp(\n   sers,\n   rng_start = as.character(Sys.Date() - years(15)),\n   rng_end = as.character(Sys.Date()),\n   height = 300,\n   width = 900\n )\n \nArguments:\nsers: a vector of series to plot\n\nrng_start: start of the zoom range (\"YYYY-MM-DD\")\n\nrng_end: end of the zoom range (\"YYYY-MM-DD\")\n\nheight: height of a single panel (px)\n\nwidth: width of a single panel (px)\nValue:\n a list with three dygraph plots (level, index, growth)\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)\n plot_comp(ts_c(`ncen@us.sola`, test1), rng_start = \"2017-01-01\")\n get_series_exp(74, save_loc = NULL) %>%\n   ts_long() %>%\n   ts_xts() %>%\n   extract(, c(\"E_NF@HI.Q\", \"ECT@HI.Q\", \"EMN@HI.Q\")) %>%\n   plot_comp()"
+    "objectID": "utilfuns.html#find_end",
+    "href": "utilfuns.html#find_end",
+    "title": "6  User defined utility functions",
+    "section": "6.3 find_end",
+    "text": "6.3 find_end\nDescription:\n Find the date of the last observation (NAs are dropped)\nUsage:\n find_end(ser_in)\n \nArguments:\n ser_in: an xts series\nValue:\n date associated with last observation\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2060, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2018\"] &lt;- c(323127513, 325511184, 327891911)\n find_end(`ncen@us.sola`)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#plot_comp_2",
-    "href": "04-utilfuns.html#plot_comp_2",
-    "title": "5  User defined utility functions",
-    "section": "5.15 plot_comp_2",
-    "text": "5.15 plot_comp_2\nDescription:\n Two-panel plot of levels, index, and growth rates\nUsage:\n plot_comp_2(\n   sers,\n   rng_start = as.character(Sys.Date() - years(15)),\n   rng_end = as.character(Sys.Date()),\n   height = 300,\n   width = 900\n )\n \nArguments:\nsers: a vector of series to plot\n\nrng_start: start of the zoom range (\"YYYY-MM-DD\")\n\nrng_end: end of the zoom range (\"YYYY-MM-DD\")\n\nheight: height of a single panel (px)\n\nwidth: width of a single panel (px)\nValue:\n a list with two dygraph plots (level, index, growth)\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)\n plot_comp_2(ts_c(`ncen@us.sola`, test1), rng_start = \"2017-01-01\")\n get_series_exp(74, save_loc = NULL) %>%\n   ts_long() %>%\n   ts_xts() %>%\n   extract(, c(\"E_NF@HI.Q\", \"ECT@HI.Q\", \"EMN@HI.Q\")) %>%\n   plot_comp_2()"
+    "objectID": "utilfuns.html#find_start",
+    "href": "utilfuns.html#find_start",
+    "title": "6  User defined utility functions",
+    "section": "6.4 find_start",
+    "text": "6.4 find_start\nDescription:\n Find the date of the first observation (NAs are dropped)\nUsage:\n find_start(ser_in)\n \nArguments:\n ser_in: an xts series\nValue:\n date associated with first observation\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2017/2021\"] &lt;- c(325511184, 327891911, 330268840, 332639102, 334998398)\n find_start(`ncen@us.sola`)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#qtoa",
-    "href": "04-utilfuns.html#qtoa",
-    "title": "5  User defined utility functions",
-    "section": "5.16 QtoA",
-    "text": "5.16 QtoA\nDescription:\n Conversion from quarterly to annual frequency\nUsage:\n QtoA(ser_in, aggr = \"mean\")\n \nArguments:\n ser_in: the xts series to be converted (freq = q)\n\n aggr: aggregate via mean (default) or sum\nValue:\n converted xts series (freq = a)\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)\n test2 <- QtoA(test1) # for stock type variables mean, for flow type variables sum\n print(test1)\n print(cbind(`ncen@us.sola`, test2))"
+    "objectID": "utilfuns.html#get_series",
+    "href": "utilfuns.html#get_series",
+    "title": "6  User defined utility functions",
+    "section": "6.5 get_series",
+    "text": "6.5 get_series\nDescription:\n Download a set of series from udaman using series names\nUsage:\n get_series(ser_id_vec)\n \nArguments:\n ser_id_vec: vector of series names\nValue:\n time and data for all series combined in a tibble\nExamples:\n get_series(c(\"VISNS@HI.M\", \"VAPNS@HI.M\"))",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#qtom",
-    "href": "04-utilfuns.html#qtom",
-    "title": "5  User defined utility functions",
-    "section": "5.17 QtoM",
-    "text": "5.17 QtoM\nDescription:\n Interpolate a tibble of series from quaterly to monthly freq\nUsage:\n QtoM(data_q, conv_type)\n \nArguments:\n data_q: tibble containing variables at quarterly freq\n\n conv_type: match the quarterly value via \"first\", \"last\", \"sum\",\n      \"average\"\nValue:\n tibble containing variables at monthly freq\nExamples:\n `ncen@us.sola` <- ts(NA, start = 2016, end = 2021, freq = 1) %>% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] <- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 <- AtoQ(`ncen@us.sola`)\n QtoM(ts_tbl(test1), \"average\")\n ts_frequency(QtoM(ts_tbl(test1), \"average\") %>% ts_xts())"
+    "objectID": "utilfuns.html#get_series1",
+    "href": "utilfuns.html#get_series1",
+    "title": "6  User defined utility functions",
+    "section": "6.6 get_series1",
+    "text": "6.6 get_series1\nDescription:\n Download a single series from udaman using series name\nUsage:\n get_series1(ser_id)\n \nArguments:\n ser_id: udaman series name\nValue:\n time and data for a single series combined in a tibble\nExamples:\n get_series(\"VISNS@HI.M\")",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#qtom1",
-    "href": "04-utilfuns.html#qtom1",
-    "title": "5  User defined utility functions",
-    "section": "5.18 QtoM1",
-    "text": "5.18 QtoM1\nDescription:\n Interpolate a single series from quarterly to monthly freq\nUsage:\n QtoM1(var_q, ts_start, conv_type)\n \nArguments:\n var_q: vector containing a single variable at quarterly freq\n\n ts_start: starting period as c(year, quarter) e.g. c(2001, 1)\n\n conv_type: match the quarterly value via \"first\", \"last\", \"sum\",\n      \"average\"\nValue:\n vector containing a single variable at monthly freq\nExamples:\n QtoM1(test1, c(2010, 1), \"average\")"
+    "objectID": "utilfuns.html#get_series_exp",
+    "href": "utilfuns.html#get_series_exp",
+    "title": "6  User defined utility functions",
+    "section": "6.7 get_series_exp",
+    "text": "6.7 get_series_exp\nDescription:\n Download series listed in an export table from udaman\nUsage:\n get_series_exp(exp_id, save_loc = \"data/raw\")\n \nArguments:\n exp_id: export id\n\n save_loc: location to save the csv of the retrieved data, set to NULL\n      to avoid saving\nValue:\n time and data for all series combined in a tibble\nExamples:\n get_series_exp(74)\n get_series_exp(74, save_loc = NULL)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "04-utilfuns.html#qtrs",
-    "href": "04-utilfuns.html#qtrs",
-    "title": "5  User defined utility functions",
-    "section": "5.19 qtrs",
-    "text": "5.19 qtrs\nDescription:\n Convert period in quarters to period months\nUsage:\n qtrs(nr_quarters)\n \nArguments:\n nr_quarters: number of quarters in period (integer)\nValue:\n number of months in period\nExamples:\n qtrs(3)\n ymd(\"2020-01-01\") + qtrs(3)"
+    "objectID": "utilfuns.html#get_var",
+    "href": "utilfuns.html#get_var",
+    "title": "6  User defined utility functions",
+    "section": "6.8 get_var",
+    "text": "6.8 get_var\nDescription:\n Construct a series name from variable components and retrieve the\n series\nUsage:\n get_var(ser_in, env = parent.frame())\n \nArguments:\n ser_in: a variable name (string with substituted expressions)\n\n env: environment where the expression should be evaluated\nValue:\n variable\nExamples:\n ser_i &lt;- \"_NF\"\n cnty_i &lt;- \"HI\"\n get_series_exp(74, save_loc = NULL) %&gt;%\n   ts_long() %&gt;%\n   ts_xts() %$% get_var(\"E{ser_i}@{cnty_i}.Q\")",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "05-bestpract.html#harness-the-power-of-tsbox",
-    "href": "05-bestpract.html#harness-the-power-of-tsbox",
-    "title": "6  Best practices for time series data manipulation",
-    "section": "6.1 Harness the power of tsbox",
-    "text": "6.1 Harness the power of tsbox\nUse the converter functions in tsbox to shift between various data types (ts_tbl(), ts_xts(), ts_ts(), ts_tslist()) and reshaping to the long and wide format (ts_long(), ts_wide()). tsbox further contains funtions for time period selection (ts_span()), merging and extension operations (ts_c(), ts_bind(), ts_chain()), transformations (ts_lag(), ts_pc(), ts_pca(), ts_pcy(), ts_diff(), ts_diffy()), and index construction (ts_compound(), ts_index()). Consider these before turning to solutions that are specific to the xts, ts, dplyr or tidyr packages."
+    "objectID": "utilfuns.html#make_xts",
+    "href": "utilfuns.html#make_xts",
+    "title": "6  User defined utility functions",
+    "section": "6.9 make_xts",
+    "text": "6.9 make_xts\nDescription:\n Create xts and fill with values\nUsage:\n make_xts(start = bnk_start, end = bnk_end, per = \"year\", val = NA)\n \nArguments:\n start: date of series start (string: \"yyyy-mm-dd\")\n\n end: date of series end (string: \"yyyy-mm-dd\")\n\n per: periodicity of series (string: \"quarter\", \"year\")\n\n val: values to fill in (scalar or vector)\nValue:\n an xts series\nExamples:\n make_xts()\n make_xts(start = ymd(\"2010-01-01\"), per = \"quarter\", val = 0)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "06-modselect.html#main-user-settings",
-    "href": "06-modselect.html#main-user-settings",
-    "title": "7  Model selection",
-    "section": "7.1 Main user settings",
-    "text": "7.1 Main user settings\n\nStart and end of period used for model selection.\n\nEnd of period used for estimation (selected model can be re-estimated for different sample).\n\nStart and end of quasi-forecast period (for model evaluation).\n\nMaximum number of lags considered in models.\n\nResponse variable.\n\nList of predictors."
+    "objectID": "utilfuns.html#p",
+    "href": "utilfuns.html#p",
+    "title": "6  User defined utility functions",
+    "section": "6.10 p",
+    "text": "6.10 p\nDescription:\n Concatenate dates to obtain period\nUsage:\n p(dat1, dat2)\n \nArguments:\n dat1: date of period start (string: yyyy-mm-dd)\n\n dat2: date of period end (string: yyyy-mm-dd)\nValue:\n string containing date range\nExamples:\n p(\"2010-01-01\", \"2020-01-01\")",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "06-modselect.html#data-preparation-tidyverse",
-    "href": "06-modselect.html#data-preparation-tidyverse",
-    "title": "7  Model selection",
-    "section": "7.2 Data preparation (tidyverse)",
-    "text": "7.2 Data preparation (tidyverse)\n\nDownload all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.\n\nLog-transform all variables.\n\nLoad (create) all indicators (dummies for impulse, level shift, seasonal) and trend.\n\nCombine all variables into a single dataset.\n\nSet date range for model selection.\n\nGenerate 8 lags of predictors.\n\nFilter data set down to specific variables considered in a particular model, including trend and season dummies."
+    "objectID": "utilfuns.html#pca_to_pc",
+    "href": "utilfuns.html#pca_to_pc",
+    "title": "6  User defined utility functions",
+    "section": "6.11 pca_to_pc",
+    "text": "6.11 pca_to_pc\nDescription:\n Convert annualized growth to quarterly growth\nUsage:\n pca_to_pc(ser_in)\n \nArguments:\n ser_in: the series containing annualized growth (in percent)\nValue:\n series containing quarterly growth (in percent)\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)\n ts_c(test1 %&gt;% ts_pca() %&gt;% pca_to_pc(), test1 %&gt;% ts_pc())",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "06-modselect.html#model-selection-steps-gets",
-    "href": "06-modselect.html#model-selection-steps-gets",
-    "title": "7  Model selection",
-    "section": "7.3 Model selection steps (gets)",
-    "text": "7.3 Model selection steps (gets)\nhttps://cran.r-project.org/web/packages/gets/index.html\n- Formulate a general unrestricted model.\n- Run the gets (general to specific) model selection algorithm.\n- Identify outliers in the relationship.\n- Repeat gets model selection over specific model and outliers.\n- Verify that no additional outliers arise due to greater model parsimony.\n- If estimation period is shorter than model selection period, remove predictors containing zeros only (e.g. outlier past the end of estimation period).\n- Re-estimate final model.\n- Save model equation as a txt file (not plugging in estimated coefficients here to keep it general). If happy with the model, copy this equation into file containing all model equations."
+    "objectID": "utilfuns.html#pchmy",
+    "href": "utilfuns.html#pchmy",
+    "title": "6  User defined utility functions",
+    "section": "6.12 pchmy",
+    "text": "6.12 pchmy\nDescription:\n Calculate multi-period average growth\nUsage:\n pchmy(ser_in, lag_in = 1)\n \nArguments:\nser_in: name of xts series for which growth is calculated\n\nlag_in: length of period over which growth is calculated\nValue:\n series containing the average growth of ser_in (in percent)\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)\n ts_c(pchmy(`ncen@us.sola`, lag_in = 3), ts_pc(`ncen@us.sola`))\n ts_c(pchmy(test1, lag_in = 4), ts_pcy(test1), ts_pca(test1), ts_pc(test1))",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "06-modselect.html#produce-a-quasi-forecast-with-the-selected-model-bimets",
-    "href": "06-modselect.html#produce-a-quasi-forecast-with-the-selected-model-bimets",
-    "title": "7  Model selection",
-    "section": "7.4 Produce a quasi-forecast with the selected model (bimets)",
-    "text": "7.4 Produce a quasi-forecast with the selected model (bimets)\nhttps://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf\n- Load model from txt file.\n- Load data used by the model.\n- Estimate the model (if estimation period ends before the last data point also run a Chow test of model stability).\n- Simulate model.\n- Evaluate simulation by plotting quasi-forecast and actual history."
+    "objectID": "utilfuns.html#plot_1",
+    "href": "utilfuns.html#plot_1",
+    "title": "6  User defined utility functions",
+    "section": "6.13 plot_1",
+    "text": "6.13 plot_1\nDescription:\n Interactive plot of a single variable with level and growth rate\nUsage:\n plot_1(\n   ser,\n   rng_start = as.character(Sys.Date() - years(15)),\n   height = 300,\n   width = 900\n )\n \nArguments:\n ser: time series to plot\n\n rng_start: start of zoom range (\"YYYY-MM-DD\")\n\n height: height of a single panel (px)\n\n width: width of a single panel (px)\nValue:\n a dygraph plot\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)\n plot_1(`ncen@us.sola`, rng_start = \"2017-01-01\")\n plot_1(test1, rng_start = \"2017-01-01\")",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "07-simulation.html#main-user-settings",
-    "href": "07-simulation.html#main-user-settings",
-    "title": "8  Stochastic simulations",
-    "section": "8.1 Main user settings",
-    "text": "8.1 Main user settings\n\nStart of forecast period.\n\nEnd of forecast period.\n\nEnd of estimation period.\n\nMaximum number of lags in models."
+    "objectID": "utilfuns.html#plot_comp",
+    "href": "utilfuns.html#plot_comp",
+    "title": "6  User defined utility functions",
+    "section": "6.14 plot_comp",
+    "text": "6.14 plot_comp\nDescription:\n Three-panel plot of levels, index, and growth rates\nUsage:\n plot_comp(\n   sers,\n   rng_start = as.character(Sys.Date() - years(15)),\n   rng_end = as.character(Sys.Date()),\n   height = 300,\n   width = 900\n )\n \nArguments:\nsers: a vector of series to plot\n\nrng_start: start of the zoom range (\"YYYY-MM-DD\")\n\nrng_end: end of the zoom range (\"YYYY-MM-DD\")\n\nheight: height of a single panel (px)\n\nwidth: width of a single panel (px)\nValue:\n a list with three dygraph plots (level, index, growth)\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)\n plot_comp(ts_c(`ncen@us.sola`, test1), rng_start = \"2017-01-01\")\n get_series_exp(74, save_loc = NULL) %&gt;%\n   ts_long() %&gt;%\n   ts_xts() %&gt;%\n   extract(, c(\"E_NF@HI.Q\", \"ECT@HI.Q\", \"EMN@HI.Q\")) %&gt;%\n   plot_comp()",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "07-simulation.html#data-preparation",
-    "href": "07-simulation.html#data-preparation",
-    "title": "8  Stochastic simulations",
-    "section": "8.2 Data preparation",
-    "text": "8.2 Data preparation\n\nDownload all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.\n\nLoad (create) all indicators (dummies for impulse, level shift, seasonal) and trend.\n\nCombine all variables into a single dataset."
+    "objectID": "utilfuns.html#plot_comp_2",
+    "href": "utilfuns.html#plot_comp_2",
+    "title": "6  User defined utility functions",
+    "section": "6.15 plot_comp_2",
+    "text": "6.15 plot_comp_2\nDescription:\n Two-panel plot of levels, index, and growth rates\nUsage:\n plot_comp_2(\n   sers,\n   rng_start = as.character(Sys.Date() - years(15)),\n   rng_end = as.character(Sys.Date()),\n   height = 300,\n   width = 900\n )\n \nArguments:\nsers: a vector of series to plot\n\nrng_start: start of the zoom range (\"YYYY-MM-DD\")\n\nrng_end: end of the zoom range (\"YYYY-MM-DD\")\n\nheight: height of a single panel (px)\n\nwidth: width of a single panel (px)\nValue:\n a list with two dygraph plots (level, index, growth)\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)\n plot_comp_2(ts_c(`ncen@us.sola`, test1), rng_start = \"2017-01-01\")\n get_series_exp(74, save_loc = NULL) %&gt;%\n   ts_long() %&gt;%\n   ts_xts() %&gt;%\n   extract(, c(\"E_NF@HI.Q\", \"ECT@HI.Q\", \"EMN@HI.Q\")) %&gt;%\n   plot_comp_2()",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "07-simulation.html#simulation-prep",
-    "href": "07-simulation.html#simulation-prep",
-    "title": "8  Stochastic simulations",
-    "section": "8.3 Simulation prep",
-    "text": "8.3 Simulation prep\n\nCompile model (load equations from text file and let bimets digest the info).\nAdd variables to model.\nSet date range for estimation (bimets does not automatically drop periods with NA’s).\nSet exogenization range to deal with ragged edge in simulation.\n\nEstimate model equations and save estimation results to text file for inspection.\nSet add factors."
+    "objectID": "utilfuns.html#qtoa",
+    "href": "utilfuns.html#qtoa",
+    "title": "6  User defined utility functions",
+    "section": "6.16 QtoA",
+    "text": "6.16 QtoA\nDescription:\n Conversion from quarterly to annual frequency\nUsage:\n QtoA(ser_in, aggr = \"mean\")\n \nArguments:\n ser_in: the xts series to be converted (freq = q)\n\n aggr: aggregate via mean (default) or sum\nValue:\n converted xts series (freq = a)\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)\n test2 &lt;- QtoA(test1) # for stock type variables mean, for flow type variables sum\n print(test1)\n print(cbind(`ncen@us.sola`, test2))",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "07-simulation.html#simulation",
-    "href": "07-simulation.html#simulation",
-    "title": "8  Stochastic simulations",
-    "section": "8.4 Simulation",
-    "text": "8.4 Simulation\n\nSimulate model deterministically to obtain mean forecast.\nExtract forecast and combine it with history.\nInspect the forecast via plots.\nSet parameters for stochastic simulations.\nRun stochastic simulation.\nExtract simulated paths and obtain deviations from the mean forecast.\nInspect the paths via plots."
+    "objectID": "utilfuns.html#qtom",
+    "href": "utilfuns.html#qtom",
+    "title": "6  User defined utility functions",
+    "section": "6.17 QtoM",
+    "text": "6.17 QtoM\nDescription:\n Interpolate a tibble of series from quaterly to monthly freq\nUsage:\n QtoM(data_q, conv_type)\n \nArguments:\n data_q: tibble containing variables at quarterly freq\n\n conv_type: match the quarterly value via \"first\", \"last\", \"sum\",\n      \"average\"\nValue:\n tibble containing variables at monthly freq\nExamples:\n `ncen@us.sola` &lt;- ts(NA, start = 2016, end = 2021, freq = 1) %&gt;% \n   ts_xts()\n `ncen@us.sola`[\"2016/2021\"] &lt;- c(323127513, 325511184, 327891911, 330268840, 332639102, 334998398)\n test1 &lt;- AtoQ(`ncen@us.sola`)\n QtoM(ts_tbl(test1), \"average\")\n ts_frequency(QtoM(ts_tbl(test1), \"average\") %&gt;% ts_xts())",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "08-notes.html#project-setup",
-    "href": "08-notes.html#project-setup",
-    "title": "9  Notes",
-    "section": "9.1 Project setup",
-    "text": "9.1 Project setup\nCoding Conventions in R:\nBasic ideas for a reproducible workflow:\nUse RStudio projects with sub-directories\n\nR - R code.\ndata/raw - data external to the project.\ndata/processed - intermediate processed data.\nnotes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc.\noutput - reports, tables, etc.\noutput/plots - plots.\nrenv - used for library management (don’t edit).\nman - help files (don’t edit).\n\nPreference settings:"
+    "objectID": "utilfuns.html#qtom1",
+    "href": "utilfuns.html#qtom1",
+    "title": "6  User defined utility functions",
+    "section": "6.18 QtoM1",
+    "text": "6.18 QtoM1\nDescription:\n Interpolate a single series from quarterly to monthly freq\nUsage:\n QtoM1(var_q, ts_start, conv_type)\n \nArguments:\n var_q: vector containing a single variable at quarterly freq\n\n ts_start: starting period as c(year, quarter) e.g. c(2001, 1)\n\n conv_type: match the quarterly value via \"first\", \"last\", \"sum\",\n      \"average\"\nValue:\n vector containing a single variable at monthly freq\nExamples:\n QtoM1(test1, c(2010, 1), \"average\")",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "08-notes.html#git",
-    "href": "08-notes.html#git",
-    "title": "9  Notes",
-    "section": "9.2 Git",
-    "text": "9.2 Git\nA quick overview: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md"
+    "objectID": "utilfuns.html#qtrs",
+    "href": "utilfuns.html#qtrs",
+    "title": "6  User defined utility functions",
+    "section": "6.19 qtrs",
+    "text": "6.19 qtrs\nDescription:\n Convert period in quarters to period months\nUsage:\n qtrs(nr_quarters)\n \nArguments:\n nr_quarters: number of quarters in period (integer)\nValue:\n number of months in period\nExamples:\n qtrs(3)\n ymd(\"2020-01-01\") + qtrs(3)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>User defined utility functions</span>"
+    ]
   },
   {
-    "objectID": "08-notes.html#git-step-by-step",
-    "href": "08-notes.html#git-step-by-step",
-    "title": "9  Notes",
-    "section": "9.3 Git step by step",
-    "text": "9.3 Git step by step\nIf you don’t have Git, install it:\nhttps://happygitwithr.com/install-git.html\nMake sure .gitignore contains the following files:\n.Renviron .Rprofile\nIntroduce yourself to Git:\nIn the shell (Terminal tab in RStudio):\ngit config –global user.name ‘Jane Doe’\ngit config –global user.email ‘jane@example.com’\ngit config –global –list\nFor more advanced tasks, use GitHub Desktop:\nhttps://desktop.github.com\nStore your GitHub PAT (Personal Access Token):\nhttps://happygitwithr.com/https-pat.html\nUse one of three ways to add your project to GitHub:\nBrand new project:\nhttps://happygitwithr.com/new-github-first.html\nExisting project without version control:\nhttps://happygitwithr.com/existing-github-first.html\nExisting project under local version control:\nhttps://happygitwithr.com/existing-github-last.html\nTroubleshooting if RStudio can’t detect Git:\nhttps://happygitwithr.com/rstudio-see-git.html\nGit vocabulary:\nhttps://happygitwithr.com/git-basics.html\nRemote setups (try to stick to GitHub first discussed above):\nhttps://happygitwithr.com/common-remote-setups.html\nUseful Git workflows and dealing with conflicts:\nhttps://happygitwithr.com/workflows-intro.html\nhttps://happygitwithr.com/push-rejected.html\nhttps://happygitwithr.com/pull-tricky.html\nAdditional resources:\nhttps://happygitwithr.com/ideas-for-content.html\nSuggested workflow:\n1) Initialize repository on GitHub.com under the UHERO account.\n2) Clone it via RStudio project setup.\n3) Commit changes, pull, resolve issues, push. 3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.\nRender results from R scripts via Rmd: 1) source your R code from within Rmd 2) only render important results in Rmd chunks\nUse here() from the here package to write file paths\nSuppose you have a dataset in csv format. Use readr::read_csv(here::here(“The subfolder where your csv file resides”, “The CSV file.csv”))\nDo not use setwd() and rm(list = ls())\nDo not save the workspace to the .Rdta file\nUse library() not require()\nUse version control (useful for recording changes between different versions of a file over time - see below for Git integration)\nSee the resources below:\nBest Practices & Style Guide for Writing R Code: https://github.com/kmishra9/Best-Practices-for-Writing-R-Code\nR Code – Best practices: https://www.r-bloggers.com/2018/09/r-code-best-practices/\nR Best Practices by Krista L. DeStasio: https://kdestasio.github.io/post/r_best_practices/\nProject-oriented workflow: https://www.tidyverse.org/blog/2017/12/workflow-vs-script/\nR coding style best practices: https://www.datanovia.com/en/blog/r-coding-style-best-practices/\nWhat They Forgot to Teach You About R by Jennifer Bryan and Jim Hester: https://rstats.wtf/save-source.html\nConflicted: a new approach to resolving ambiguity: https://www.tidyverse.org/blog/2018/06/conflicted/\nIntroduction to renv package: https://rstudio.github.io/renv/articles/renv.html#future-work-1\nRow-oriented workflows in R with the tidyverse: https://github.com/jennybc/row-oriented-workflows#readme\nStructuring R projects: https://www.r-bloggers.com/2018/08/structuring-r-projects/\nDefensive Programming in R: https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/#8\nNice R code: https://nicercode.github.io/blog/2013-04-05-projects/\nWorkflow basics: https://r4ds.had.co.nz/workflow-basics.html\nNamespace package: https://r-pkgs.org/namespace.html\nWriting R packages in RStudio: https://ourcodingclub.github.io/tutorials/writing-r-package/\nIt is dangerous to change state: https://withr.r-lib.org/articles/changing-and-restoring-state.html\nThe targets R Package User Manual: https://books.ropensci.org/targets/\nGithub and R:\nInstall git on the R system from here: https://git-scm.com/downloads\nGo to RStudio → Global Options → Git/SVN → Make sure the box “Enable version control interface for RStudio projects” is checked\nTell RStudio where your Git executable is in the Git/SVN under Global Options\nCreate a new project in R (make sure the check box “Create a git repository” is checked)\nCreate a new task file in R (New File → Rscript) and save it as a .R file\nTo use Git version control on the .R file we need to commit that file\nTo commit a file with Git in RStudio go to the Git tab in the top right pane in R → Select one or more files by checking the box\nChecking the box means that it is ready to be committed\nTo actually commit the file click the “Commit” button (will open up a commit window)\nInclude a commit message then click on the second “Commit” button\nFor collaboration on Github:\nLoad the usethis package and type in ?use_github in the R console\nIn the Authentication section, click on GitHub personal access token (PAT)\nClick on the button to generate a new token\nPut a Note and use repo permission for your token and then click on “Generate token”\nCopy the token ID number (needs to be stored)\nType in edit_r_environ() in the R console and then type in GITHUB_PAT =‘copy and paste token ID number here’\nIn R console type in use_github(protocol =‘https’, auth_token = Sys.getenv(“GITHUB_PAT”))\nRun it and will ask if you are sure. Select 3\nThis will create a Github repository and will set up the syncing\nAnother way to collaborate on Github (easier so follow this!):\nGo to http://github.com and create an account\nCreate a new repository and give it a name (click “Add a README file)\nGo to R → Install the usethis package and include library(usethis) → Type in use_git_config(user.name = “Your Name on the GitHub account”, user.email = “Your email address on the GitHub account”)\nIn the newly created repository, click the “Code” button on GitHub. Copy the URL under the “Clone with HTTPS”\nGo to R → New Project → Version Control → Git → Repository URL (copy and paste the HTTP URL from your Github repository) - this will connect what’s on the cloud on Github to your computer (also called cloning your repository)\nCan start a new R script and would be able to see the Git tab in R\nCan commit and include a commit message (will add the files to your depository)\nNeed to push to fully make the changes go through and to show up on your GitHub account\nUnder the History tab you would be able to see the changes you made and committed\nCan link the SSH keys from settings on your account and into R under the Git/SVN tab (have to create a SSH RSA key if it has not been created already)\nIf there is a merge conflict when collaborating on making simultaneous changes together then pull first and then fix the merge conflict. Then can commit by finalizing on which changes to keep by eliminating the “====” and “>>>>” and push it out. The other person will have to pull in the changes in her hand.\nCreating a new branch will allow you to do things on your own. Click on the branch button to create a new branch and name it. A new branch will allow you to make changes on it and work separately on it. The other person will have to pull to see the new branch and your changes on it. In this way, we can work independently when working together at the same time. Then will have to merge the independent branches.\nOpen a pull request by clicking on the Compare and pull request button on the Github site to merge the separate branches together. Can delete your separate branch if desired. Then go to R and pull the changes down.\nFor .Renviron have to use specific user credentials such as user name, password, Github and udaman tokens.\nThe .Rprofile can be ignored in gitignore if there is a problem with different paths across Macs and PCs.\nResources:\nHappy Git and GitHub for the useR: https://happygitwithr.com/\nGithub for collaboration: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md\nMy research workflow, based on Github: https://www.carlboettiger.info/2012/05/06/research-workflow.html\nCollaborating with renv: https://rstudio.github.io/renv/articles/collaborating.html\nR style guide: http://adv-r.had.co.nz/Style.html\nUHERO R style guide:\nUse block letters for R file names (because the NAS file server is case sensitive)\nComment your code\nTime Series Modeling:\nForecasting: Principles and Practice (3rd ed) by Rob J Hyndman and George Athanasopoulos : https://otexts.com/fpp3/index.html\nAn Introduction to Statistical Learning (1st ed): https://www.statlearning.com\nManipulating Time Series Data in R with xts & zoo: https://rstudio-pubs-static.s3.amazonaws.com/288218_117e183e74964557a5da4fc5902fc671.html https://rpubs.com/mpfoley73/504487 Time Series in R, The Power of xts and zoo: https://ugoproto.github.io/ugo_r_doc/time_series_in_r_the_power_of_xts_and_zoo/ xts Cheat Sheet: Time Series in R: https://www.r-bloggers.com/2017/05/xts-cheat-sheet-time-series-in-r/\nR For Data Science Cheat Sheet by DataCamp: https://s3.amazonaws.com/assets.datacamp.com/blog_assets/xts_Cheat_Sheet_R.pdf\nEvaluate the R packages: gets, ARDL, etc.\nThe gets package is used for Multi-path General-to-Specific (GETS) modelling of the mean and/or variance of a regression, and Indicator Saturation (ISAT) methods for detecting structural breaks in the mean.https://cran.r-project.org/web/packages/gets/index.html\nThe ARDL package creates complex autoregressive distributed lag (ARDL) models providing just the order and automatically constructs the underlying unrestricted and restricted error correction model (ECM). It also performs the bounds-test for cointegration as described in Pesaran et al. (2001). https://cran.r-project.org/web/packages/ARDL/index.html https://github.com/Natsiopoulos/ARDL\nTidy tools for time series modeling under tidyverts: https://tidyverts.org - The fable package applies tidyverse principles to time series modeling used for forecasting: https://fable.tidyverts.org/ - The tsibble package provides a tidy data structure for time series: https://cran.r-project.org/web/packages/tsibble/index.html - The tsibbledata package provide a different types of datasets in the tsibble data structure: https://cran.r-project.org/web/packages/tsibbledata/index.html - The tsibbletalk package introduces shared key to the tsibble, to easily {crosstalk} between plots on both client and server sides (i.e. with or without shiny): https://cran.r-project.org/web/packages/tsibbletalk/tsibbletalk.pdf- The feasts package provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data: https://cran.r-project.org/web/packages/feasts/index.html - The fable.prohphet package provides an interface allowing the prophet forecasting procedure to be used within the fable framework: https://cran.r-project.org/web/packages/fable.prophet/vignettes/intro.html\nThe xts or Extensible Time Series package provides an extensible time series class, enabling uniform handling of many R time series classes : https://cran.r-project.org/web/packages/xts/index.html xts: Extensible Time Series: https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf\nThink about dummies, breaks, outliers\nFigure out how bimets deals with ragged edge, add-factors, goal search\nThe bimets is an R package developed with the aim of easing time series analysis and building up a framework that facilitates the definition, estimation and simulation of simultaneous equation models: https://cran.r-project.org/web/packages/bimets/index.htmlbimets - Time Series And Econometric Modeling In R: https://github.com/cran/bimets https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf\nStructural Equation Models (SEM): https://rviews.rstudio.com/2021/01/22/sem-time-series-modeling/\nLook at tidy models\nThe tidymodels package is a collection of packages for modeling and machine learning using tidyverse principles: https://www.tidymodels.org\nPort the Gekko code into R: http://t-t.dk/gekko/\nLook at DiagrammeR package, also the Gantt charts it can produce\nhttps://rich-iannone.github.io/DiagrammeR/\nA Beginner’s Guide to Learning R:\nA (very) short introduction to R: https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf\nRstudio Education: https://github.com/rstudio-education\nRemaster the tidyverse: https://github.com/rstudio-education/remaster-the-tidyverse\nIntroduction to R and Rstudio: https://jules32.github.io/2016-07-12-Oxford/R_RStudio/\nAn intro to R for new programmers: https://rforcats.net\nfasteR: Fast Lane to Learning R!: https://github.com/matloff/fasteR\nRStudio Cheatsheets: https://rstudio.com/resources/cheatsheets/\nR for Data Science: https://r4ds.had.co.nz\nData wrangling, exploration, and analysis with R: https://stat545.com\nR Markdown: The Definitive Guide: https://bookdown.org/yihui/rmarkdown/\nData Visualization with R: https://rkabacoff.github.io/datavis/\nModern R with the tidyverse: https://b-rodrigues.github.io/modern_R/\nR Cookbook, 2nd Edition: https://rc2e.com\nAdvanced R by Hadley Wickham: http://adv-r.had.co.nz\nUC Business Analytics R Programming Guide: http://uc-r.github.io/descriptive\nR Programming for Data Science: https://bookdown.org/rdpeng/rprogdatascience/\nHands-On Programming with R: https://rstudio-education.github.io/hopr/\nEfficient R programming: https://csgillespie.github.io/efficientR/index.html\nR for Fledglings: http://www.uvm.edu/~tdonovan/RforFledglings/index.html\nR Intermediate Level (includes applications):\nAdvanced Statistical Computing: https://bookdown.org/rdpeng/advstatcomp/\nFeature Engineering and Selection: A Practical Approach for Predictive Models: http://www.feat.engineering/index.html\nAdvanced Quantitative Methods: https://uclspp.github.io/PUBLG088/index.html\nPrinciples of Econometrics with R: https://bookdown.org/ccolonescu/RPoE4/\nModern Data Analysis for Economics: https://jiamingmao.github.io/data-analysis/Resources/\nData Science for Economists: https://github.com/uo-ec607/lectures\nData Science for Psychologists: https://bookdown.org/hneth/ds4psy/10-time.html\nRewriting R code in C++: https://adv-r.hadley.nz/rcpp.html\nWriting R Extensions: https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html\nOther R packages for data analysis:\nThe data.table package is used for fast aggregation of large data (e.g. 100GB in RAM), fast ordered joins, fast add/modify/delete of columns by group using no copies at all, list columns, friendly and fast character- separated-value read/write: https://cran.r-project.org/web/packages/data.table/\nThe mlr3 (Lang et al. 2019) package and ecosystem provide a generic, object-oriented, and extensible framework for classification, regression, survival analysis, and other machine learning tasks for the R: https://mlr3book.mlr-org.com\npurr package tutorial: https://jennybc.github.io/purrr-tutorial/\nData Visualization with R:\nData Analysis and Visualization Using R: http://varianceexplained.org/RData/\nData Analysis and Visualization in R for Ecologists: https://datacarpentry.org/R-ecology-lesson/\nData Visualization with R by Rob Kabacoff: https://rkabacoff.github.io/datavis/\nR Graphics Cookbook, 2nd edition: https://r-graphics.org\nggplot2: elegant graphics for data analysis: https://ggplot2-book.org"
+    "objectID": "bestpract.html",
+    "href": "bestpract.html",
+    "title": "7  Best practices for time series data manipulation",
+    "section": "",
+    "text": "7.1 Harness the power of tsbox\nUse the converter functions in tsbox to shift between various data types (ts_tbl(), ts_xts(), ts_ts(), ts_tslist()) and reshaping to the long and wide format (ts_long(), ts_wide()). tsbox further contains funtions for time period selection (ts_span()), merging and extension operations (ts_c(), ts_bind(), ts_chain()), transformations (ts_lag(), ts_pc(), ts_pca(), ts_pcy(), ts_diff(), ts_diffy()), and index construction (ts_compound(), ts_index()). Consider these before turning to solutions that are specific to the xts, ts, dplyr or tidyr packages.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Best practices for time series data manipulation</span>"
+    ]
+  },
+  {
+    "objectID": "modselect.html",
+    "href": "modselect.html",
+    "title": "8  Model selection",
+    "section": "",
+    "text": "8.1 Main user settings",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Model selection</span>"
+    ]
+  },
+  {
+    "objectID": "modselect.html#main-user-settings",
+    "href": "modselect.html#main-user-settings",
+    "title": "8  Model selection",
+    "section": "",
+    "text": "Start and end of period used for model selection.\n\nEnd of period used for estimation (selected model can be re-estimated for different sample).\n\nStart and end of quasi-forecast period (for model evaluation).\n\nMaximum number of lags considered in models.\n\nResponse variable.\n\nList of predictors.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Model selection</span>"
+    ]
+  },
+  {
+    "objectID": "modselect.html#data-preparation-tidyverse",
+    "href": "modselect.html#data-preparation-tidyverse",
+    "title": "8  Model selection",
+    "section": "8.2 Data preparation (tidyverse)",
+    "text": "8.2 Data preparation (tidyverse)\n\nDownload all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.\n\nLog-transform all variables.\n\nLoad (create) all indicators (dummies for impulse, level shift, seasonal) and trend.\n\nCombine all variables into a single dataset.\n\nSet date range for model selection.\n\nGenerate 8 lags of predictors.\n\nFilter data set down to specific variables considered in a particular model, including trend and season dummies.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Model selection</span>"
+    ]
+  },
+  {
+    "objectID": "modselect.html#model-selection-steps-gets",
+    "href": "modselect.html#model-selection-steps-gets",
+    "title": "8  Model selection",
+    "section": "8.3 Model selection steps (gets)",
+    "text": "8.3 Model selection steps (gets)\nhttps://cran.r-project.org/web/packages/gets/index.html\n- Formulate a general unrestricted model.\n- Run the gets (general to specific) model selection algorithm.\n- Identify outliers in the relationship.\n- Repeat gets model selection over specific model and outliers.\n- Verify that no additional outliers arise due to greater model parsimony.\n- If estimation period is shorter than model selection period, remove predictors containing zeros only (e.g. outlier past the end of estimation period).\n- Re-estimate final model.\n- Save model equation as a txt file (not plugging in estimated coefficients here to keep it general). If happy with the model, copy this equation into file containing all model equations.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Model selection</span>"
+    ]
+  },
+  {
+    "objectID": "modselect.html#produce-a-quasi-forecast-with-the-selected-model-bimets",
+    "href": "modselect.html#produce-a-quasi-forecast-with-the-selected-model-bimets",
+    "title": "8  Model selection",
+    "section": "8.4 Produce a quasi-forecast with the selected model (bimets)",
+    "text": "8.4 Produce a quasi-forecast with the selected model (bimets)\nhttps://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf\n- Load model from txt file.\n- Load data used by the model.\n- Estimate the model (if estimation period ends before the last data point also run a Chow test of model stability).\n- Simulate model.\n- Evaluate simulation by plotting quasi-forecast and actual history.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Model selection</span>"
+    ]
+  },
+  {
+    "objectID": "simulation.html",
+    "href": "simulation.html",
+    "title": "9  Stochastic simulations",
+    "section": "",
+    "text": "9.1 Main user settings",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stochastic simulations</span>"
+    ]
+  },
+  {
+    "objectID": "simulation.html#main-user-settings",
+    "href": "simulation.html#main-user-settings",
+    "title": "9  Stochastic simulations",
+    "section": "",
+    "text": "Start of forecast period.\n\nEnd of forecast period.\n\nEnd of estimation period.\n\nMaximum number of lags in models.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stochastic simulations</span>"
+    ]
+  },
+  {
+    "objectID": "simulation.html#data-preparation",
+    "href": "simulation.html#data-preparation",
+    "title": "9  Stochastic simulations",
+    "section": "9.2 Data preparation",
+    "text": "9.2 Data preparation\n\nDownload all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.\n\nLoad (create) all indicators (dummies for impulse, level shift, seasonal) and trend.\n\nCombine all variables into a single dataset.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stochastic simulations</span>"
+    ]
+  },
+  {
+    "objectID": "simulation.html#simulation-prep",
+    "href": "simulation.html#simulation-prep",
+    "title": "9  Stochastic simulations",
+    "section": "9.3 Simulation prep",
+    "text": "9.3 Simulation prep\n\nCompile model (load equations from text file and let bimets digest the info).\nAdd variables to model.\nSet date range for estimation (bimets does not automatically drop periods with NA’s).\nSet exogenization range to deal with ragged edge in simulation.\n\nEstimate model equations and save estimation results to text file for inspection.\nSet add factors.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stochastic simulations</span>"
+    ]
+  },
+  {
+    "objectID": "simulation.html#simulation",
+    "href": "simulation.html#simulation",
+    "title": "9  Stochastic simulations",
+    "section": "9.4 Simulation",
+    "text": "9.4 Simulation\n\nSimulate model deterministically to obtain mean forecast.\nExtract forecast and combine it with history.\nInspect the forecast via plots.\nSet parameters for stochastic simulations.\nRun stochastic simulation.\nExtract simulated paths and obtain deviations from the mean forecast.\nInspect the paths via plots.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Stochastic simulations</span>"
+    ]
+  },
+  {
+    "objectID": "notes.html",
+    "href": "notes.html",
+    "title": "10  Notes",
+    "section": "",
+    "text": "10.1 Project setup\nCoding Conventions in R:\nBasic ideas for a reproducible workflow:\nUse RStudio projects with sub-directories\nPreference settings:",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Notes</span>"
+    ]
+  },
+  {
+    "objectID": "notes.html#project-setup",
+    "href": "notes.html#project-setup",
+    "title": "10  Notes",
+    "section": "",
+    "text": "R - R code.\ndata/raw - data external to the project.\ndata/processed - intermediate processed data.\nnotes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc.\noutput - reports, tables, etc.\noutput/plots - plots.\nrenv - used for library management (don’t edit).\nman - help files (don’t edit).",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Notes</span>"
+    ]
+  },
+  {
+    "objectID": "notes.html#git",
+    "href": "notes.html#git",
+    "title": "10  Notes",
+    "section": "10.2 Git",
+    "text": "10.2 Git\nA quick overview: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Notes</span>"
+    ]
+  },
+  {
+    "objectID": "notes.html#git-step-by-step",
+    "href": "notes.html#git-step-by-step",
+    "title": "10  Notes",
+    "section": "10.3 Git step by step",
+    "text": "10.3 Git step by step\nIf you don’t have Git, install it:\nhttps://happygitwithr.com/install-git.html\nMake sure .gitignore contains the following files:\n.Renviron .Rprofile\nIntroduce yourself to Git:\nIn the shell (Terminal tab in RStudio):\ngit config –global user.name ‘Jane Doe’\ngit config –global user.email ‘jane@example.com’\ngit config –global –list\nFor more advanced tasks, use GitHub Desktop:\nhttps://desktop.github.com\nStore your GitHub PAT (Personal Access Token):\nhttps://happygitwithr.com/https-pat.html\nUse one of three ways to add your project to GitHub:\nBrand new project:\nhttps://happygitwithr.com/new-github-first.html\nExisting project without version control:\nhttps://happygitwithr.com/existing-github-first.html\nExisting project under local version control:\nhttps://happygitwithr.com/existing-github-last.html\nTroubleshooting if RStudio can’t detect Git:\nhttps://happygitwithr.com/rstudio-see-git.html\nGit vocabulary:\nhttps://happygitwithr.com/git-basics.html\nRemote setups (try to stick to GitHub first discussed above):\nhttps://happygitwithr.com/common-remote-setups.html\nUseful Git workflows and dealing with conflicts:\nhttps://happygitwithr.com/workflows-intro.html\nhttps://happygitwithr.com/push-rejected.html\nhttps://happygitwithr.com/pull-tricky.html\nAdditional resources:\nhttps://happygitwithr.com/ideas-for-content.html\nSuggested workflow:\n1) Initialize repository on GitHub.com under the UHERO account.\n2) Clone it via RStudio project setup.\n3) Commit changes, pull, resolve issues, push. 3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.\nRender results from R scripts via Rmd: 1) source your R code from within Rmd 2) only render important results in Rmd chunks\nUse here() from the here package to write file paths\nSuppose you have a dataset in csv format. Use readr::read_csv(here::here(“The subfolder where your csv file resides”, “The CSV file.csv”))\nDo not use setwd() and rm(list = ls())\nDo not save the workspace to the .Rdta file\nUse library() not require()\nUse version control (useful for recording changes between different versions of a file over time - see below for Git integration)\nSee the resources below:\nBest Practices & Style Guide for Writing R Code: https://github.com/kmishra9/Best-Practices-for-Writing-R-Code\nR Code – Best practices: https://www.r-bloggers.com/2018/09/r-code-best-practices/\nR Best Practices by Krista L. DeStasio: https://kdestasio.github.io/post/r_best_practices/\nProject-oriented workflow: https://www.tidyverse.org/blog/2017/12/workflow-vs-script/\nR coding style best practices: https://www.datanovia.com/en/blog/r-coding-style-best-practices/\nWhat They Forgot to Teach You About R by Jennifer Bryan and Jim Hester: https://rstats.wtf/save-source.html\nConflicted: a new approach to resolving ambiguity: https://www.tidyverse.org/blog/2018/06/conflicted/\nIntroduction to renv package: https://rstudio.github.io/renv/articles/renv.html#future-work-1\nRow-oriented workflows in R with the tidyverse: https://github.com/jennybc/row-oriented-workflows#readme\nStructuring R projects: https://www.r-bloggers.com/2018/08/structuring-r-projects/\nDefensive Programming in R: https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/#8\nNice R code: https://nicercode.github.io/blog/2013-04-05-projects/\nWorkflow basics: https://r4ds.had.co.nz/workflow-basics.html\nNamespace package: https://r-pkgs.org/namespace.html\nWriting R packages in RStudio: https://ourcodingclub.github.io/tutorials/writing-r-package/\nIt is dangerous to change state: https://withr.r-lib.org/articles/changing-and-restoring-state.html\nThe targets R Package User Manual: https://books.ropensci.org/targets/\nGithub and R:\nInstall git on the R system from here: https://git-scm.com/downloads\nGo to RStudio → Global Options → Git/SVN → Make sure the box “Enable version control interface for RStudio projects” is checked\nTell RStudio where your Git executable is in the Git/SVN under Global Options\nCreate a new project in R (make sure the check box “Create a git repository” is checked)\nCreate a new task file in R (New File → Rscript) and save it as a .R file\nTo use Git version control on the .R file we need to commit that file\nTo commit a file with Git in RStudio go to the Git tab in the top right pane in R → Select one or more files by checking the box\nChecking the box means that it is ready to be committed\nTo actually commit the file click the “Commit” button (will open up a commit window)\nInclude a commit message then click on the second “Commit” button\nFor collaboration on Github:\nLoad the usethis package and type in ?use_github in the R console\nIn the Authentication section, click on GitHub personal access token (PAT)\nClick on the button to generate a new token\nPut a Note and use repo permission for your token and then click on “Generate token”\nCopy the token ID number (needs to be stored)\nType in edit_r_environ() in the R console and then type in GITHUB_PAT =‘copy and paste token ID number here’\nIn R console type in use_github(protocol =‘https’, auth_token = Sys.getenv(“GITHUB_PAT”))\nRun it and will ask if you are sure. Select 3\nThis will create a Github repository and will set up the syncing\nAnother way to collaborate on Github (easier so follow this!):\nGo to http://github.com and create an account\nCreate a new repository and give it a name (click “Add a README file)\nGo to R → Install the usethis package and include library(usethis) → Type in use_git_config(user.name = “Your Name on the GitHub account”, user.email = “Your email address on the GitHub account”)\nIn the newly created repository, click the “Code” button on GitHub. Copy the URL under the “Clone with HTTPS”\nGo to R → New Project → Version Control → Git → Repository URL (copy and paste the HTTP URL from your Github repository) - this will connect what’s on the cloud on Github to your computer (also called cloning your repository)\nCan start a new R script and would be able to see the Git tab in R\nCan commit and include a commit message (will add the files to your depository)\nNeed to push to fully make the changes go through and to show up on your GitHub account\nUnder the History tab you would be able to see the changes you made and committed\nCan link the SSH keys from settings on your account and into R under the Git/SVN tab (have to create a SSH RSA key if it has not been created already)\nIf there is a merge conflict when collaborating on making simultaneous changes together then pull first and then fix the merge conflict. Then can commit by finalizing on which changes to keep by eliminating the “====” and “&gt;&gt;&gt;&gt;” and push it out. The other person will have to pull in the changes in her hand.\nCreating a new branch will allow you to do things on your own. Click on the branch button to create a new branch and name it. A new branch will allow you to make changes on it and work separately on it. The other person will have to pull to see the new branch and your changes on it. In this way, we can work independently when working together at the same time. Then will have to merge the independent branches.\nOpen a pull request by clicking on the Compare and pull request button on the Github site to merge the separate branches together. Can delete your separate branch if desired. Then go to R and pull the changes down.\nFor .Renviron have to use specific user credentials such as user name, password, Github and udaman tokens.\nThe .Rprofile can be ignored in gitignore if there is a problem with different paths across Macs and PCs.\nResources:\nHappy Git and GitHub for the useR: https://happygitwithr.com/\nGithub for collaboration: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md\nMy research workflow, based on Github: https://www.carlboettiger.info/2012/05/06/research-workflow.html\nCollaborating with renv: https://rstudio.github.io/renv/articles/collaborating.html\nR style guide: http://adv-r.had.co.nz/Style.html\nUHERO R style guide:\nUse block letters for R file names (because the NAS file server is case sensitive)\nComment your code\nTime Series Modeling:\nForecasting: Principles and Practice (3rd ed) by Rob J Hyndman and George Athanasopoulos : https://otexts.com/fpp3/index.html\nAn Introduction to Statistical Learning (1st ed): https://www.statlearning.com\nManipulating Time Series Data in R with xts & zoo: https://rstudio-pubs-static.s3.amazonaws.com/288218_117e183e74964557a5da4fc5902fc671.html https://rpubs.com/mpfoley73/504487 Time Series in R, The Power of xts and zoo: https://ugoproto.github.io/ugo_r_doc/time_series_in_r_the_power_of_xts_and_zoo/ xts Cheat Sheet: Time Series in R: https://www.r-bloggers.com/2017/05/xts-cheat-sheet-time-series-in-r/\nR For Data Science Cheat Sheet by DataCamp: https://s3.amazonaws.com/assets.datacamp.com/blog_assets/xts_Cheat_Sheet_R.pdf\nEvaluate the R packages: gets, ARDL, etc.\nThe gets package is used for Multi-path General-to-Specific (GETS) modelling of the mean and/or variance of a regression, and Indicator Saturation (ISAT) methods for detecting structural breaks in the mean.https://cran.r-project.org/web/packages/gets/index.html\nThe ARDL package creates complex autoregressive distributed lag (ARDL) models providing just the order and automatically constructs the underlying unrestricted and restricted error correction model (ECM). It also performs the bounds-test for cointegration as described in Pesaran et al. (2001). https://cran.r-project.org/web/packages/ARDL/index.html https://github.com/Natsiopoulos/ARDL\nTidy tools for time series modeling under tidyverts: https://tidyverts.org - The fable package applies tidyverse principles to time series modeling used for forecasting: https://fable.tidyverts.org/ - The tsibble package provides a tidy data structure for time series: https://cran.r-project.org/web/packages/tsibble/index.html - The tsibbledata package provide a different types of datasets in the tsibble data structure: https://cran.r-project.org/web/packages/tsibbledata/index.html - The tsibbletalk package introduces shared key to the tsibble, to easily {crosstalk} between plots on both client and server sides (i.e. with or without shiny): https://cran.r-project.org/web/packages/tsibbletalk/tsibbletalk.pdf- The feasts package provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data: https://cran.r-project.org/web/packages/feasts/index.html - The fable.prohphet package provides an interface allowing the prophet forecasting procedure to be used within the fable framework: https://cran.r-project.org/web/packages/fable.prophet/vignettes/intro.html\nThe xts or Extensible Time Series package provides an extensible time series class, enabling uniform handling of many R time series classes : https://cran.r-project.org/web/packages/xts/index.html xts: Extensible Time Series: https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf\nThink about dummies, breaks, outliers\nFigure out how bimets deals with ragged edge, add-factors, goal search\nThe bimets is an R package developed with the aim of easing time series analysis and building up a framework that facilitates the definition, estimation and simulation of simultaneous equation models: https://cran.r-project.org/web/packages/bimets/index.htmlbimets - Time Series And Econometric Modeling In R: https://github.com/cran/bimets https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf\nStructural Equation Models (SEM): https://rviews.rstudio.com/2021/01/22/sem-time-series-modeling/\nLook at tidy models\nThe tidymodels package is a collection of packages for modeling and machine learning using tidyverse principles: https://www.tidymodels.org\nPort the Gekko code into R: http://t-t.dk/gekko/\nLook at DiagrammeR package, also the Gantt charts it can produce\nhttps://rich-iannone.github.io/DiagrammeR/\nA Beginner’s Guide to Learning R:\nA (very) short introduction to R: https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf\nRstudio Education: https://github.com/rstudio-education\nRemaster the tidyverse: https://github.com/rstudio-education/remaster-the-tidyverse\nIntroduction to R and Rstudio: https://jules32.github.io/2016-07-12-Oxford/R_RStudio/\nAn intro to R for new programmers: https://rforcats.net\nfasteR: Fast Lane to Learning R!: https://github.com/matloff/fasteR\nRStudio Cheatsheets: https://rstudio.com/resources/cheatsheets/\nR for Data Science: https://r4ds.had.co.nz\nData wrangling, exploration, and analysis with R: https://stat545.com\nR Markdown: The Definitive Guide: https://bookdown.org/yihui/rmarkdown/\nData Visualization with R: https://rkabacoff.github.io/datavis/\nModern R with the tidyverse: https://b-rodrigues.github.io/modern_R/\nR Cookbook, 2nd Edition: https://rc2e.com\nAdvanced R by Hadley Wickham: http://adv-r.had.co.nz\nUC Business Analytics R Programming Guide: http://uc-r.github.io/descriptive\nR Programming for Data Science: https://bookdown.org/rdpeng/rprogdatascience/\nHands-On Programming with R: https://rstudio-education.github.io/hopr/\nEfficient R programming: https://csgillespie.github.io/efficientR/index.html\nR for Fledglings: http://www.uvm.edu/~tdonovan/RforFledglings/index.html\nR Intermediate Level (includes applications):\nAdvanced Statistical Computing: https://bookdown.org/rdpeng/advstatcomp/\nFeature Engineering and Selection: A Practical Approach for Predictive Models: http://www.feat.engineering/index.html\nAdvanced Quantitative Methods: https://uclspp.github.io/PUBLG088/index.html\nPrinciples of Econometrics with R: https://bookdown.org/ccolonescu/RPoE4/\nModern Data Analysis for Economics: https://jiamingmao.github.io/data-analysis/Resources/\nData Science for Economists: https://github.com/uo-ec607/lectures\nData Science for Psychologists: https://bookdown.org/hneth/ds4psy/10-time.html\nRewriting R code in C++: https://adv-r.hadley.nz/rcpp.html\nWriting R Extensions: https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html\nOther R packages for data analysis:\nThe data.table package is used for fast aggregation of large data (e.g. 100GB in RAM), fast ordered joins, fast add/modify/delete of columns by group using no copies at all, list columns, friendly and fast character- separated-value read/write: https://cran.r-project.org/web/packages/data.table/\nThe mlr3 (Lang et al. 2019) package and ecosystem provide a generic, object-oriented, and extensible framework for classification, regression, survival analysis, and other machine learning tasks for the R: https://mlr3book.mlr-org.com\npurr package tutorial: https://jennybc.github.io/purrr-tutorial/\nData Visualization with R:\nData Analysis and Visualization Using R: http://varianceexplained.org/RData/\nData Analysis and Visualization in R for Ecologists: https://datacarpentry.org/R-ecology-lesson/\nData Visualization with R by Rob Kabacoff: https://rkabacoff.github.io/datavis/\nR Graphics Cookbook, 2nd edition: https://r-graphics.org\nggplot2: elegant graphics for data analysis: https://ggplot2-book.org",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Notes</span>"
+    ]
   }
 ]

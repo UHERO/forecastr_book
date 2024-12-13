@@ -8,7 +8,7 @@
 
 <meta name="author" content="Peter Fuleky">
 
-<title>4&nbsp; Setup of the forecastr project – User guide to UHERO's forecast processes</title>
+<title>5&nbsp; Setup of the forecastr project – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./04-utilfuns.html" rel="next">
-<link href="./02-git.html" rel="prev">
+<link href="./utilfuns.html" rel="next">
+<link href="./renv.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-setup.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./setup.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -141,50 +141,56 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></span></a>
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></span></a>
+  <a href="./git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-setup.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
+  <a href="./renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./setup.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-bestpract.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
+  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  <a href="./bestpract.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  <a href="./modselect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
   </div>
 </li>
     </ul>
@@ -197,19 +203,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#start-with-a-clean-slate" id="toc-start-with-a-clean-slate" class="nav-link active" data-scroll-target="#start-with-a-clean-slate"><span class="header-section-number">4.1</span> Start with a clean slate</a></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">4.2</span> Packages</a></li>
-  <li><a href="#package-descriptions" id="toc-package-descriptions" class="nav-link" data-scroll-target="#package-descriptions"><span class="header-section-number">4.3</span> Package descriptions</a></li>
-  <li><a href="#additional-info-in-setup" id="toc-additional-info-in-setup" class="nav-link" data-scroll-target="#additional-info-in-setup"><span class="header-section-number">4.4</span> Additional info in setup</a></li>
+  <li><a href="#start-with-a-clean-slate" id="toc-start-with-a-clean-slate" class="nav-link active" data-scroll-target="#start-with-a-clean-slate"><span class="header-section-number">5.1</span> Start with a clean slate</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">5.2</span> Packages</a></li>
+  <li><a href="#package-descriptions" id="toc-package-descriptions" class="nav-link" data-scroll-target="#package-descriptions"><span class="header-section-number">5.3</span> Package descriptions</a></li>
+  <li><a href="#additional-info-in-setup" id="toc-additional-info-in-setup" class="nav-link" data-scroll-target="#additional-info-in-setup"><span class="header-section-number">5.4</span> Additional info in setup</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/03-setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/03-setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></h1>
 </div>
 
 
@@ -227,8 +233,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>The <code>setup.R</code> file contains general information used throughout the project. The contents are listed below.</p>
-<section id="start-with-a-clean-slate" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="start-with-a-clean-slate"><span class="header-section-number">4.1</span> Start with a clean slate</h2>
+<section id="start-with-a-clean-slate" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="start-with-a-clean-slate"><span class="header-section-number">5.1</span> Start with a clean slate</h2>
 <p>First remove all objects from global environment:<br>
 <code>rm(list = ls())</code></p>
 <p>If only some objects need to be removed, search for them via wildcards:<br>
@@ -249,8 +255,8 @@ invisible(
   )
 }</code></pre>
 </section>
-<section id="packages" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">4.2</span> Packages</h2>
+<section id="packages" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">5.2</span> Packages</h2>
 <p>The setup file clarifies its own location relative to the project root and loads the necessary packages.</p>
 <p>Navigate within a project using the <code>here()</code> package. Start by specifying:<br>
 <code>here::i_am("R/setup.R")</code></p>
@@ -272,8 +278,8 @@ conflict_prefer("extract", "magrittr") # magrittr vs tidyr</code></pre>
 <p>Verify top level project directory<br>
 <code>here()</code></p>
 </section>
-<section id="package-descriptions" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="package-descriptions"><span class="header-section-number">4.3</span> Package descriptions</h2>
+<section id="package-descriptions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="package-descriptions"><span class="header-section-number">5.3</span> Package descriptions</h2>
 <p>Use the <code>here</code> package to deal with file paths:<br>
 https://here.r-lib.org</p>
 <p>Suppose you have a dataset in csv format. Use:<br>
@@ -295,8 +301,8 @@ https://cran.r-project.org/web/packages/bimets/index.html</p>
 https://cran.r-project.org/web/packages/xts/index.html</p>
 <p>Prefer using <code>tsbox</code> and <code>tidyverse</code> functions whenever possible, but understand the components and behavior of <code>xts</code> objects: https://rc2e.com/timeseriesanalysis</p>
 </section>
-<section id="additional-info-in-setup" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="additional-info-in-setup"><span class="header-section-number">4.4</span> Additional info in setup</h2>
+<section id="additional-info-in-setup" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="additional-info-in-setup"><span class="header-section-number">5.4</span> Additional info in setup</h2>
 <p>Define project-wide constants:</p>
 <pre><code>bnk_start &lt;- ymd("1900-01-01")
 bnk_end &lt;- ymd("2060-12-31")</code></pre>
@@ -729,13 +735,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02-git.html" class="pagination-link" aria-label="Git">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></span>
+      <a href="./renv.html" class="pagination-link" aria-label="Package management">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04-utilfuns.html" class="pagination-link" aria-label="User defined utility functions">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./utilfuns.html" class="pagination-link" aria-label="User defined utility functions">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -747,7 +753,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/03-setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/03-setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

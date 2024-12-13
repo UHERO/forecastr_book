@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Peter Fuleky">
-<meta name="dcterms.date" content="2024-12-13">
 
-<title>User guide to UHERO’s forecast processes</title>
+<title>2&nbsp; Project – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./project.html" rel="next">
+<link href="./git.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,13 +135,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link">
+  <a href="./project.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
   </div>
 </li>
@@ -203,38 +203,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">1</span> About</a>
-  <ul class="collapse">
-  <li><a href="#contents" id="toc-contents" class="nav-link" data-scroll-target="#contents"><span class="header-section-number">1.1</span> Contents</a></li>
-  </ul></li>
+  <li><a href="#project-setup-and-conventions" id="toc-project-setup-and-conventions" class="nav-link active" data-scroll-target="#project-setup-and-conventions"><span class="header-section-number">2.1</span> Project setup and conventions</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">2.2</span> Additional resources</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/project.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">User guide to UHERO’s forecast processes</h1>
+<h1 class="title"><span id="sec-project" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Peter Fuleky </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 13, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -244,15 +230,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="about" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> About</h1>
-<p>This document describes some useful practices for using R for applied research, especially in the time series and forecasting domain. It also serves as a guide for contributors to the <code>forecastr</code> R project. The focus of the project is forecasting using multi-equation behavioral models. The project encompasses data preparation, model selection (work in progress), external forecast generation, local forecast generation (planned), simulations (planned), and forecast distribution to a more granular scale.</p>
-<section id="contents" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="contents"><span class="header-section-number">1.1</span> Contents</h2>
-<p><a href="project.html" class="quarto-xref">Chapters&nbsp;<span>2</span></a> <a href="renv.html" class="quarto-xref">-&nbsp;<span>4</span></a> discuss the general setup of a collaborative project under version control. Chapter 4 deals with the setup file that configures the most general aspects of the <code>forecastr</code> project. Chapter 5 describes user defined helper functions for the <code>forecastr</code> project. Chapter 6 gives examples of best practices for time series manipulation.</p>
-
-
+<p>Projects are useful for organizing work, especially when working on multiple pieces of research simultaneously. They help to keep the workspace clean and avoid conflicts between tasks. Projects also make it easier to share work with others. A <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">project</a> consists of the files associated with a given project (input data, R scripts, analytical results, and figures) kept together in a folder.</p>
+<section id="project-setup-and-conventions" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="project-setup-and-conventions"><span class="header-section-number">2.1</span> Project setup and conventions</h2>
+<p>Create a new project locally in RStudio under the File menu or using <code>usethis::create_project("proj_dir")</code>. The <em>.Rproj</em> file contains the project settings. Open the project by double clicking this file in Finder. The minimum structure of a project includes an <em>R</em> folder for scripts, a <em>data</em> folder for data, and an <em>output</em> folder for reports and plots. If present, the <em>data/raw</em> folder contains data external to the project and the <em>data/processed</em> folder contains intermediate processed data. Although local projects are sometimes useful to explore an idea, whenever you consider version tracking or collaboration, the project should be initiated from GitHub (see <a href="git.html" class="quarto-xref"><span>Chapter 3</span></a> for details).</p>
+<p>Use the <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> package to store information about the packages used in the project. The renv package facilitates sharing a project and maintaining the same behavior on different machines. It creates a local package directory for the project. This means that it keeps track of all the packages and package versions that are used in the project, and collaborators can restore the exact same package environment and reproduce the results (see <a href="renv.html" class="quarto-xref"><span>Chapter 4</span></a> for details).</p>
+<p>Use the <a href="https://here.r-lib.org">here</a> package to create paths relative to the project root. For example, <code>here::here("data", "raw/file.csv")</code> returns the path to the file <em>file.csv</em> in the <em>data/raw</em> folder. Load libraries and put hard coded lines at the top of the script. Use the <a href="https://conflicted.r-lib.org">conflicted</a> package to detect conflicts across packages and assign preferences. For example, <code>conflict_prefer("filter", "dplyr")</code> assigns preference to the <code>filter</code> function in the dplyr package over the <code>filter</code> function in the stats package. Don’t save the workspace on exit (Tools &gt; Global Options &gt; General &gt; Save workspace to .RData on exit &gt; Never or <code>usethis::use_blank_slate()</code>).</p>
+<p>Start each pipe with a comment, and if necessary add comments to each line. Enable <a href="https://docs.posit.co/ide/user/ide/guide/tools/copilot.html">Github Copilot</a> for RStudio; it is free for higher education users. Github Copilot will suggest code based on comments, which you can accept with the tab key. Use sectioning comments (# comments followed by at least four dashes —-) to separate different parts of the script (they show up in the outline section of the editor pane). Use the addin provided by <a href="https://styler.r-lib.org">styler</a> package to format the code. Follow the <code>tidyverse</code> “dialect” and <a href="https://style.tidyverse.org">syntax</a>.</p>
+<p>Use R scripts for coding; don’t put the analysis into chunks in markdown documents. Only render important results in code chunks of quarto (<em>qmd</em>) or Rmarkdown (<em>Rmd</em>) documents. Within a <em>qmd</em> or <em>Rmd</em> document <a href="https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html">source the R script</a> containing the analysis. Alternatively, save the entire workspace or individual objects from the R script, and then load these in the appropriate code chunks of the markdown document. Make sure the code chunks are looking for <a href="https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html">objects in the correct working directory</a>.</p>
+<p>Store secrets, passwords, and keys with the <a href="https://keyring.r-lib.org/index.html">keyring</a> package. For example, set the UDAMAN token with <code>keyring::key_set_with_value(service = "udaman_token", password = "-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=")</code> and retrieve it with <code>keyring::key_get("udaman_token")</code>. To avoid disclosing your secrets, do not store/assign the retrieved credentials to a variable. If security is not a concern, environment variables, such as API keys, can also be stored in a project specific <em>.Renviron</em> file; it must end with <code>\n</code>. In addition to <em>.Renviron</em>, the <em>.Rprofile</em> file is also executed each time R starts up. The latter typically contains a script with options and startup tasks. Both files are located in the project root folder.</p>
 </section>
+<section id="additional-resources" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">2.2</span> Additional resources</h2>
+<p>Overview of R setup:<br>
+<a href="https://rstats.wtf" class="uri">https://rstats.wtf</a></p>
+<p>Best practices:<br>
+<a href="https://kdestasio.github.io/post/r_best_practices/" class="uri">https://kdestasio.github.io/post/r_best_practices/</a></p>
+<p>Considerations for structuring projects:<br>
+<a href="https://www.r-bloggers.com/2018/08/structuring-r-projects/" class="uri">https://www.r-bloggers.com/2018/08/structuring-r-projects/</a></p>
+<p>Set up your work in projects:<br>
+<a href="https://r4ds.hadley.nz/workflow-scripts#projects" class="uri">https://r4ds.hadley.nz/workflow-scripts#projects</a></p>
+<p>Efficient data management in R:<br>
+<a href="https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/" class="uri">https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/</a></p>
+<p>Efficient R programming:<br>
+<a href="https://csgillespie.github.io/efficientR/" class="uri">https://csgillespie.github.io/efficientR/</a></p>
+<p>Data science workflow:<br>
+<a href="http://dcl-workflow.stanford.edu" class="uri">http://dcl-workflow.stanford.edu</a></p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -678,10 +683,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="About">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./project.html" class="pagination-link" aria-label="Project">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./git.html" class="pagination-link" aria-label="Version control">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -693,7 +701,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/project.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

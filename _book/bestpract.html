@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Peter Fuleky">
-<meta name="dcterms.date" content="2024-12-13">
 
-<title>User guide to UHERO’s forecast processes</title>
+<title>7&nbsp; Best practices for time series data manipulation – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./project.html" rel="next">
+<link href="./modselect.html" rel="next">
+<link href="./utilfuns.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bestpract.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></span></a>
   </div>
 </li>
@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bestpract.html" class="sidebar-item-text sidebar-link">
+  <a href="./bestpract.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
   </div>
 </li>
@@ -203,38 +203,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">1</span> About</a>
-  <ul class="collapse">
-  <li><a href="#contents" id="toc-contents" class="nav-link" data-scroll-target="#contents"><span class="header-section-number">1.1</span> Contents</a></li>
-  </ul></li>
+  <li><a href="#harness-the-power-of-tsbox" id="toc-harness-the-power-of-tsbox" class="nav-link active" data-scroll-target="#harness-the-power-of-tsbox"><span class="header-section-number">7.1</span> Harness the power of tsbox</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/bestpract.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/bestpract.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">User guide to UHERO’s forecast processes</h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Peter Fuleky </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 13, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -244,15 +229,76 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="about" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> About</h1>
-<p>This document describes some useful practices for using R for applied research, especially in the time series and forecasting domain. It also serves as a guide for contributors to the <code>forecastr</code> R project. The focus of the project is forecasting using multi-equation behavioral models. The project encompasses data preparation, model selection (work in progress), external forecast generation, local forecast generation (planned), simulations (planned), and forecast distribution to a more granular scale.</p>
-<section id="contents" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="contents"><span class="header-section-number">1.1</span> Contents</h2>
-<p><a href="project.html" class="quarto-xref">Chapters&nbsp;<span>2</span></a> <a href="renv.html" class="quarto-xref">-&nbsp;<span>4</span></a> discuss the general setup of a collaborative project under version control. Chapter 4 deals with the setup file that configures the most general aspects of the <code>forecastr</code> project. Chapter 5 describes user defined helper functions for the <code>forecastr</code> project. Chapter 6 gives examples of best practices for time series manipulation.</p>
+<p>Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g.&nbsp;<code>N@US.A</code>). Eliminate special characters using a long tibble.</p>
+<pre><code>hist_q_mod &lt;- hist_q %&gt;%
+  ts_tbl() %&gt;%
+  mutate(id = str_replace_all(id, c("@" = "_AT_", "\\." = "_")))
+  
+# revert back to udaman notation
+hist_q &lt;- hist_q_mod %&gt;%
+  ts_tbl() %&gt;%
+  mutate(id = str_replace_all(id, c("_AT_" = "@", "_Q" = "\\.Q")))</code></pre>
+<p>Use the <code>xts</code> format whenever possible. Observations in a multivariate <code>xts</code> can be accessed by time and series name in two ways: <code>mul_var_xts[time, ser_name]</code> or <code>mul_var_xts$ser_name[time]</code>.</p>
+<p>Make sure all series are defined on the same range (default start = bnk_start, end = bnk_end). Take advantage of <code>make_xts()</code> (and its defaults, e.g.&nbsp;start and end period).</p>
+<pre><code>import_xts &lt;- read_csv(here("data/raw", str_glue("{exp_id_a}.csv"))) %&gt;%
+  arrange(time) %&gt;%
+  ts_long() %&gt;%
+  ts_xts() %&gt;%
+  ts_c(
+    temp = make_xts(per = "year") # temporary variable to force start and end in import_xts
+  ) %&gt;%
+  extract(, str_subset(colnames(.), "temp", negate = TRUE)) # remove temp</code></pre>
+<p>Don’t break up multivariate time series (think databank) into individual series in the global environment.</p>
+<p>If referring directly to a series with a static name, use the <code>bank$series</code> notation (this can be used on both the right and the left hand side of the assignment, while <code>bank[, series]</code> can only be used for existing series in bank).</p>
+<pre><code># find the last value in history
+dat_end &lt;- find_end(hist_q$N_AT_US_Q)
+# same as
+dat_end &lt;- find_end(hist_q[, N_AT_US_Q])</code></pre>
+<p>Use <code>[p()]</code> to select a period in <code>xts</code> objects, otherwise use <code>ts_span()</code>.</p>
+<pre><code># extend series with addfactored level
+sol_q$N_AT_US_SOLQ &lt;- hist_q$N_AT_US_Q[p("", dat_end)] %&gt;%
+  ts_bind(sol_q$NCEN_AT_US_SOLQ[p(dat_end, "")] +
+    as.numeric(sol_q$N_AT_US_SOLQ_ADDLEV[dat_end]))
+    
+# addfactor for growth
+sol_q$N_AT_US_SOLQ_ADDGRO[p(dat_end + qtrs(1), dat_end + qtrs(4))] &lt;- -0.35
+
+# extend history using growth rate
+sol_q$N_AT_US_SOLQ &lt;- sol_q$N_AT_US_SOLQ[p("", dat_end)] %&gt;%
+  ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))</code></pre>
+<p>The <code>bank[,seriesname]</code> notation only works for <em>existing</em> <code>xts</code> series on the left of the assignment (it can also be used on the right). <code>seriesname</code> can be determined at runtime</p>
+<pre><code># initialize the lhs series in the "bank"
+hist_a$temp &lt;- make_xts()
+names(hist_a)[names(hist_a) == "temp"] &lt;- str_glue("E{ser_i}_AT_{cnty_i}_ADD")
+
+# calculate expression and assign to lhs
+hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- 
+  (hist_a[, str_glue("E{ser_i}_AT_{cnty_i}")] / hist_a[, str_glue("E_NF_AT_{cnty_i}")])</code></pre>
+<p>Alternatively, make multiple series in <em>bank</em> available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code> on the right.</p>
+<pre><code>hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- hist_a %$%
+  (get_var("E{ser_i}_AT_{cnty_i}") / get_var("E_NF_AT_{cnty_i}"))</code></pre>
+<p>Bimets requires data in a particular <code>tslist</code> format. Convert <code>xts</code> to <code>tslist</code> using <code>ts_tslist()</code>.</p>
+<pre><code># store series as tslist
+hist_a_lst &lt;- hist_a %&gt;% 
+  ts_tslist() %&gt;% 
+
+# convert series to bimets format
+hist_a_bimets &lt;- hist_a_lst %&gt;%
+  map(as.bimets)
+
+# bimets strips the attributes, need to reset them for further manipulation by tsbox
+hist_a &lt;- hist_a_bimets %&gt;% 
+  set_attr("class", c("tslist", "list")) %&gt;% 
+  ts_xts()</code></pre>
+<p>For series collected in a <code>tslist</code> on the left of the assignment use the <code>bank[[seriesname]]</code> notation (it can also be used on the right). Here the lhs series <code>seriesname</code> does not need to exist, and it might easier to work with <code>tslist</code> than <code>xts</code> when variable names are determined at runtime.</p>
+<pre><code># similar to above with a tslist variable
+hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] &lt;- hist_a_lst %$%
+  (get_var("E{ser_i}_AT_{cnty_i}") - get_var("E_NF_AT_{cnty_i}"))</code></pre>
+<section id="harness-the-power-of-tsbox" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="harness-the-power-of-tsbox"><span class="header-section-number">7.1</span> Harness the power of tsbox</h2>
+<p>Use the converter functions in <a href="https://www.tsbox.help/reference/index.html"><code>tsbox</code></a> to shift between various data types (<code>ts_tbl()</code>, <code>ts_xts()</code>, <code>ts_ts()</code>, <code>ts_tslist()</code>) and reshaping to the long and wide format (<code>ts_long()</code>, <code>ts_wide()</code>). <code>tsbox</code> further contains funtions for time period selection (<code>ts_span()</code>), merging and extension operations (<code>ts_c()</code>, <code>ts_bind()</code>, <code>ts_chain()</code>), transformations (<code>ts_lag()</code>, <code>ts_pc()</code>, <code>ts_pca()</code>, <code>ts_pcy()</code>, <code>ts_diff()</code>, <code>ts_diffy()</code>), and index construction (<code>ts_compound()</code>, <code>ts_index()</code>). Consider these before turning to solutions that are specific to the <code>xts</code>, <code>ts</code>, <code>dplyr</code> or <code>tidyr</code> packages.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -678,10 +724,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./utilfuns.html" class="pagination-link" aria-label="User defined utility functions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./project.html" class="pagination-link" aria-label="Project">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./modselect.html" class="pagination-link" aria-label="Model selection">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -693,7 +742,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/bestpract.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/bestpract.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

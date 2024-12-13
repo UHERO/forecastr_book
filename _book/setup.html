@@ -8,7 +8,7 @@
 
 <meta name="author" content="Peter Fuleky">
 
-<title>9&nbsp; Notes – User guide to UHERO's forecast processes</title>
+<title>5&nbsp; Setup of the forecastr project – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-simulation.html" rel="prev">
+<link href="./utilfuns.html" rel="next">
+<link href="./renv.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-notes.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./setup.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -140,50 +141,56 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project setup</span></span></a>
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git</span></span></a>
+  <a href="./git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
+  <a href="./renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./setup.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-bestpract.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
+  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  <a href="./bestpract.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  <a href="./modselect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-notes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
   </div>
 </li>
     </ul>
@@ -196,18 +203,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#project-setup" id="toc-project-setup" class="nav-link active" data-scroll-target="#project-setup"><span class="header-section-number">9.1</span> Project setup</a></li>
-  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="header-section-number">9.2</span> Git</a></li>
-  <li><a href="#git-step-by-step" id="toc-git-step-by-step" class="nav-link" data-scroll-target="#git-step-by-step"><span class="header-section-number">9.3</span> Git step by step</a></li>
+  <li><a href="#start-with-a-clean-slate" id="toc-start-with-a-clean-slate" class="nav-link active" data-scroll-target="#start-with-a-clean-slate"><span class="header-section-number">5.1</span> Start with a clean slate</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">5.2</span> Packages</a></li>
+  <li><a href="#package-descriptions" id="toc-package-descriptions" class="nav-link" data-scroll-target="#package-descriptions"><span class="header-section-number">5.3</span> Package descriptions</a></li>
+  <li><a href="#additional-info-in-setup" id="toc-additional-info-in-setup" class="nav-link" data-scroll-target="#additional-info-in-setup"><span class="header-section-number">5.4</span> Additional info in setup</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/08-notes.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/08-notes.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Notes</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></h1>
 </div>
 
 
@@ -224,195 +232,82 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="project-setup" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="project-setup"><span class="header-section-number">9.1</span> Project setup</h2>
-<p>Coding Conventions in R:</p>
-<p>Basic ideas for a reproducible workflow:</p>
-<p>Use RStudio projects with sub-directories</p>
-<ul>
-<li>R - R code.</li>
-<li>data/raw - data external to the project.</li>
-<li>data/processed - intermediate processed data.</li>
-<li>notes - Rmd, and Rmd output, notes, papers, supporting documents, Rmd, etc.</li>
-<li>output - reports, tables, etc.</li>
-<li>output/plots - plots.</li>
-<li>renv - used for library management (don’t edit).</li>
-<li>man - help files (don’t edit).</li>
-</ul>
-<p>Preference settings:</p>
+<p>The <code>setup.R</code> file contains general information used throughout the project. The contents are listed below.</p>
+<section id="start-with-a-clean-slate" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="start-with-a-clean-slate"><span class="header-section-number">5.1</span> Start with a clean slate</h2>
+<p>First remove all objects from global environment:<br>
+<code>rm(list = ls())</code></p>
+<p>If only some objects need to be removed, search for them via wildcards:<br>
+<code>rm(list = ls(pattern = glob2rx("*__*")))</code></p>
+<p>Detach all loaded packages:</p>
+<pre><code>if (!is.null(names(sessionInfo()$otherPkgs))) {
+invisible(
+  suppressMessages(
+    suppressWarnings(
+      lapply(
+        paste("package:", names(sessionInfo()$otherPkgs), sep=""), 
+        detach, 
+        character.only = TRUE, 
+        unload = TRUE
+        )
+      )
+    )
+  )
+}</code></pre>
 </section>
-<section id="git" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="git"><span class="header-section-number">9.2</span> Git</h2>
-<p>A quick overview: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md</p>
+<section id="packages" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">5.2</span> Packages</h2>
+<p>The setup file clarifies its own location relative to the project root and loads the necessary packages.</p>
+<p>Navigate within a project using the <code>here()</code> package. Start by specifying:<br>
+<code>here::i_am("R/setup.R")</code></p>
+<p>Then load necessary packages</p>
+<pre><code>library(here) # navigation within the project
+library(conflicted) # detect conflicts across packages
+library(tidyverse) # a set of frequently used data-wrangling tools
+library(magrittr) # more than just pipes
+library(lubridate) # dealing with dates
+library(tsbox) # dealing with time series
+# library(bimets)</code></pre>
+<p>Detect conflicts across packages and assign preferences</p>
+<pre><code>conflict_scout()
+conflict_prefer("filter", "dplyr") # dplyr v stats
+conflict_prefer("first", "dplyr") # dplyr v xts
+conflict_prefer("lag", "dplyr") # dplyr v stats
+conflict_prefer("last", "dplyr") # dplyr v xts
+conflict_prefer("extract", "magrittr") # magrittr vs tidyr</code></pre>
+<p>Verify top level project directory<br>
+<code>here()</code></p>
 </section>
-<section id="git-step-by-step" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="git-step-by-step"><span class="header-section-number">9.3</span> Git step by step</h2>
-<p>If you don’t have Git, install it:<br>
-https://happygitwithr.com/install-git.html</p>
-<p>Make sure .gitignore contains the following files:<br>
-.Renviron .Rprofile</p>
-<p>Introduce yourself to Git:<br>
-In the shell (Terminal tab in RStudio):<br>
-git config –global user.name ‘Jane Doe’<br>
-git config –global user.email ‘jane@example.com’<br>
-git config –global –list</p>
-<p>For more advanced tasks, use GitHub Desktop:<br>
-https://desktop.github.com</p>
-<p>Store your GitHub PAT (Personal Access Token):<br>
-https://happygitwithr.com/https-pat.html</p>
-<p>Use one of three ways to add your project to GitHub:<br>
-Brand new project:<br>
-https://happygitwithr.com/new-github-first.html<br>
-Existing project without version control:<br>
-https://happygitwithr.com/existing-github-first.html<br>
-Existing project under local version control:<br>
-https://happygitwithr.com/existing-github-last.html</p>
-<p>Troubleshooting if RStudio can’t detect Git:<br>
-https://happygitwithr.com/rstudio-see-git.html</p>
-<p>Git vocabulary:<br>
-https://happygitwithr.com/git-basics.html</p>
-<p>Remote setups (try to stick to GitHub first discussed above):<br>
-https://happygitwithr.com/common-remote-setups.html</p>
-<p>Useful Git workflows and dealing with conflicts:<br>
-https://happygitwithr.com/workflows-intro.html<br>
-https://happygitwithr.com/push-rejected.html<br>
-https://happygitwithr.com/pull-tricky.html</p>
-<p>Additional resources:<br>
-https://happygitwithr.com/ideas-for-content.html</p>
-<p>Suggested workflow:<br>
-1) Initialize repository on GitHub.com under the UHERO account.<br>
-2) Clone it via RStudio project setup.<br>
-3) Commit changes, pull, resolve issues, push. 3*) If work in a branch (create in RStudio), commit to branch, (pull) push to remote, pull request on GitHub.com from branch to main, merge, delete branch on GitHub.com.</p>
-<p>Render results from R scripts via Rmd: 1) source your R code from within Rmd 2) only render important results in Rmd chunks</p>
-<p>Use here() from the here package to write file paths</p>
-<p>Suppose you have a dataset in csv format. Use readr::read_csv(here::here(“The subfolder where your csv file resides”, “The CSV file.csv”))</p>
-<p>Do not use setwd() and rm(list = ls())</p>
-<p>Do not save the workspace to the .Rdta file</p>
-<p>Use library() not require()</p>
-<p>Use version control (useful for recording changes between different versions of a file over time - see below for Git integration)</p>
-<p>See the resources below:</p>
-<p>Best Practices &amp; Style Guide for Writing R Code: https://github.com/kmishra9/Best-Practices-for-Writing-R-Code</p>
-<p>R Code – Best practices: https://www.r-bloggers.com/2018/09/r-code-best-practices/</p>
-<p>R Best Practices by Krista L. DeStasio: https://kdestasio.github.io/post/r_best_practices/</p>
-<p>Project-oriented workflow: https://www.tidyverse.org/blog/2017/12/workflow-vs-script/</p>
-<p>R coding style best practices: https://www.datanovia.com/en/blog/r-coding-style-best-practices/</p>
-<p>What They Forgot to Teach You About R by Jennifer Bryan and Jim Hester: https://rstats.wtf/save-source.html</p>
-<p>Conflicted: a new approach to resolving ambiguity: https://www.tidyverse.org/blog/2018/06/conflicted/</p>
-<p>Introduction to renv package: https://rstudio.github.io/renv/articles/renv.html#future-work-1</p>
-<p>Row-oriented workflows in R with the tidyverse: https://github.com/jennybc/row-oriented-workflows#readme</p>
-<p>Structuring R projects: https://www.r-bloggers.com/2018/08/structuring-r-projects/</p>
-<p>Defensive Programming in R: https://bitsandbugs.io/2018/07/27/defensive-programming-in-r/#8</p>
-<p>Nice R code: https://nicercode.github.io/blog/2013-04-05-projects/</p>
-<p>Workflow basics: https://r4ds.had.co.nz/workflow-basics.html</p>
-<p>Namespace package: https://r-pkgs.org/namespace.html</p>
-<p>Writing R packages in RStudio: https://ourcodingclub.github.io/tutorials/writing-r-package/</p>
-<p>It is dangerous to change state: https://withr.r-lib.org/articles/changing-and-restoring-state.html</p>
-<p>The targets R Package User Manual: https://books.ropensci.org/targets/</p>
-<p>Github and R:</p>
-<p>Install git on the R system from here: https://git-scm.com/downloads</p>
-<p>Go to RStudio → Global Options → Git/SVN → Make sure the box “Enable version control interface for RStudio projects” is checked</p>
-<p>Tell RStudio where your Git executable is in the Git/SVN under Global Options</p>
-<p>Create a new project in R (make sure the check box “Create a git repository” is checked)</p>
-<p>Create a new task file in R (New File → Rscript) and save it as a .R file</p>
-<p>To use Git version control on the .R file we need to commit that file</p>
-<p>To commit a file with Git in RStudio go to the Git tab in the top right pane in R → Select one or more files by checking the box</p>
-<p>Checking the box means that it is ready to be committed</p>
-<p>To actually commit the file click the “Commit” button (will open up a commit window)</p>
-<p>Include a commit message then click on the second “Commit” button</p>
-<p>For collaboration on Github:</p>
-<p>Load the usethis package and type in ?use_github in the R console</p>
-<p>In the Authentication section, click on GitHub personal access token (PAT)</p>
-<p>Click on the button to generate a new token</p>
-<p>Put a Note and use repo permission for your token and then click on “Generate token”</p>
-<p>Copy the token ID number (needs to be stored)</p>
-<p>Type in edit_r_environ() in the R console and then type in GITHUB_PAT =‘copy and paste token ID number here’</p>
-<p>In R console type in use_github(protocol =‘https’, auth_token = Sys.getenv(“GITHUB_PAT”))</p>
-<p>Run it and will ask if you are sure. Select 3</p>
-<p>This will create a Github repository and will set up the syncing</p>
-<p>Another way to collaborate on Github (easier so follow this!):</p>
-<p>Go to http://github.com and create an account</p>
-<p>Create a new repository and give it a name (click “Add a README file)</p>
-<p>Go to R → Install the usethis package and include library(usethis) → Type in use_git_config(user.name = “Your Name on the GitHub account”, user.email = “Your email address on the GitHub account”)</p>
-<p>In the newly created repository, click the “Code” button on GitHub. Copy the URL under the “Clone with HTTPS”</p>
-<p>Go to R → New Project → Version Control → Git → Repository URL (copy and paste the HTTP URL from your Github repository) - this will connect what’s on the cloud on Github to your computer (also called cloning your repository)</p>
-<p>Can start a new R script and would be able to see the Git tab in R</p>
-<p>Can commit and include a commit message (will add the files to your depository)</p>
-<p>Need to push to fully make the changes go through and to show up on your GitHub account</p>
-<p>Under the History tab you would be able to see the changes you made and committed</p>
-<p>Can link the SSH keys from settings on your account and into R under the Git/SVN tab (have to create a SSH RSA key if it has not been created already)</p>
-<p>If there is a merge conflict when collaborating on making simultaneous changes together then pull first and then fix the merge conflict. Then can commit by finalizing on which changes to keep by eliminating the “====” and “&gt;&gt;&gt;&gt;” and push it out. The other person will have to pull in the changes in her hand.</p>
-<p>Creating a new branch will allow you to do things on your own. Click on the branch button to create a new branch and name it. A new branch will allow you to make changes on it and work separately on it. The other person will have to pull to see the new branch and your changes on it. In this way, we can work independently when working together at the same time. Then will have to merge the independent branches.</p>
-<p>Open a pull request by clicking on the Compare and pull request button on the Github site to merge the separate branches together. Can delete your separate branch if desired. Then go to R and pull the changes down.</p>
-<p>For .Renviron have to use specific user credentials such as user name, password, Github and udaman tokens.</p>
-<p>The .Rprofile can be ignored in gitignore if there is a problem with different paths across Macs and PCs.</p>
-<p>Resources:</p>
-<p>Happy Git and GitHub for the useR: https://happygitwithr.com/</p>
-<p>Github for collaboration: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md</p>
-<p>My research workflow, based on Github: https://www.carlboettiger.info/2012/05/06/research-workflow.html</p>
-<p>Collaborating with renv: https://rstudio.github.io/renv/articles/collaborating.html</p>
-<p>R style guide: http://adv-r.had.co.nz/Style.html</p>
-<p>UHERO R style guide:</p>
-<p>Use block letters for R file names (because the NAS file server is case sensitive)</p>
-<p>Comment your code</p>
-<p>Time Series Modeling:</p>
-<p>Forecasting: Principles and Practice (3rd ed) by Rob J Hyndman and George Athanasopoulos : https://otexts.com/fpp3/index.html</p>
-<p>An Introduction to Statistical Learning (1st ed): https://www.statlearning.com</p>
-<p>Manipulating Time Series Data in R with xts &amp; zoo: https://rstudio-pubs-static.s3.amazonaws.com/288218_117e183e74964557a5da4fc5902fc671.html https://rpubs.com/mpfoley73/504487 Time Series in R, The Power of xts and zoo: https://ugoproto.github.io/ugo_r_doc/time_series_in_r_the_power_of_xts_and_zoo/ xts Cheat Sheet: Time Series in R: https://www.r-bloggers.com/2017/05/xts-cheat-sheet-time-series-in-r/</p>
-<p>R For Data Science Cheat Sheet by DataCamp: https://s3.amazonaws.com/assets.datacamp.com/blog_assets/xts_Cheat_Sheet_R.pdf</p>
-<p>Evaluate the R packages: gets, ARDL, etc.</p>
-<p>The gets package is used for Multi-path General-to-Specific (GETS) modelling of the mean and/or variance of a regression, and Indicator Saturation (ISAT) methods for detecting structural breaks in the mean.https://cran.r-project.org/web/packages/gets/index.html</p>
-<p>The ARDL package creates complex autoregressive distributed lag (ARDL) models providing just the order and automatically constructs the underlying unrestricted and restricted error correction model (ECM). It also performs the bounds-test for cointegration as described in Pesaran et al.&nbsp;(2001). https://cran.r-project.org/web/packages/ARDL/index.html https://github.com/Natsiopoulos/ARDL</p>
-<p>Tidy tools for time series modeling under tidyverts: https://tidyverts.org - The fable package applies tidyverse principles to time series modeling used for forecasting: https://fable.tidyverts.org/ - The tsibble package provides a tidy data structure for time series: https://cran.r-project.org/web/packages/tsibble/index.html - The tsibbledata package provide a different types of datasets in the tsibble data structure: https://cran.r-project.org/web/packages/tsibbledata/index.html - The tsibbletalk package introduces shared key to the tsibble, to easily {crosstalk} between plots on both client and server sides (i.e.&nbsp;with or without shiny): https://cran.r-project.org/web/packages/tsibbletalk/tsibbletalk.pdf- The feasts package provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data: https://cran.r-project.org/web/packages/feasts/index.html - The fable.prohphet package provides an interface allowing the prophet forecasting procedure to be used within the fable framework: https://cran.r-project.org/web/packages/fable.prophet/vignettes/intro.html</p>
-<p>The xts or Extensible Time Series package provides an extensible time series class, enabling uniform handling of many R time series classes : https://cran.r-project.org/web/packages/xts/index.html xts: Extensible Time Series: https://cran.r-project.org/web/packages/xts/vignettes/xts.pdf</p>
-<p>Think about dummies, breaks, outliers</p>
-<p>Figure out how bimets deals with ragged edge, add-factors, goal search</p>
-<p>The bimets is an R package developed with the aim of easing time series analysis and building up a framework that facilitates the definition, estimation and simulation of simultaneous equation models: https://cran.r-project.org/web/packages/bimets/index.htmlbimets - Time Series And Econometric Modeling In R: https://github.com/cran/bimets https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf</p>
-<p>Structural Equation Models (SEM): https://rviews.rstudio.com/2021/01/22/sem-time-series-modeling/</p>
-<p>Look at tidy models</p>
-<p>The tidymodels package is a collection of packages for modeling and machine learning using tidyverse principles: https://www.tidymodels.org</p>
-<p>Port the Gekko code into R: http://t-t.dk/gekko/</p>
-<p>Look at DiagrammeR package, also the Gantt charts it can produce</p>
-<p>https://rich-iannone.github.io/DiagrammeR/</p>
-<p>A Beginner’s Guide to Learning R:</p>
-<p>A (very) short introduction to R: https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf</p>
-<p>Rstudio Education: https://github.com/rstudio-education</p>
-<p>Remaster the tidyverse: https://github.com/rstudio-education/remaster-the-tidyverse</p>
-<p>Introduction to R and Rstudio: https://jules32.github.io/2016-07-12-Oxford/R_RStudio/</p>
-<p>An intro to R for new programmers: https://rforcats.net</p>
-<p>fasteR: Fast Lane to Learning R!: https://github.com/matloff/fasteR</p>
-<p>RStudio Cheatsheets: https://rstudio.com/resources/cheatsheets/</p>
-<p>R for Data Science: https://r4ds.had.co.nz</p>
-<p>Data wrangling, exploration, and analysis with R: https://stat545.com</p>
-<p>R Markdown: The Definitive Guide: https://bookdown.org/yihui/rmarkdown/</p>
-<p>Data Visualization with R: https://rkabacoff.github.io/datavis/</p>
-<p>Modern R with the tidyverse: https://b-rodrigues.github.io/modern_R/</p>
-<p>R Cookbook, 2nd Edition: https://rc2e.com</p>
-<p>Advanced R by Hadley Wickham: http://adv-r.had.co.nz</p>
-<p>UC Business Analytics R Programming Guide: http://uc-r.github.io/descriptive</p>
-<p>R Programming for Data Science: https://bookdown.org/rdpeng/rprogdatascience/</p>
-<p>Hands-On Programming with R: https://rstudio-education.github.io/hopr/</p>
-<p>Efficient R programming: https://csgillespie.github.io/efficientR/index.html</p>
-<p>R for Fledglings: http://www.uvm.edu/~tdonovan/RforFledglings/index.html</p>
-<p>R Intermediate Level (includes applications):</p>
-<p>Advanced Statistical Computing: https://bookdown.org/rdpeng/advstatcomp/</p>
-<p>Feature Engineering and Selection: A Practical Approach for Predictive Models: http://www.feat.engineering/index.html</p>
-<p>Advanced Quantitative Methods: https://uclspp.github.io/PUBLG088/index.html</p>
-<p>Principles of Econometrics with R: https://bookdown.org/ccolonescu/RPoE4/</p>
-<p>Modern Data Analysis for Economics: https://jiamingmao.github.io/data-analysis/Resources/</p>
-<p>Data Science for Economists: https://github.com/uo-ec607/lectures</p>
-<p>Data Science for Psychologists: https://bookdown.org/hneth/ds4psy/10-time.html</p>
-<p>Rewriting R code in C++: https://adv-r.hadley.nz/rcpp.html</p>
-<p>Writing R Extensions: https://cran.rstudio.com/doc/manuals/r-devel/R-exts.html</p>
-<p>Other R packages for data analysis:</p>
-<p>The data.table package is used for fast aggregation of large data (e.g.&nbsp;100GB in RAM), fast ordered joins, fast add/modify/delete of columns by group using no copies at all, list columns, friendly and fast character- separated-value read/write: https://cran.r-project.org/web/packages/data.table/</p>
-<p>The mlr3 (Lang et al.&nbsp;2019) package and ecosystem provide a generic, object-oriented, and extensible framework for classification, regression, survival analysis, and other machine learning tasks for the R: https://mlr3book.mlr-org.com</p>
-<p>purr package tutorial: https://jennybc.github.io/purrr-tutorial/</p>
-<p>Data Visualization with R:</p>
-<p>Data Analysis and Visualization Using R: http://varianceexplained.org/RData/</p>
-<p>Data Analysis and Visualization in R for Ecologists: https://datacarpentry.org/R-ecology-lesson/</p>
-<p>Data Visualization with R by Rob Kabacoff: https://rkabacoff.github.io/datavis/</p>
-<p>R Graphics Cookbook, 2nd edition: https://r-graphics.org</p>
-<p>ggplot2: elegant graphics for data analysis: https://ggplot2-book.org</p>
+<section id="package-descriptions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="package-descriptions"><span class="header-section-number">5.3</span> Package descriptions</h2>
+<p>Use the <code>here</code> package to deal with file paths:<br>
+https://here.r-lib.org</p>
+<p>Suppose you have a dataset in csv format. Use:<br>
+<code>readr::read_csv(here::here("&lt;The subfolder where your csv file resides&gt;", "&lt;The CSV file.csv&gt;"))</code></p>
+<p>Only load essential packages with many useful functions (don’t load a whole package to access a single function).<br>
+Refer to individual functions in not loaded packages by <code>namespace::function()</code></p>
+<p>Resolve conflicts across multiple packages with <code>conflicted</code>:<br>
+https://conflicted.r-lib.org</p>
+<p>Core <code>tidyverse</code> packages:<br>
+https://www.tidyverse.org</p>
+<p>Non-core <code>tidyverse</code> packages (need to be loaded separately):<br>
+https://magrittr.tidyverse.org<br>
+https://lubridate.tidyverse.org</p>
+<p>Time series tools in <code>tsbox</code> (learn them and use them, very useful). All start with <code>ts_</code>.<br>
+https://www.tsbox.help</p>
+<p>Forecasting with multi-equation behavioral models (only load <code>bimets</code> if actually doing forecasts, no need for data manipulation):<br>
+https://cran.r-project.org/web/packages/bimets/index.html</p>
+<p><code>bimets</code> depends on <code>xts</code> (if not loaded, can access necessary functions via <code>xts::function()</code>):<br>
+https://cran.r-project.org/web/packages/xts/index.html</p>
+<p>Prefer using <code>tsbox</code> and <code>tidyverse</code> functions whenever possible, but understand the components and behavior of <code>xts</code> objects: https://rc2e.com/timeseriesanalysis</p>
+</section>
+<section id="additional-info-in-setup" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="additional-info-in-setup"><span class="header-section-number">5.4</span> Additional info in setup</h2>
+<p>Define project-wide constants:</p>
+<pre><code>bnk_start &lt;- ymd("1900-01-01")
+bnk_end &lt;- ymd("2060-12-31")</code></pre>
+<p>Load user defined utility functions (details in next section):<br>
+<code>source(here("R", "util_funs.R"))</code></p>
 
 
 </section>
@@ -840,11 +735,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./07-simulation.html" class="pagination-link" aria-label="Stochastic simulations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span>
+      <a href="./renv.html" class="pagination-link" aria-label="Package management">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./utilfuns.html" class="pagination-link" aria-label="User defined utility functions">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -855,7 +753,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/08-notes.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/08-notes.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

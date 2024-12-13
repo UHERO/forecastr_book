@@ -9,7 +9,6 @@
   numbers=noendperiod]{scrreport}
 
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -19,6 +18,10 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -40,14 +43,28 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 
 \providecommand{\tightlist}{%
@@ -76,8 +93,6 @@
 \makeatother
 
 \KOMAoption{captions}{tableheading}
-\makeatletter
-\makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
@@ -117,21 +132,17 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\makeatother
+\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
-\makeatother
-\makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
-\makeatother
-\makeatletter
-\makeatother
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -144,13 +155,13 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
+
 \title{User guide to UHERO's forecast processes}
 \author{Peter Fuleky}
-\date{4/10/23}
+\date{2024-12-13}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, breakable, frame hidden, interior hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -158,214 +169,598 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\bookmarksetup{startatroot}
-
-\hypertarget{about}{%
-\chapter{About}\label{about}}
-
-This document describes the setup and components of the
-\texttt{forecastr} project. The focus of the project is forecasting
-using multi-equation behavioral models. The project encompasses data
-preparation, model selection (work in progress), external forecast
-generation, local forecast generation (planned), simulations (planned),
-and forecast distribution to a more granular scale.
-
-\hypertarget{contents}{%
-\section{Contents}\label{contents}}
-
-Chapters 2-3 discuss the general setup of a collaborative project under
-version control. Chapter 4 deals with the setup file that configures the
-most general aspects of the \texttt{forecastr} project. Chapter 5
-describes user defined helper functions for the \texttt{forecastr}
-project. Chapter 6 gives examples of best practices for time series
-manipulation.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{project-setup}{%
-\chapter{Project setup}\label{project-setup}}
+\chapter{About}\label{about}
 
-A project is self-contained in a folder (the project folder).
+This document describes some useful practices for using R for applied
+research, especially in the time series and forecasting domain. It also
+serves as a guide for contributors to the \texttt{forecastr} R project.
+The focus of the project is forecasting using multi-equation behavioral
+models. The project encompasses data preparation, model selection (work
+in progress), external forecast generation, local forecast generation
+(planned), simulations (planned), and forecast distribution to a more
+granular scale.
 
-\hypertarget{a-quick-overview}{%
-\section{A quick overview:}\label{a-quick-overview}}
+\section{Contents}\label{contents}
 
-TL;DR:\\
-https://kdestasio.github.io/post/r\_best\_practices/
+Chapters~\ref{sec-project} -~\ref{sec-renv} discuss the general setup of
+a collaborative project under version control. Chapter 4 deals with the
+setup file that configures the most general aspects of the
+\texttt{forecastr} project. Chapter 5 describes user defined helper
+functions for the \texttt{forecastr} project. Chapter 6 gives examples
+of best practices for time series manipulation.
 
-\hypertarget{basic-ideas-for-a-reproducible-workflow}{%
-\section{Basic ideas for a reproducible
-workflow}\label{basic-ideas-for-a-reproducible-workflow}}
+\bookmarksetup{startatroot}
+
+\chapter{Project}\label{sec-project}
+
+Projects are useful for organizing work, especially when working on
+multiple pieces of research simultaneously. They help to keep the
+workspace clean and avoid conflicts between tasks. Projects also make it
+easier to share work with others. A
+\href{https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects}{project}
+consists of the files associated with a given project (input data, R
+scripts, analytical results, and figures) kept together in a folder.
+
+\section{Project setup and
+conventions}\label{project-setup-and-conventions}
+
+Create a new project locally in RStudio under the File menu or using
+\texttt{usethis::create\_project("proj\_dir")}. The \emph{.Rproj} file
+contains the project settings. Open the project by double clicking this
+file in Finder. The minimum structure of a project includes an \emph{R}
+folder for scripts, a \emph{data} folder for data, and an \emph{output}
+folder for reports and plots. If present, the \emph{data/raw} folder
+contains data external to the project and the \emph{data/processed}
+folder contains intermediate processed data. Although local projects are
+sometimes useful to explore an idea, whenever you consider version
+tracking or collaboration, the project should be initiated from GitHub
+(see Chapter~\ref{sec-git} for details).
+
+Use the \href{https://rstudio.github.io/renv/articles/renv.html}{renv}
+package to store information about the packages used in the project. The
+renv package facilitates sharing a project and maintaining the same
+behavior on different machines. It creates a local package directory for
+the project. This means that it keeps track of all the packages and
+package versions that are used in the project, and collaborators can
+restore the exact same package environment and reproduce the results
+(see Chapter~\ref{sec-renv} for details).
+
+Use the \href{https://here.r-lib.org}{here} package to create paths
+relative to the project root. For example,
+\texttt{here::here("data",\ "raw/file.csv")} returns the path to the
+file \emph{file.csv} in the \emph{data/raw} folder. Load libraries and
+put hard coded lines at the top of the script. Use the
+\href{https://conflicted.r-lib.org}{conflicted} package to detect
+conflicts across packages and assign preferences. For example,
+\texttt{conflict\_prefer("filter",\ "dplyr")} assigns preference to the
+\texttt{filter} function in the dplyr package over the \texttt{filter}
+function in the stats package. Don't save the workspace on exit (Tools
+\textgreater{} Global Options \textgreater{} General \textgreater{} Save
+workspace to .RData on exit \textgreater{} Never or
+\texttt{usethis::use\_blank\_slate()}).
+
+Start each pipe with a comment, and if necessary add comments to each
+line. Enable
+\href{https://docs.posit.co/ide/user/ide/guide/tools/copilot.html}{Github
+Copilot} for RStudio; it is free for higher education users. Github
+Copilot will suggest code based on comments, which you can accept with
+the tab key. Use sectioning comments (\# comments followed by at least
+four dashes ----) to separate different parts of the script (they show
+up in the outline section of the editor pane). Use the addin provided by
+\href{https://styler.r-lib.org}{styler} package to format the code.
+Follow the \texttt{tidyverse} ``dialect'' and
+\href{https://style.tidyverse.org}{syntax}.
+
+Use R scripts for coding; don't put the analysis into chunks in markdown
+documents. Only render important results in code chunks of quarto
+(\emph{qmd}) or Rmarkdown (\emph{Rmd}) documents. Within a \emph{qmd} or
+\emph{Rmd} document
+\href{https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html}{source
+the R script} containing the analysis. Alternatively, save the entire
+workspace or individual objects from the R script, and then load these
+in the appropriate code chunks of the markdown document. Make sure the
+code chunks are looking for
+\href{https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html}{objects
+in the correct working directory}.
+
+Store secrets, passwords, and keys with the
+\href{https://keyring.r-lib.org/index.html}{keyring} package. For
+example, set the UDAMAN token with
+\texttt{keyring::key\_set\_with\_value(service\ =\ "udaman\_token",\ password\ =\ "-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=")}
+and retrieve it with \texttt{keyring::key\_get("udaman\_token")}. To
+avoid disclosing your secrets, do not store/assign the retrieved
+credentials to a variable. If security is not a concern, environment
+variables, such as API keys, can also be stored in a project specific
+\emph{.Renviron} file; it must end with \texttt{\textbackslash{}n}. In
+addition to \emph{.Renviron}, the \emph{.Rprofile} file is also executed
+each time R starts up. The latter typically contains a script with
+options and startup tasks. Both files are located in the project root
+folder.
+
+\section{Additional resources}\label{additional-resources}
+
+Overview of R setup:\\
+\url{https://rstats.wtf}
+
+Best practices:\\
+\url{https://kdestasio.github.io/post/r_best_practices/}
+
+Considerations for structuring projects:\\
+\url{https://www.r-bloggers.com/2018/08/structuring-r-projects/}
 
 Set up your work in projects:\\
-https://r4ds.hadley.nz/workflow-projects.html
+\url{https://r4ds.hadley.nz/workflow-scripts\#projects}
 
-Read section I in WTF: https://rstats.wtf/save-source.html
+Efficient data management in R:\\
+\url{https://www.r-bloggers.com/2020/02/efficient-data-management-in-r/}
 
-A good list of consideration for structuring projects:
-https://www.r-bloggers.com/2018/08/structuring-r-projects/
+Efficient R programming:\\
+\url{https://csgillespie.github.io/efficientR/}
 
-Use RStudio projects with sub-directories - R - R code. - data/raw -
-data external to the project. - data/processed - intermediate processed
-data. - notes - Rmd, and Rmd output, notes, papers, supporting
-documents, Rmd, etc. - output - reports, tables, etc. - output/plots -
-plots. - renv - used for library management (don't edit). - man - help
-files (don't edit).
+Data science workflow:\\
+\url{http://dcl-workflow.stanford.edu}
 
-Coding Conventions in R
+\bookmarksetup{startatroot}
 
-Follow the \texttt{tidyverse} style guide:
-https://style.tidyverse.org/index.html
+\chapter{Version control}\label{sec-git}
 
-Add 4 dashes after a section header for it to show up in the outline:
+Version control tracks changes in files over time, allows you to revert
+files back to a previous state and compare changes over time. It is
+essential for the collaborative development of a project, but is also
+useful for individual projects.
 
-\begin{verbatim}
-# *************************
-#  setup ----
-# *************************
-\end{verbatim}
+\section{Version control terms in
+Git(Hub)}\label{version-control-terms-in-github}
 
-Package management with \texttt{renv}:
-https://rstudio.github.io/renv/articles/renv.html
+\begin{itemize}
+\item
+  \textbf{.gitignore}: A file that specifies which files and directories
+  should be excluded from version control.
+\item
+  \textbf{Branch}: A separate line of development or parallel version of
+  the repository. Branches are used to develop features or fix bugs
+  without affecting the main branch.
+\item
+  \textbf{Clone}: A copy of a repository on your local machine. Cloning
+  a repository allows you to work on the project locally.
+\item
+  \textbf{Commit}: A snapshot of the project at a specific point in
+  time. Commits are used to save changes to the repository.
+\item
+  \textbf{Conflict}: When two branches have made changes to the same
+  line in a file, a conflict occurs. Conflicts need to be resolved
+  before the changes can be merged.
+\item
+  \textbf{Fork}: A copy of a repository on GitHub. This copy is
+  independent of the original and you can make changes to it without
+  affecting the original project.
+\item
+  \textbf{HEAD}: A reference to the most recent commit in the
+  repository, tip of the branch that is currently checked out.
+\item
+  \textbf{Main or Master}: The default branch in a Git repository.
+\item
+  \textbf{Merge}: Combining changes from one branch into another branch.
+\item
+  \textbf{Origin}: The default name of primary version of the repository
+  on GitHub.
+\item
+  \textbf{Pull}: Getting changes from GitHub to your local repository.
+\item
+  \textbf{Pull request}: A request to merge proposed changes from one
+  branch into another branch. Pull requests are used to review and
+  discuss changes before merging them into the main branch.
+\item
+  \textbf{Push}: Sending changes from your local repository to GitHub.
+\item
+  \textbf{Remote}: A remote repository on GitHub that you can pull from
+  and push to.
+\item
+  \textbf{Repository}: A folder that contains all the files and history
+  of a project. There can be a local repository (on your computer) and a
+  remote repository (hosted on GitHub).
+\item
+  \textbf{Stage}: Staging allows you to select which changes should be
+  included in the next commit.
+\item
+  \textbf{Upstream}: The original repository that you forked from on
+  GitHub.
+\end{itemize}
+
+\section{Version control setup}\label{version-control-setup}
+
+RStudio has built in support for Git-based version control for a
+project. Check if Git is
+\href{https://happygitwithr.com/install-git}{installed} by running
+\texttt{git\ -\/-version} in the terminal. Git is included in Xcode
+command line tools, which can be installed by running
+\texttt{xcode-select\ -\/-install} in the terminal. Provide your GitHub
+\href{https://happygitwithr.com/hello-git}{user name and email} to Git
+via
+\texttt{usethis::use\_git\_config(user.name\ =\ "Jane\ Doe",\ user.email\ =\ "jane@example.org")}.
+Next, \href{https://happygitwithr.com/https-pat\#tldr}{generate and
+store} a personal access token for GitHub via
+\texttt{usethis::create\_github\_token()} and
+\texttt{gitcreds::gitcreds\_set()}, respectively. Finally, make sure
+version control is enabled in RStudio (RStudio \textgreater{} Global
+Options \textgreater{} Git/SVN \textgreater{} Enable version control
+interface for RStudio projects \textgreater{} check box or
+\texttt{usethis::use\_blank\_slate()}). This concludes the setup for Git
+and GitHub, making it possible to establish a connection between RStudio
+and GitHub.
+
+Always \href{https://happygitwithr.com/new-github-first}{start setting
+up} version control on GitHub. Even if you
+\href{https://happygitwithr.com/existing-github-first}{already have a
+project} on your computer, begin by setting up a repository on GitHub.
+This can be done by clicking on the ``+'' in the top right corner of the
+GitHub website and selecting ``New repository''. Give the repository a
+name and description, make it public or private, add a readme file, and
+choose the R template for .gitignore. After creating the repository,
+copy the URL and open RStudio. The next paragraph describes a robust
+local setup method with the \texttt{usethis} package, but there is also
+a menu based option: create a new project from version control by
+selecting File \textgreater{} New Project \textgreater{} Version Control
+\textgreater{} Git and pasting the URL in the ``Repository URL'' field.
+Use the repository name as the project directory name. Choose a folder
+on your computer where the project will be stored locally and click
+``Create''. This will clone the repository to your computer and create a
+new RStudio project. The project is now connected to the repository on
+GitHub.
+
+The local setup described above can be automated with
+\texttt{usethis::create\_from\_github("repo\_url",\ "proj\_dir")}. If
+you have permission to push to the remote GitHub repository because you
+are an owner or collaborator on the project, then
+\texttt{create\_from\_github} will
+\href{https://happygitwithr.com/existing-github-first\#git-clone-usethis-rstudio}{clone
+it}. If you do not have parmission to push to the repository,
+\texttt{create\_from\_github} will
+\href{https://happygitwithr.com/fork-and-clone\#fork-and-clone-create-from-github}{fork
+and clone it}. In either case, do not work in the main branch. Instead,
+create a ``dev'' branch in RStudio and work in that branch: in the Git
+pane, click on the ``New Branch'', enter ``dev'' as the branch name,
+keep the remote origin, and chek the sync with remote box. This will
+create a new branch and switch to it.
+
+While in the dev branch, make changes to scripts or other files and save
+them. When you are ready to commit the changes, stage the files in the
+Git pane (``Command a'' selects all files), click ``Commit'' at the top
+of the Git pane. In the pop-up window, the ``Diff'' button allows you to
+browse the changes made to the files in the repository, while the
+``History'' button shows the commit history of the repository. These can
+be analyzed more conveniently on GitHub as described below in
+Section~\ref{sec-browse-commits}. Enter a commit message in the text
+box, and click the ``Commit'' button. Then push the changes to the
+remote repository. Go to the GitHub page of the dev branch and create a
+pull request to merge the dev branch into the main branch of the remote
+repository. After the pull request is merged, delete the dev branch on
+GitHub. Delete the local dev branch by executing
+\texttt{git\ branch\ -d\ dev} in the terminal. Finally, switch back to
+the main branch in RStudio and pull the changes from the remote
+repository.
+
+\section{Time travel on GitHub}\label{sec-browse-commits}
+
+From your repo's landing page, access commit history by clicking on
+``123 Commits'' under the green Code button. Once you're viewing the
+history, notice three ways to access more info for each commit:
+
+\begin{itemize}
+\item
+  The clipboard icon copies the SHA of the commit. This can be handy if
+  you need to refer to this commit elsewhere, e.g.~in an issue thread or
+  a commit message or in a Git command you're forming for local
+  execution.
+\item
+  Click on the abbreviated SHA itself in order to the view the diff
+  associated with the commit.
+\item
+  Click on the double angle brackets \textless\textgreater{} to browse
+  the state of the entire repo at that point in history.
+\end{itemize}
+
+Back out of any drilled down view by clicking on YOU/REPO to return to
+your repo's landing page. This brings you back to the present state and
+top-level of your repo.
+
+Once you've identified a relevant commit, diff, or file state, you can
+copy the current URL from your browser and use it to enhance online
+discussion elsewhere, i.e.~to bring other people to this exact view of
+the repo. The hyperlink-iness of repos hosted on GitHub can make online
+discussion of a project much more precise and efficient.
+
+What if you're interested in how a specific file came to be the way it
+is? First navigate to the file in the repo, then notice ``Blame'' on the
+left and ``History'' in the upper right.
+
+\begin{itemize}
+\item
+  The ``blame'' view of a file reveals who last touched each line of the
+  file, how long ago, and the associated commit message. Click on the
+  commit message to visit that commit. Or click the ``stacked
+  rectangles'' icon to move further back in time, but staying in blame
+  view. This is handy when doing forensics on a specific and small set
+  of lines.
+\item
+  The ``history'' view for a file is very much like the overall commit
+  history described above, except it only includes commits that affect
+  the file of interest. This can be handy when your inquiry is rather
+  diffuse and you're trying to digest the general story arc for a file.
+\end{itemize}
+
+When viewing a file on GitHub, you can click on a line number to
+highlight it. Use ``click \ldots{} shift-click'' to select a range of
+lines. Notice your browser's URL shows something of this form:
+https://github.com/OWNER/REPO/blob/SHA/path/to/file.R\#L27-L31 If the
+URL does not contain the SHA, type ``y'' to toggle into that form. These
+file- and SHA-specific URLs are a great way to point people at
+particular lines of code in online conversations. It's best practice to
+use the uglier links that contain the SHA, as they will stand the test
+of time.
+
+Search is always available in the upper-righthand corner of GitHub. Once
+you enter some text in the search box, a dropdown provides the choice to
+search in the current repo (the default) or all of GitHub. GitHub
+searches the contents of files (described as ``Code''), commit messages,
+and issues. Take advantage of the search hits across these different
+domains. Again, this is a powerful way to zoom in on specific lines of
+code, revisit an interesting time in project history, or re-discover a
+conversation thread.
+
+\section{Version control workflow}\label{version-control-workflow}
+
+After the initial setup, the workflow should always follow the following
+sequence:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  in the local/main branch, click on the ``Pull'' button in the Git pane
+  to pull changes from the main branch of the remote repository, which
+  is
+
+  \begin{itemize}
+  \tightlist
+  \item
+    upstream if the repository was forked,
+  \item
+    origin if the repository was cloned,
+  \end{itemize}
+
+  in the case of forked repo, after pulling from upstream, push to
+  origin,
+\item
+  create a new dev branch and switch to it,
+\item
+  make changes in the dev branch,
+\item
+  commit changes in the dev branch,
+\item
+  push changes to the dev branch of the remote origin repository,
+\item
+  create a pull request on GitHub to merge the origin dev branch a) into
+  upstream main if the repository was forked, b) into origin main if the
+  repository was cloned,
+\item
+  merge the pull request (or wait for it to be merged by the owner),
+\item
+  after merging, delete the dev branch on the remote and locally,
+\item
+  repeat step 1. (and then repeat it again before you resume your work
+  on the project).
+\end{enumerate}
+
+This workflow is recommended to avoid conflicts with other
+collaborators.
+
+\section{Dealing with conflicts}\label{dealing-with-conflicts}
+
+If a push is rejected, pull the changes from the remote repository. If
+there are conflicts, resolve them by editing the files and committing
+the changes. Every merge conflict inserts three delimiters:
+
+\texttt{\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}}
+feature branch name, the start of the merge conflict\\
+\texttt{======} the separator between the content of both branches\\
+\texttt{\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}}
+base branch name, the end of the merge conflict\\
+
+Fix the merge conflict by directly editing the script at the indicated
+locations. Often you can fix it by simply deleting the content of one of
+the branches within the conflict. Potentially you need to keep a mix of
+both. Don't forget to also delete the three delimiters when you're
+ready.
+
+\section{Additional resources}\label{additional-resources-1}
+
+Visual Git guide:\\
+\url{https://inbo.github.io/git-course/index.html}
+
+Exhaustive discussion of Git for R users:\\
+\url{https://happygitwithr.com}
+
+A research workflow based on Github:\\
+\url{https://www.carlboettiger.info/2012/05/06/research-workflow.html}
+
+For more advanced tasks, use GitHub Desktop:\\
+\url{https://desktop.github.com}
+
+\bookmarksetup{startatroot}
+
+\chapter{Package management}\label{sec-renv}
+
+The \href{https://rstudio.github.io/renv/articles/renv.html}{renv
+package} helps create \textbf{r}eproducible \textbf{env}ironments for
+your R projects. Use renv to make R projects more isolated, portable and
+reproducible.
+
+\begin{itemize}
+\item
+  \textbf{Isolated}: Installing a new or updated package for one project
+  won't break other projects, and vice versa. That's because renv gives
+  each project its own private library.
+\item
+  \textbf{Portable}: Easily transport projects from one computer to
+  another, even across different platforms. renv makes it easy to
+  install the packages the project depends on.
+\item
+  \textbf{Reproducible}: renv records the exact package versions the
+  project depends on, and ensures those exact versions get installed by
+  others who work on the project.
+\end{itemize}
+
+\section{Getting started}\label{getting-started}
+
+To convert a project to use renv, call \texttt{renv::init()}. This adds
+three new files and directories to the project:
+
+\begin{itemize}
+\item
+  The project library, \emph{renv/library}, is a library that contains
+  all packages currently used by the project\footnote{If you'd like to
+    skip dependency discovery, you can call
+    \texttt{renv::init(bare\ =\ TRUE)} to initialize a project with an
+    empty project library.}. This is the key magic that makes renv work:
+  instead of having one library containing the packages used in every
+  project, renv gives you a separate library for each project. This
+  provides the benefits of isolation: different projects can use
+  different versions of packages, and installing, updating, or removing
+  packages in one project doesn't affect any other project.
+\item
+  The lockfile, \emph{renv.lock}, records enough metadata about every
+  package that it can be re-installed on a new machine.
+\item
+  renv uses \emph{.Rprofile} to configure the R session to use the
+  project library. This ensures that once renv is turned on for a
+  project, it stays on, until it is deliberately turned off.
+\end{itemize}
+
+The next important pair of tools is \texttt{renv::snapshot()} and
+\texttt{renv::restore()}. \texttt{snapshot()} updates the lockfile with
+metadata about the currently-used packages in the project library.
+Sharing the lockfile allows other people or other computers to reproduce
+the current project environment by running \texttt{restore()}, which
+uses the metadata from the lockfile to install exactly the same version
+of every package. This pair of functions provides the benefits of
+reproducibility and portability: you are now tracking exactly which
+package versions you have installed so you can recreate them on other
+machines.
+
+\section{Collaboration}\label{collaboration}
+
+One of the reasons to use renv is to make it easier to share code in
+such a way that everyone gets exactly the same package versions. As
+above, start by calling \texttt{renv::init()}. You'll then need to
+commit \emph{renv.lock}, \emph{.Rprofile}, \emph{renv/settings.json} and
+\emph{renv/activate.R} to version control, ensuring that others can
+recreate your project environment. If you're using git, this is
+particularly simple because renv will create a \emph{.gitignore}, and
+you can just commit all suggested files.
+
+Now when one of your collaborators opens this project, renv will
+automatically bootstrap itself, downloading and installing the
+appropriate version of renv. It will also ask them if they want to
+download and install all the packages it needs by running
+\texttt{renv::restore()}.
+
+\section{Installing packages}\label{installing-packages}
+
+If you use renv for multiple projects, you'll have multiple libraries,
+meaning that you'll often need to install the same package in multiple
+places. It would be annoying if you had to download (or worse, compile)
+the package repeatedly, so renv uses a package cache. That means you
+only ever have to download and install a package once, and for each
+subsequent install, renv will just add a link from the project library
+to the global cache. You can learn more about the cache in
+\texttt{vignette("package-install")}.
+
+After installing the package and checking that the code works, you
+should call \texttt{renv::snapshot()} to record the latest package
+versions in your lockfile. If you're collaborating with others, you'll
+need to commit those changes to git, and let them know that you've
+updated the lockfile and they should call \texttt{renv::restore()} when
+they're next working on a project.
+
+\section{Updating packages}\label{updating-packages}
+
+Regularly (at least once a year) update the packages in your project to
+get the latest versions of all dependencies. Similarly, if you're making
+major changes to a project that you haven't worked on for a while, it's
+often a good idea to start with an \texttt{renv::update()}\footnote{You
+  can also use \texttt{update.packages()}, but \texttt{renv::update()}
+  works with the same sources that \texttt{renv::install()} supports.}
+before making any changes to the code.
+
+After calling \texttt{renv::update()}, you should run the code in your
+project and verify that it still works (or make any changes needed to
+get it working). Then call \texttt{renv::snapshot()} to record the new
+versions in the lockfile. If you get stuck, and can't get the project to
+work with the new versions, you can call \texttt{renv::restore()} to
+roll back changes to the project library and revert to the known good
+state recorded in your lockfile. If you need to roll back to an even
+older version, take a look at \texttt{renv::history()} and
+\texttt{renv::revert()}. \texttt{renv::update()} will also update renv
+itself, ensuring that you get all the latest features.
+
+\section{Workflow for setting up a project with version control and
+renv}\label{workflow-for-setting-up-a-project-with-version-control-and-renv}
+
+The ideal sequence of steps to set up a project with version control and
+renv is as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  github
+\item
+  usethis::create\_from\_github()
+\item
+  renv::init() or renv::restore() git::pull \ldots{}
+\item
+  get work done
+\item
+  renv::snapshot()
+\item
+  git
+\end{enumerate}
+
+\section{Additional resources}\label{additional-resources-2}
+
+Overview of \texttt{renv}:\\
+\url{https://rstudio.github.io/renv/articles/renv.html}
+
+Leveraging git and renv at the end of a working session
+
+Now that we have our nice project setup, we should not forget to
+leverage it. At the end of a working session you should follow the
+following steps:
+
+Create a renv::snapshot() to save all the packages you used to your
+local package directory. Commit all your changes to git. This can be
+easily done by using the Git pane in RStudio. Push everything to GitHub.
+Whenever you re-open your Rproject, make sure to start your working
+session with a Pull from GitHub. That way, you will always work with the
+most recent version of your project.
 
 Collaborating with \texttt{renv}:
 https://rstudio.github.io/renv/articles/collaborating.html
 
-\hypertarget{produce-output-via-r-markdown}{%
-\section{Produce output via R
-Markdown}\label{produce-output-via-r-markdown}}
-
-Preference settings:
-https://bookdown.org/yihui/rmarkdown-cookbook/working-directory.html
-
-Render results from R scripts via Rmd: 1) source your R code from within
-Rmd https://bookdown.org/yihui/rmarkdown-cookbook/source-script.html 1*)
-save output from R script and load it in Rmd setup chunk 2) only render
-important results in Rmd chunks
-
-\hypertarget{dealing-with-credentials}{%
-\section{Dealing with credentials}\label{dealing-with-credentials}}
-
-Store your credentials and sensitive info in project specific .Renviron
-file (project's root directory, must end with
-\texttt{\textbackslash{}n}):
-
-\begin{verbatim}
-udaman_token = "<your udaman token>"
-udaman_user = "<your user name>"
-udaman_pwd = "<your password>"
-GITHUB_PAT = "<your github pat>"
-\end{verbatim}
-
-Retrieve credentials on demand. Do not store/assign the retrieved
-credentials to a variable:
-\texttt{req\ \textless{}-\ httr::GET(url,\ httr::add\_headers(Authorization\ =\ paste("Bearer",\ Sys.getenv("udaman\_token"))))}
-
-\hypertarget{additonal-resources}{%
-\section{Additonal resources:}\label{additonal-resources}}
-
-Look at the \texttt{targets} package for workflow automation:
-https://docs.ropensci.org/targets/index.html
-
-Look at the Efficient R programming book:
-https://csgillespie.github.io/efficientR/
-
-Also look at the Stanford Guide: http://dcl-workflow.stanford.edu
-
-\bookmarksetup{startatroot}
-
-\hypertarget{git}{%
-\chapter{Git}\label{git}}
-
-Set up version control for a project.
-
-\hypertarget{a-quick-overview-1}{%
-\section{A quick overview:}\label{a-quick-overview-1}}
-
 TL;DR: https://inbo.github.io/git-course/index.html
-
-\hypertarget{git-step-by-step}{%
-\section{Git step by step}\label{git-step-by-step}}
-
-If you don't have Git, install it:\\
-https://happygitwithr.com/install-git.html
-
-Make sure .gitignore contains the following files:\\
-.Renviron\\
-.Rprofile
-
-Introduce yourself to Git:\\
-In the shell (Terminal tab in RStudio):\\
-git config --global user.name `Jane\_Doe'\\
-git config --global user.email `jane@example.com'\\
-git config --global --list
-
-For more advanced tasks, use GitHub Desktop:\\
-https://desktop.github.com
-
-Generate and store your GitHub PAT (Personal Access Token):\\
-https://happygitwithr.com/https-pat.html\\
-https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-
-Use one of three ways to add your project to GitHub:\\
-Brand new project:\\
-https://happygitwithr.com/new-github-first.html\\
-Existing project without version control:\\
-https://happygitwithr.com/existing-github-first.html\\
-Existing project under local version control:\\
-https://happygitwithr.com/existing-github-last.html
-
-Troubleshooting if RStudio can't detect Git:\\
-https://happygitwithr.com/rstudio-see-git.html
-
-Git vocabulary:\\
-https://happygitwithr.com/git-basics.html
-
-Remote setups (try to stick to GitHub first discussed above):\\
-https://happygitwithr.com/common-remote-setups.html
-
-Useful Git workflows and dealing with conflicts:\\
-https://happygitwithr.com/workflows-intro.html\\
-https://happygitwithr.com/push-rejected.html\\
-https://happygitwithr.com/pull-tricky.html
-
-Additional resources:\\
-https://happygitwithr.com/ideas-for-content.html
-
-\hypertarget{suggested-workflow}{%
-\section{Suggested workflow}\label{suggested-workflow}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\tightlist
-\item
-  Initialize repository on GitHub.com under the UHERO account.\\
-\item
-  Clone it via RStudio project setup.\\
-\item
-  Commit changes, pull, resolve issues, push.\\
-  3*) If work in a branch (create in RStudio), commit to branch, (pull)
-  push to remote, pull request on GitHub.com from branch to main, merge,
-  delete branch on GitHub.com.
-\end{enumerate}
-
-See these detailed guides: https://inbo.github.io/git-course/index.html
-https://github.com/llendway/github\_for\_collaboration/blob/master/github\_for\_collaboration.md
-
-Another research workflow based on Github:
-https://www.carlboettiger.info/2012/05/06/research-workflow.html
+https://happygitwithr.com/
 
 \bookmarksetup{startatroot}
 
-\hypertarget{setup-of-the-forecastr-project}{%
 \chapter{Setup of the forecastr
-project}\label{setup-of-the-forecastr-project}}
+project}\label{setup-of-the-forecastr-project}
 
 The \texttt{setup.R} file contains general information used throughout
 the project. The contents are listed below.
 
-\hypertarget{start-with-a-clean-slate}{%
-\section{Start with a clean slate}\label{start-with-a-clean-slate}}
+\section{Start with a clean slate}\label{start-with-a-clean-slate}
 
 First remove all objects from global environment:\\
 \texttt{rm(list\ =\ ls())}
@@ -393,8 +788,7 @@ invisible(
 }
 \end{verbatim}
 
-\hypertarget{packages}{%
-\section{Packages}\label{packages}}
+\section{Packages}\label{packages}
 
 The setup file clarifies its own location relative to the project root
 and loads the necessary packages.
@@ -429,8 +823,7 @@ conflict_prefer("extract", "magrittr") # magrittr vs tidyr
 Verify top level project directory\\
 \texttt{here()}
 
-\hypertarget{package-descriptions}{%
-\section{Package descriptions}\label{package-descriptions}}
+\section{Package descriptions}\label{package-descriptions}
 
 Use the \texttt{here} package to deal with file paths:\\
 https://here.r-lib.org
@@ -470,8 +863,7 @@ Prefer using \texttt{tsbox} and \texttt{tidyverse} functions whenever
 possible, but understand the components and behavior of \texttt{xts}
 objects: https://rc2e.com/timeseriesanalysis
 
-\hypertarget{additional-info-in-setup}{%
-\section{Additional info in setup}\label{additional-info-in-setup}}
+\section{Additional info in setup}\label{additional-info-in-setup}
 
 Define project-wide constants:
 
@@ -485,15 +877,13 @@ Load user defined utility functions (details in next section):\\
 
 \bookmarksetup{startatroot}
 
-\hypertarget{user-defined-utility-functions}{%
 \chapter{User defined utility
-functions}\label{user-defined-utility-functions}}
+functions}\label{user-defined-utility-functions}
 
 Functions not available in existing packages are stored in util\_funs.R.
 A pdf version of this document is available \href{util_funs.pdf}{here}.
 
-\hypertarget{atoq}{%
-\section{AtoQ}\label{atoq}}
+\section{AtoQ}\label{atoq}
 
 Description:
 
@@ -532,8 +922,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{explode_xts}{%
-\section{explode\_xts}\label{explode_xts}}
+\section{explode\_xts}\label{explode_xts}
 
 Description:
 
@@ -572,8 +961,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{find_end}{%
-\section{find\_end}\label{find_end}}
+\section{find\_end}\label{find_end}
 
 Description:
 
@@ -610,8 +998,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{find_start}{%
-\section{find\_start}\label{find_start}}
+\section{find\_start}\label{find_start}
 
 Description:
 
@@ -648,8 +1035,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{get_series}{%
-\section{get\_series}\label{get_series}}
+\section{get\_series}\label{get_series}
 
 Description:
 
@@ -683,8 +1069,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{get_series1}{%
-\section{get\_series1}\label{get_series1}}
+\section{get\_series1}\label{get_series1}
 
 Description:
 
@@ -718,8 +1103,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{get_series_exp}{%
-\section{get\_series\_exp}\label{get_series_exp}}
+\section{get\_series\_exp}\label{get_series_exp}
 
 Description:
 
@@ -757,8 +1141,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{get_var}{%
-\section{get\_var}\label{get_var}}
+\section{get\_var}\label{get_var}
 
 Description:
 
@@ -799,8 +1182,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{make_xts}{%
-\section{make\_xts}\label{make_xts}}
+\section{make\_xts}\label{make_xts}
 
 Description:
 
@@ -841,8 +1223,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{p}{%
-\section{p}\label{p}}
+\section{p}\label{p}
 
 Description:
 
@@ -879,8 +1260,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{pca_to_pc}{%
-\section{pca\_to\_pc}\label{pca_to_pc}}
+\section{pca\_to\_pc}\label{pca_to_pc}
 
 Description:
 
@@ -917,8 +1297,7 @@ Examples:
  ts_c(test1 %>% ts_pca() %>% pca_to_pc(), test1 %>% ts_pc())
 \end{verbatim}
 
-\hypertarget{pchmy}{%
-\section{pchmy}\label{pchmy}}
+\section{pchmy}\label{pchmy}
 
 Description:
 
@@ -959,8 +1338,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{plot_1}{%
-\section{plot\_1}\label{plot_1}}
+\section{plot\_1}\label{plot_1}
 
 Description:
 
@@ -1010,8 +1388,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{plot_comp}{%
-\section{plot\_comp}\label{plot_comp}}
+\section{plot\_comp}\label{plot_comp}
 
 Description:
 
@@ -1068,8 +1445,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{plot_comp_2}{%
-\section{plot\_comp\_2}\label{plot_comp_2}}
+\section{plot\_comp\_2}\label{plot_comp_2}
 
 Description:
 
@@ -1126,8 +1502,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{qtoa}{%
-\section{QtoA}\label{qtoa}}
+\section{QtoA}\label{qtoa}
 
 Description:
 
@@ -1169,8 +1544,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{qtom}{%
-\section{QtoM}\label{qtom}}
+\section{QtoM}\label{qtom}
 
 Description:
 
@@ -1212,8 +1586,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{qtom1}{%
-\section{QtoM1}\label{qtom1}}
+\section{QtoM1}\label{qtom1}
 
 Description:
 
@@ -1252,8 +1625,7 @@ Examples:
  
 \end{verbatim}
 
-\hypertarget{qtrs}{%
-\section{qtrs}\label{qtrs}}
+\section{qtrs}\label{qtrs}
 
 Description:
 
@@ -1290,9 +1662,8 @@ Examples:
 
 \bookmarksetup{startatroot}
 
-\hypertarget{best-practices-for-time-series-data-manipulation}{%
 \chapter{Best practices for time series data
-manipulation}\label{best-practices-for-time-series-data-manipulation}}
+manipulation}\label{best-practices-for-time-series-data-manipulation}
 
 Use capital letters for series names. Special characters in variable
 names require putting the name between backticks (e.g.~\texttt{N@US.A}).
@@ -1415,8 +1786,7 @@ hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] <- hist_a_lst %$%
   (get_var("E{ser_i}_AT_{cnty_i}") - get_var("E_NF_AT_{cnty_i}"))
 \end{verbatim}
 
-\hypertarget{harness-the-power-of-tsbox}{%
-\section{Harness the power of tsbox}\label{harness-the-power-of-tsbox}}
+\section{Harness the power of tsbox}\label{harness-the-power-of-tsbox}
 
 Use the converter functions in
 \href{https://www.tsbox.help/reference/index.html}{\texttt{tsbox}} to
@@ -1435,8 +1805,7 @@ are specific to the \texttt{xts}, \texttt{ts}, \texttt{dplyr} or
 
 \bookmarksetup{startatroot}
 
-\hypertarget{model-selection}{%
-\chapter{Model selection}\label{model-selection}}
+\chapter{Model selection}\label{model-selection}
 
 The model selection process can be run line-by-line from an R script
 directly (R/gets\_model\_select.R) or via sourcing an Rmd document
@@ -1444,8 +1813,7 @@ directly (R/gets\_model\_select.R) or via sourcing an Rmd document
 results in an easier to digest html file. Running the full script
 (source) takes about 1 minute.
 
-\hypertarget{main-user-settings}{%
-\section{Main user settings}\label{main-user-settings}}
+\section{Main user settings}\label{main-user-settings}
 
 \begin{itemize}
 \tightlist
@@ -1464,9 +1832,8 @@ results in an easier to digest html file. Running the full script
   List of predictors.
 \end{itemize}
 
-\hypertarget{data-preparation-tidyverse}{%
 \section{\texorpdfstring{Data preparation
-(\texttt{tidyverse})}{Data preparation (tidyverse)}}\label{data-preparation-tidyverse}}
+(\texttt{tidyverse})}{Data preparation (tidyverse)}}\label{data-preparation-tidyverse}
 
 \begin{itemize}
 \tightlist
@@ -1490,9 +1857,8 @@ results in an easier to digest html file. Running the full script
   model, including trend and season dummies.
 \end{itemize}
 
-\hypertarget{model-selection-steps-gets}{%
 \section{\texorpdfstring{Model selection steps
-(\texttt{gets})}{Model selection steps (gets)}}\label{model-selection-steps-gets}}
+(\texttt{gets})}{Model selection steps (gets)}}\label{model-selection-steps-gets}
 
 \url{https://cran.r-project.org/web/packages/gets/index.html}\strut \\
 - Formulate a general unrestricted model.\\
@@ -1509,10 +1875,9 @@ estimation period).\\
 coefficients here to keep it general). If happy with the model, copy
 this equation into file containing all model equations.
 
-\hypertarget{produce-a-quasi-forecast-with-the-selected-model-bimets}{%
 \section{\texorpdfstring{Produce a quasi-forecast with the selected
 model
-(\texttt{bimets})}{Produce a quasi-forecast with the selected model (bimets)}}\label{produce-a-quasi-forecast-with-the-selected-model-bimets}}
+(\texttt{bimets})}{Produce a quasi-forecast with the selected model (bimets)}}\label{produce-a-quasi-forecast-with-the-selected-model-bimets}
 
 \url{https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf}\strut \\
 - Load model from txt file.\\
@@ -1524,8 +1889,7 @@ point also run a Chow test of model stability).\\
 
 \bookmarksetup{startatroot}
 
-\hypertarget{stochastic-simulations}{%
-\chapter{Stochastic simulations}\label{stochastic-simulations}}
+\chapter{Stochastic simulations}\label{stochastic-simulations}
 
 The model selection process stores a set of general equations
 (coefficient estimates are not plugged in) in a text file. Before
@@ -1538,8 +1902,7 @@ the ragged edge of the data by finding the last data point for each
 series and ``exogenize'' the series up to that point (use actuals in
 simulation).
 
-\hypertarget{main-user-settings-1}{%
-\section{Main user settings}\label{main-user-settings-1}}
+\section{Main user settings}\label{main-user-settings-1}
 
 \begin{itemize}
 \tightlist
@@ -1553,8 +1916,7 @@ simulation).
   Maximum number of lags in models.
 \end{itemize}
 
-\hypertarget{data-preparation}{%
-\section{Data preparation}\label{data-preparation}}
+\section{Data preparation}\label{data-preparation}
 
 \begin{itemize}
 \tightlist
@@ -1569,8 +1931,7 @@ simulation).
   Combine all variables into a single dataset.
 \end{itemize}
 
-\hypertarget{simulation-prep}{%
-\section{Simulation prep}\label{simulation-prep}}
+\section{Simulation prep}\label{simulation-prep}
 
 \begin{itemize}
 \tightlist
@@ -1591,8 +1952,7 @@ simulation).
   Set add factors.
 \end{itemize}
 
-\hypertarget{simulation}{%
-\section{Simulation}\label{simulation}}
+\section{Simulation}\label{simulation}
 
 \begin{itemize}
 \tightlist
@@ -1614,11 +1974,9 @@ simulation).
 
 \bookmarksetup{startatroot}
 
-\hypertarget{notes}{%
-\chapter{Notes}\label{notes}}
+\chapter{Notes}\label{notes}
 
-\hypertarget{project-setup-1}{%
-\section{Project setup}\label{project-setup-1}}
+\section{Project setup}\label{project-setup}
 
 Coding Conventions in R:
 
@@ -1649,14 +2007,12 @@ Use RStudio projects with sub-directories
 
 Preference settings:
 
-\hypertarget{git-1}{%
-\section{Git}\label{git-1}}
+\section{Git}\label{git}
 
 A quick overview:
 https://github.com/llendway/github\_for\_collaboration/blob/master/github\_for\_collaboration.md
 
-\hypertarget{git-step-by-step-1}{%
-\section{Git step by step}\label{git-step-by-step-1}}
+\section{Git step by step}\label{git-step-by-step}
 
 If you don't have Git, install it:\\
 https://happygitwithr.com/install-git.html
@@ -2093,6 +2449,7 @@ https://rkabacoff.github.io/datavis/
 R Graphics Cookbook, 2nd edition: https://r-graphics.org
 
 ggplot2: elegant graphics for data analysis: https://ggplot2-book.org
+
 
 
 

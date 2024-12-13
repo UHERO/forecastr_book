@@ -26,14 +26,15 @@ book:
     style: floating
   chapters:
     - index.qmd
-    - 01-project.qmd
-    - 02-git.qmd
-    - 03-setup.qmd
-    - 04-utilfuns.qmd
-    - 05-bestpract.qmd
-    - 06-modselect.qmd
-    - 07-simulation.qmd
-    - 08-notes.qmd
+    - project.qmd
+    - git.qmd
+    - renv.qmd
+    - setup.qmd
+    - utilfuns.qmd
+    - bestpract.qmd
+    - modselect.qmd
+    - simulation.qmd
+    - notes.qmd
 
 comments:
   hypothesis: false

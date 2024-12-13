@@ -1,0 +1,126 @@
+# Version control {#sec-git}
+
+Version control tracks changes in files over time, allows you to revert files back to a previous state and compare changes over time. It is essential for the collaborative development of a project, but is also useful for individual projects.
+
+## Version control terms in Git(Hub)
+
+-   **.gitignore**: A file that specifies which files and directories should be excluded from version control.
+
+-   **Branch**: A separate line of development or parallel version of the repository. Branches are used to develop features or fix bugs without affecting the main branch.
+
+-   **Clone**: A copy of a repository on your local machine. Cloning a repository allows you to work on the project locally.
+
+-   **Commit**: A snapshot of the project at a specific point in time. Commits are used to save changes to the repository.
+
+-   **Conflict**: When two branches have made changes to the same line in a file, a conflict occurs. Conflicts need to be resolved before the changes can be merged.
+
+-   **Fork**: A copy of a repository on GitHub. This copy is independent of the original and you can make changes to it without affecting the original project.
+
+-   **HEAD**: A reference to the most recent commit in the repository, tip of the branch that is currently checked out.
+
+-   **Main or Master**: The default branch in a Git repository.
+
+-   **Merge**: Combining changes from one branch into another branch.
+
+-   **Origin**: The default name of primary version of the repository on GitHub.
+
+-   **Pull**: Getting changes from GitHub to your local repository.
+
+-   **Pull request**: A request to merge proposed changes from one branch into another branch. Pull requests are used to review and discuss changes before merging them into the main branch.
+
+-   **Push**: Sending changes from your local repository to GitHub.
+
+-   **Remote**: A remote repository on GitHub that you can pull from and push to.
+
+-   **Repository**: A folder that contains all the files and history of a project. There can be a local repository (on your computer) and a remote repository (hosted on GitHub).
+
+-   **Stage**: Staging allows you to select which changes should be included in the next commit.
+
+-   **Upstream**: The original repository that you forked from on GitHub.
+
+## Version control setup
+
+RStudio has built in support for Git-based version control for a project. Check if Git is [installed](https://happygitwithr.com/install-git) by running `git --version` in the terminal. Git is included in Xcode command line tools, which can be installed by running `xcode-select --install` in the terminal. Provide your GitHub [user name and email](https://happygitwithr.com/hello-git) to Git via `usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")`. Next, [generate and store](https://happygitwithr.com/https-pat#tldr) a personal access token for GitHub via `usethis::create_github_token()` and `gitcreds::gitcreds_set()`, respectively. Finally, make sure version control is enabled in RStudio (RStudio \> Global Options \> Git/SVN \> Enable version control interface for RStudio projects \> check box or `usethis::use_blank_slate()`). This concludes the setup for Git and GitHub, making it possible to establish a connection between RStudio and GitHub.
+
+Always [start setting up](https://happygitwithr.com/new-github-first) version control on GitHub. Even if you [already have a project](https://happygitwithr.com/existing-github-first) on your computer, begin by setting up a repository on GitHub. This can be done by clicking on the "+" in the top right corner of the GitHub website and selecting "New repository". Give the repository a name and description, make it public or private, add a readme file, and choose the R template for .gitignore. After creating the repository, copy the URL and open RStudio. The next paragraph describes a robust local setup method with the `usethis` package, but there is also a menu based option: create a new project from version control by selecting File \> New Project \> Version Control \> Git and pasting the URL in the "Repository URL" field. Use the repository name as the project directory name. Choose a folder on your computer where the project will be stored locally and click "Create". This will clone the repository to your computer and create a new RStudio project. The project is now connected to the repository on GitHub.
+
+The local setup described above can be automated with `usethis::create_from_github("repo_url", "proj_dir")`. If you have permission to push to the remote GitHub repository because you are an owner or collaborator on the project, then `create_from_github` will [clone it](https://happygitwithr.com/existing-github-first#git-clone-usethis-rstudio). If you do not have parmission to push to the repository, `create_from_github` will [fork and clone it](https://happygitwithr.com/fork-and-clone#fork-and-clone-create-from-github). In either case, do not work in the main branch. Instead, create a "dev" branch in RStudio and work in that branch: in the Git pane, click on the "New Branch", enter "dev" as the branch name, keep the remote origin, and chek the sync with remote box. This will create a new branch and switch to it.
+
+While in the dev branch, make changes to scripts or other files and save them. When you are ready to commit the changes, stage the files in the Git pane ("Command a" selects all files), click "Commit" at the top of the Git pane. In the pop-up window, the "Diff" button allows you to browse the changes made to the files in the repository, while the "History" button shows the commit history of the repository. These can be analyzed more conveniently on GitHub as described below in @sec-browse-commits. Enter a commit message in the text box, and click the "Commit" button. Then push the changes to the remote repository. Go to the GitHub page of the dev branch and create a pull request to merge the dev branch into the main branch of the remote repository. After the pull request is merged, delete the dev branch on GitHub. Delete the local dev branch by executing `git branch -d dev` in the terminal. Finally, switch back to the main branch in RStudio and pull the changes from the remote repository.
+
+## Time travel on GitHub {#sec-browse-commits}
+
+From your repo’s landing page, access commit history by clicking on “123 Commits” under the green Code button. Once you’re viewing the history, notice three ways to access more info for each commit:
+
+-   The clipboard icon copies the SHA of the commit. This can be handy if you need to refer to this commit elsewhere, e.g. in an issue thread or a commit message or in a Git command you’re forming for local execution.
+
+-   Click on the abbreviated SHA itself in order to the view the diff associated with the commit.
+
+-   Click on the double angle brackets \<\> to browse the state of the entire repo at that point in history.
+
+Back out of any drilled down view by clicking on YOU/REPO to return to your repo’s landing page. This brings you back to the present state and top-level of your repo.
+
+Once you’ve identified a relevant commit, diff, or file state, you can copy the current URL from your browser and use it to enhance online discussion elsewhere, i.e. to bring other people to this exact view of the repo. The hyperlink-iness of repos hosted on GitHub can make online discussion of a project much more precise and efficient.
+
+What if you’re interested in how a specific file came to be the way it is? First navigate to the file in the repo, then notice “Blame” on the left and “History” in the upper right.
+
+-   The “blame” view of a file reveals who last touched each line of the file, how long ago, and the associated commit message. Click on the commit message to visit that commit. Or click the “stacked rectangles” icon to move further back in time, but staying in blame view. This is handy when doing forensics on a specific and small set of lines.
+
+-   The “history” view for a file is very much like the overall commit history described above, except it only includes commits that affect the file of interest. This can be handy when your inquiry is rather diffuse and you’re trying to digest the general story arc for a file.
+
+When viewing a file on GitHub, you can click on a line number to highlight it. Use “click … shift-click” to select a range of lines. Notice your browser’s URL shows something of this form: https://github.com/OWNER/REPO/blob/SHA/path/to/file.R#L27-L31 If the URL does not contain the SHA, type “y” to toggle into that form. These file- and SHA-specific URLs are a great way to point people at particular lines of code in online conversations. It’s best practice to use the uglier links that contain the SHA, as they will stand the test of time.
+
+Search is always available in the upper-righthand corner of GitHub. Once you enter some text in the search box, a dropdown provides the choice to search in the current repo (the default) or all of GitHub. GitHub searches the contents of files (described as “Code”), commit messages, and issues. Take advantage of the search hits across these different domains. Again, this is a powerful way to zoom in on specific lines of code, revisit an interesting time in project history, or re-discover a conversation thread.
+
+## Version control workflow
+
+After the initial setup, the workflow should always follow the following sequence:
+
+1.  in the local/main branch, click on the "Pull" button in the Git pane to pull changes from the main branch of the remote repository, which is
+
+    -   upstream if the repository was forked,
+    -   origin if the repository was cloned,
+
+    in the case of forked repo, after pulling from upstream, push to origin,
+
+2.  create a new dev branch and switch to it,
+
+3.  make changes in the dev branch,
+
+4.  commit changes in the dev branch,
+
+5.  push changes to the dev branch of the remote origin repository,
+
+6.  create a pull request on GitHub to merge the origin dev branch a) into upstream main if the repository was forked, b) into origin main if the repository was cloned,
+
+7.  merge the pull request (or wait for it to be merged by the owner),
+
+8.  after merging, delete the dev branch on the remote and locally,
+
+9.  repeat step 1. (and then repeat it again before you resume your work on the project).
+
+This workflow is recommended to avoid conflicts with other collaborators.
+
+## Dealing with conflicts
+
+If a push is rejected, pull the changes from the remote repository. If there are conflicts, resolve them by editing the files and committing the changes. Every merge conflict inserts three delimiters:
+
+`<<<<<<` feature branch name, the start of the merge conflict\
+`======` the separator between the content of both branches\
+`>>>>>>` base branch name, the end of the merge conflict\
+
+Fix the merge conflict by directly editing the script at the indicated locations. Often you can fix it by simply deleting the content of one of the branches within the conflict. Potentially you need to keep a mix of both. Don’t forget to also delete the three delimiters when you’re ready.
+
+## Additional resources
+
+Visual Git guide:\
+<https://inbo.github.io/git-course/index.html>
+
+Exhaustive discussion of Git for R users:\
+<https://happygitwithr.com>
+
+A research workflow based on Github:\
+<https://www.carlboettiger.info/2012/05/06/research-workflow.html>
+
+For more advanced tasks, use GitHub Desktop:\
+<https://desktop.github.com>

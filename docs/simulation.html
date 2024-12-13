@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Peter Fuleky">
 
-<title>a-renv</title>
+<title>9&nbsp; Stochastic simulations – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,78 +24,265 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="02a-renv_files/libs/clipboard/clipboard.min.js"></script>
-<script src="02a-renv_files/libs/quarto-html/quarto.js"></script>
-<script src="02a-renv_files/libs/quarto-html/popper.min.js"></script>
-<script src="02a-renv_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="02a-renv_files/libs/quarto-html/anchor.min.js"></script>
-<link href="02a-renv_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="02a-renv_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="02a-renv_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="02a-renv_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="02a-renv_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./notes.html" rel="next">
+<link href="./modselect.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
+<link rel="stylesheet" href="style.css">
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simulation.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">User guide to UHERO’s forecast processes</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/UHERO/forecastr_book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./forecastr.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./forecastr.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Package management</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bestpract.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modselect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#main-user-settings" id="toc-main-user-settings" class="nav-link active" data-scroll-target="#main-user-settings"><span class="header-section-number">9.1</span> Main user settings</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">9.2</span> Data preparation</a></li>
+  <li><a href="#simulation-prep" id="toc-simulation-prep" class="nav-link" data-scroll-target="#simulation-prep"><span class="header-section-number">9.3</span> Simulation prep</a></li>
+  <li><a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation"><span class="header-section-number">9.4</span> Simulation</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/simulation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/simulation.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></h1>
+</div>
 
 
 
-<section id="package-management" class="level1">
-<h1>Package management</h1>
-<p>This description is taken from the developer’s <a href="https://rstudio.github.io/renv/articles/renv.html">introducion to the renv package</a>. The renv package helps create <strong>r</strong>eproducible <strong>env</strong>ironments for your R projects. Use renv to make R projects more isolated, portable and reproducible.</p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The model selection process stores a set of general equations (coefficient estimates are not plugged in) in a text file. Before simulation can commence, several steps need to take place: compile the system of equations, add data to the equations, estimate equations. <code>bimets</code> does not automatically adjust the sample for missing data points, so need to identify the time period with a rectangular sample for the estimation of each equation. For forecasting, deal with the ragged edge of the data by finding the last data point for each series and “exogenize” the series up to that point (use actuals in simulation).</p>
+<section id="main-user-settings" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="main-user-settings"><span class="header-section-number">9.1</span> Main user settings</h2>
 <ul>
-<li><strong>Isolated</strong>: Installing a new or updated package for one project won’t break other projects, and vice versa. That’s because renv gives each project its own private library.</li>
-<li><strong>Portable</strong>: Easily transport projects from one computer to another, even across different platforms. renv makes it easy to install the packages the project depends on.</li>
-<li><strong>Reproducible</strong>: renv records the exact package versions the project depends on, and ensures those exact versions get installed by others who work on the project.</li>
+<li>Start of forecast period.<br>
+</li>
+<li>End of forecast period.<br>
+</li>
+<li>End of estimation period.<br>
+</li>
+<li>Maximum number of lags in models.</li>
 </ul>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
-<p>To convert a project to use renv, call <code>renv::init()</code>. This adds three new files and directories to the project:</p>
+</section>
+<section id="data-preparation" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">9.2</span> Data preparation</h2>
 <ul>
-<li>The project library, <code>renv/library</code>, is a library that contains all packages currently used by the project<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This is the key magic that makes renv work: instead of having one library containing the packages used in every project, renv gives you a separate library for each project. This provides the benefits of <strong>isolation</strong>: different projects can use different versions of packages, and installing, updating, or removing packages in one project doesn’t affect any other project.</li>
-<li>The <strong>lockfile</strong>, <code>renv.lock</code>, records enough metadata about every package that it can be re-installed on a new machine.</li>
-<li>renv uses <code>.Rprofile</code> to configure the R session to use the project library. This ensures that once renv is turned on for a project, it stays on, until it is deliberately turned off.</li>
+<li>Download all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.<br>
+</li>
+<li>Load (create) all indicators (dummies for impulse, level shift, seasonal) and trend.<br>
+</li>
+<li>Combine all variables into a single dataset.</li>
 </ul>
-<p>The next important pair of tools is <code>renv::snapshot()</code> and <code>renv::restore()</code>. <code>snapshot()</code> updates the lockfile with metadata about the currently-used packages in the project library. Sharing the lockfile allows other people or other computers to reproduce the current project environment by running <code>restore()</code>, which uses the metadata from the lockfile to install exactly the same version of every package. This pair of functions provides the benefits of <strong>reproducibility</strong> and <strong>portability</strong>: you are now tracking exactly which package versions you have installed so you can recreate them on other machines.</p>
 </section>
-<section id="collaboration" class="level2">
-<h2 class="anchored" data-anchor-id="collaboration">Collaboration</h2>
-<p>One of the reasons to use renv is to make it easier to share code in such a way that everyone gets exactly the same package versions. As above, start by calling <code>renv::init()</code>. You’ll then need to commit <code>renv.lock</code>, <code>.Rprofile</code>, <code>renv/settings.json</code> and <code>renv/activate.R</code> to version control, ensuring that others can recreate your project environment. If you’re using git, this is particularly simple because renv will create a <code>.gitignore</code>, and you can just commit all suggested files.</p>
-<p>Now when one of your collaborators opens this project, renv will automatically bootstrap itself, downloading and installing the appropriate version of renv. It will also ask them if they want to download and install all the packages it needs by running <code>renv::restore()</code>.</p>
+<section id="simulation-prep" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="simulation-prep"><span class="header-section-number">9.3</span> Simulation prep</h2>
+<ul>
+<li>Compile model (load equations from text file and let <code>bimets</code> digest the info).</li>
+<li>Add variables to model.</li>
+<li>Set date range for estimation (<code>bimets</code> does not automatically drop periods with NA’s).</li>
+<li>Set exogenization range to deal with ragged edge in simulation.<br>
+</li>
+<li>Estimate model equations and save estimation results to text file for inspection.</li>
+<li>Set add factors.</li>
+</ul>
 </section>
-<section id="installing-packages" class="level2">
-<h2 class="anchored" data-anchor-id="installing-packages">Installing packages</h2>
-<p>If you use renv for multiple projects, you’ll have multiple libraries, meaning that you’ll often need to install the same package in multiple places. It would be annoying if you had to download (or worse, compile) the package repeatedly, so renv uses a package cache. That means you only ever have to download and install a package once, and for each subsequent install, renv will just add a link from the project library to the global cache. You can learn more about the cache in <code>vignette("package-install")</code>.</p>
-<p>After installing the package and checking that the code works, you should call <code>renv::snapshot()</code> to record the latest package versions in your lockfile. If you’re collaborating with others, you’ll need to commit those changes to git, and let them know that you’ve updated the lockfile and they should call <code>renv::restore()</code> when they’re next working on a project.</p>
-</section>
-<section id="updating-packages" class="level2">
-<h2 class="anchored" data-anchor-id="updating-packages">Updating packages</h2>
-<p>We recommend that you regularly (at least once a year) update the packages in your project to get the latest versions of all dependencies. Similarly, if you’re making major changes to a project that you haven’t worked on for a while, it’s often a good idea to start with an <code>renv::update()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> before making any changes to the code.</p>
-<p>After calling <code>renv::update()</code>, you should run the code in your project and verify that it still works (or make any changes needed to get it working). Then call <code>renv::snapshot()</code> to record the new versions in the lockfile. If you get stuck, and can’t get the project to work with the new versions, you can call <code>renv::restore()</code> to roll back changes to the project library and revert to the known good state recorded in your lockfile. If you need to roll back to an even older version, take a look at <code>renv::history()</code> and <code>renv::revert()</code>. <code>renv::update()</code> will also update renv itself, ensuring that you get all the latest features.</p>
-</section>
-<section id="additional-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-resources">Additional resources</h2>
-<p>Overview of <code>renv</code>:<br>
-<a href="https://rstudio.github.io/renv/articles/renv.html">https://rstudio.github.io/renv/articles/renv.html</a></p>
-</section>
-</section>
+<section id="simulation" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="simulation"><span class="header-section-number">9.4</span> Simulation</h2>
+<ul>
+<li>Simulate model deterministically to obtain mean forecast.</li>
+<li>Extract forecast and combine it with history.</li>
+<li>Inspect the forecast via plots.</li>
+<li>Set parameters for stochastic simulations.</li>
+<li>Run stochastic simulation.</li>
+<li>Extract simulated paths and obtain deviations from the mean forecast.</li>
+<li>Inspect the paths via plots.</li>
+</ul>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+</section>
 
-<ol>
-<li id="fn1"><p>If you’d like to skip dependency discovery, you can call <code>renv::init(bare = TRUE)</code> to initialize a project with an empty project library.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>You can also use <code>update.packages()</code>, but <code>renv::update()</code> works with the same sources that <code>renv::install()</code> supports.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -515,7 +703,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./modselect.html" class="pagination-link" aria-label="Model selection">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./notes.html" class="pagination-link" aria-label="Notes">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Author: Peter Fuleky</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/simulation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/simulation.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
 
 
 
