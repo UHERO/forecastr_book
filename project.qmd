@@ -1,4 +1,4 @@
-# Project {#sec-project}
+# Projects {#sec-projects}
 
 Projects are useful for organizing work, especially when working on multiple pieces of research simultaneously. They help to keep the workspace clean and avoid conflicts between tasks. Projects also make it easier to share work with others. A [project](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects) consists of the files associated with a given project (input data, R scripts, analytical results, and figures) kept together in a folder.
 

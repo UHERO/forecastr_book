@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><title>R: Change Frequency</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_frequency</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Change Frequency</h2>
+
+<h3>Description</h3>
+
+<p>Changes the frequency of a time series. By default, incomplete
+periods of regular series are omitted.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ts_frequency(
+  x,
+  to = c("year", "quarter", "month", "week", "day", "hour", "min", "sec"),
+  aggregate = "mean",
+  na.rm = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+<tr><td><code id="to">to</code></td>
+<td>
+<p>desired frequency, either a character string (<code>"year"</code>,
+<code>"quarter"</code>, <code>"month"</code>) or an integer (<code>1</code>, <code>4</code>, <code>12</code>).</p>
+</td></tr>
+<tr><td><code id="aggregate">aggregate</code></td>
+<td>
+<p>character string, or function. Either <code>"mean"</code>, <code>"sum"</code>,
+<code>"first"</code>, or <code>"last"</code>, or any aggregate function, such as <code>base::mean()</code>.</p>
+</td></tr>
+<tr><td><code id="na.rm">na.rm</code></td>
+<td>
+<p>logical, if <code>TRUE</code>, incomplete periods are aggregated as
+well. For irregular series, incomplete periods are always aggregated.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <a href="https://CRAN.R-project.org/package=tempdisagg">tempdisagg package</a>
+can convert low frequency to high frequency data and
+has support for ts-boxable objects. See
+<code>vignette("hf-disagg", package = "tempdisagg")</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a ts-boxable time series, with the same class as the input.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+ts_frequency(cbind(mdeaths, fdeaths), "year", "sum")
+ts_frequency(cbind(mdeaths, fdeaths), "quarter", "last")
+
+ts_frequency(AirPassengers, 4, "sum")
+
+# Note that incomplete years are omited by default
+ts_frequency(EuStockMarkets, "year")
+ts_frequency(EuStockMarkets, "year", na.rm = TRUE)
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><title>R: Aggregate from quarterly to annual frequency (superseded by...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>QtoA</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Aggregate from quarterly to annual frequency
+(superseded by tsbox::ts_frequency())</h2>
+
+<h3>Description</h3>
+
+<p>Aggregate from quarterly to annual frequency
+(superseded by tsbox::ts_frequency())
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>QtoA(ser_in, aggr = "mean")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ser_in">ser_in</code></td>
+<td>
+<p>the xts series to be converted (freq = q)</p>
+</td></tr>
+<tr><td><code id="aggr">aggr</code></td>
+<td>
+<p>aggregate via mean (default) or sum</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>converted xts series (freq = a)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_xts() |&gt;
+  tsbox::ts_pick("E_NF_HI") |&gt;
+  QtoA() |&gt; # this matches with below
+  AtoQ() |&gt;
+  QtoA() |&gt; # this matches with above
+  tsbox::ts_plot()
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><title>R: Update a bimets model with new/modified equations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>update_eqs</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Update a bimets model with new/modified equations</h2>
+
+<h3>Description</h3>
+
+<p>Update a bimets model with new/modified equations
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>update_eqs(model_1, model_2, eqList)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="model_1">model_1</code></td>
+<td>
+<p>original estimated bimets model</p>
+</td></tr>
+<tr><td><code id="model_2">model_2</code></td>
+<td>
+<p>estimated bimets model containing updates (only updated
+equations need to be estimated)</p>
+</td></tr>
+<tr><td><code id="eqList">eqList</code></td>
+<td>
+<p>names of updated behavioral equations (vector of strings),
+others taken from model_1 (equations missing from model_2 are removed)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Start by making a copy of the original model's equations (txt file).
+Re-specify some equations, add new equations, and remove not needed equations.
+Load the new model as model_2 and estimate the modified/new equations (ok to estimate all).
+Replace the equations in model_2 that should remain the same as in model_1
+by the estimated equations from model_1. Equations that are to remain unchanged
+have to be present in both model_1 and model_2, and not present in eqList.
+</p>
+
+
+<h3>Value</h3>
+
+<p>estimated bimets model containing updates
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+update_eqs(scen_model_1_est, scen_model_2_est, c("E_NF_AT_HI_Q", "Y_R_AT_HI_Q"))
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

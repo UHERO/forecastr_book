@@ -1,0 +1,109 @@
+<!DOCTYPE html><html><head><title>R: Interpolate univariate or multivariate time series from low...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>disagg</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Interpolate univariate or multivariate time series from low to high frequency</h2>
+
+<h3>Description</h3>
+
+<p>Interpolate univariate or multivariate time series from low to high frequency
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>disagg(x, conv_type = "mean", target_freq = "quarter", pattern = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>a tx-boxable object at a low frequency (e.g. annual or quarterly)</p>
+</td></tr>
+<tr><td><code id="conv_type">conv_type</code></td>
+<td>
+<p>match the quarterly value via &quot;first&quot;, &quot;last&quot;, &quot;sum&quot;, &quot;mean&quot;</p>
+</td></tr>
+<tr><td><code id="target_freq">target_freq</code></td>
+<td>
+<p>target frequency &quot;quarter&quot; or &quot;month&quot;</p>
+</td></tr>
+<tr><td><code id="pattern">pattern</code></td>
+<td>
+<p>a single high-frequency pattern that the interpolation should follow</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>the time-span of the high-frequency pattern has to match or be larger
+than the time-span of the low frequency series. NA values are not allowed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>interpolated object of the same type as the input
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>quarterly_data_example |&gt;
+  disagg(conv_type = "mean", target_freq = "month")
+quarterly_data_example |&gt;
+  disagg(conv_type = "mean", target_freq = "month") |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_frequency(to = "quarter", aggregate = "mean") |&gt;
+  tsbox::ts_wide() # this matches original data
+# works with a single series too
+quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_pick("E_NF_HI") |&gt;
+  disagg(conv_type = "mean", target_freq = "month") |&gt;
+  tsbox::ts_plot()
+# using a high-frequency pattern
+quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_span("2005-01-01", "2020-01-01") |&gt;
+  disagg(
+    conv_type = "mean", target_freq = "month", pattern = monthly_data_example |&gt;
+      tsbox::ts_long() |&gt;
+      tsbox::ts_pick("VISNS_HI")
+  )
+# multiple low-frequency series, same number of high-frequency patterns
+purrr::map2(
+  quarterly_data_example |&gt;
+    tsbox::ts_long() |&gt;
+    tsbox::ts_pick("E_NF_HI", "ECT_HI") |&gt;
+    tsbox::ts_span("2005-01-01", "2020-01-01") |&gt;
+    tsbox::ts_tslist(),
+  monthly_data_example |&gt;
+    tsbox::ts_long() |&gt;
+    tsbox::ts_tslist(),
+  ~ disagg(.x, conv_type = "mean", target_freq = "month", pattern = .y)
+)
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

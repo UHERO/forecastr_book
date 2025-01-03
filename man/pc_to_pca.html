@@ -1,0 +1,76 @@
+<!DOCTYPE html><html><head><title>R: Convert quarterly growth to annualized growth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>pc_to_pca</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert quarterly growth to annualized growth</h2>
+
+<h3>Description</h3>
+
+<p>Convert quarterly growth to annualized growth
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pc_to_pca(x, freq = 4)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable object containing quarterly growth (in percent)</p>
+</td></tr>
+<tr><td><code id="freq">freq</code></td>
+<td>
+<p>numeric frequency of the time series e.g. 4 for quarterly</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>object of the same type as the input containing annualized growth (in percent)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_pc() |&gt;
+  pc_to_pca() |&gt;
+  tail()
+tsbox::ts_c(
+  quarterly_data_example |&gt;
+    tsbox::ts_long() |&gt;
+    tsbox::ts_pc() |&gt;
+    pc_to_pca(),
+  quarterly_data_example |&gt;
+    tsbox::ts_long() |&gt;
+    tsbox::ts_pca()
+) |&gt;
+  dplyr::arrange(id, time) |&gt;
+  tsbox::ts_wide()
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

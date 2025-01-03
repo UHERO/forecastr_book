@@ -1,0 +1,84 @@
+<!DOCTYPE html><html><head><title>R: Extend a series using year over year growth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>yoy_to_lev</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extend a series using year over year growth</h2>
+
+<h3>Description</h3>
+
+<p>Extend a series using year over year growth
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>yoy_to_lev(yoy_gr, hist_lev, smooth_span = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="yoy_gr">yoy_gr</code></td>
+<td>
+<p>ts-boxable object containing year over year growth rates</p>
+</td></tr>
+<tr><td><code id="hist_lev">hist_lev</code></td>
+<td>
+<p>ts-boxable object containing the history in levels
+for forecast and at least one year of history (in percent)</p>
+</td></tr>
+<tr><td><code id="smooth_span">smooth_span</code></td>
+<td>
+<p>extent of smoothing between 0-1 (default: 0, no smoothing)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function only works for univariate time series and requires
+that the growth rates are available for at least the last year of history.
+Year-over-year growth rates propagate the fluctuations of the base period
+into the extension period. This can be mitigated by smoothing the extension.
+</p>
+
+
+<h3>Value</h3>
+
+<p>object of the same type as hist_lev extended with year over year growth
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>gr &lt;- quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  dplyr::filter(id == "E_NF_HI") |&gt;
+  tsbox::ts_pcy()
+lev &lt;- quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  dplyr::filter(id == "ECT_HI")
+res1 &lt;- yoy_to_lev(gr, lev |&gt; dplyr::filter(time &lt;= "2010-01-01"))
+res2 &lt;- yoy_to_lev(gr, lev |&gt; dplyr::filter(time &lt;= "2010-01-01"), 1/8)
+tsbox::ts_plot(lev, res1, res2)
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

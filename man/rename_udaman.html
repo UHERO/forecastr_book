@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><title>R: Format series names to udaman format (mnemonic@loc.freq)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>rename_udaman</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Format series names to udaman format (mnemonic@loc.freq)</h2>
+
+<h3>Description</h3>
+
+<p>Format series names to udaman format (mnemonic@loc.freq)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>rename_udaman(ser_in, freq = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ser_in">ser_in</code></td>
+<td>
+<p>series names (character &quot;mnemonic_loc&quot;, &quot;mnemonic_AT_loc_freq&quot;, &quot;mnemonic__loc_freq&quot;, mnemonic@loc.freq&quot;)</p>
+</td></tr>
+<tr><td><code id="freq">freq</code></td>
+<td>
+<p>frequency of the series, required if not contained in the series
+name (character &quot;D&quot;, &quot;W&quot;, &quot;M&quot;, &quot;Q&quot;, &quot;S&quot;, &quot;A&quot;)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>series names following udaman convention &quot;mnemonic@loc.freq&quot;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>rename_udaman(c("E_NF_HI", "ECT_HI", "E_TU_HAW"), freq = "M")
+rename_udaman(c("E_NF__HI_M", "ECT__HI_M", "VAP__HAW_W"))
+rename_udaman(c("E_NF_AT_HI_M", "ECT_AT_HI_M", "VAP_AT_HAW_W"))
+rename_udaman(c("E_NF@HI.M", "ECT@HI.M", "VAP@HAW.W"))
+rename_udaman(c("SH_US@HI.M", "SH_JP__HON_M"))
+quarterly_data_example |&gt; dplyr::rename_with(~ rename_udaman(., freq = "M"), .cols = -1)
+quarterly_data_example |&gt; dplyr::rename_with(rename_udaman, freq = "M", .cols = !time)
+quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  dplyr::mutate(id = rename_udaman(id, freq = "M")) |&gt;
+  tsbox::ts_xts()
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

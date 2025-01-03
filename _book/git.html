@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,8 +165,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./fcutils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,19 +178,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></span></a>
   </div>
 </li>
     </ul>
@@ -234,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Version control tracks changes in files over time, allows you to revert files back to a previous state and compare changes over time. It is essential for the collaborative development of a project, but is also useful for individual projects.</p>
+<p>Version control tracks changes in files over time, allows you to revert files back to a previous state and compare changes over time. It is essential for the collaborative development of a project, but is also useful for individual projects. Git is a popular version control system and GitHub is a web-based platform that hosts Git repositories and provides tools for collaboration.</p>
 <section id="version-control-terms-in-github" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="version-control-terms-in-github"><span class="header-section-number">3.1</span> Version control terms in Git(Hub)</h2>
 <ul>
@@ -260,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="version-control-setup" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="version-control-setup"><span class="header-section-number">3.2</span> Version control setup</h2>
 <p>RStudio has built in support for Git-based version control for a project. Check if Git is <a href="https://happygitwithr.com/install-git">installed</a> by running <code>git --version</code> in the terminal. Git is included in Xcode command line tools, which can be installed by running <code>xcode-select --install</code> in the terminal. Provide your GitHub <a href="https://happygitwithr.com/hello-git">user name and email</a> to Git via <code>usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")</code>. Next, <a href="https://happygitwithr.com/https-pat#tldr">generate and store</a> a personal access token for GitHub via <code>usethis::create_github_token()</code> and <code>gitcreds::gitcreds_set()</code>, respectively. Finally, make sure version control is enabled in RStudio (RStudio &gt; Global Options &gt; Git/SVN &gt; Enable version control interface for RStudio projects &gt; check box or <code>usethis::use_blank_slate()</code>). This concludes the setup for Git and GitHub, making it possible to establish a connection between RStudio and GitHub.</p>
-<p>Always <a href="https://happygitwithr.com/new-github-first">start setting up</a> version control on GitHub. Even if you <a href="https://happygitwithr.com/existing-github-first">already have a project</a> on your computer, begin by setting up a repository on GitHub. This can be done by clicking on the “+” in the top right corner of the GitHub website and selecting “New repository”. Give the repository a name and description, make it public or private, add a readme file, and choose the R template for .gitignore. After creating the repository, copy the URL and open RStudio. The next paragraph describes a robust local setup method with the <code>usethis</code> package, but there is also a menu based option: create a new project from version control by selecting File &gt; New Project &gt; Version Control &gt; Git and pasting the URL in the “Repository URL” field. Use the repository name as the project directory name. Choose a folder on your computer where the project will be stored locally and click “Create”. This will clone the repository to your computer and create a new RStudio project. The project is now connected to the repository on GitHub.</p>
+<p>Always <a href="https://happygitwithr.com/new-github-first">start setting up</a> version control on GitHub. Even if you <a href="https://happygitwithr.com/existing-github-first">already have a project</a> on your computer, begin by setting up a repository on GitHub. This can be done by clicking on the “+” in the top right corner of the <a href="https://github.com">GitHub website</a> and selecting “New repository”. Give the repository a name and description, make it public or private, add a readme file, and choose the R template for .gitignore. After creating the repository, copy the URL and open RStudio. The next paragraph describes a robust local setup method with the <code>usethis</code> package, but there is also a menu based option: create a new project from version control by selecting File &gt; New Project &gt; Version Control &gt; Git and pasting the URL in the “Repository URL” field. Use the repository name as the project directory name. Choose a folder on your computer where the project will be stored locally and click “Create”. This will clone the repository to your computer and create a new RStudio project. The project is now connected to the repository on GitHub.</p>
 <p>The local setup described above can be automated with <code>usethis::create_from_github("repo_url", "proj_dir")</code>. If you have permission to push to the remote GitHub repository because you are an owner or collaborator on the project, then <code>create_from_github</code> will <a href="https://happygitwithr.com/existing-github-first#git-clone-usethis-rstudio">clone it</a>. If you do not have parmission to push to the repository, <code>create_from_github</code> will <a href="https://happygitwithr.com/fork-and-clone#fork-and-clone-create-from-github">fork and clone it</a>. In either case, do not work in the main branch. Instead, create a “dev” branch in RStudio and work in that branch: in the Git pane, click on the “New Branch”, enter “dev” as the branch name, keep the remote origin, and chek the sync with remote box. This will create a new branch and switch to it.</p>
 <p>While in the dev branch, make changes to scripts or other files and save them. When you are ready to commit the changes, stage the files in the Git pane (“Command a” selects all files), click “Commit” at the top of the Git pane. In the pop-up window, the “Diff” button allows you to browse the changes made to the files in the repository, while the “History” button shows the commit history of the repository. These can be analyzed more conveniently on GitHub as described below in <a href="#sec-browse-commits" class="quarto-xref"><span>Section 3.3</span></a>. Enter a commit message in the text box, and click the “Commit” button. Then push the changes to the remote repository. Go to the GitHub page of the dev branch and create a pull request to merge the dev branch into the main branch of the remote repository. After the pull request is merged, delete the dev branch on GitHub. Delete the local dev branch by executing <code>git branch -d dev</code> in the terminal. Finally, switch back to the main branch in RStudio and pull the changes from the remote repository.</p>
 </section>
@@ -749,8 +737,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./project.html" class="pagination-link" aria-label="Project">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span>
+      <a href="./project.html" class="pagination-link" aria-label="Projects">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projects</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

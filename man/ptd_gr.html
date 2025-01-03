@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><title>R: Period to date growth rate</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ptd_gr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Period to date growth rate</h2>
+
+<h3>Description</h3>
+
+<p>Period to date growth rate
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ptd_gr(x, per = "year", lag_length = "1 year")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>a ts-boxable object</p>
+</td></tr>
+<tr><td><code id="per">per</code></td>
+<td>
+<p>unit of time supplied to floor_date() (for ytd per = &quot;year&quot;
+(default), for mtd per = &quot;month&quot;)</p>
+</td></tr>
+<tr><td><code id="lag_length">lag_length</code></td>
+<td>
+<p>period over which growth is calculated (e.g. &quot;1 year&quot;
+(default), &quot;3 years&quot;, etc. See ?ts_lag() for options)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>object of the same type as the input containing period to date growth rate
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>monthly_data_example |&gt;
+  ptd_gr() |&gt;
+  tail()
+monthly_data_example |&gt;
+  dplyr::select(time, "VAPNS_HI") |&gt;
+  ptd_gr(per = "month", lag_length = "3 years") |&gt;
+  tail()
+# don't use lag_length = "1 year" with weekly data
+daily_data_example |&gt;
+  ptd_gr("week")
+# lag_length = "52 weeks" instead
+daily_data_example |&gt;
+  ptd_gr("week", "52 weeks")
+# and use lag_length = "364 days" with daily data
+daily_data_example |&gt;
+  ptd_gr("day", "364 days")
+daily_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_pick("VAPNS_HI") |&gt;
+  ptd_gr("week", "4 weeks") %&gt;%
+  tail()
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

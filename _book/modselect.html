@@ -8,7 +8,7 @@
 
 <meta name="author" content="Peter Fuleky">
 
-<title>8&nbsp; Model selection – User guide to UHERO's forecast processes</title>
+<title>8&nbsp; Model selection and simulation – User guide to UHERO's forecast processes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +65,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./simulation.html" rel="next">
 <link href="./bestpract.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -83,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modselect.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modselect.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -142,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,8 +198,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./fcutils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,19 +211,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modselect.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></span></a>
   </div>
 </li>
     </ul>
@@ -204,9 +225,45 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#main-user-settings" id="toc-main-user-settings" class="nav-link active" data-scroll-target="#main-user-settings"><span class="header-section-number">8.1</span> Main user settings</a></li>
-  <li><a href="#data-preparation-tidyverse" id="toc-data-preparation-tidyverse" class="nav-link" data-scroll-target="#data-preparation-tidyverse"><span class="header-section-number">8.2</span> Data preparation (<code>tidyverse</code>)</a></li>
-  <li><a href="#model-selection-steps-gets" id="toc-model-selection-steps-gets" class="nav-link" data-scroll-target="#model-selection-steps-gets"><span class="header-section-number">8.3</span> Model selection steps (<code>gets</code>)</a></li>
-  <li><a href="#produce-a-quasi-forecast-with-the-selected-model-bimets" id="toc-produce-a-quasi-forecast-with-the-selected-model-bimets" class="nav-link" data-scroll-target="#produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">8.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)</a></li>
+  <li><a href="#data-preparation-tidyverse" id="toc-data-preparation-tidyverse" class="nav-link" data-scroll-target="#data-preparation-tidyverse"><span class="header-section-number">8.2</span> Data preparation (<code>tidyverse</code>)</a>
+  <ul class="collapse">
+  <li><a href="#data-download-and-initial-processing" id="toc-data-download-and-initial-processing" class="nav-link" data-scroll-target="#data-download-and-initial-processing"><span class="header-section-number">8.2.1</span> Data Download and Initial Processing</a></li>
+  <li><a href="#log-transformation" id="toc-log-transformation" class="nav-link" data-scroll-target="#log-transformation"><span class="header-section-number">8.2.2</span> Log Transformation</a></li>
+  <li><a href="#indicator-variable-creation" id="toc-indicator-variable-creation" class="nav-link" data-scroll-target="#indicator-variable-creation"><span class="header-section-number">8.2.3</span> Indicator Variable Creation</a></li>
+  <li><a href="#data-combination" id="toc-data-combination" class="nav-link" data-scroll-target="#data-combination"><span class="header-section-number">8.2.4</span> Data Combination</a></li>
+  <li><a href="#data-subsetting" id="toc-data-subsetting" class="nav-link" data-scroll-target="#data-subsetting"><span class="header-section-number">8.2.5</span> Data Subsetting</a></li>
+  <li><a href="#lag-generation" id="toc-lag-generation" class="nav-link" data-scroll-target="#lag-generation"><span class="header-section-number">8.2.6</span> Lag Generation</a></li>
+  <li><a href="#data-transformation-to-xts" id="toc-data-transformation-to-xts" class="nav-link" data-scroll-target="#data-transformation-to-xts"><span class="header-section-number">8.2.7</span> Data Transformation to xts</a></li>
+  </ul></li>
+  <li><a href="#model-selection-steps-gets" id="toc-model-selection-steps-gets" class="nav-link" data-scroll-target="#model-selection-steps-gets"><span class="header-section-number">8.3</span> Model selection steps (<code>gets</code>)</a>
+  <ul class="collapse">
+  <li><a href="#formulate-a-general-unrestricted-model-gum" id="toc-formulate-a-general-unrestricted-model-gum" class="nav-link" data-scroll-target="#formulate-a-general-unrestricted-model-gum"><span class="header-section-number">8.3.1</span> Formulate a General Unrestricted Model (GUM)</a></li>
+  <li><a href="#run-the-gets-algorithm" id="toc-run-the-gets-algorithm" class="nav-link" data-scroll-target="#run-the-gets-algorithm"><span class="header-section-number">8.3.2</span> Run the <code>gets</code> Algorithm</a></li>
+  <li><a href="#identify-outliers-in-the-relationship" id="toc-identify-outliers-in-the-relationship" class="nav-link" data-scroll-target="#identify-outliers-in-the-relationship"><span class="header-section-number">8.3.3</span> Identify Outliers in the Relationship</a></li>
+  <li><a href="#repeat-gets-model-selection-optional" id="toc-repeat-gets-model-selection-optional" class="nav-link" data-scroll-target="#repeat-gets-model-selection-optional"><span class="header-section-number">8.3.4</span> Repeat <code>gets</code> Model Selection (Optional)</a></li>
+  <li><a href="#verify-if-additional-outliers-arose-due-to-greater-model-parsimony" id="toc-verify-if-additional-outliers-arose-due-to-greater-model-parsimony" class="nav-link" data-scroll-target="#verify-if-additional-outliers-arose-due-to-greater-model-parsimony"><span class="header-section-number">8.3.5</span> Verify if Additional Outliers Arose Due to Greater Model Parsimony</a></li>
+  <li><a href="#handle-zero-valued-predictors" id="toc-handle-zero-valued-predictors" class="nav-link" data-scroll-target="#handle-zero-valued-predictors"><span class="header-section-number">8.3.6</span> Handle Zero-Valued Predictors</a></li>
+  <li><a href="#re-estimate-final-model" id="toc-re-estimate-final-model" class="nav-link" data-scroll-target="#re-estimate-final-model"><span class="header-section-number">8.3.7</span> Re-estimate Final Model</a></li>
+  <li><a href="#save-model-equation" id="toc-save-model-equation" class="nav-link" data-scroll-target="#save-model-equation"><span class="header-section-number">8.3.8</span> Save Model Equation</a></li>
+  </ul></li>
+  <li><a href="#produce-a-quasi-forecast-with-the-selected-model-bimets" id="toc-produce-a-quasi-forecast-with-the-selected-model-bimets" class="nav-link" data-scroll-target="#produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">8.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)</a>
+  <ul class="collapse">
+  <li><a href="#load-model-and-data" id="toc-load-model-and-data" class="nav-link" data-scroll-target="#load-model-and-data"><span class="header-section-number">8.4.1</span> Load Model and Data</a></li>
+  <li><a href="#estimate-the-model" id="toc-estimate-the-model" class="nav-link" data-scroll-target="#estimate-the-model"><span class="header-section-number">8.4.2</span> Estimate the Model</a></li>
+  <li><a href="#simulate-the-model" id="toc-simulate-the-model" class="nav-link" data-scroll-target="#simulate-the-model"><span class="header-section-number">8.4.3</span> Simulate the Model</a></li>
+  <li><a href="#evaluate-the-simulation" id="toc-evaluate-the-simulation" class="nav-link" data-scroll-target="#evaluate-the-simulation"><span class="header-section-number">8.4.4</span> Evaluate the Simulation</a></li>
+  </ul></li>
+  <li><a href="#stochastic-simulation" id="toc-stochastic-simulation" class="nav-link" data-scroll-target="#stochastic-simulation"><span class="header-section-number">8.5</span> Stochastic simulation</a>
+  <ul class="collapse">
+  <li><a href="#simulate-model-deterministically-to-obtain-mean-forecast." id="toc-simulate-model-deterministically-to-obtain-mean-forecast." class="nav-link" data-scroll-target="#simulate-model-deterministically-to-obtain-mean-forecast."><span class="header-section-number">8.5.1</span> Simulate model deterministically to obtain mean forecast.</a></li>
+  <li><a href="#extract-forecast-and-combine-it-with-history." id="toc-extract-forecast-and-combine-it-with-history." class="nav-link" data-scroll-target="#extract-forecast-and-combine-it-with-history."><span class="header-section-number">8.5.2</span> Extract forecast and combine it with history.</a></li>
+  <li><a href="#inspect-the-forecast-via-plots." id="toc-inspect-the-forecast-via-plots." class="nav-link" data-scroll-target="#inspect-the-forecast-via-plots."><span class="header-section-number">8.5.3</span> Inspect the forecast via plots.</a></li>
+  <li><a href="#set-parameters-for-stochastic-simulations." id="toc-set-parameters-for-stochastic-simulations." class="nav-link" data-scroll-target="#set-parameters-for-stochastic-simulations."><span class="header-section-number">8.5.4</span> Set parameters for stochastic simulations.</a></li>
+  <li><a href="#run-stochastic-simulation." id="toc-run-stochastic-simulation." class="nav-link" data-scroll-target="#run-stochastic-simulation."><span class="header-section-number">8.5.5</span> Run stochastic simulation.</a></li>
+  <li><a href="#extract-simulated-paths-and-obtain-deviations-from-the-mean-forecast." id="toc-extract-simulated-paths-and-obtain-deviations-from-the-mean-forecast." class="nav-link" data-scroll-target="#extract-simulated-paths-and-obtain-deviations-from-the-mean-forecast."><span class="header-section-number">8.5.6</span> Extract simulated paths and obtain deviations from the mean forecast.</a></li>
+  <li><a href="#inspect-the-paths-via-plots." id="toc-inspect-the-paths-via-plots." class="nav-link" data-scroll-target="#inspect-the-paths-via-plots."><span class="header-section-number">8.5.7</span> Inspect the paths via plots.</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8.6</span> Conclusion</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/modselect.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/modselect.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -215,7 +272,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
+<h1 class="title"><span id="sec-modselect" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></span></h1>
 </div>
 
 
@@ -232,61 +289,574 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The model selection process can be run line-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model selection results in an easier to digest html file. Running the full script (source) takes about 1 minute.</p>
+<p>The model selection process can be run line-by-line from an R script directly (<em>R/gets_model_select.R</em>) or via sourcing an Rmd document (<em>notes/gets_model_select.Rmd</em>) which collects all model selection results in an easier to digest html file. Running the full script (source) takes about 1 minute.</p>
 <section id="main-user-settings" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="main-user-settings"><span class="header-section-number">8.1</span> Main user settings</h2>
+<p>Before diving into the automated steps, users must specify several key parameters that control the model selection process:</p>
 <ul>
-<li>Start and end of period used for model selection.<br>
+<li><strong><code>mselect_start</code></strong> and <strong><code>mselect_end</code></strong>: Define the start and end dates of the period used for model selection. This is the sample over which the <em>gets</em> algorithm will evaluate potential models.<br>
 </li>
-<li>End of period used for estimation (selected model can be re-estimated for different sample).<br>
+<li><strong><code>est_end</code></strong>: Specifies the end of the period used for estimation. While the model selection process might consider data up to <code>mselect_end</code>, the final model can be re-estimated using a shorter sample ending at <code>est_end</code>. This is useful when recent data is deemed less reliable or structurally different.<br>
 </li>
-<li>Start and end of quasi-forecast period (for model evaluation).<br>
+<li><strong><code>fcst_start</code></strong> and <strong><code>fcst_end</code></strong>: Define the start and end dates of the quasi-forecast period. This is the period over which the model’s forecasting performance will be evaluated. The model is simulated forward from <code>fcst_start</code>, and the simulated values are compared against actual data (if available) up to <code>fcst_end</code>.<br>
 </li>
-<li>Maximum number of lags considered in models.<br>
+<li><strong><code>max_lag</code></strong>: Specifies the maximum number of lags to be considered for each predictor variable in the model. For example, if <code>max_lag</code> is 4, the model selection process will consider the current value and up to four lagged values of each predictor.<br>
 </li>
-<li>Response variable.<br>
+<li><strong><code>yvar_name</code></strong>: The name of the response variable to be forecasted. This must correspond to the name of a variable in the downloaded dataset. For example: <code>yvar_name &lt;- "E_NF_AT_HI_QL"</code> specifies the log of non-farm employment in Hawaii as the target variable.<br>
 </li>
-<li>List of predictors.</li>
+<li><strong><code>xvar_list</code></strong>: A vector of names of potential predictor variables. These can include economic indicators, other related time series, or even transformations of the response variable itself. For instance:<br>
+</li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list of candidate variables (logs are denoted by _QL extension)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>xvar_list <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Y_R_AT_HI_QL"</span>, <span class="co"># Log of real income in Hawaii</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"VIS_AT_HI_QL"</span>, <span class="co"># Log of visitor arrivals in Hawaii         </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CPI_AT_HON_QL"</span> <span class="co"># Log of CPI in Honolulu</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If no additional regressors are considered set <code>xvar_list &lt;- c()</code>.</p>
 </section>
 <section id="data-preparation-tidyverse" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="data-preparation-tidyverse"><span class="header-section-number">8.2</span> Data preparation (<code>tidyverse</code>)</h2>
+<p>The data preparation stage involves several steps to transform the raw data downloaded from UDAMAN into a format suitable for model selection:</p>
+<section id="data-download-and-initial-processing" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="data-download-and-initial-processing"><span class="header-section-number">8.2.1</span> Data Download and Initial Processing</h3>
 <ul>
 <li>Download all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.<br>
 </li>
-<li>Log-transform all variables.<br>
-</li>
-<li>Load (create) all indicators (dummies for impulse, level shift, seasonal) and trend.<br>
-</li>
-<li>Combine all variables into a single dataset.<br>
-</li>
-<li>Set date range for model selection.<br>
-</li>
-<li>Generate 8 lags of predictors.<br>
-</li>
-<li>Filter data set down to specific variables considered in a particular model, including trend and season dummies.</li>
+<li>The data is converted to a long format using <code>ts_long()</code>.</li>
 </ul>
+</section>
+<section id="log-transformation" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="log-transformation"><span class="header-section-number">8.2.2</span> Log Transformation</h3>
+<ul>
+<li>All variables in the dataset are log-transformed using. This is a common practice in time series analysis to stabilize variance and linearize relationships. The names of the log-transformed variables are appended with “L”. For example, <code>E_NF_AT_HI</code> becomes <code>E_NF_AT_HI_L</code>. Note that, depending on the data, this may result in <code>NaN</code> values which will be handled by the <code>gets</code> algorithm during model selection.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take the log of all series (some will produce NaNs)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>hist_ql <span class="ot">&lt;-</span> hist_q <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">log</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">str_c</span>(id, <span class="st">"L"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="indicator-variable-creation" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="indicator-variable-creation"><span class="header-section-number">8.2.3</span> Indicator Variable Creation</h3>
+<ul>
+<li>Indicator variables, also known as dummy variables, are created to capture the effects of specific events or periods. The script allows for loading previously saved indicators (<code>indicators_from_disk</code>) or creating them from scratch.<br>
+</li>
+<li><strong>Impulse Indicator Series (IIS)</strong>: These are binary variables that take the value 1 in a specific quarter and 0 otherwise. They are used to capture the impact of one-time events or shocks. These dummies are useful to control for one-time temporary shocks such as hurricanes, policy changes or one-time bonuses paid out in a particular quarter. Without controlling for these events, the model would try to fit these extraordinary data points using regular predictors, which may lead to biased estimates.<br>
+</li>
+<li><strong>Step Indicator Series (SIS)</strong>: These variables take the value 0 before a certain date and 1 thereafter. They are used to model structural breaks or permanent level shifts in the time series. A typical example of when these indicator series might be useful is the case of a permanent policy change, introduction of a major competitor, or a permanent change in consumer preferences. By introducing a SIS, the model can account for these changes without biasing estimates for the entire sample.<br>
+</li>
+<li><strong>Season Dummies</strong>: These variables capture the seasonal patterns in the data. For quarterly data, four seasonal dummies are created (IQ1, IQ2, IQ3, IQ4), each taking the value 1 in the corresponding quarter and 0 otherwise. A typical example of quarterly seasonal pattern are fourth quarter spending sprees related to holidays, or seasonal variations in tourism related to weather conditions and holidays in other countries.<br>
+</li>
+<li><strong>Trend Indicator</strong>: A linear trend variable (<code>ITREND</code>) is created to capture the overall upward or downward movement of the time series over time. For example, technological progress or population growth may cause a steady upward trend in economic time series such as income or consumption.<br>
+</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine indicators into single data frame</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>indicator_vars <span class="ot">&lt;-</span> <span class="fu">ts_c</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  iis_indicators <span class="sc">%&gt;%</span> <span class="fu">ts_long</span>(),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  sis_indicators <span class="sc">%&gt;%</span> <span class="fu">ts_long</span>(),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  season_indicators <span class="sc">%&gt;%</span> <span class="fu">ts_long</span>(),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  trend_indicator <span class="sc">%&gt;%</span> <span class="fu">ts_long</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="data-combination" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="data-combination"><span class="header-section-number">8.2.4</span> Data Combination</h3>
+<ul>
+<li>The original data, log-transformed data, and indicator variables are combined into a single dataset using <code>ts_c()</code>.</li>
+</ul>
+</section>
+<section id="data-subsetting" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="data-subsetting"><span class="header-section-number">8.2.5</span> Data Subsetting</h3>
+<ul>
+<li>The dataset is filtered to include only the observations within the <code>mselect_start</code> and <code>mselect_end</code> range. The data is also subset based on the <code>yvar_name</code> and <code>xvar_list</code> to retain only the variables relevant for the specific model being considered.</li>
+</ul>
+</section>
+<section id="lag-generation" class="level3" data-number="8.2.6">
+<h3 data-number="8.2.6" class="anchored" data-anchor-id="lag-generation"><span class="header-section-number">8.2.6</span> Lag Generation</h3>
+<ul>
+<li>Lags of the predictor variables are generated using <code>ts_lag()</code> and combined using <code>ts_c()</code>. This creates a dataset containing the current and lagged values (up to <code>max_lag</code>) of each predictor.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate lags of selected predictors</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>xvar_lags <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>max_lag <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">ts_lag</span>(xvar_0, .x)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(ts_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="data-transformation-to-xts" class="level3" data-number="8.2.7">
+<h3 data-number="8.2.7" class="anchored" data-anchor-id="data-transformation-to-xts"><span class="header-section-number">8.2.7</span> Data Transformation to xts</h3>
+<ul>
+<li>The response variable and the combined predictor variables (including lags, trend, and seasonal dummies) are converted to <code>xts</code> objects for use with the <code>gets</code> package.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform to xts</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>yvar_xts <span class="ot">&lt;-</span> yvar_0 <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_xts</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># transform to xts</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>xvar_xts <span class="ot">&lt;-</span> xvar_all <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_xts</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="model-selection-steps-gets" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="model-selection-steps-gets"><span class="header-section-number">8.3</span> Model selection steps (<code>gets</code>)</h2>
-<p><a href="https://cran.r-project.org/web/packages/gets/index.html" class="uri">https://cran.r-project.org/web/packages/gets/index.html</a><br>
-- Formulate a general unrestricted model.<br>
-- Run the gets (general to specific) model selection algorithm.<br>
-- Identify outliers in the relationship.<br>
-- Repeat gets model selection over specific model and outliers.<br>
-- Verify that no additional outliers arise due to greater model parsimony.<br>
-- If estimation period is shorter than model selection period, remove predictors containing zeros only (e.g.&nbsp;outlier past the end of estimation period).<br>
-- Re-estimate final model.<br>
-- Save model equation as a txt file (not plugging in estimated coefficients here to keep it general). If happy with the model, copy this equation into file containing all model equations.</p>
+<p>The core of the model selection process is handled by the <a href="https://cran.r-project.org/web/packages/gets/index.html">gets package</a>, which implements a general-to-specific (GETS) algorithm:</p>
+<section id="formulate-a-general-unrestricted-model-gum" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="formulate-a-general-unrestricted-model-gum"><span class="header-section-number">8.3.1</span> Formulate a General Unrestricted Model (GUM)</h3>
+<ul>
+<li>The GETS process begins with a GUM that includes all potential regressors (predictors, lags, indicators). In our case this includes an autoregressive term, trend and seasonal dummies. The <code>arx()</code> function is used to estimate the GUM using the <code>yvar_xts</code> and <code>xvar_xts</code> data. The <code>mc = TRUE</code> argument specifies that a constant term should be included. The <code>ar = 1:max_lag</code> argument indicates that autoregressive terms up to the specified <code>max_lag</code> should be included.</li>
+<li>The <code>arx()</code> function is also capable of detecting variance anomalies in the error terms, such as autoregressive conditional heteroskedasticity (ARCH).</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># formulate a general unrestricted model</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NA-s are automatically eliminated from the data</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  gum_model <span class="ot">&lt;-</span> <span class="fu">arx</span>(<span class="at">y =</span> yvar_xts, <span class="at">mc =</span> <span class="cn">TRUE</span>, <span class="at">ar =</span> <span class="dv">1</span><span class="sc">:</span>max_lag, <span class="at">mxreg =</span> xvar_xts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-the-gets-algorithm" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="run-the-gets-algorithm"><span class="header-section-number">8.3.2</span> Run the <code>gets</code> Algorithm</h3>
+<ul>
+<li>First, the <code>isat()</code> function is applied to the GUM data to identify outliers in the unrestricted model using indicator variables. Outliers are defined as those observations whose residuals are deemed too large, possibly due to some extraordinary events. The outlier identification takes into account heteroskedasticity or autocorrelation in the residuals.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify outliers in the GUM ----</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>isat_model <span class="ot">&lt;-</span> <span class="fu">isat</span>(<span class="at">y =</span> gum_data[, <span class="dv">1</span>], </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mxreg =</span> gum_data[, <span class="sc">-</span><span class="dv">1</span>], </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ar.LjungB =</span> <span class="fu">list</span>(<span class="at">lag=</span>max_lag, </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pval=</span><span class="fl">0.01</span>), </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">arch.LjungB =</span> <span class="fu">list</span>(<span class="at">lag=</span>max_lag, <span class="at">pval=</span><span class="fl">0.01</span>), </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">iis =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sis =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Next, the <code>getsm()</code> function is applied to the outlier-augmented model to perform the general-to-specific model selection. It starts with the GUM and iteratively eliminates insignificant regressors based on their t-statistics and diagnostic tests for autocorrelation (Ljung-Box Q-test) and autoregressive conditional heteroskedasticity (ARCH LM test) in the error terms. The <code>t.pval</code> argument sets the significance level for retaining regressors. The <code>keep</code> argument can be used to force certain variables to be kept in the model regardless of their significance.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run the gets (general to specific) model selection algorithm ----</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gets_model <span class="ot">&lt;-</span> <span class="fu">getsm</span>(isat_model, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">t.pval =</span> <span class="fl">0.01</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ar.LjungB =</span> <span class="fu">list</span>(<span class="at">lag=</span>max_lag, <span class="at">pval=</span><span class="fl">0.01</span>), </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">arch.LjungB =</span> <span class="fu">list</span>(<span class="at">lag=</span>max_lag, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pval=</span><span class="fl">0.01</span>), </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">keep =</span> <span class="fu">c</span>(<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="identify-outliers-in-the-relationship" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="identify-outliers-in-the-relationship"><span class="header-section-number">8.3.3</span> Identify Outliers in the Relationship</h3>
+<ul>
+<li>After the initial GETS selection, the <code>isat()</code> function is applied to the residuals of the selected model to identify any remaining outliers. This is important, because the initial model selection process may produce a different residual series which now exhibits new outliers.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check outliers in the residuals</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>isat_res <span class="ot">&lt;-</span> gets_model <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">residuals</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">isat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="repeat-gets-model-selection-optional" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="repeat-gets-model-selection-optional"><span class="header-section-number">8.3.4</span> Repeat <code>gets</code> Model Selection (Optional)</h3>
+<ul>
+<li>If <code>second_pass</code> is set to <code>TRUE</code>, the model selection process is repeated, but this time including the newly identified outliers as regressors. This step further refines the model and ensures that the final specification is robust to outliers in the data.</li>
+</ul>
+</section>
+<section id="verify-if-additional-outliers-arose-due-to-greater-model-parsimony" class="level3" data-number="8.3.5">
+<h3 data-number="8.3.5" class="anchored" data-anchor-id="verify-if-additional-outliers-arose-due-to-greater-model-parsimony"><span class="header-section-number">8.3.5</span> Verify if Additional Outliers Arose Due to Greater Model Parsimony</h3>
+<ul>
+<li>A final check is performed using <code>isat()</code> on the final model’s residuals to ensure that no additional outliers have emerged due to the model simplification process. The <code>isatvar()</code> function can then be used to extract the estimated path of the constant, incorporating any significant shifts indicated by the outlier analysis.</li>
+<li>The <code>isattest()</code> function generates a plot showing the significant shifts in the constant over time.</li>
+</ul>
+</section>
+<section id="handle-zero-valued-predictors" class="level3" data-number="8.3.6">
+<h3 data-number="8.3.6" class="anchored" data-anchor-id="handle-zero-valued-predictors"><span class="header-section-number">8.3.6</span> Handle Zero-Valued Predictors</h3>
+<ul>
+<li>If the estimation period (<code>est_end</code>) is shorter than the model selection period (<code>mselect_end</code>), some predictors (e.g., outlier dummies) might contain only zeros in the estimation sample. These variables are identified and removed from the dataset to avoid issues during estimation.<br>
+</li>
+<li>This step recognizes that the outliers that occurred after <code>est_end</code> will not be relevant for the estimation of the model going forward.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find all variables with only zeros in the estimation period (if shorter than model selection period)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>zero_vars <span class="ot">&lt;-</span> gets_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_span</span>(<span class="at">end =</span> est_end) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_tbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">abs</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum_vals =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sum_vals <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(id)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># remove zero valued variables from the estimation sample</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>est_data <span class="ot">&lt;-</span> gets_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_span</span>(<span class="at">end =</span> est_end) <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_tbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_wide</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">all_of</span>(zero_vars)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_long</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_xts</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="re-estimate-final-model" class="level3" data-number="8.3.7">
+<h3 data-number="8.3.7" class="anchored" data-anchor-id="re-estimate-final-model"><span class="header-section-number">8.3.7</span> Re-estimate Final Model</h3>
+<ul>
+<li>The final selected model is re-estimated using <code>lm()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># re-estimate re-specified model via lm using the estimation sample</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  est_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(<span class="fu">str_c</span>(yvar_name, <span class="st">" ~ ."</span>)), <span class="at">data =</span> est_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="save-model-equation" class="level3" data-number="8.3.8">
+<h3 data-number="8.3.8" class="anchored" data-anchor-id="save-model-equation"><span class="header-section-number">8.3.8</span> Save Model Equation</h3>
+<ul>
+<li>The final model equation is saved as a text file (<em>model_eq.txt</em>) using the <code>model_equation()</code> function. This function formats the model output into an equation that can be read by the <a href="https://github.com/andrea-luciani/bimets">bimets package</a>. Since the equation can be later re-estimated in bimets, the saved equation does not contain the estimated coefficients to keep it general.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at estimated model and bimets model components</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">model_equation</span>(est_lm)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># save equation</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (save_eq) {</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sink</span>(<span class="fu">here</span>(<span class="st">"output"</span>, <span class="st">"model_eq.txt"</span>), <span class="at">append =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">str_glue</span>(<span class="st">"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">    {model_equation(est_lm)[2:4]}</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="st">  "</span>))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sink</span>()</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="produce-a-quasi-forecast-with-the-selected-model-bimets" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="produce-a-quasi-forecast-with-the-selected-model-bimets"><span class="header-section-number">8.4</span> Produce a quasi-forecast with the selected model (<code>bimets</code>)</h2>
-<p><a href="https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf" class="uri">https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf</a><br>
-- Load model from txt file.<br>
-- Load data used by the model.<br>
-- Estimate the model (if estimation period ends before the last data point also run a Chow test of model stability).<br>
-- Simulate model.<br>
-- Evaluate simulation by plotting quasi-forecast and actual history.</p>
+<p>After selecting the model using <code>gets</code>, the <code>bimets</code> package is used to estimate the model and produce a quasi-forecast:</p>
+<section id="load-model-and-data" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="load-model-and-data"><span class="header-section-number">8.4.1</span> Load Model and Data</h3>
+<ul>
+<li>The <code>LOAD_MODEL()</code> function loads the model equation from the saved text file. The <code>LOAD_MODEL_DATA()</code> function then combines the model with the relevant data, ensuring that all variables used in the model are present in the dataset.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load model from stored txt file</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model_eq <span class="ot">&lt;-</span> bimets<span class="sc">::</span><span class="fu">LOAD_MODEL</span>(<span class="at">modelFile =</span> <span class="fu">here</span>(<span class="st">"output"</span>, <span class="st">"model_eq.txt"</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># store variables in bimets format (no ragged edge: drop_na)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>hist_q_bimets <span class="ot">&lt;-</span> hist_q_mod <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">%in%</span> <span class="fu">c</span>(model_eq<span class="sc">$</span>vendog, model_eq<span class="sc">$</span>vexog)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_wide</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_long</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_tslist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(bimets<span class="sc">::</span>as.bimets)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># add data to model</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>model_eq_dat <span class="ot">&lt;-</span> bimets<span class="sc">::</span><span class="fu">LOAD_MODEL_DATA</span>(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  model_eq,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  hist_q_bimets</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="estimate-the-model" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="estimate-the-model"><span class="header-section-number">8.4.2</span> Estimate the Model</h3>
+<ul>
+<li>The <code>ESTIMATE()</code> function estimates the model using the specified estimation range (<code>est_range</code>). If the forecast end date (<code>fcst_end</code>) is later than the estimation end date, a Chow test for structural stability is automatically performed. The Chow test assesses whether the model’s parameters are constant over the estimation and forecast periods. The <code>CHOWPAR</code> argument specifies the date at which the data is split for the Chow test.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># determine range of history for estimation</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>est_range <span class="ot">&lt;-</span> model_eq_dat<span class="sc">$</span>modelData <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_attr_tslist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_xts</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  zoo<span class="sc">::</span><span class="fu">index</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract</span>(<span class="fu">c</span>(max_lag<span class="sc">+</span><span class="dv">1</span>, <span class="fu">length</span>(.)))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate model</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">floor_date</span>(fcst_end, <span class="st">"quarter"</span>) <span class="sc">&lt;=</span> <span class="fu">floor_date</span>(est_range[<span class="dv">2</span>], <span class="st">"quarter"</span>)) {</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  model_est <span class="ot">&lt;-</span> bimets<span class="sc">::</span><span class="fu">ESTIMATE</span>(model_eq_dat,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">eqList =</span> model_eq_dat<span class="sc">$</span>vendog,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">TSRANGE =</span> <span class="fu">c</span>(<span class="fu">year</span>(est_range[<span class="dv">1</span>]), <span class="fu">quarter</span>(est_range[<span class="dv">1</span>]), <span class="fu">year</span>(est_range[<span class="dv">2</span>]), <span class="fu">quarter</span>(est_range[<span class="dv">2</span>])),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">quietly =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  model_est <span class="ot">&lt;-</span> bimets<span class="sc">::</span><span class="fu">ESTIMATE</span>(model_eq_dat,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">eqList =</span> model_eq_dat<span class="sc">$</span>vendog,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">TSRANGE =</span> <span class="fu">c</span>(<span class="fu">year</span>(est_range[<span class="dv">1</span>]), <span class="fu">quarter</span>(est_range[<span class="dv">1</span>]), <span class="fu">year</span>(est_range[<span class="dv">2</span>]), <span class="fu">quarter</span>(est_range[<span class="dv">2</span>])),</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">CHOWTEST =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">CHOWPAR =</span> <span class="fu">c</span>(<span class="fu">year</span>(fcst_end), <span class="fu">quarter</span>(fcst_end)),</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">quietly =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="simulate-the-model" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="simulate-the-model"><span class="header-section-number">8.4.3</span> Simulate the Model</h3>
+<ul>
+<li>Statistical models generate forecasts based on historical data patterns and estimated relationships between variables. These models often assume that the underlying structure and relationships observed in the past will continue to hold in the future. There might be events or changes that are known (or believed) to occur in the future but are not reflected in the historical data or the model’s structure. Set <em>addfactors</em> to adjust the forecast path. An addfactor is a value that is added to the model’s forecast for a specific variable and time period. It’s essentially a way to incorporate external information, expert opinion, or subjective judgment into a model-based forecast. Addfactors are used to bridge the gap between purely model-based forecasts and external information or judgment. They are expressed in the same units as the variable being forcasted.</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set value of addfactors</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>scen_addfactor <span class="ot">&lt;-</span> hist_q_mod <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">%in%</span> <span class="fu">str_glue</span>(<span class="st">"{model_eq_dat$vendog}"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_tslist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(bimets<span class="sc">::</span>as.bimets)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># update an addfactor stored in xts format</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>add_qmod.xts<span class="sc">$</span>NDEA_HI <span class="sc">%+=%</span> <span class="fu">addf</span>(<span class="fl">2021.4</span>, <span class="fl">2024.4</span>, .<span class="dv">01</span>, .<span class="dv">025</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The <code>SIMULATE()</code> function simulates the model over the forecast period (<code>fcst_start</code> to <code>fcst_end</code>). The <code>simType = "FORECAST"</code> argument specifies that a deterministic forecast should be produced.</li>
+<li>The <code>simConvergence</code> and <code>simIterLimit</code> arguments control the convergence criteria and maximum number of iterations for the simulation algorithm. These parameters are particularly relevant for models with simultaneous equations, where the values of endogenous variables depend on each other. The simulation algorithm iteratively solves the system of equations until the solution converges or the maximum number of iterations is reached.</li>
+<li>Use the <code>fcutils::set_tsrange()</code> function to deal with a ragged edge in the data and prepare the exogenization range for the <code>Exogenize</code> parameter of the <code>SIMULATE()</code> function.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate model</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model_sim <span class="ot">&lt;-</span> bimets<span class="sc">::</span><span class="fu">SIMULATE</span>(model_est,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">simType =</span> <span class="st">"FORECAST"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">TSRANGE =</span> <span class="fu">c</span>(<span class="fu">year</span>(fcst_start), <span class="fu">quarter</span>(fcst_start), <span class="fu">year</span>(fcst_end), <span class="fu">quarter</span>(fcst_end)),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ConstantAdjustment =</span> scen_addfactor,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Exogenize =</span> exog_range,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">simConvergence =</span> <span class="fl">0.00001</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">simIterLimit =</span> <span class="dv">100</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">quietly =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="evaluate-the-simulation" class="level3" data-number="8.4.4">
+<h3 data-number="8.4.4" class="anchored" data-anchor-id="evaluate-the-simulation"><span class="header-section-number">8.4.4</span> Evaluate the Simulation</h3>
+<ul>
+<li>The simulated values (forecast) are extracted from the <code>model_sim</code> object and combined with the historical data for evaluation. The <code>plot_comp_2()</code> function is used to generate plots comparing the quasi-forecast with the actual history. These plots help assess the model’s ability to capture the dynamics of the time series and its potential forecasting accuracy.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract forecast</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model_fcst <span class="ot">&lt;-</span> model_sim<span class="sc">$</span>simulation <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract</span>(model_sim<span class="sc">$</span>vendog) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_attr_tslist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_tbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">str_c</span>(model_sim<span class="sc">$</span>vendog, <span class="st">"SOL"</span>), <span class="at">.before =</span> time)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># combine history and forecast for plot</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plot_data_fcst <span class="ot">&lt;-</span> <span class="fu">ts_c</span>(hist_q_mod <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id <span class="sc">%in%</span> model_sim<span class="sc">$</span>vendog), model_fcst) <span class="sc">%&gt;%</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_wide</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(model_sim<span class="sc">$</span>vendog)) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">str_glue</span>(<span class="st">"{model_sim$vendog}SOL"</span>)))))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_comp_2</span>(plot_data_fcst <span class="sc">%&gt;%</span> <span class="fu">ts_long</span>(), </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">rng_start =</span> <span class="fu">as.character</span>(<span class="fu">Sys.Date</span>() <span class="sc">-</span> <span class="fu">years</span>(<span class="dv">15</span>)), </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">rng_end =</span> fcst_end <span class="sc">%&gt;%</span> <span class="fu">as.character</span>(), </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">200</span>, <span class="at">width =</span> <span class="dv">400</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="stochastic-simulation" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="stochastic-simulation"><span class="header-section-number">8.5</span> Stochastic simulation</h2>
+<p>The preceding workflow can be extended with stochastic simulation. If necessary it is preceded by the same data preparation and model selection steps.</p>
+<section id="simulate-model-deterministically-to-obtain-mean-forecast." class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="simulate-model-deterministically-to-obtain-mean-forecast."><span class="header-section-number">8.5.1</span> Simulate model deterministically to obtain mean forecast.</h3>
+<p>The first step for obtaining a forecast interval is to simulate the estimated model deterministically. In a deterministic simulation, the model’s equations are solved without any random shocks. This produces a single “mean” forecast, representing the most likely path of the endogenous variables given the model’s structure, estimated parameters, and any specified exogenous assumptions.</p>
+</section>
+<section id="extract-forecast-and-combine-it-with-history." class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="extract-forecast-and-combine-it-with-history."><span class="header-section-number">8.5.2</span> Extract forecast and combine it with history.</h3>
+<p>After the deterministic simulation, the forecasted values are extracted from the simulation object. The historical data and the forecasted values are combined to facilitate comparison and visualization.</p>
+</section>
+<section id="inspect-the-forecast-via-plots." class="level3" data-number="8.5.3">
+<h3 data-number="8.5.3" class="anchored" data-anchor-id="inspect-the-forecast-via-plots."><span class="header-section-number">8.5.3</span> Inspect the forecast via plots.</h3>
+<p>Then generate plots to visually compare the historical data and the deterministic forecast. These plots allow for a visual assessment of the forecast’s behavior compared to the historical data. For example, one can observe whether the forecast captures the overall cycles in the historical data, and whether there are any abrupt changes or discontinuities at the forecast origin.</p>
+</section>
+<section id="set-parameters-for-stochastic-simulations." class="level3" data-number="8.5.4">
+<h3 data-number="8.5.4" class="anchored" data-anchor-id="set-parameters-for-stochastic-simulations."><span class="header-section-number">8.5.4</span> Set parameters for stochastic simulations.</h3>
+<p>Stochastic simulation introduces randomness into the model to generate a distribution of possible future paths, rather than just a single mean forecast. This helps to quantify the uncertainty surrounding the forecast.</p>
+<p>The first step in stochastic simulation is to define the structure of the random shocks. This is done by creating a list called <code>myStochStructure</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set parameters for stochastic simulation</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>myStochStructure <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ser_i <span class="cf">in</span> scen_model<span class="sc">$</span>vendog) {</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  myStochStructure[[ser_i]] <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">TSRANGE =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">TYPE =</span> <span class="st">"NORM"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">PARS =</span> <span class="fu">c</span>(<span class="dv">0</span>, scen_model_est<span class="sc">$</span>behaviorals[[ser_i]][[<span class="st">"statistics"</span>]][[<span class="st">"StandardErrorRegression"</span>]])</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The code iterates through each endogenous variable (<code>ser_i</code>).</li>
+<li>For each variable, it creates a list specifying the parameters of the random shocks:
+<ul>
+<li><strong><code>TSRANGE = TRUE</code></strong>: Indicates that the shocks should be applied throughout the entire simulation period.</li>
+<li><strong><code>TYPE = "NORM"</code></strong>: Specifies that the shocks should be drawn from a normal distribution.</li>
+<li><strong><code>PARS</code></strong>: Defines the parameters of the normal distribution. In this case, the mean is set to 0 and the standard deviation is set to the standard error of the regression for the corresponding equation. This means that the random shocks are scaled to the estimated uncertainty of each equation. The standard deviation of the error term is obtained from the estimation output, and it reflects the historical volatility of the residuals.</li>
+</ul></li>
+</ul>
+<p>In addition to perturbing the error terms, the script also allows for perturbing the estimated coefficients. This captures the uncertainty in the parameter estimates themselves.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perturb coefficients (draw from multivariate normal distro)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">987</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>scen_model_est_copy <span class="ot">&lt;-</span> scen_model_est</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>scen_model_est_pars <span class="ot">&lt;-</span> scen_model_est<span class="sc">$</span>behaviorals <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> <span class="cf">if</span> (n_coeff_sim <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cbind</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>      .x<span class="sc">$</span>coefficients,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>      MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n =</span> n_coeff_sim, <span class="at">mu =</span> .x<span class="sc">$</span>coefficients, <span class="at">Sigma =</span> .x<span class="sc">$</span>statistics<span class="sc">$</span>CoeffCovariance) <span class="sc">%&gt;%</span> <span class="fu">t</span>()</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    .x<span class="sc">$</span>coefficients</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong><code>set.seed(987)</code></strong>: Sets the random seed for reproducibility.</li>
+<li><strong><code>scen_model_est_copy &lt;- scen_model_est</code></strong>: Creates a copy of the estimated model object.</li>
+<li><strong><code>scen_model_est_pars</code></strong>: Stores the perturbed coefficients.</li>
+<li>The code iterates through each equation in <code>scen_model_est$behaviorals</code>.</li>
+<li>If <code>n_coeff_sim</code> is greater than 0, it draws <code>n_coeff_sim</code> sets of coefficients from a multivariate normal distribution using <code>MASS::mvrnorm()</code>. The mean of the distribution is the original estimated coefficients (<code>.x$coefficients</code>), and the covariance matrix is the estimated covariance matrix of the coefficients (<code>.x$statistics$CoeffCovariance</code>). This ensures that the perturbed coefficients are consistent with the estimated uncertainty and correlations among the parameters.</li>
+<li>If <code>n_coeff_sim</code> is 0 (coefficients are not drawn randomly), the original coefficients are used without perturbation.</li>
+</ul>
+</section>
+<section id="run-stochastic-simulation." class="level3" data-number="8.5.5">
+<h3 data-number="8.5.5" class="anchored" data-anchor-id="run-stochastic-simulation."><span class="header-section-number">8.5.5</span> Run stochastic simulation.</h3>
+<p>The stochastic simulation is performed using the <code>STOCHSIMULATE()</code> function in <code>bimets</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create variables to hold stochastic simulation objects and forecasts</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>scen_model_stochsim <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>scen_model_stochfcast <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over the parameter draws (first one is the estimate)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sim_i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(n_coeff_sim <span class="sc">+</span> <span class="dv">1</span>)) { <span class="co"># sim_i = 1</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set params for each equation</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (eq_i <span class="cf">in</span> scen_model_dat<span class="sc">$</span>vendog) { <span class="co"># eq_i = scen_model_dat$vendog[1]</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    scen_model_est_copy<span class="sc">$</span>behaviorals[[eq_i]][[<span class="st">"coefficients"</span>]][, <span class="dv">1</span>] <span class="ot">&lt;-</span> scen_model_est_pars[[eq_i]][, sim_i]</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># simulate model</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  scen_model_stochsim[[sim_i]] <span class="ot">&lt;-</span> bimets<span class="sc">::</span><span class="fu">STOCHSIMULATE</span>(scen_model_est_copy,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">simType =</span> <span class="st">"FORECAST"</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">TSRANGE =</span> <span class="fu">c</span>(<span class="fu">year</span>(fcst_start), <span class="fu">quarter</span>(fcst_start), <span class="fu">year</span>(fcst_end), <span class="fu">quarter</span>(fcst_end)),</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Exogenize =</span> exog_range,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">simConvergence =</span> <span class="fl">0.00001</span>,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">simIterLimit =</span> <span class="dv">100</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">StochStructure =</span> myStochStructure,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">StochReplica =</span> n_stoch_sim,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">StochSeed =</span> <span class="dv">123</span> <span class="sc">+</span> sim_i,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">quietly =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extract forecast</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  scen_model_stochfcast[[sim_i]] <span class="ot">&lt;-</span> scen_model_stochsim[[sim_i]][[<span class="st">"simulation_MM"</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">extract</span>(scen_model<span class="sc">$</span>vendog)</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The code loops <code>n_coeff_sim + 1</code> times. In the first iteration (<code>sim_i = 1</code>), the original estimated coefficients are used. In subsequent iterations, the perturbed coefficients are used.</li>
+<li>Inside the loop, for each iteration:
+<ul>
+<li>The coefficients in <code>scen_model_est_copy</code> are updated with the current set of perturbed coefficients.</li>
+<li><code>STOCHSIMULATE()</code> is called to perform the stochastic simulation.</li>
+<li><strong><code>StochStructure = myStochStructure</code></strong>: Specifies the structure of the random shocks defined earlier.</li>
+<li><strong><code>StochReplica = n_stoch_sim</code></strong>: Sets the number of stochastic replications for each set of coefficients. Each replication involves drawing a new set of random shocks and simulating the model.</li>
+<li><strong><code>StochSeed = 123 + sim_i</code></strong>: Sets the random seed for each iteration, ensuring reproducibility.</li>
+<li>The simulated paths are extracted from <code>scen_model_stochsim[[sim_i]][["simulation_MM"]]</code> and stored in <code>scen_model_stochfcast[[sim_i]]</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="extract-simulated-paths-and-obtain-deviations-from-the-mean-forecast." class="level3" data-number="8.5.6">
+<h3 data-number="8.5.6" class="anchored" data-anchor-id="extract-simulated-paths-and-obtain-deviations-from-the-mean-forecast."><span class="header-section-number">8.5.6</span> Extract simulated paths and obtain deviations from the mean forecast.</h3>
+<p>After the stochastic simulation, the simulated paths are processed to analyze the distribution of possible outcomes:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert matrices in the list to ts_long format</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>scen_model_stochfcast <span class="ot">&lt;-</span> scen_model_stochfcast <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_depth</span>(<span class="dv">2</span>, <span class="cf">function</span>(x) {</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(x, <span class="at">.name_repair =</span> <span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">seq.Date</span>(<span class="at">from =</span> fcst_start, <span class="at">to =</span> fcst_end, <span class="at">by =</span> <span class="st">"quarter"</span>), <span class="at">.before =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ts_long</span>()</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># forecast deviations</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>scen_model_stochdev <span class="ot">&lt;-</span> scen_model_stochfcast <span class="sc">%&gt;%</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_depth</span>(<span class="dv">2</span>, <span class="cf">function</span>(x) {</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ts_wide</span>(x) <span class="sc">%&gt;%</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="fu">across</span>(V1<span class="sc">:</span><span class="fu">last_col</span>(), <span class="sc">~</span> (.x <span class="sc">/</span> V1) <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span>V1) <span class="sc">%&gt;%</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ts_long</span>()</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong><code>scen_model_stochfcast</code></strong> is transformed using <code>map_depth(2, ...)</code> to apply a function to each simulated path (each element at depth 2 of the nested list).
+<ul>
+<li><code>as_tibble()</code> converts the matrix of simulated values to a tibble.</li>
+<li><code>mutate(time = ...)</code> adds a time index.</li>
+<li><code>ts_long()</code> converts the data to long format.</li>
+</ul></li>
+<li><strong><code>scen_model_stochdev</code></strong> calculates the deviations of each simulated path from the mean forecast (the first path, <code>V1</code>).
+<ul>
+<li><code>ts_wide()</code> converts the data to wide format.</li>
+<li><code>mutate(across(V1:last_col(), ~ (.x / V1) - 1))</code> calculates the percentage deviation of each column (simulated path) from the first column (mean forecast).</li>
+<li><code>select(-V1)</code> removes the mean forecast column.</li>
+<li><code>ts_long()</code> converts the data back to long format.</li>
+</ul></li>
+</ul>
+<p>The script then calculates quantiles of the distribution of deviations:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quantiles</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>scen_model_quantiles <span class="ot">&lt;-</span> scen_model_stochdev <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transpose</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_depth</span>(<span class="dv">2</span>, ts_wide) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">reduce</span>(.x, <span class="cf">function</span>(x1, x2) <span class="fu">full_join</span>(x1, x2, <span class="at">by =</span> <span class="st">"time"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="cf">function</span>(x) {</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ts_wide(x) %&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>(x) <span class="sc">%&gt;%</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">transmute</span>(</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">time =</span> time,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">Q05 =</span> <span class="fu">quantile</span>(<span class="fu">c_across</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="fl">0.05</span>),</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">Q10 =</span> <span class="fu">quantile</span>(<span class="fu">c_across</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="fl">0.10</span>),</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">Q20 =</span> <span class="fu">quantile</span>(<span class="fu">c_across</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="fl">0.20</span>),</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">Q50 =</span> <span class="fu">quantile</span>(<span class="fu">c_across</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="fl">0.50</span>),</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">Q80 =</span> <span class="fu">quantile</span>(<span class="fu">c_across</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="fl">0.80</span>),</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">Q90 =</span> <span class="fu">quantile</span>(<span class="fu">c_across</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="fl">0.90</span>),</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">Q95 =</span> <span class="fu">quantile</span>(<span class="fu">c_across</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="fl">0.95</span>),</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ungroup</span>()</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>transpose()</code> transposes the nested list structure of <code>scen_model_stochdev</code>.</li>
+<li><code>map_depth(2, ts_wide)</code> converts each set of deviations to wide format.</li>
+<li><code>map(~ reduce(.x, ...))</code> combines the deviations for each variable into a single tibble.</li>
+<li><code>map(function(x) ...)</code> calculates the quantiles for each time period using <code>quantile()</code>.</li>
+</ul>
+<p>The resulting <code>scen_model_quantiles</code> object contains the 5th, 10th, 20th, 50th, 80th, 90th, and 95th percentiles of the distribution of deviations for each variable.</p>
+</section>
+<section id="inspect-the-paths-via-plots." class="level3" data-number="8.5.7">
+<h3 data-number="8.5.7" class="anchored" data-anchor-id="inspect-the-paths-via-plots."><span class="header-section-number">8.5.7</span> Inspect the paths via plots.</h3>
+<p>Finally, the script generates plots to visualize the simulated paths and the quantiles:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate plots (compare levels)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">here</span>(<span class="st">"output/plots"</span>, <span class="st">"stoch_plot.pdf"</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ser_i <span class="cf">in</span> scen_model<span class="sc">$</span>vendog) { <span class="co"># ser_i = scen_model$vendog[1]</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  plot_out <span class="ot">&lt;-</span> scen_model_stochfcast <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transpose</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map_depth</span>(<span class="dv">2</span>, ts_wide) <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">reduce</span>(.x, <span class="cf">function</span>(x1, x2) <span class="fu">full_join</span>(x1, x2, <span class="at">by =</span> <span class="st">"time"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">rename_with</span>(.x, <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"time"</span>, <span class="fu">str_c</span>(<span class="st">"V"</span>, <span class="dv">1</span><span class="sc">:</span>((n_coeff_sim <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">*</span> (n_stoch_sim <span class="sc">+</span> <span class="dv">1</span>)))))) <span class="sc">%&gt;%</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(ts_long) <span class="sc">%&gt;%</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">extract2</span>(ser_i) <span class="sc">%&gt;%</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">group =</span> id), <span class="at">linetype =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"seagreen"</span>) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">str_glue</span>(<span class="st">"{ser_i}"</span>)) <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(plot_out)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ser_i <span class="cf">in</span> scen_model<span class="sc">$</span>vendog) { <span class="co"># ser_i = scen_model$vendog[1]</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  plot_out <span class="ot">&lt;-</span> scen_model_stochdev <span class="sc">%&gt;%</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transpose</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map_depth</span>(<span class="dv">2</span>, ts_wide) <span class="sc">%&gt;%</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">reduce</span>(.x, <span class="cf">function</span>(x1, x2) <span class="fu">full_join</span>(x1, x2, <span class="at">by =</span> <span class="st">"time"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">rename_with</span>(.x, <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"time"</span>, <span class="fu">str_c</span>(<span class="st">"V"</span>, <span class="dv">1</span><span class="sc">:</span>((n_coeff_sim <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">*</span> (n_stoch_sim)))))) <span class="sc">%&gt;%</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(ts_long) <span class="sc">%&gt;%</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">extract2</span>(ser_i) <span class="sc">%&gt;%</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">group =</span> id), <span class="at">linetype =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"seagreen"</span>) <span class="sc">+</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">str_glue</span>(<span class="st">"{ser_i}"</span>)) <span class="sc">+</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(plot_out)</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ser_i <span class="cf">in</span> scen_model<span class="sc">$</span>vendog) { <span class="co"># ser_i = scen_model$vendog[1]</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>  plot_out <span class="ot">&lt;-</span> scen_model_quantiles <span class="sc">%&gt;%</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">extract2</span>(ser_i) <span class="sc">%&gt;%</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ts_long</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">group =</span> id), <span class="at">linetype =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"seagreen"</span>) <span class="sc">+</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">str_glue</span>(<span class="st">"{ser_i}"</span>)) <span class="sc">+</span></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(plot_out)</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The code iterates through each endogenous variable (<code>ser_i</code>).</li>
+<li>For each variable, it creates three types of plots:
+<ul>
+<li><strong>Simulated levels</strong>: Shows all simulated paths of the variable.</li>
+<li><strong>Deviations from the mean forecast</strong>: Shows the deviations of each simulated path from the mean forecast.</li>
+<li><strong>Quantiles</strong>: Shows the quantiles of the distribution of deviations.</li>
+</ul></li>
+<li><code>ggplot2</code> is used to create the plots, with <code>geom_line()</code> used to display the paths.</li>
+<li>The plots are saved to a PDF file (<code>stoch_plot.pdf</code>).</li>
+</ul>
+<p>These plots provide a visual representation of the uncertainty surrounding the forecast. The spread of the simulated paths and the width of the quantile bands indicate the range of possible outcomes. By examining these plots, one can assess the degree of uncertainty associated with different variables and time periods.</p>
+<p>The script includes an additional set of plots based on smoothed quantile paths, which are generated by applying user-specified adjustment factors to certain quantiles at specific time points and then interpolating the values in between. This allows for incorporating subjective views about the evolution of uncertainty over time. However, the overall logic of plotting the smoothed paths is similar to that described above.</p>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">8.6</span> Conclusion</h2>
+<p>This detailed process, combining the strengths of <code>gets</code> and <code>bimets</code>, provides a robust and flexible framework for model selection and evaluation in time series forecasting. The use of indicator variables, diagnostic tests, and quasi-forecast evaluation further enhances the reliability and interpretability of the selected models. The use of stochastic simulation provides valuable insights into the range of possible outcomes and helps to quantify the risks associated with relying solely on a single mean forecast.</p>
 
 
 </section>
@@ -719,9 +1289,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./simulation.html" class="pagination-link" aria-label="Stochastic simulations">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

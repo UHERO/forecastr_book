@@ -1,0 +1,89 @@
+<!DOCTYPE html><html><head><title>R: Omit NA values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_na_omit</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Omit NA values</h2>
+
+<h3>Description</h3>
+
+<p>Remove NA values in ts-boxable objects, turning explicit into implicit
+missing values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ts_na_omit(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Note that internal NAs in <code>ts</code> time series will not be removed, as this
+conflicts with the regular structure.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a ts-boxable object of the same class as <code>x</code>, i.e., an object of
+class <code>ts</code>, <code>xts</code>, <code>zoo</code>, <code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>,
+<code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>, <code>irts</code> or <code>timeSeries</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>ts_regular, for the opposite, turning implicit into explicit
+missing values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>x &lt;- AirPassengers
+x[c(2, 4)] &lt;- NA
+
+# A ts object does only know explicit NAs
+ts_na_omit(x)
+
+# by default, NAs are implicit in data frames
+ts_df(x)
+
+# make NAs explicit
+ts_regular(ts_df(x))
+
+# and implicit again
+ts_na_omit(ts_regular(ts_df(x)))
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

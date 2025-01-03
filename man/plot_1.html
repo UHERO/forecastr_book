@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head><title>R: Interactive plot with level and growth rate</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>plot_1</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Interactive plot with level and growth rate</h2>
+
+<h3>Description</h3>
+
+<p>Interactive plot with level and growth rate
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>plot_1(
+  x,
+  rng_start = as.character(Sys.Date() - lubridate::years(10)),
+  rng_end = as.character(Sys.Date() + lubridate::years(2)),
+  height = 300,
+  width = 900,
+  yoy_gr = TRUE,
+  gr_1 = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable object to plot (e.g. time series of history, oldsol, sol)</p>
+</td></tr>
+<tr><td><code id="rng_start">rng_start</code></td>
+<td>
+<p>start of zoom range (&quot;YYYY-MM-DD&quot;)</p>
+</td></tr>
+<tr><td><code id="rng_end">rng_end</code></td>
+<td>
+<p>end of the zoom range (&quot;YYYY-MM-DD&quot;)</p>
+</td></tr>
+<tr><td><code id="height">height</code></td>
+<td>
+<p>height of a single panel (px)</p>
+</td></tr>
+<tr><td><code id="width">width</code></td>
+<td>
+<p>width of a single panel (px)</p>
+</td></tr>
+<tr><td><code id="yoy_gr">yoy_gr</code></td>
+<td>
+<p>year-over-year (default) or annualized growth</p>
+</td></tr>
+<tr><td><code id="gr_1">gr_1</code></td>
+<td>
+<p>only show growth for the first series (default)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a dygraph plot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>monthly_data_example |&gt;
+  plot_1()
+quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_pick("E_TU_HI", "ECT_HI", "EMN_HI") |&gt;
+  plot_1()
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

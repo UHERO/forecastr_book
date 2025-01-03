@@ -1,0 +1,163 @@
+<!DOCTYPE html><html><head><title>R: Convert Everything to Everything</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_ts</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert Everything to Everything</h2>
+
+<h3>Description</h3>
+
+<p>tsbox is built around a set of converters, which convert time series
+stored as <code>ts</code>, <code>xts</code>, <code>zoo</code>, <code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>,
+<code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>, <code>irts</code> or <code>timeSeries</code> to each other.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ts_data.frame(x)
+
+ts_df(x)
+
+ts_data.table(x)
+
+ts_dt(x)
+
+ts_tbl(x)
+
+ts_tibbletime(x)
+
+ts_timeSeries(x)
+
+ts_tis(x)
+
+ts_ts(x)
+
+ts_irts(x)
+
+ts_tsibble(x)
+
+ts_tslist(x)
+
+ts_xts(x)
+
+ts_zoo(x)
+
+ts_zooreg(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In data frames, multiple time series will be stored in a 'long' format. tsbox
+detects a <em>value</em>, a <em>time</em> and zero to several <em>id</em> columns. Column
+detection is done in the following order:
+</p>
+
+<ol>
+<li><p> Starting <strong>on the right</strong>, the first first <code>numeric</code> or <code>integer</code> column
+is used as <strong>value column</strong>.
+</p>
+</li>
+<li><p> Using the remaining columns, and starting on the right again, the first
+<code>Date</code>, <code>POSIXct</code>, <code>numeric</code> or <code>character</code> column is used as
+<strong>time column</strong>. <code>character</code> strings are parsed by <code>anytime::anytime()</code>.
+The time stamp, <code>time</code>, indicates the beginning of a period.
+</p>
+</li>
+<li> <p><strong>All remaining</strong> columns are <strong>id columns</strong>. Each unique combination of
+id columns points to a time series.
+</p>
+</li></ol>
+
+<p><strong>Alternatively</strong>, the <strong>time</strong> column and the <strong>value</strong> column to be
+explicitly named as <code>time</code> and <code>value</code>. If explicit names are used, the
+column order will be ignored.
+</p>
+<p>Whenever possible, tsbox relies on <strong>heuristic time conversion</strong>. When a
+monthly <code>"ts"</code> time series, e.g., <code>AirPassengers</code>, is converted to a data
+frame, each time stamp (of class <code>"Date"</code>) is the first day of the month. In
+most circumstances, this reflects the actual meaning of the data stored in a
+<code>"ts"</code> object. Technically, of course, this is not correct: <code>"ts"</code> objects
+divide time in period of equal length, while in reality, February is shorter
+than January. Heuristic conversion is done for frequencies of 0.1 (decades),
+1 (years), 4 (quarters) and 12 (month).
+</p>
+<p>For other frequencies, e.g. 260, of <code>EuStockMarkets</code>, tsbox uses  <strong>exact
+time conversion</strong>. The year is divided into 260 equally long units, and time
+stamp of a period will be a point in time (of class <code>"POSIXct"</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>ts-boxable time series of the desired class, i.e., an object of
+class <code>ts</code>, <code>xts</code>, <code>zoo</code>, <code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>,
+<code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>, <code>irts</code> or <code>timeSeries</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+x.ts &lt;- ts_c(mdeaths, fdeaths)
+x.ts
+ts_df(x.ts)
+
+suppressMessages(library(dplyr))
+ts_tbl(x.ts)
+
+suppressMessages(library(data.table))
+ts_dt(x.ts)
+
+suppressMessages(library(xts))
+ts_xts(x.ts)
+
+# heuristic time conversion
+# 1 month: approx. 1/12 year
+ts_df(AirPassengers)
+
+# exact time conversion
+# 1 trading day: exactly 1/260 year
+ts_df(EuStockMarkets)
+
+# multiple ids
+a &lt;- ts_df(ts_c(fdeaths, mdeaths))
+a$type &lt;- "level"
+b &lt;- ts_pc(a)
+b$type &lt;- "pc"
+multi.id.df &lt;- rbind(a, b)
+
+ts_ts(multi.id.df)
+ts_plot(multi.id.df)
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

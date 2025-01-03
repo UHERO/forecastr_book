@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./utilfuns.html" rel="next">
+<link href="./fcutils.html" rel="next">
 <link href="./renv.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -142,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,8 +199,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./fcutils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,19 +212,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></span></a>
   </div>
 </li>
     </ul>
@@ -206,7 +228,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#start-with-a-clean-slate" id="toc-start-with-a-clean-slate" class="nav-link active" data-scroll-target="#start-with-a-clean-slate"><span class="header-section-number">5.1</span> Start with a clean slate</a></li>
   <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">5.2</span> Packages</a></li>
   <li><a href="#package-descriptions" id="toc-package-descriptions" class="nav-link" data-scroll-target="#package-descriptions"><span class="header-section-number">5.3</span> Package descriptions</a></li>
-  <li><a href="#additional-info-in-setup" id="toc-additional-info-in-setup" class="nav-link" data-scroll-target="#additional-info-in-setup"><span class="header-section-number">5.4</span> Additional info in setup</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/setup.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -215,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></h1>
+<h1 class="title"><span id="sec-setup" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Setup of the forecastr project</span></span></h1>
 </div>
 
 
@@ -240,20 +261,20 @@ ul.task-list li input[type="checkbox"] {
 <p>If only some objects need to be removed, search for them via wildcards:<br>
 <code>rm(list = ls(pattern = glob2rx("*__*")))</code></p>
 <p>Detach all loaded packages:</p>
-<pre><code>if (!is.null(names(sessionInfo()$otherPkgs))) {
-invisible(
-  suppressMessages(
-    suppressWarnings(
-      lapply(
-        paste("package:", names(sessionInfo()$otherPkgs), sep=""), 
-        detach, 
-        character.only = TRUE, 
-        unload = TRUE
-        )
-      )
-    )
-  )
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">names</span>(<span class="fu">sessionInfo</span>()<span class="sc">$</span>otherPkgs))) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">suppressMessages</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">suppressWarnings</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lapply</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste</span>(<span class="st">"package:"</span>, <span class="fu">names</span>(<span class="fu">sessionInfo</span>()<span class="sc">$</span>otherPkgs), <span class="at">sep=</span><span class="st">""</span>), </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        detach, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">character.only =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">unload =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="packages" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">5.2</span> Packages</h2>
@@ -261,53 +282,60 @@ invisible(
 <p>Navigate within a project using the <code>here()</code> package. Start by specifying:<br>
 <code>here::i_am("R/setup.R")</code></p>
 <p>Then load necessary packages</p>
-<pre><code>library(here) # navigation within the project
-library(conflicted) # detect conflicts across packages
-library(tidyverse) # a set of frequently used data-wrangling tools
-library(magrittr) # more than just pipes
-library(lubridate) # dealing with dates
-library(tsbox) # dealing with time series
-# library(bimets)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load necessary packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co"># navigation within the project</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted) <span class="co"># detect conflicts across packages</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># a set of frequently used data-wrangling tools</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># more than just pipes</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># dealing with dates</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tsbox) <span class="co"># dealing with time series</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pins"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># library(bimets)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github("UHERO/fcutils")</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># renv::purge("fcutils")</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fcutils"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Detect conflicts across packages and assign preferences</p>
-<pre><code>conflict_scout()
-conflict_prefer("filter", "dplyr") # dplyr v stats
-conflict_prefer("first", "dplyr") # dplyr v xts
-conflict_prefer("lag", "dplyr") # dplyr v stats
-conflict_prefer("last", "dplyr") # dplyr v xts
-conflict_prefer("extract", "magrittr") # magrittr vs tidyr</code></pre>
-<p>Verify top level project directory<br>
-<code>here()</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_scout</span>()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>) <span class="co"># dplyr v stats</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"first"</span>, <span class="st">"dplyr"</span>) <span class="co"># dplyr v xts</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"lag"</span>, <span class="st">"dplyr"</span>) <span class="co"># dplyr v stats</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"last"</span>, <span class="st">"dplyr"</span>) <span class="co"># dplyr v xts</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"extract"</span>, <span class="st">"magrittr"</span>) <span class="co"># magrittr vs tidyr</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"set_names"</span>, <span class="st">"magrittr"</span>) <span class="co"># magrittr vs purrr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Verify top level project directory <code>here::here()</code>.<br>
+</p>
 </section>
 <section id="package-descriptions" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="package-descriptions"><span class="header-section-number">5.3</span> Package descriptions</h2>
-<p>Use the <code>here</code> package to deal with file paths:<br>
-https://here.r-lib.org</p>
-<p>Suppose you have a dataset in csv format. Use:<br>
-<code>readr::read_csv(here::here("&lt;The subfolder where your csv file resides&gt;", "&lt;The CSV file.csv&gt;"))</code></p>
-<p>Only load essential packages with many useful functions (don’t load a whole package to access a single function).<br>
-Refer to individual functions in not loaded packages by <code>namespace::function()</code></p>
-<p>Resolve conflicts across multiple packages with <code>conflicted</code>:<br>
-https://conflicted.r-lib.org</p>
-<p>Core <code>tidyverse</code> packages:<br>
-https://www.tidyverse.org</p>
-<p>Non-core <code>tidyverse</code> packages (need to be loaded separately):<br>
-https://magrittr.tidyverse.org<br>
-https://lubridate.tidyverse.org</p>
-<p>Time series tools in <code>tsbox</code> (learn them and use them, very useful). All start with <code>ts_</code>.<br>
-https://www.tsbox.help</p>
-<p>Forecasting with multi-equation behavioral models (only load <code>bimets</code> if actually doing forecasts, no need for data manipulation):<br>
-https://cran.r-project.org/web/packages/bimets/index.html</p>
-<p><code>bimets</code> depends on <code>xts</code> (if not loaded, can access necessary functions via <code>xts::function()</code>):<br>
-https://cran.r-project.org/web/packages/xts/index.html</p>
-<p>Prefer using <code>tsbox</code> and <code>tidyverse</code> functions whenever possible, but understand the components and behavior of <code>xts</code> objects: https://rc2e.com/timeseriesanalysis</p>
-</section>
-<section id="additional-info-in-setup" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="additional-info-in-setup"><span class="header-section-number">5.4</span> Additional info in setup</h2>
-<p>Define project-wide constants:</p>
-<pre><code>bnk_start &lt;- ymd("1900-01-01")
-bnk_end &lt;- ymd("2060-12-31")</code></pre>
-<p>Load user defined utility functions (details in next section):<br>
-<code>source(here("R", "util_funs.R"))</code></p>
+<!-- Use the `here` package to deal with file paths:\ -->
+<!-- https://here.r-lib.org -->
+<!-- Suppose you have a dataset in csv format. Use:\ -->
+<!-- `readr::read_csv(here::here("<The subfolder where your csv file resides>", "<The CSV file.csv>"))` -->
+<p>Only load essential packages with many useful functions (don’t load a whole package to access a single function). Refer to individual functions in packages that are not loaded by <code>namespace::function()</code>.<br>
+</p>
+<!-- Resolve conflicts across multiple packages with `conflicted`:\ -->
+<!-- https://conflicted.r-lib.org -->
+<ul>
+<li>Core <a href="https://www.tidyverse.org">tidyverse</a> packages.<br>
+</li>
+<li>Non-core tidyverse packages (need to be loaded separately):<br>
+
+<ul>
+<li><a href="https://magrittr.tidyverse.org">magrittr</a><br>
+</li>
+<li><a href="https://lubridate.tidyverse.org">lubridate</a></li>
+</ul></li>
+<li>Time series tools in <a href="https://www.tsbox.help">tsbox</a> (learn them and use them, very useful). All start with <code>ts_</code>.<br>
+</li>
+<li>Load the <a href="https://github.com/UHERO/fcutils">fcutils package</a> for utility functions.<br>
+</li>
+<li>Forecasting with multi-equation behavioral models: only the <a href="https://cran.r-project.org/web/packages/bimets/index.html">load bimets</a> pakage if actually doing forecasts, no need for data manipulation.<br>
+</li>
+<li>bimets depends on the <a href="http://joshuaulrich.github.io/xts/">xts package</a> (if not loaded, can access necessary functions via <code>xts::function()</code>). Prefer using tsbox and tidyverse functions whenever possible, but understand the components and behavior of xts objects.<br>
+</li>
+</ul>
+<!-- ## Additional info in setup -->
 
 
 </section>
@@ -740,8 +768,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./utilfuns.html" class="pagination-link" aria-label="User defined utility functions">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./fcutils.html" class="pagination-link" aria-label="Utility functions">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Utility functions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

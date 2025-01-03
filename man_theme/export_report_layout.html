@@ -1,0 +1,78 @@
+<!DOCTYPE html><html><head><title>R: Export chart for UHERO report layout</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>export_report_layout</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Export chart for UHERO report layout</h2>
+
+<h3>Description</h3>
+
+<p>Uses <code>ggplot2::ggsave</code> to save a copy of the chart. By default, charts are sized at 5.6931 x 4 inches.
+Sometimes charts may need to be larger, so the export function does accept parameters to change the width and height.
+Please use a '.svg', '.pdf', or '.eps' extension when exporting for a report layout.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>export_report_layout(file_name, plot, w = 5.6931, h = 4, u = "in", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="file_name">file_name</code></td>
+<td>
+<p>A string for the file name, including the extension.</p>
+</td></tr>
+<tr><td><code id="plot">plot</code></td>
+<td>
+<p>Ggplot plot object.</p>
+</td></tr>
+<tr><td><code id="w">w</code></td>
+<td>
+<p>Integer - width of the exported image, defaults to 5.6931</p>
+</td></tr>
+<tr><td><code id="h">h</code></td>
+<td>
+<p>Integer - height of the exported image, defaults to 4</p>
+</td></tr>
+<tr><td><code id="u">u</code></td>
+<td>
+<p>A string for the units, defaults to &quot;in&quot; for inches</p>
+</td></tr>
+<tr><td><code id="...">...</code></td>
+<td>
+<p>Additional parameters that can be passed to ggplot2::ggsave</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>df &lt;- data.frame(
+  x = rnorm(10) * 100000,
+  y = seq(0, 1, length.out = 10)
+)
+plot &lt;- ggplot2::ggplot(df, ggplot2::aes(x, y)) + ggplot2::geom_point()
+export_report_layout('plot.svg', plot)
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

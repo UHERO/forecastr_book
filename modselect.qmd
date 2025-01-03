@@ -1,43 +1,587 @@
-# Model selection
+# Model selection and simulation {#sec-modselect}
 
-The model selection process can be run line-by-line from an R script directly (R/gets_model_select.R) or via sourcing an Rmd document (notes/gets_model_select.Rmd) which collects all model selection results in an easier to digest html file. Running the full script (source) takes about 1 minute.
+The model selection process can be run line-by-line from an R script directly (*R/gets_model_select.R*) or via sourcing an Rmd document (*notes/gets_model_select.Rmd*) which collects all model selection results in an easier to digest html file. Running the full script (source) takes about 1 minute.
 
 ## Main user settings
 
--   Start and end of period used for model selection.\
--   End of period used for estimation (selected model can be re-estimated for different sample).\
--   Start and end of quasi-forecast period (for model evaluation).\
--   Maximum number of lags considered in models.\
--   Response variable.\
--   List of predictors.
+Before diving into the automated steps, users must specify several key parameters that control the model selection process:
+
+-   **`mselect_start`** and **`mselect_end`**: Define the start and end dates of the period used for model selection. This is the sample over which the *gets* algorithm will evaluate potential models.\
+-   **`est_end`**: Specifies the end of the period used for estimation. While the model selection process might consider data up to `mselect_end`, the final model can be re-estimated using a shorter sample ending at `est_end`. This is useful when recent data is deemed less reliable or structurally different.\
+-   **`fcst_start`** and **`fcst_end`**: Define the start and end dates of the quasi-forecast period. This is the period over which the model's forecasting performance will be evaluated. The model is simulated forward from `fcst_start`, and the simulated values are compared against actual data (if available) up to `fcst_end`.\
+-   **`max_lag`**: Specifies the maximum number of lags to be considered for each predictor variable in the model. For example, if `max_lag` is 4, the model selection process will consider the current value and up to four lagged values of each predictor.\
+-   **`yvar_name`**: The name of the response variable to be forecasted. This must correspond to the name of a variable in the downloaded dataset. For example: `yvar_name <- "E_NF_AT_HI_QL"` specifies the log of non-farm employment in Hawaii as the target variable.\
+-   **`xvar_list`**: A vector of names of potential predictor variables. These can include economic indicators, other related time series, or even transformations of the response variable itself. For instance:\
+
+``` R
+# list of candidate variables (logs are denoted by _QL extension)
+xvar_list <- c(
+  "Y_R_AT_HI_QL", # Log of real income in Hawaii
+  "VIS_AT_HI_QL", # Log of visitor arrivals in Hawaii         
+  "CPI_AT_HON_QL" # Log of CPI in Honolulu
+)
+```         
+
+If no additional regressors are considered set `xvar_list <- c()`.
+
 
 ## Data preparation (`tidyverse`)
 
--   Download all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.\
--   Log-transform all variables.\
--   Load (create) all indicators (dummies for impulse, level shift, seasonal) and trend.\
--   Combine all variables into a single dataset.\
--   Set date range for model selection.\
--   Generate 8 lags of predictors.\
--   Filter data set down to specific variables considered in a particular model, including trend and season dummies.
+The data preparation stage involves several steps to transform the raw data downloaded from UDAMAN into a format suitable for model selection:
+
+### Data Download and Initial Processing
+
+  -   Download all series used in the model selection process from UDAMAN (about 500 rows and 1200 columns) and eliminate special characters from the series names.\
+  -   The data is converted to a long format using `ts_long()`.
+
+### Log Transformation
+
+  -   All variables in the dataset are log-transformed using. This is a common practice in time series analysis to stabilize variance and linearize relationships. The names of the log-transformed variables are appended with "L". For example, `E_NF_AT_HI` becomes `E_NF_AT_HI_L`. Note that, depending on the data, this may result in `NaN` values which will be handled by the `gets` algorithm during model selection.
+
+``` R
+# take the log of all series (some will produce NaNs)
+hist_ql <- hist_q %>%
+  mutate(value = log(value)) %>%
+  mutate(id = str_c(id, "L"))
+```         
+
+### Indicator Variable Creation
+
+  -   Indicator variables, also known as dummy variables, are created to capture the effects of specific events or periods. The script allows for loading previously saved indicators (`indicators_from_disk`) or creating them from scratch.\
+  -   **Impulse Indicator Series (IIS)**: These are binary variables that take the value 1 in a specific quarter and 0 otherwise. They are used to capture the impact of one-time events or shocks. These dummies are useful to control for one-time temporary shocks such as hurricanes, policy changes or one-time bonuses paid out in a particular quarter. Without controlling for these events, the model would try to fit these extraordinary data points using regular predictors, which may lead to biased estimates.\
+  -   **Step Indicator Series (SIS)**: These variables take the value 0 before a certain date and 1 thereafter. They are used to model structural breaks or permanent level shifts in the time series. A typical example of when these indicator series might be useful is the case of a permanent policy change, introduction of a major competitor, or a permanent change in consumer preferences. By introducing a SIS, the model can account for these changes without biasing estimates for the entire sample.\
+  -   **Season Dummies**: These variables capture the seasonal patterns in the data. For quarterly data, four seasonal dummies are created (IQ1, IQ2, IQ3, IQ4), each taking the value 1 in the corresponding quarter and 0 otherwise. A typical example of quarterly seasonal pattern are fourth quarter spending sprees related to holidays, or seasonal variations in tourism related to weather conditions and holidays in other countries.\
+  -   **Trend Indicator**: A linear trend variable (`ITREND`) is created to capture the overall upward or downward movement of the time series over time. For example, technological progress or population growth may cause a steady upward trend in economic time series such as income or consumption.\
+
+``` R
+# combine indicators into single data frame
+indicator_vars <- ts_c(
+  iis_indicators %>% ts_long(),
+  sis_indicators %>% ts_long(),
+  season_indicators %>% ts_long(),
+  trend_indicator %>% ts_long()
+)
+```         
+
+### Data Combination
+
+  -   The original data, log-transformed data, and indicator variables are combined into a single dataset using `ts_c()`.
+
+### Data Subsetting
+
+  -   The dataset is filtered to include only the observations within the `mselect_start` and `mselect_end` range. The data is also subset based on the `yvar_name` and `xvar_list` to retain only the variables relevant for the specific model being considered.
+
+### Lag Generation
+
+  -   Lags of the predictor variables are generated using `ts_lag()` and combined using `ts_c()`. This creates a dataset containing the current and lagged values (up to `max_lag`) of each predictor.
+
+``` R
+# generate lags of selected predictors
+xvar_lags <- 0:max_lag %>% 
+  map(~ts_lag(xvar_0, .x)) %>% 
+  reduce(ts_c)
+```
+
+### Data Transformation to xts
+
+  -   The response variable and the combined predictor variables (including lags, trend, and seasonal dummies) are converted to `xts` objects for use with the `gets` package.
+
+``` R
+# transform to xts
+yvar_xts <- yvar_0 %>%
+  ts_xts()
+
+# transform to xts
+xvar_xts <- xvar_all %>%
+  ts_xts()
+```
 
 ## Model selection steps (`gets`)
 
-<https://cran.r-project.org/web/packages/gets/index.html>\
-- Formulate a general unrestricted model.\
-- Run the gets (general to specific) model selection algorithm.\
-- Identify outliers in the relationship.\
-- Repeat gets model selection over specific model and outliers.\
-- Verify that no additional outliers arise due to greater model parsimony.\
-- If estimation period is shorter than model selection period, remove predictors containing zeros only (e.g. outlier past the end of estimation period).\
-- Re-estimate final model.\
-- Save model equation as a txt file (not plugging in estimated coefficients here to keep it general). If happy with the model, copy this equation into file containing all model equations.
+
+The core of the model selection process is handled by the [gets package](https://cran.r-project.org/web/packages/gets/index.html), which implements a general-to-specific (GETS) algorithm:
+
+### Formulate a General Unrestricted Model (GUM)
+
+  -   The GETS process begins with a GUM that includes all potential regressors (predictors, lags, indicators). In our case this includes an autoregressive term, trend and seasonal dummies. The `arx()` function is used to estimate the GUM using the `yvar_xts` and `xvar_xts` data. The `mc = TRUE` argument specifies that a constant term should be included. The `ar = 1:max_lag` argument indicates that autoregressive terms up to the specified `max_lag` should be included.
+  -   The `arx()` function is also capable of detecting variance anomalies in the error terms, such as autoregressive conditional heteroskedasticity (ARCH).
+
+``` R
+# formulate a general unrestricted model
+# NA-s are automatically eliminated from the data
+  gum_model <- arx(y = yvar_xts, mc = TRUE, ar = 1:max_lag, mxreg = xvar_xts)
+```
+
+### Run the `gets` Algorithm
+
+  -   First, the `isat()` function is applied to the GUM data to identify outliers in the unrestricted model using indicator variables. Outliers are defined as those observations whose residuals are deemed too large, possibly due to some extraordinary events. The outlier identification takes into account heteroskedasticity or autocorrelation in the residuals.
+  
+``` R
+# identify outliers in the GUM ----
+isat_model <- isat(y = gum_data[, 1], 
+  mc = TRUE, 
+  mxreg = gum_data[, -1], 
+  ar.LjungB = list(lag=max_lag, 
+  pval=0.01), 
+  arch.LjungB = list(lag=max_lag, pval=0.01), 
+  iis = TRUE, 
+  sis = TRUE, 
+  plot = TRUE
+)
+```
+  
+  -   Next, the `getsm()` function is applied to the outlier-augmented model to perform the general-to-specific model selection. It starts with the GUM and iteratively eliminates insignificant regressors based on their t-statistics and diagnostic tests for autocorrelation (Ljung-Box Q-test) and autoregressive conditional heteroskedasticity (ARCH LM test) in the error terms. The `t.pval` argument sets the significance level for retaining regressors. The `keep` argument can be used to force certain variables to be kept in the model regardless of their significance.
+
+``` R
+# run the gets (general to specific) model selection algorithm ----
+gets_model <- getsm(isat_model, 
+  t.pval = 0.01, 
+  ar.LjungB = list(lag=max_lag, pval=0.01), 
+  arch.LjungB = list(lag=max_lag, 
+  pval=0.01), 
+  keep = c(1))
+```
+
+### Identify Outliers in the Relationship
+
+  -   After the initial GETS selection, the `isat()` function is applied to the residuals of the selected model to identify any remaining outliers. This is important, because the initial model selection process may produce a different residual series which now exhibits new outliers.
+
+``` R
+# check outliers in the residuals
+isat_res <- gets_model %>%
+  residuals() %>%
+  isat()
+```
+
+### Repeat `gets` Model Selection (Optional)
+
+  -   If `second_pass` is set to `TRUE`, the model selection process is repeated, but this time including the newly identified outliers as regressors. This step further refines the model and ensures that the final specification is robust to outliers in the data.
+
+### Verify if Additional Outliers Arose Due to Greater Model Parsimony
+
+  -   A final check is performed using `isat()` on the final model's residuals to ensure that no additional outliers have emerged due to the model simplification process. The `isatvar()` function can then be used to extract the estimated path of the constant, incorporating any significant shifts indicated by the outlier analysis.
+  -   The `isattest()` function generates a plot showing the significant shifts in the constant over time.
+
+### Handle Zero-Valued Predictors
+
+  -   If the estimation period (`est_end`) is shorter than the model selection period (`mselect_end`), some predictors (e.g., outlier dummies) might contain only zeros in the estimation sample. These variables are identified and removed from the dataset to avoid issues during estimation.\
+  -   This step recognizes that the outliers that occurred after `est_end` will not be relevant for the estimation of the model going forward.
+
+``` R
+# find all variables with only zeros in the estimation period (if shorter than model selection period)
+zero_vars <- gets_data %>%
+  ts_span(end = est_end) %>%
+  ts_tbl() %>%
+  mutate(value = abs(value)) %>%
+  group_by(id) %>%
+  summarize(sum_vals = sum(value)) %>%
+  filter(sum_vals == 0) %>%
+  pull(id)
+
+# remove zero valued variables from the estimation sample
+est_data <- gets_data %>%
+  ts_span(end = est_end) %>%
+  ts_tbl() %>%
+  ts_wide() %>%
+  select(-all_of(zero_vars)) %>%
+  ts_long() %>%
+  ts_xts()
+```
+
+### Re-estimate Final Model
+
+  -   The final selected model is re-estimated using `lm()`.
+
+``` R
+# re-estimate re-specified model via lm using the estimation sample
+  est_lm <- lm(as.formula(str_c(yvar_name, " ~ .")), data = est_data)
+```
+
+### Save Model Equation
+
+  -   The final model equation is saved as a text file (*model_eq.txt*) using the `model_equation()` function. This function formats the model output into an equation that can be read by the [bimets package](https://github.com/andrea-luciani/bimets). Since the equation can be later re-estimated in bimets, the saved equation does not contain the estimated coefficients to keep it general.
+
+``` R
+# look at estimated model and bimets model components
+model_equation(est_lm)
+
+# save equation
+if (save_eq) {
+  sink(here("output", "model_eq.txt"), append = TRUE)
+  cat(str_glue("
+
+    {model_equation(est_lm)[2:4]}
+
+  "))
+  sink()
+}
+```
 
 ## Produce a quasi-forecast with the selected model (`bimets`)
 
-<https://cran.r-project.org/web/packages/bimets/vignettes/bimets.pdf>\
-- Load model from txt file.\
-- Load data used by the model.\
-- Estimate the model (if estimation period ends before the last data point also run a Chow test of model stability).\
-- Simulate model.\
-- Evaluate simulation by plotting quasi-forecast and actual history.
+
+After selecting the model using `gets`, the `bimets` package is used to estimate the model and produce a quasi-forecast:
+
+### Load Model and Data
+
+  -   The `LOAD_MODEL()` function loads the model equation from the saved text file. The `LOAD_MODEL_DATA()` function then combines the model with the relevant data, ensuring that all variables used in the model are present in the dataset.
+
+``` R
+# load model from stored txt file
+model_eq <- bimets::LOAD_MODEL(modelFile = here("output", "model_eq.txt"))
+
+# store variables in bimets format (no ragged edge: drop_na)
+hist_q_bimets <- hist_q_mod %>%
+  filter(id %in% c(model_eq$vendog, model_eq$vexog)) %>%
+  ts_wide() %>% 
+  drop_na() %>% 
+  ts_long() %>% 
+  ts_tslist() %>%
+  map(bimets::as.bimets)
+
+# add data to model
+model_eq_dat <- bimets::LOAD_MODEL_DATA(
+  model_eq,
+  hist_q_bimets
+)
+```
+
+### Estimate the Model
+
+  -   The `ESTIMATE()` function estimates the model using the specified estimation range (`est_range`). If the forecast end date (`fcst_end`) is later than the estimation end date, a Chow test for structural stability is automatically performed. The Chow test assesses whether the model's parameters are constant over the estimation and forecast periods. The `CHOWPAR` argument specifies the date at which the data is split for the Chow test.
+
+``` R
+# determine range of history for estimation
+est_range <- model_eq_dat$modelData %>% 
+  set_attr_tslist() %>%
+  ts_xts() %>% 
+  zoo::index() %>%
+  extract(c(max_lag+1, length(.)))
+
+# estimate model
+if (floor_date(fcst_end, "quarter") <= floor_date(est_range[2], "quarter")) {
+  model_est <- bimets::ESTIMATE(model_eq_dat,
+    eqList = model_eq_dat$vendog,
+    TSRANGE = c(year(est_range[1]), quarter(est_range[1]), year(est_range[2]), quarter(est_range[2])),
+    quietly = FALSE
+  )
+} else {
+  model_est <- bimets::ESTIMATE(model_eq_dat,
+    eqList = model_eq_dat$vendog,
+    TSRANGE = c(year(est_range[1]), quarter(est_range[1]), year(est_range[2]), quarter(est_range[2])),
+    CHOWTEST = TRUE,
+    CHOWPAR = c(year(fcst_end), quarter(fcst_end)),
+    quietly = FALSE
+  )
+}
+```
+
+### Simulate the Model
+
+  -   Statistical models generate forecasts based on historical data patterns and estimated relationships between variables. These models often assume that the underlying structure and relationships observed in the past will continue to hold in the future. There might be events or changes that are known (or believed) to occur in the future but are not reflected in the historical data or the model's structure. Set *addfactors* to adjust the forecast path. An addfactor is a value that is added to the model's forecast for a specific variable and time period. It's essentially a way to incorporate external information, expert opinion, or subjective judgment into a model-based forecast. Addfactors are used to bridge the gap between purely model-based forecasts and external information or judgment. They are expressed in the same units as the variable being forcasted.
+
+``` R
+# set value of addfactors
+scen_addfactor <- hist_q_mod %>%
+  filter(id %in% str_glue("{model_eq_dat$vendog}")) %>%
+  mutate(value = 0) %>%
+  ts_tslist() %>%
+  map(bimets::as.bimets)
+  
+# update an addfactor stored in xts format
+add_qmod.xts$NDEA_HI %+=% addf(2021.4, 2024.4, .01, .025)
+  
+```
+  -   The `SIMULATE()` function simulates the model over the forecast period (`fcst_start` to `fcst_end`). The `simType = "FORECAST"` argument specifies that a deterministic forecast should be produced.
+  -   The `simConvergence` and `simIterLimit` arguments control the convergence criteria and maximum number of iterations for the simulation algorithm. These parameters are particularly relevant for models with simultaneous equations, where the values of endogenous variables depend on each other. The simulation algorithm iteratively solves the system of equations until the solution converges or the maximum number of iterations is reached.
+  -   Use the `fcutils::set_tsrange()` function to deal with a ragged edge in the data and prepare the exogenization range for the `Exogenize` parameter of the `SIMULATE()` function.
+
+``` R
+# simulate model
+model_sim <- bimets::SIMULATE(model_est,
+  simType = "FORECAST",
+  TSRANGE = c(year(fcst_start), quarter(fcst_start), year(fcst_end), quarter(fcst_end)),
+  ConstantAdjustment = scen_addfactor,
+  Exogenize = exog_range,
+  simConvergence = 0.00001,
+  simIterLimit = 100,
+  quietly = FALSE
+)
+```
+
+### Evaluate the Simulation
+
+  -   The simulated values (forecast) are extracted from the `model_sim` object and combined with the historical data for evaluation. The `plot_comp_2()` function is used to generate plots comparing the quasi-forecast with the actual history. These plots help assess the model's ability to capture the dynamics of the time series and its potential forecasting accuracy.
+
+``` R
+# extract forecast
+model_fcst <- model_sim$simulation %>%
+  extract(model_sim$vendog) %>%
+  set_attr_tslist() %>%
+  ts_tbl() %>%
+  mutate(id = str_c(model_sim$vendog, "SOL"), .before = time)
+
+# combine history and forecast for plot
+plot_data_fcst <- ts_c(hist_q_mod %>% filter(id %in% model_sim$vendog), model_fcst) %>%
+  ts_wide() %>%
+  slice(which(!is.na(!!sym(model_sim$vendog)) | !is.na(!!sym(str_glue("{model_sim$vendog}SOL")))))
+
+plot_comp_2(plot_data_fcst %>% ts_long(), 
+  rng_start = as.character(Sys.Date() - years(15)), 
+  rng_end = fcst_end %>% as.character(), 
+  height = 200, width = 400
+)
+```
+
+## Stochastic simulation
+
+The preceding workflow can be extended with stochastic simulation. If necessary it is preceded by the same data preparation and model selection steps.
+
+### Simulate model deterministically to obtain mean forecast.
+
+The first step for obtaining a forecast interval is to simulate the estimated model deterministically. In a deterministic simulation, the model's equations are solved without any random shocks. This produces a single "mean" forecast, representing the most likely path of the endogenous variables given the model's structure, estimated parameters, and any specified exogenous assumptions.
+
+
+### Extract forecast and combine it with history.
+
+After the deterministic simulation, the forecasted values are extracted from the simulation object. The historical data and the forecasted values are combined to facilitate comparison and visualization.
+
+### Inspect the forecast via plots.
+
+Then generate plots to visually compare the historical data and the deterministic forecast. These plots allow for a visual assessment of the forecast's behavior compared to the historical data. For example, one can observe whether the forecast captures the overall cycles in the historical data, and whether there are any abrupt changes or discontinuities at the forecast origin.
+
+### Set parameters for stochastic simulations.
+
+Stochastic simulation introduces randomness into the model to generate a distribution of possible future paths, rather than just a single mean forecast. This helps to quantify the uncertainty surrounding the forecast.
+
+The first step in stochastic simulation is to define the structure of the random shocks. This is done by creating a list called `myStochStructure`:
+
+```r
+# set parameters for stochastic simulation
+myStochStructure <- list()
+for (ser_i in scen_model$vendog) {
+  myStochStructure[[ser_i]] <- list(
+    TSRANGE = TRUE,
+    TYPE = "NORM",
+    PARS = c(0, scen_model_est$behaviorals[[ser_i]][["statistics"]][["StandardErrorRegression"]])
+  )
+}
+```
+
+-   The code iterates through each endogenous variable (`ser_i`).
+-   For each variable, it creates a list specifying the parameters of the random shocks:
+    -   **`TSRANGE = TRUE`**: Indicates that the shocks should be applied throughout the entire simulation period.
+    -   **`TYPE = "NORM"`**: Specifies that the shocks should be drawn from a normal distribution.
+    -   **`PARS`**: Defines the parameters of the normal distribution. In this case, the mean is set to 0 and the standard deviation is set to the standard error of the regression for the corresponding equation. This means that the random shocks are scaled to the estimated uncertainty of each equation. The standard deviation of the error term is obtained from the estimation output, and it reflects the historical volatility of the residuals.
+
+In addition to perturbing the error terms, the script also allows for perturbing the estimated coefficients. This captures the uncertainty in the parameter estimates themselves.
+
+```r
+# perturb coefficients (draw from multivariate normal distro)
+set.seed(987)
+scen_model_est_copy <- scen_model_est
+scen_model_est_pars <- scen_model_est$behaviorals %>%
+  map(~ if (n_coeff_sim > 0) {
+    cbind(
+      .x$coefficients,
+      MASS::mvrnorm(n = n_coeff_sim, mu = .x$coefficients, Sigma = .x$statistics$CoeffCovariance) %>% t()
+    )
+  } else {
+    .x$coefficients
+  })
+```
+
+-   **`set.seed(987)`**: Sets the random seed for reproducibility.
+-   **`scen_model_est_copy <- scen_model_est`**: Creates a copy of the estimated model object.
+-   **`scen_model_est_pars`**: Stores the perturbed coefficients.
+-   The code iterates through each equation in `scen_model_est$behaviorals`.
+-   If `n_coeff_sim` is greater than 0, it draws `n_coeff_sim` sets of coefficients from a multivariate normal distribution using `MASS::mvrnorm()`. The mean of the distribution is the original estimated coefficients (`.x$coefficients`), and the covariance matrix is the estimated covariance matrix of the coefficients (`.x$statistics$CoeffCovariance`). This ensures that the perturbed coefficients are consistent with the estimated uncertainty and correlations among the parameters.
+-   If `n_coeff_sim` is 0 (coefficients are not drawn randomly), the original coefficients are used without perturbation.
+
+### Run stochastic simulation.
+
+The stochastic simulation is performed using the `STOCHSIMULATE()` function in `bimets`:
+
+```r
+# create variables to hold stochastic simulation objects and forecasts
+scen_model_stochsim <- list()
+scen_model_stochfcast <- list()
+
+# loop over the parameter draws (first one is the estimate)
+for (sim_i in 1:(n_coeff_sim + 1)) { # sim_i = 1
+
+  # set params for each equation
+  for (eq_i in scen_model_dat$vendog) { # eq_i = scen_model_dat$vendog[1]
+    scen_model_est_copy$behaviorals[[eq_i]][["coefficients"]][, 1] <- scen_model_est_pars[[eq_i]][, sim_i]
+  }
+
+  # simulate model
+  scen_model_stochsim[[sim_i]] <- bimets::STOCHSIMULATE(scen_model_est_copy,
+    simType = "FORECAST",
+    TSRANGE = c(year(fcst_start), quarter(fcst_start), year(fcst_end), quarter(fcst_end)),
+    Exogenize = exog_range,
+    simConvergence = 0.00001,
+    simIterLimit = 100,
+    StochStructure = myStochStructure,
+    StochReplica = n_stoch_sim,
+    StochSeed = 123 + sim_i,
+    quietly = FALSE
+  )
+
+  # extract forecast
+  scen_model_stochfcast[[sim_i]] <- scen_model_stochsim[[sim_i]][["simulation_MM"]] %>%
+    extract(scen_model$vendog)
+}
+```
+
+-   The code loops `n_coeff_sim + 1` times. In the first iteration (`sim_i = 1`), the original estimated coefficients are used. In subsequent iterations, the perturbed coefficients are used.
+-   Inside the loop, for each iteration:
+    -   The coefficients in `scen_model_est_copy` are updated with the current set of perturbed coefficients.
+    -   `STOCHSIMULATE()` is called to perform the stochastic simulation.
+    -   **`StochStructure = myStochStructure`**: Specifies the structure of the random shocks defined earlier.
+    -   **`StochReplica = n_stoch_sim`**: Sets the number of stochastic replications for each set of coefficients. Each replication involves drawing a new set of random shocks and simulating the model.
+    -   **`StochSeed = 123 + sim_i`**: Sets the random seed for each iteration, ensuring reproducibility.
+    -   The simulated paths are extracted from `scen_model_stochsim[[sim_i]][["simulation_MM"]]` and stored in `scen_model_stochfcast[[sim_i]]`.
+
+### Extract simulated paths and obtain deviations from the mean forecast.
+
+After the stochastic simulation, the simulated paths are processed to analyze the distribution of possible outcomes:
+
+```r
+# convert matrices in the list to ts_long format
+scen_model_stochfcast <- scen_model_stochfcast %>%
+  map_depth(2, function(x) {
+    as_tibble(x, .name_repair = NULL) %>%
+      mutate(time = seq.Date(from = fcst_start, to = fcst_end, by = "quarter"), .before = 1) %>%
+      ts_long()
+  })
+
+# forecast deviations
+scen_model_stochdev <- scen_model_stochfcast %>%
+  map_depth(2, function(x) {
+    ts_wide(x) %>%
+      mutate(across(V1:last_col(), ~ (.x / V1) - 1)) %>%
+      select(-V1) %>%
+      ts_long()
+  })
+```
+
+-   **`scen_model_stochfcast`** is transformed using `map_depth(2, ...)` to apply a function to each simulated path (each element at depth 2 of the nested list).
+    -   `as_tibble()` converts the matrix of simulated values to a tibble.
+    -   `mutate(time = ...)` adds a time index.
+    -   `ts_long()` converts the data to long format.
+-   **`scen_model_stochdev`** calculates the deviations of each simulated path from the mean forecast (the first path, `V1`).
+    -   `ts_wide()` converts the data to wide format.
+    -   `mutate(across(V1:last_col(), ~ (.x / V1) - 1))` calculates the percentage deviation of each column (simulated path) from the first column (mean forecast).
+    -   `select(-V1)` removes the mean forecast column.
+    -   `ts_long()` converts the data back to long format.
+
+The script then calculates quantiles of the distribution of deviations:
+
+```r
+# quantiles
+scen_model_quantiles <- scen_model_stochdev %>%
+  transpose() %>%
+  map_depth(2, ts_wide) %>%
+  map(~ reduce(.x, function(x1, x2) full_join(x1, x2, by = "time"))) %>%
+  map(function(x) {
+    # ts_wide(x) %>%
+    rowwise(x) %>%
+      transmute(
+        time = time,
+        Q05 = quantile(c_across(-1), 0.05),
+        Q10 = quantile(c_across(-1), 0.10),
+        Q20 = quantile(c_across(-1), 0.20),
+        Q50 = quantile(c_across(-1), 0.50),
+        Q80 = quantile(c_across(-1), 0.80),
+        Q90 = quantile(c_across(-1), 0.90),
+        Q95 = quantile(c_across(-1), 0.95),
+      ) %>%
+      ungroup()
+  })
+```
+
+-   `transpose()` transposes the nested list structure of `scen_model_stochdev`.
+-   `map_depth(2, ts_wide)` converts each set of deviations to wide format.
+-   `map(~ reduce(.x, ...))` combines the deviations for each variable into a single tibble.
+-   `map(function(x) ...)` calculates the quantiles for each time period using `quantile()`.
+
+The resulting `scen_model_quantiles` object contains the 5th, 10th, 20th, 50th, 80th, 90th, and 95th percentiles of the distribution of deviations for each variable.
+
+### Inspect the paths via plots.
+
+Finally, the script generates plots to visualize the simulated paths and the quantiles:
+
+```r
+# generate plots (compare levels)
+pdf(here("output/plots", "stoch_plot.pdf"))
+
+for (ser_i in scen_model$vendog) { # ser_i = scen_model$vendog[1]
+  plot_out <- scen_model_stochfcast %>%
+    transpose() %>%
+    map_depth(2, ts_wide) %>%
+    map(~ reduce(.x, function(x1, x2) full_join(x1, x2, by = "time"))) %>%
+    map(~ rename_with(.x, ~ c("time", str_c("V", 1:((n_coeff_sim + 1) * (n_stoch_sim + 1)))))) %>%
+    map(ts_long) %>%
+    extract2(ser_i) %>%
+    ggplot(aes(x = time)) +
+    geom_line(aes(y = value, group = id), linetype = 1, alpha = 0.8, size = 0.8, color = "seagreen") +
+    labs(x = NULL, y = str_glue("{ser_i}")) +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+  print(plot_out)
+}
+
+for (ser_i in scen_model$vendog) { # ser_i = scen_model$vendog[1]
+  plot_out <- scen_model_stochdev %>%
+    transpose() %>%
+    map_depth(2, ts_wide) %>%
+    map(~ reduce(.x, function(x1, x2) full_join(x1, x2, by = "time"))) %>%
+    map(~ rename_with(.x, ~ c("time", str_c("V", 1:((n_coeff_sim + 1) * (n_stoch_sim)))))) %>%
+    map(ts_long) %>%
+    extract2(ser_i) %>%
+    ggplot(aes(x = time)) +
+    geom_line(aes(y = value, group = id), linetype = 1, alpha = 0.8, size = 0.8, color = "seagreen") +
+    labs(x = NULL, y = str_glue("{ser_i}")) +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+  print(plot_out)
+}
+
+for (ser_i in scen_model$vendog) { # ser_i = scen_model$vendog[1]
+  plot_out <- scen_model_quantiles %>%
+    extract2(ser_i) %>%
+    ts_long() %>%
+    ggplot(aes(x = time)) +
+    geom_line(aes(y = value, group = id), linetype = 1, alpha = 0.8, size = 0.8, color = "seagreen") +
+    labs(x = NULL, y = str_glue("{ser_i}")) +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+  print(plot_out)
+}
+
+dev.off()
+```
+
+-   The code iterates through each endogenous variable (`ser_i`).
+-   For each variable, it creates three types of plots:
+    -   **Simulated levels**: Shows all simulated paths of the variable.
+    -   **Deviations from the mean forecast**: Shows the deviations of each simulated path from the mean forecast.
+    -   **Quantiles**: Shows the quantiles of the distribution of deviations.
+-   `ggplot2` is used to create the plots, with `geom_line()` used to display the paths.
+-   The plots are saved to a PDF file (`stoch_plot.pdf`).
+
+These plots provide a visual representation of the uncertainty surrounding the forecast. The spread of the simulated paths and the width of the quantile bands indicate the range of possible outcomes. By examining these plots, one can assess the degree of uncertainty associated with different variables and time periods.
+
+The script includes an additional set of plots based on smoothed quantile paths, which are generated by applying user-specified adjustment factors to certain quantiles at specific time points and then interpolating the values in between. This allows for incorporating subjective views about the evolution of uncertainty over time. However, the overall logic of plotting the smoothed paths is similar to that described above.
+
+
+## Conclusion
+
+This detailed process, combining the strengths of `gets` and `bimets`, provides a robust and flexible framework for model selection and evaluation in time series forecasting. The use of indicator variables, diagnostic tests, and quasi-forecast evaluation further enhances the reliability and interpretability of the selected models. The use of stochastic simulation provides valuable insights into the range of possible outcomes and helps to quantify the risks associated with relying solely on a single mean forecast.
+
+
+
+
+
+

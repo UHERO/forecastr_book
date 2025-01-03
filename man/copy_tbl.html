@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><title>R: Copy a data frame to clipboard (only works on MacOS)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>copy_tbl</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Copy a data frame to clipboard (only works on MacOS)</h2>
+
+<h3>Description</h3>
+
+<p>Copy a data frame to clipboard (only works on MacOS)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>copy_tbl(x, dec = 2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>tibble (or data frame) to be copied</p>
+</td></tr>
+<tr><td><code id="dec">dec</code></td>
+<td>
+<p>number of decimals to round numeric columns to (default: 2)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>copy_tbl() returns the input x invisibly
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+monthly_data_example |&gt; copy_tbl()
+monthly_data_example |&gt; copy_tbl(1)
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

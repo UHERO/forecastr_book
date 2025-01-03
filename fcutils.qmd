@@ -1,0 +1,222 @@
+# Utility functions {#sec-utils}
+
+This section describes utility functions that facilitate common operations on time series data. These functions perform frequency conversion, growth rate conversion, time series arithmetic and combination, plot generation, etc.
+
+The R ecosystem knows a vast number of time series classes: ts, xts, zoo, tsibble, tibbletime, tis, or timeSeries. The plethora of standards causes confusion. As different packages rely on different classes, it is hard to use them in the same analysis. The [tsbox package](https://docs.ropensci.org/tsbox/) provides a set of tools that make it easy to switch between these classes. It also allows the user to treat time series as plain data frames, facilitating the use with tools that assume rectangular data. In each section below functions from the tsbox package are listed first followed by functions from the [fcutils package](https://github.com/UHERO/fcutils). The [uherotheme package](https://github.com/uhero/uherotheme) contains functions to apply the UHERO style guide to plots made with [ggplot](https://ggplot2.tidyverse.org/). These functions are listed under [Section @sec-plots].
+
+
+## Input-output and data generation {#sec-io}
+
+{{< include man/get_series.md >}}
+
+{{< include man/get_series_exp.md >}}
+
+{{< include man/set_udaman_token.md >}}
+
+{{< include man/make_xts.md >}}
+
+{{< include man/addf.md >}}
+
+{{< include man/copy_tbl.md >}}
+
+{{< include man/gen_table.md >}}
+
+{{< include man/write_tsd.md >}}
+
+
+## Time series info and date manipulation {#sec-tsinfo}
+
+{{< include man/ts_summary.md >}}
+
+{{< include man/ts_first_of_period.md >}}
+
+{{< include man/ts_regular.md >}}
+
+{{< include man/ts_na_omit.md >}}
+
+{{< include man/ts_span.md >}}
+
+{{< include man/span.md >}}
+
+{{< include man/find_start.md >}}
+
+{{< include man/find_end.md >}}
+
+{{< include man/nmons.md >}}
+
+{{< include man/nqtrs.md >}}
+
+{{< include man/qtrs.md >}}
+
+{{< include man/p.md >}}
+
+{{< include man/pm.md >}}
+
+{{< include man/pq.md >}}
+
+{{< include man/py.md >}}
+
+{{< include man/to_ymd.md >}}
+
+{{< include man/ymd_to_yQq.md >}}
+
+
+## Frequency conversion
+
+{{< include man/ts_frequency.md >}}
+
+{{< include man/disagg.md >}}
+
+{{< include man/QtoA.md >}}
+
+{{< include man/AtoQ.md >}}
+
+
+## Growth rates and level operations
+
+{{< include man/ts_pc.md >}}
+
+{{< include man/ts_lag.md >}}
+
+{{< include man/ts_arithmetic.md >}}
+
+{{< include man/ts_scale.md >}}
+
+{{< include man/ts_trend.md >}}
+
+{{< include man/ts_bind.md >}}
+
+{{< include man/ts_index.md >}}
+
+{{< include man/index.md >}}
+
+{{< include man/ma.md >}}
+
+{{< include man/yoy_to_lev.md >}}
+
+{{< include man/mtd_cum.md >}}
+
+{{< include man/mtd_gr.md >}}
+
+{{< include man/ytd_cum.md >}}
+
+{{< include man/ytd_gr.md >}}
+
+{{< include man/ptd_cum.md >}}
+
+{{< include man/ptd_gr.md >}}
+
+{{< include man/pca_to_pc.md >}}
+
+{{< include man/pc_to_pca.md >}}
+
+{{< include man/cagr.md >}}
+
+{{< include man/pcmp.md >}}
+
+{{< include man/grapes-plus-equals-grapes.md >}}
+
+
+## Data type conversion {#sec-type}
+
+{{< include man/ts_ts.md >}}
+
+{{< include man/ts_long.md >}}
+
+{{< include man/conv_long.md >}}
+
+{{< include man/is_wide.md >}}
+
+{{< include man/set_attr_tslist.md >}}
+
+
+## Data field operations {#sec-field}
+
+{{< include man/ts_c.md >}}
+
+{{< include man/ts_default.md >}}
+
+{{< include man/ts_pick.md >}}
+
+{{< include man/get_var.md >}}
+
+{{< include man/rename_udaman.md >}}
+
+
+## Plots {#sec-plots}
+
+{{< include man/ts_ggplot.md >}}
+
+{{< include man/ts_plot.md >}}
+
+{{< include man/ts_save.md >}}
+
+{{< include man/plot_1.md >}}
+
+{{< include man/plot_2ax.md >}}
+
+{{< include man/plot_comp_2.md >}}
+
+{{< include man/plot_comp_3.md >}}
+
+{{< include man/plot_fc.md >}}
+
+{{< include man/save_plot_list.md >}}
+
+{{< include man_theme/uhero_theme.md >}}
+
+{{< include man_theme/uhero_scale_nums.md >}}
+
+{{< include man_theme/uhero_colors.md >}}
+
+{{< include man_theme/uhero_pal.md >}}
+
+{{< include man_theme/uhero_scale_colour.md >}}
+
+{{< include man_theme/uhero_scale_fill.md >}}
+
+{{< include man_theme/uhero_scale_colour_diverge.md >}}
+
+{{< include man_theme/uhero_scale_fill_diverge.md >}}
+
+{{< include man_theme/draw_fcast_layout.md >}}
+
+{{< include man_theme/draw_report_layout.md >}}
+
+{{< include man_theme/export_fcast_layout.md >}}
+
+{{< include man_theme/export_report_layout.md >}}
+
+{{< include man_theme/export_plot.md >}}
+
+
+<!-- {{< include man/README.md >}} -->
+
+
+## tsbox extensions
+
+{{< include man/ts_.md >}}
+
+{{< include man/ts_examples.md >}}
+
+
+## bimets and gets utilities
+
+{{< include man/set_tsrange.md >}}
+
+{{< include man/update_eqs.md >}}
+
+{{< include man/extract_data.md >}}
+
+{{< include man/model_equation.md >}}
+
+
+## fcutils constants
+
+The fcutils package assumes a date range for data sets. Unless specified by the user, the start and end date are set by default to:
+
+``` R
+bnk_start = "1970-01-01"
+bnk_end = "2060-12-31"
+```
+

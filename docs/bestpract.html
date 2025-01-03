@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./modselect.html" rel="next">
-<link href="./utilfuns.html" rel="prev">
+<link href="./fcutils.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -142,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,8 +199,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./fcutils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,19 +212,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></span></a>
   </div>
 </li>
     </ul>
@@ -212,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></h1>
+<h1 class="title"><span id="sec-bestpract" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Best practices for time series data manipulation</span></span></h1>
 </div>
 
 
@@ -229,74 +251,70 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g.&nbsp;<code>N@US.A</code>). Eliminate special characters using a long tibble.</p>
-<pre><code>hist_q_mod &lt;- hist_q %&gt;%
-  ts_tbl() %&gt;%
-  mutate(id = str_replace_all(id, c("@" = "_AT_", "\\." = "_")))
-  
-# revert back to udaman notation
-hist_q &lt;- hist_q_mod %&gt;%
-  ts_tbl() %&gt;%
-  mutate(id = str_replace_all(id, c("_AT_" = "@", "_Q" = "\\.Q")))</code></pre>
-<p>Use the <code>xts</code> format whenever possible. Observations in a multivariate <code>xts</code> can be accessed by time and series name in two ways: <code>mul_var_xts[time, ser_name]</code> or <code>mul_var_xts$ser_name[time]</code>.</p>
-<p>Make sure all series are defined on the same range (default start = bnk_start, end = bnk_end). Take advantage of <code>make_xts()</code> (and its defaults, e.g.&nbsp;start and end period).</p>
-<pre><code>import_xts &lt;- read_csv(here("data/raw", str_glue("{exp_id_a}.csv"))) %&gt;%
-  arrange(time) %&gt;%
-  ts_long() %&gt;%
-  ts_xts() %&gt;%
-  ts_c(
-    temp = make_xts(per = "year") # temporary variable to force start and end in import_xts
-  ) %&gt;%
-  extract(, str_subset(colnames(.), "temp", negate = TRUE)) # remove temp</code></pre>
-<p>Don’t break up multivariate time series (think databank) into individual series in the global environment.</p>
+<p>Use capital letters for series names. Special characters in variable names require putting the name between backticks (e.g.&nbsp;<code>N@US.A</code>). Eliminate special characters at the time of loading the data from udaman with the <code>rename</code> argument of the <code>fcutils::get_series()</code> function (<a href="fcutils.html#sec-io" class="quarto-xref"><span>Section 6.1</span></a>) or using a long tibble.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>hist_q_mod <span class="ot">&lt;-</span> hist_q <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_tbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(id, <span class="fu">c</span>(<span class="st">"@"</span> <span class="ot">=</span> <span class="st">"_AT_"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span> <span class="ot">=</span> <span class="st">"_"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Revert back to the udaman format with the <code>fcutils::rename_udaman()</code> function (<a href="fcutils.html#sec-field" class="quarto-xref"><span>Section 6.6</span></a>).</p>
+<p>Use the <em>xts</em> format whenever you need a time series object. Observations in a multivariate xts can be accessed by time and series name in two ways: <code>mul_var_xts[time, ser_name]</code> or <code>mul_var_xts$ser_name[time]</code>.</p>
+<p>Make sure all series are defined on the same range (default start = bnk_start, end = bnk_end). Take advantage of the <code>fcutils::make_xts()</code> function and its defaults, e.g.&nbsp;start and end period (<a href="fcutils.html#sec-io" class="quarto-xref"><span>Section 6.1</span></a>).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>import_xts <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/raw"</span>, stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"{exp_id_a}.csv"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(time) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_long</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_xts</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_c</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">temp =</span> fcutils<span class="sc">::</span><span class="fu">make_xts</span>(<span class="at">per =</span> <span class="st">"year"</span>) <span class="co"># temporary variable to force start and end in import_xts</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  magrittr<span class="sc">::</span><span class="fu">extract</span>(, <span class="fu">str_subset</span>(<span class="fu">colnames</span>(.), <span class="st">"temp"</span>, <span class="at">negate =</span> <span class="cn">TRUE</span>)) <span class="co"># remove temp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- Don't break up multivariate time series (think databank) into individual series in the global environment. -->
 <p>If referring directly to a series with a static name, use the <code>bank$series</code> notation (this can be used on both the right and the left hand side of the assignment, while <code>bank[, series]</code> can only be used for existing series in bank).</p>
-<pre><code># find the last value in history
-dat_end &lt;- find_end(hist_q$N_AT_US_Q)
-# same as
-dat_end &lt;- find_end(hist_q[, N_AT_US_Q])</code></pre>
-<p>Use <code>[p()]</code> to select a period in <code>xts</code> objects, otherwise use <code>ts_span()</code>.</p>
-<pre><code># extend series with addfactored level
-sol_q$N_AT_US_SOLQ &lt;- hist_q$N_AT_US_Q[p("", dat_end)] %&gt;%
-  ts_bind(sol_q$NCEN_AT_US_SOLQ[p(dat_end, "")] +
-    as.numeric(sol_q$N_AT_US_SOLQ_ADDLEV[dat_end]))
-    
-# addfactor for growth
-sol_q$N_AT_US_SOLQ_ADDGRO[p(dat_end + qtrs(1), dat_end + qtrs(4))] &lt;- -0.35
-
-# extend history using growth rate
-sol_q$N_AT_US_SOLQ &lt;- sol_q$N_AT_US_SOLQ[p("", dat_end)] %&gt;%
-  ts_chain(ts_compound(sol_q$N_AT_US_SOLQ_GRO[p(dat_end, "")]))</code></pre>
-<p>The <code>bank[,seriesname]</code> notation only works for <em>existing</em> <code>xts</code> series on the left of the assignment (it can also be used on the right). <code>seriesname</code> can be determined at runtime</p>
-<pre><code># initialize the lhs series in the "bank"
-hist_a$temp &lt;- make_xts()
-names(hist_a)[names(hist_a) == "temp"] &lt;- str_glue("E{ser_i}_AT_{cnty_i}_ADD")
-
-# calculate expression and assign to lhs
-hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- 
-  (hist_a[, str_glue("E{ser_i}_AT_{cnty_i}")] / hist_a[, str_glue("E_NF_AT_{cnty_i}")])</code></pre>
-<p>Alternatively, make multiple series in <em>bank</em> available by <code>%$%</code> and retrieve inividual series by <code>get_var()</code> on the right.</p>
-<pre><code>hist_a[, str_glue("E{ser_i}_AT_{cnty_i}_SH")] &lt;- hist_a %$%
-  (get_var("E{ser_i}_AT_{cnty_i}") / get_var("E_NF_AT_{cnty_i}"))</code></pre>
-<p>Bimets requires data in a particular <code>tslist</code> format. Convert <code>xts</code> to <code>tslist</code> using <code>ts_tslist()</code>.</p>
-<pre><code># store series as tslist
-hist_a_lst &lt;- hist_a %&gt;% 
-  ts_tslist() %&gt;% 
-
-# convert series to bimets format
-hist_a_bimets &lt;- hist_a_lst %&gt;%
-  map(as.bimets)
-
-# bimets strips the attributes, need to reset them for further manipulation by tsbox
-hist_a &lt;- hist_a_bimets %&gt;% 
-  set_attr("class", c("tslist", "list")) %&gt;% 
-  ts_xts()</code></pre>
-<p>For series collected in a <code>tslist</code> on the left of the assignment use the <code>bank[[seriesname]]</code> notation (it can also be used on the right). Here the lhs series <code>seriesname</code> does not need to exist, and it might easier to work with <code>tslist</code> than <code>xts</code> when variable names are determined at runtime.</p>
-<pre><code># similar to above with a tslist variable
-hist_a_lst[[str_glue("E{ser_i}_AT_{cnty_i}_ADD")]] &lt;- hist_a_lst %$%
-  (get_var("E{ser_i}_AT_{cnty_i}") - get_var("E_NF_AT_{cnty_i}"))</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the last value in history</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dat_end <span class="ot">&lt;-</span> fcutils<span class="sc">::</span><span class="fu">find_end</span>(hist_q<span class="sc">$</span>N_AT_US_Q)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># same as</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dat_end <span class="ot">&lt;-</span> fcutils<span class="sc">::</span><span class="fu">find_end</span>(hist_q[, N_AT_US_Q])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use <code>[fcutils::p()]</code> to select a period in xts objects, otherwise use <code>tsbox::ts_span()</code> (both in <a href="fcutils.html#sec-tsinfo" class="quarto-xref"><span>Section 6.2</span></a>).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extend series with addfactored level</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sol_q<span class="sc">$</span>N_AT_US_SOLQ <span class="ot">&lt;-</span> hist_q<span class="sc">$</span>N_AT_US_Q[<span class="fu">p</span>(<span class="st">""</span>, dat_end)] <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_bind</span>(sol_q<span class="sc">$</span>NCEN_AT_US_SOLQ[<span class="fu">p</span>(dat_end, <span class="st">""</span>)] <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.numeric</span>(sol_q<span class="sc">$</span>N_AT_US_SOLQ_ADDLEV[dat_end]))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># addfactor for growth</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>sol_q<span class="sc">$</span>N_AT_US_SOLQ_ADDGRO[<span class="fu">p</span>(dat_end <span class="sc">+</span> fcutils<span class="sc">::</span><span class="fu">qtrs</span>(<span class="dv">1</span>), dat_end <span class="sc">+</span> fcutils<span class="sc">::</span><span class="fu">qtrs</span>(<span class="dv">4</span>))] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.35</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># extend history using growth rate</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>sol_q<span class="sc">$</span>N_AT_US_SOLQ <span class="ot">&lt;-</span> sol_q<span class="sc">$</span>N_AT_US_SOLQ[<span class="fu">p</span>(<span class="st">""</span>, dat_end)] <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_chain</span>(tsbox<span class="sc">::</span><span class="fu">ts_compound</span>(sol_q<span class="sc">$</span>N_AT_US_SOLQ_GRO[<span class="fu">p</span>(dat_end, <span class="st">""</span>)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>bank[,seriesname]</code> notation only works for <em>existing</em> xts series on the left of the assignment (it can also be used on the right). <code>seriesname</code> can be determined at runtime</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize the lhs series in the "bank"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>hist_a<span class="sc">$</span>temp <span class="ot">&lt;-</span> <span class="fu">make_xts</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(hist_a)[<span class="fu">names</span>(hist_a) <span class="sc">==</span> <span class="st">"temp"</span>] <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"E{ser_i}_AT_{cnty_i}_ADD"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate expression and assign to lhs</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>hist_a[, stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"E{ser_i}_AT_{cnty_i}_SH"</span>)] <span class="ot">&lt;-</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  (hist_a[, stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"E{ser_i}_AT_{cnty_i}"</span>)] <span class="sc">/</span> hist_a[, stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"E_NF_AT_{cnty_i}"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Alternatively, make multiple series in <em>bank</em> available by <code>magrittr::%$%</code> and retrieve inividual series by <code>fcutils::get_var()</code> on the right (<a href="fcutils.html#sec-field" class="quarto-xref"><span>Section 6.6</span></a>).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hist_a[, stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"E{ser_i}_AT_{cnty_i}_SH"</span>)] <span class="ot">&lt;-</span> hist_a <span class="sc">%$%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  (fcutils<span class="sc">::</span><span class="fu">get_var</span>(<span class="st">"E{ser_i}_AT_{cnty_i}"</span>) <span class="sc">/</span> fcutils<span class="sc">::</span><span class="fu">get_var</span>(<span class="st">"E_NF_AT_{cnty_i}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Conversion to bimets format requires data in a particular <em>tslist</em> format. Convert xts to tslist using <code>tsbox::ts_tslist()</code>. The <code>fcutils::set_attr_tslist()</code> function adds a “tslist” attribute to a list (both in <a href="fcutils.html#sec-type" class="quarto-xref"><span>Section 6.5</span></a>).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># store series as tslist</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>hist_a_lst <span class="ot">&lt;-</span> hist_a <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_tslist</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># convert series to bimets format</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>hist_a_bimets <span class="ot">&lt;-</span> hist_a_lst <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map</span>(bimets<span class="sc">::</span>as.bimets)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># bimets strips the attributes, need to reset them for further manipulation by tsbox</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>hist_a <span class="ot">&lt;-</span> hist_a_bimets <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  fcutils<span class="sc">::</span><span class="fu">set_attr_tslist</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_xts</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For series collected in a <code>tslist</code> on the left of the assignment use the <code>bank[[seriesname]]</code> notation (it can also be used on the right). Here the lhs series <code>seriesname</code> does not need to exist, and it might be easier to work with <code>tslist</code> than <code>xts</code> when variable names are determined at runtime.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># similar to above with a tslist variable</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>hist_a_lst[[stringr<span class="sc">::</span><span class="fu">str_glue</span>(<span class="st">"E{ser_i}_AT_{cnty_i}_ADD"</span>)]] <span class="ot">&lt;-</span> hist_a_lst <span class="sc">%$%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  (fcutils<span class="sc">::</span><span class="fu">get_var</span>(<span class="st">"E{ser_i}_AT_{cnty_i}"</span>) <span class="sc">-</span> fcutils<span class="sc">::</span><span class="fu">get_var</span>(<span class="st">"E_NF_AT_{cnty_i}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="harness-the-power-of-tsbox" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="harness-the-power-of-tsbox"><span class="header-section-number">7.1</span> Harness the power of tsbox</h2>
-<p>Use the converter functions in <a href="https://www.tsbox.help/reference/index.html"><code>tsbox</code></a> to shift between various data types (<code>ts_tbl()</code>, <code>ts_xts()</code>, <code>ts_ts()</code>, <code>ts_tslist()</code>) and reshaping to the long and wide format (<code>ts_long()</code>, <code>ts_wide()</code>). <code>tsbox</code> further contains funtions for time period selection (<code>ts_span()</code>), merging and extension operations (<code>ts_c()</code>, <code>ts_bind()</code>, <code>ts_chain()</code>), transformations (<code>ts_lag()</code>, <code>ts_pc()</code>, <code>ts_pca()</code>, <code>ts_pcy()</code>, <code>ts_diff()</code>, <code>ts_diffy()</code>), and index construction (<code>ts_compound()</code>, <code>ts_index()</code>). Consider these before turning to solutions that are specific to the <code>xts</code>, <code>ts</code>, <code>dplyr</code> or <code>tidyr</code> packages.</p>
+<p>Use the converter functions in <a href="https://www.tsbox.help/reference/index.html"><code>tsbox</code></a> to shift between various data types (<code>ts_tbl()</code>, <code>ts_xts()</code>, <code>ts_ts()</code>, <code>ts_tslist()</code>) and reshaping to the long and wide format (<code>ts_long()</code>, <code>ts_wide()</code>). <code>tsbox</code> further contains funtions for time period selection (<code>ts_span()</code>), merging and extension operations (<code>ts_c()</code>, <code>ts_bind()</code>, <code>ts_chain()</code>), transformations (<code>ts_lag()</code>, <code>ts_pc()</code>, <code>ts_pca()</code>, <code>ts_pcy()</code>, <code>ts_diff()</code>, <code>ts_diffy()</code>), and index construction (<code>ts_compound()</code>, <code>ts_index()</code>). These functions are described in <a href="fcutils.html" class="quarto-xref">Section&nbsp;<span>6</span></a>. Consider these tsbox functions before turning to solutions that are specific to the <code>xts</code>, <code>ts</code>, <code>dplyr</code> or <code>tidyr</code> packages.</p>
 
 
 </section>
@@ -724,13 +742,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./utilfuns.html" class="pagination-link" aria-label="User defined utility functions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span>
+      <a href="./fcutils.html" class="pagination-link" aria-label="Utility functions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Utility functions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./modselect.html" class="pagination-link" aria-label="Model selection">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./modselect.html" class="pagination-link" aria-label="Model selection and simulation">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

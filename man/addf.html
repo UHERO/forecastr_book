@@ -1,0 +1,97 @@
+<!DOCTYPE html><html><head><title>R: Create xts addfactor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>addf</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create xts addfactor</h2>
+
+<h3>Description</h3>
+
+<p>Create xts addfactor
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>addf(
+  start = bnk_start,
+  end = bnk_end,
+  from = 0,
+  to = 0,
+  ser_name = "value",
+  per = "year"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="start">start</code></td>
+<td>
+<p>start date of linear interpolation (character: &quot;yyyy-mm-dd&quot;, &quot;yyyyqq&quot;, &quot;yyyy&quot;)</p>
+</td></tr>
+<tr><td><code id="end">end</code></td>
+<td>
+<p>end date of linear interpolation (character: &quot;yyyy-mm-dd&quot;, &quot;yyyyqq&quot;, &quot;yyyy&quot;)</p>
+</td></tr>
+<tr><td><code id="from">from</code></td>
+<td>
+<p>first value for linear interpolation (numeric)</p>
+</td></tr>
+<tr><td><code id="to">to</code></td>
+<td>
+<p>last value for linear interpolation (numeric)</p>
+</td></tr>
+<tr><td><code id="ser_name">ser_name</code></td>
+<td>
+<p>name of the xts series (string)</p>
+</td></tr>
+<tr><td><code id="per">per</code></td>
+<td>
+<p>periodicity of series (character: &quot;year&quot; - default)
+if date format of start is quarterly, automatically set to &quot;quarter&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>this is a wrapper around make_xts with some additional functionality.
+the start and end dates specify the span of the non-zero add-factor value. the
+remaining period between start and end is filled with zeros.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a single xts series spanning bnk_start-bnk_end
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>addf()
+addf(201002, 201504, 1, 2)
+addf(20100101, 20601201, 1, 2, per = "month")
+addf(20100101, from = 1, to = 2, per = "quarter")
+addf(2010.2, 2015.4, 1, 2, "ECT_HI")
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

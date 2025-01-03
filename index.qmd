@@ -4,4 +4,4 @@ This document describes some useful practices for using R for applied research, 
 
 ## Contents
 
-[Chapters @sec-project] [- @sec-renv] discuss the general setup of a collaborative project under version control. Chapter 4 deals with the setup file that configures the most general aspects of the `forecastr` project. Chapter 5 describes user defined helper functions for the `forecastr` project. Chapter 6 gives examples of best practices for time series manipulation.
+[Chapters @sec-projects] - [-@sec-renv] discuss the general setup of a collaborative project environment under version control. [Chapter @sec-setup] deals with the setup file that configures the most general aspects of the `forecastr` project. [Chapter @sec-utils] describes useful functions for time series manipulation and forecasting. [Chapter @sec-bestpract] gives examples of best practices for time series manipulation. [Chapter @sec-modselect] describes a forecasting workflow from model selection to simulation.

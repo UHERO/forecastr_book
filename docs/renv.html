@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,8 +165,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./utilfuns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">User defined utility functions</span></span></a>
+  <a href="./fcutils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Utility functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,19 +178,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modselect.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stochastic simulations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Notes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model selection and simulation</span></span></a>
   </div>
 </li>
     </ul>
@@ -267,25 +255,30 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="workflow-for-setting-up-a-project-with-version-control-and-renv" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.5</span> Workflow for setting up a project with version control and renv</h2>
-<p>The ideal sequence of steps to set up a project with version control and renv is as follows:</p>
+<p>The combination of version control and package management can facilitate reproducibility and collaboration.</p>
 <ol type="1">
-<li><p>github</p></li>
-<li><p>usethis::create_from_github()</p></li>
-<li><p>renv::init() or renv::restore() git::pull …</p></li>
-<li><p>get work done</p></li>
-<li><p>renv::snapshot()</p></li>
-<li><p>git</p></li>
+<li><p>Set up a repository on GitHub</p></li>
+<li><p>Clone the repo with <code>usethis::create_from_github()</code></p></li>
+<li><p>Initialize renv with <code>renv::init()</code></p></li>
+<li><p>Edit a script, install packages, run the script</p></li>
+<li><p>Store info about installed packages with <code>renv::snapshot()</code></p></li>
+<li><p>Sync the project state with GitHub by committing and pushing up the changes</p></li>
+<li><p>Collaborators (fork and) clone the repo, and install the necessary packages with <code>renv::restore()</code></p></li>
+<li><p>In subsequent work,</p>
+<ol type="a">
+<li><p>pull the current state of the repo from GitHub,</p></li>
+<li><p>run <code>renv::restore()</code> to install the necessary packages,</p></li>
+<li><p>edit the script, install new packages, run the script,</p></li>
+<li><p>run <code>renv::snapshot()</code>,</p></li>
+<li><p>push changes to GitHub and place a pull request if necessary.</p></li>
+</ol></li>
 </ol>
+<p>This process ensures that you will always work with the most recent version of your project.</p>
 </section>
 <section id="additional-resources" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">4.6</span> Additional resources</h2>
 <p>Overview of <code>renv</code>:<br>
 <a href="https://rstudio.github.io/renv/articles/renv.html" class="uri">https://rstudio.github.io/renv/articles/renv.html</a></p>
-<p>Leveraging git and renv at the end of a working session</p>
-<p>Now that we have our nice project setup, we should not forget to leverage it. At the end of a working session you should follow the following steps:</p>
-<p>Create a renv::snapshot() to save all the packages you used to your local package directory. Commit all your changes to git. This can be easily done by using the Git pane in RStudio. Push everything to GitHub. Whenever you re-open your Rproject, make sure to start your working session with a Pull from GitHub. That way, you will always work with the most recent version of your project.</p>
-<p>Collaborating with <code>renv</code>: https://rstudio.github.io/renv/articles/collaborating.html</p>
-<p>TL;DR: https://inbo.github.io/git-course/index.html https://happygitwithr.com/</p>
 
 
 </section>

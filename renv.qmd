@@ -44,33 +44,38 @@ After calling `renv::update()`, you should run the code in your project and veri
 
 ## Workflow for setting up a project with version control and renv
 
-The ideal sequence of steps to set up a project with version control and renv is as follows:
+The combination of version control and package management can facilitate reproducibility and collaboration.
 
-1.  github
+1.  Set up a repository on GitHub
 
-2.  usethis::create_from_github()
+2.  Clone the repo with `usethis::create_from_github()`
 
-3.  renv::init() or renv::restore() git::pull ...
+3.  Initialize renv with `renv::init()`
 
-4.  get work done
+4.  Edit a script, install packages, run the script
 
-5.  renv::snapshot()
+5.  Store info about installed packages with `renv::snapshot()`
 
-4.  git
+6.  Sync the project state with GitHub by committing and pushing up the changes
+
+7.  Collaborators (fork and) clone the repo, and install the necessary packages with `renv::restore()`
+
+8.  In subsequent work, 
+    
+    a. pull the current state of the repo from GitHub, 
+    
+    b. run `renv::restore()` to install the necessary packages,
+    
+    c. edit the script, install new packages, run the script,
+    
+    d. run `renv::snapshot()`, 
+    
+    e. push changes to GitHub and place a pull request if necessary.
+
+This process ensures that you will always work with the most recent version of your project.
+
 
 ## Additional resources
 
 Overview of `renv`:\
 <https://rstudio.github.io/renv/articles/renv.html>
-
-
-
-Leveraging git and renv at the end of a working session
-
-Now that we have our nice project setup, we should not forget to leverage it. At the end of a working session you should follow the following steps:
-
-Create a renv::snapshot() to save all the packages you used to your local package directory. Commit all your changes to git. This can be easily done by using the Git pane in RStudio. Push everything to GitHub. Whenever you re-open your Rproject, make sure to start your working session with a Pull from GitHub. That way, you will always work with the most recent version of your project.
-
-Collaborating with `renv`: https://rstudio.github.io/renv/articles/collaborating.html
-
-TL;DR: https://inbo.github.io/git-course/index.html https://happygitwithr.com/

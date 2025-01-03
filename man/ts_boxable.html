@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><title>R: Test if an Object is ts-Boxable</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_boxable</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Test if an Object is ts-Boxable</h2>
+
+<h3>Description</h3>
+
+<p>Mainly used internally.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ts_boxable(x)
+
+check_ts_boxable(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>logical, either <code>TRUE</code> or <code>FALSE</code>. <code>check_ts_boxable()</code> fails if not
+<code>TRUE</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>ts_boxable(AirPassengers)
+ts_boxable(lm)
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

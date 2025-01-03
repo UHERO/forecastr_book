@@ -1,0 +1,120 @@
+<!DOCTYPE html><html><head><title>R: Download a set of series from udaman using series names</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>get_series</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Download a set of series from udaman using series names</h2>
+
+<h3>Description</h3>
+
+<p>Download a set of series from udaman using series names
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>get_series(
+  ser_id_vec,
+  format = "wide",
+  expand,
+  raw = TRUE,
+  rename = "compact",
+  freq = NULL,
+  descr = FALSE,
+  public = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ser_id_vec">ser_id_vec</code></td>
+<td>
+<p>vector of series names (character)</p>
+</td></tr>
+<tr><td><code id="format">format</code></td>
+<td>
+<p>&quot;wide&quot; (default) or &quot;long&quot; or &quot;xts&quot;</p>
+</td></tr>
+<tr><td><code id="expand">expand</code></td>
+<td>
+<p>DEPRECATED, USE raw INSTEAD &quot;true&quot; (default) or &quot;raw&quot; (&quot;true&quot; downloads formatted data, &quot;raw&quot; downloads raw units)</p>
+</td></tr>
+<tr><td><code id="raw">raw</code></td>
+<td>
+<p>TRUE (default) or FALSE (TRUE downloads raw data, FALSE downloads scaled and rounded data)</p>
+</td></tr>
+<tr><td><code id="rename">rename</code></td>
+<td>
+<p>&quot;compact&quot; (default), &quot;full&quot;, &quot;no&quot;. &quot;compact&quot;: @ replaced by _
+and no frequency; &quot;full&quot;: @ replaced by <em>AT</em> and . by _; &quot;no&quot;: no renaming,
+keep UDAMAN names</p>
+</td></tr>
+<tr><td><code id="freq">freq</code></td>
+<td>
+<p>if frequency is missing from series names (or want to modify freq
+in existing names) specify frequency (character), e.g. &quot;M&quot;.</p>
+</td></tr>
+<tr><td><code id="descr">descr</code></td>
+<td>
+<p>if TRUE add to the udaman series name the series description in parentheses (default: FALSE)</p>
+</td></tr>
+<tr><td><code id="public">public</code></td>
+<td>
+<p>if TRUE use the public API interface - does not require VPN (default: FALSE)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function requires permission to access UDAMAN.
+Store the udaman token in the .Renviron file using the following format:
+udaman_token = &quot;-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=&quot;
+Or using fcutils::set_udaman_token(&quot;-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=&quot;)
+Or store the udaman token among your credentials (e.g. keychain) using keyring:
+keyring::key_set_with_value(service = &quot;udaman_token&quot;, password = &quot;-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=&quot;)
+</p>
+
+
+<h3>Value</h3>
+
+<p>time and data for all series combined in an object specified by the
+format option
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+get_series(c("VISNS@HI.M", "VAPNS@HI.M"), raw = TRUE)
+get_series(c("VEXP_RB@HI.M"))
+get_series(c("VISNS@HI.M", "VAPNS@HI.M"), public = TRUE)
+get_series(c("VISNS@HI.M", "VISUSNS@HI.M"), freq = "Q")
+get_series(c("VISNS@HI.M", "VAPNS@HI.M"), format = "xts")
+get_series(c("VISNS@HI.M"), format = "xts")
+get_series(c("VISNS@HI.M"), format = "xts", descr = TRUE)
+get_series(c("E_NF_HI", "ECT_HI", "E_TU_HAW"), freq = "M")
+get_series(c("E_NF__HI_M", "ECT__HI_M", "VAP__HI_W"))
+get_series(c("E_NF_AT_HI_M", "ECT_AT_HI_M", "VAP_AT_HI_W"))
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

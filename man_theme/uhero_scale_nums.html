@@ -1,0 +1,90 @@
+<!DOCTYPE html><html><head><title>R: Format tick labels for ggplot chart axes with continuous...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>uhero_scale_nums</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Format tick labels for ggplot chart axes with continuous scales</h2>
+
+<h3>Description</h3>
+
+<p>This can be passed in to the labels parameter of ggplot scales like scale_x_continous() or scale_y_continuous()
+If the max value of the scale is larger than 1000, the tick labels will be scaled down with a suffix added to the maximum value.
+For max values of at least 10^3 but less than 10^6, tick labels will be divided by 10^3 with &quot;K&quot; added to the label for the maximum value.
+For max values of at least 10^6 but less than 10^9, tick labels will be divided by 10^6 with &quot;M&quot; added to the label for the maximum value.
+For max values of at least 10^9 but less than 10^12, tick labels will be divided by 10^9 with &quot;B&quot; added to the label for the maximum value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>uhero_scale_nums(
+  x,
+  scale_limit = max(x, na.rm = TRUE),
+  prefix = "",
+  percent = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>Passed in from labels function.</p>
+</td></tr>
+<tr><td><code id="scale_limit">scale_limit</code></td>
+<td>
+<p>Defaults to the max value of the scale.</p>
+</td></tr>
+<tr><td><code id="prefix">prefix</code></td>
+<td>
+<p>This is optional and defaults to an empty string. This can be used to add things like currency labels, (i.e. &quot;$100&quot;).</p>
+</td></tr>
+<tr><td><code id="percent">percent</code></td>
+<td>
+<p>Boolean that defaults to false. Set the value to true to add a &quot;%&quot; to the maximum value tick label.</p>
+</td></tr>
+<tr><td><code id="...">...</code></td>
+<td>
+<p>Additional arguments that can be passed to R's format().</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a formatted string for the tick label.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>set.seed(1)
+df &lt;- data.frame(
+  x = rnorm(10) * 100000,
+  y = seq(0, 1, length.out = 10)
+)
+ggplot2::ggplot(df, ggplot2::aes(x, y)) + ggplot2::geom_point() +
+ggplot2::scale_y_continuous(labels = function(x) uhero_scale_nums(x, percent = TRUE)) +
+ggplot2::scale_x_continuous(labels = function(x) uhero_scale_nums(x))
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

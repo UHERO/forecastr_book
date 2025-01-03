@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><title>R: Create xts and fill with values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>make_xts</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create xts and fill with values</h2>
+
+<h3>Description</h3>
+
+<p>Create xts and fill with values
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>make_xts(start = bnk_start, end = NULL, per = "year", val = NA_real_)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="start">start</code></td>
+<td>
+<p>date of series start (character: &quot;yyyy-mm-dd&quot;, &quot;yyyyqq&quot;, &quot;yyyy&quot;)</p>
+</td></tr>
+<tr><td><code id="end">end</code></td>
+<td>
+<p>date of series end (character: &quot;yyyy-mm-dd&quot;, &quot;yyyyqq&quot;, &quot;yyyy&quot;)</p>
+</td></tr>
+<tr><td><code id="per">per</code></td>
+<td>
+<p>periodicity of series (character: &quot;year&quot; - default)
+if date format of start is quarterly, automatically set to &quot;quarter&quot;</p>
+</td></tr>
+<tr><td><code id="val">val</code></td>
+<td>
+<p>values to fill in (numeric scalar, vector, or tibble)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>when end is missing, but val is a vector of more than one element,
+the end date is automatically determined by the length of the val vector.
+if end is missing and val is a scalar, the end date is set to bnk_end.
+if end is missing the remaining arguments have to be named. if val is a tibble,
+the end date is automatically determined by the number of rows in the tibble.
+</p>
+
+
+<h3>Value</h3>
+
+<p>an xts series
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>make_xts()
+make_xts(val = 0, per = "m")
+make_xts(start = 20100101, per = "quarter", val = 0)
+make_xts(start = 2010.1, per = "q", val = 1:10)
+make_xts(2010.1, val = 1:10) # automatically set per = "quarter"
+make_xts(start = "2010-01-01", per = "m", val = 0)
+make_xts(start = 201001, per = "q",
+         val = tibble::tibble(E_NF_HON = c(1:10), ECT_HI = c(11:20)))
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

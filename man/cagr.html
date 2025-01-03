@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><title>R: Calculate compund annual growth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>cagr</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate compund annual growth</h2>
+
+<h3>Description</h3>
+
+<p>Calculate compund annual growth
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>cagr(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable object for which growth is calculated between first and last period</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a tibble with a single row containing the compound annual growth between
+the first and last period of x (in percent)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>quarterly_data_example |&gt;
+  cagr()
+quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_xts() |&gt;
+  cagr()
+quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_xts() |&gt;
+  tsbox::ts_span("2000-01-01", "2020-01-01") |&gt;
+  tsbox::ts_pick("E_NF_HI") |&gt;
+  cagr()
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

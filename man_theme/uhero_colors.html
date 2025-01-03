@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><title>R: Hex codes for a given color in the UHERO colors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>uhero_colors</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Hex codes for a given color in the UHERO colors</h2>
+
+<h3>Description</h3>
+
+<p>Hex codes for a given color in the UHERO colors
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>uhero_colors(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="...">...</code></td>
+<td>
+<p>Names of the UHERO colors. There are 14 total:
+&quot;blue&quot;, &quot;orange&quot;, &quot;green&quot;, &quot;purple&quot;, &quot;cyan&quot;, &quot;gray&quot;, &quot;red&quot;, &quot;light blue&quot;, &quot;light orange&quot;, &quot;light green&quot;, &quot;light purple&quot;,
+&quot;light cyan&quot;, &quot;light gray&quot;, and &quot;light red&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of colors with their HEX codes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>uhero_colors("blue")
+uhero_colors("blue", "light orange")
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

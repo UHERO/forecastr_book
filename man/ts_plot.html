@@ -1,0 +1,118 @@
+<!DOCTYPE html><html><head><title>R: Plot Time Series</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_plot</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Time Series</h2>
+
+<h3>Description</h3>
+
+<p><code>ts_plot()</code> is a fast and simple plotting function for ts-boxable time
+series, with limited customizability. For more theme options, use
+<code>ts_ggplot()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ts_plot(..., title, subtitle, ylab = "", family = getOption("ts_font", "sans"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="...">...</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+<tr><td><code id="title">title</code></td>
+<td>
+<p>title (optional)</p>
+</td></tr>
+<tr><td><code id="subtitle">subtitle</code></td>
+<td>
+<p>subtitle (optional)</p>
+</td></tr>
+<tr><td><code id="ylab">ylab</code></td>
+<td>
+<p>ylab (optional)</p>
+</td></tr>
+<tr><td><code id="family">family</code></td>
+<td>
+<p>font family (optional, can also be set via <code>options</code>)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Both <code>ts_plot()</code> and <code>ts_ggplot()</code> combine multiple ID dimensions into a
+single dimension. To plot multiple dimensions in different shapes, facets,
+etc., use standard ggplot.
+</p>
+<p>Limited customizability of <code>ts_plot</code> is available via options. See examples.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>ts_ggplot()</code>, for a plotting function based on ggplot2.
+<code>ts_dygraphs()</code>, for interactive time series plots. <code>ts_save()</code> to
+save a plot to the file system.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+ts_plot(
+  AirPassengers,
+  title = "Airline passengers",
+  subtitle = "The classic Box &amp; Jenkins airline data"
+)
+
+# naming arguments
+ts_plot(total = ldeaths, female = fdeaths, male = mdeaths)
+
+# using different ts-boxable objects
+ts_plot(ts_scale(ts_c(
+  ts_xts(airmiles),
+  ts_tbl(co2),
+  JohnsonJohnson,
+  ts_df(discoveries)
+)))
+
+# customize ts_plot
+op &lt;- options(
+  tsbox.lwd = 3,
+  tsbox.col = c("gray51", "gray11"),
+  tsbox.lty = "dashed"
+)
+ts_plot(
+  "Female" = fdeaths,
+  "Male" = mdeaths
+)
+options(op) # restore defaults
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

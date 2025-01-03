@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><title>R: Interactive plot with level and growth rate for forecast...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>plot_fc</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Interactive plot with level and growth rate for forecast series</h2>
+
+<h3>Description</h3>
+
+<p>Interactive plot with level and growth rate for forecast series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>plot_fc(
+  x,
+  rng_start = as.character(Sys.Date() - lubridate::years(10)),
+  rng_end = as.character(Sys.Date() + lubridate::years(2)),
+  add_table = TRUE,
+  table_start = rng_start,
+  table_end = rng_end,
+  height = 300,
+  width = 900,
+  yoy_gr = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable object to plot (min 1, max 3 time series) (e.g. current fcst, old fcst, history)</p>
+</td></tr>
+<tr><td><code id="rng_start">rng_start</code></td>
+<td>
+<p>start of zoom range (&quot;YYYY-MM-DD&quot;)</p>
+</td></tr>
+<tr><td><code id="rng_end">rng_end</code></td>
+<td>
+<p>end of the zoom range (&quot;YYYY-MM-DD&quot;)</p>
+</td></tr>
+<tr><td><code id="add_table">add_table</code></td>
+<td>
+<p>should a data table be appended to the plot? (default = TRUE)</p>
+</td></tr>
+<tr><td><code id="table_start">table_start</code></td>
+<td>
+<p>start of table range (&quot;YYYY-MM-DD&quot;) (all data = NULL, default = rng_start)</p>
+</td></tr>
+<tr><td><code id="table_end">table_end</code></td>
+<td>
+<p>end of table range (&quot;YYYY-MM-DD&quot;) (all data = NULL, default = rng_end)</p>
+</td></tr>
+<tr><td><code id="height">height</code></td>
+<td>
+<p>height of a single panel (px)</p>
+</td></tr>
+<tr><td><code id="width">width</code></td>
+<td>
+<p>width of a single panel (px)</p>
+</td></tr>
+<tr><td><code id="yoy_gr">yoy_gr</code></td>
+<td>
+<p>year-over-year (default) or annualized growth</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a dygraph plot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>monthly_data_example |&gt;
+  plot_fc()
+quarterly_data_example |&gt;
+  tsbox::ts_long() |&gt;
+  tsbox::ts_pick("E_TU_HI", "ECT_HI", "EMN_HI") |&gt;
+  plot_fc()
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

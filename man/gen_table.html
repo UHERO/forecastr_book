@@ -1,0 +1,108 @@
+<!DOCTYPE html><html><head><title>R: Generate a table with time series</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>gen_table</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate a table with time series</h2>
+
+<h3>Description</h3>
+
+<p>Generate a table with time series
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gen_table(
+  x,
+  tbl_start = as.character(Sys.Date() - lubridate::years(10)),
+  tbl_end = as.character(Sys.Date() + lubridate::years(2)),
+  percent = "pc",
+  time_across = TRUE,
+  tbl_height = 800,
+  save_loc = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>a ts-boxable object</p>
+</td></tr>
+<tr><td><code id="tbl_start">tbl_start</code></td>
+<td>
+<p>start period for table</p>
+</td></tr>
+<tr><td><code id="tbl_end">tbl_end</code></td>
+<td>
+<p>end period for table</p>
+</td></tr>
+<tr><td><code id="percent">percent</code></td>
+<td>
+<p>what type of percent should be added (&quot;none&quot;, &quot;pc&quot; (default),
+&quot;pcy&quot;, &quot;pca&quot;)</p>
+</td></tr>
+<tr><td><code id="time_across">time_across</code></td>
+<td>
+<p>should time be in column headers and variable names in
+first column (default TRUE)</p>
+</td></tr>
+<tr><td><code id="tbl_height">tbl_height</code></td>
+<td>
+<p>the height of the table in px (default 800)</p>
+</td></tr>
+<tr><td><code id="save_loc">save_loc</code></td>
+<td>
+<p>file path for saving table incl. extension (&quot;html&quot; or &quot;csv&quot;)
+(default NULL)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>table formatted for output
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>quarterly_data_example %&gt;%
+  tsbox::ts_long() %&gt;%
+  tsbox::ts_tslist() %&gt;%
+  gen_table()
+gen_table(quarterly_data_example)
+gen_table(quarterly_data_example, percent = "none")
+gen_table(quarterly_data_example, percent = "pcy", time_across = FALSE)
+
+gen_table(quarterly_data_example,
+  percent = "pcy",
+  time_across = FALSE, save_loc = "~/Downloads/temp.csv"
+)
+gen_table(quarterly_data_example,
+  percent = "pcy", time_across = TRUE,
+  save_loc = "~/Downloads/temp.html"
+)
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

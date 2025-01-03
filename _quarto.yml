@@ -30,11 +30,12 @@ book:
     - git.qmd
     - renv.qmd
     - setup.qmd
-    - utilfuns.qmd
+    - fcutils.qmd
+    # - utilfuns.qmd
     - bestpract.qmd
     - modselect.qmd
-    - simulation.qmd
-    - notes.qmd
+    # - simulation.qmd
+    # - notes.qmd
 
 comments:
   hypothesis: false

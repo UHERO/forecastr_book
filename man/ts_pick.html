@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><title>R: Pick Series (Experimental)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_pick</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Pick Series (Experimental)</h2>
+
+<h3>Description</h3>
+
+<p>Pick (and optionally rename) series from multiple time series.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ts_pick(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+<tr><td><code id="...">...</code></td>
+<td>
+<p>character string(s), names of the series to be picked, or integer,
+with positions. If arguments are named, the series will be renamed.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a ts-boxable object of the same class as <code>x</code>, i.e., an object of
+class <code>ts</code>, <code>xts</code>, <code>zoo</code>, <code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>,
+<code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>, <code>irts</code> or <code>timeSeries</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Interactive use
+
+ts_plot(ts_pick(
+  EuStockMarkets,
+  `My Dax` = "DAX",
+  `My Smi` = "SMI"
+))
+ts_pick(EuStockMarkets, c(1, 2))
+ts_pick(EuStockMarkets, `My Dax` = "DAX", `My Smi` = "SMI")
+
+# Programming use
+to.be.picked.and.renamed &lt;- c(`My Dax` = "DAX", `My Smi` = "SMI")
+ts_pick(EuStockMarkets, to.be.picked.and.renamed)
+
+
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

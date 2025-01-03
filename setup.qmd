@@ -1,4 +1,4 @@
-# Setup of the forecastr project
+# Setup of the forecastr project {#sec-setup}
 
 The `setup.R` file contains general information used throughout the project. The contents are listed below.
 
@@ -12,7 +12,7 @@ If only some objects need to be removed, search for them via wildcards:\
 
 Detach all loaded packages:
 
-```         
+``` R
 if (!is.null(names(sessionInfo()$otherPkgs))) {
 invisible(
   suppressMessages(
@@ -38,70 +38,57 @@ Navigate within a project using the `here()` package. Start by specifying:\
 
 Then load necessary packages
 
-```         
+``` R
+# load necessary packages
 library(here) # navigation within the project
 library(conflicted) # detect conflicts across packages
 library(tidyverse) # a set of frequently used data-wrangling tools
 library(magrittr) # more than just pipes
 library(lubridate) # dealing with dates
 library(tsbox) # dealing with time series
+library("pins")
 # library(bimets)
+# install.packages("devtools")
+# devtools::install_github("UHERO/fcutils")
+# renv::purge("fcutils")
+library("fcutils")
 ```
 
 Detect conflicts across packages and assign preferences
 
-```         
-conflict_scout()
-conflict_prefer("filter", "dplyr") # dplyr v stats
-conflict_prefer("first", "dplyr") # dplyr v xts
-conflict_prefer("lag", "dplyr") # dplyr v stats
-conflict_prefer("last", "dplyr") # dplyr v xts
-conflict_prefer("extract", "magrittr") # magrittr vs tidyr
+``` R
+conflicted::conflict_scout()
+conflicted::conflict_prefer("filter", "dplyr") # dplyr v stats
+conflicted::conflict_prefer("first", "dplyr") # dplyr v xts
+conflicted::conflict_prefer("lag", "dplyr") # dplyr v stats
+conflicted::conflict_prefer("last", "dplyr") # dplyr v xts
+conflicted::conflict_prefer("extract", "magrittr") # magrittr vs tidyr
+conflicted::conflict_prefer("set_names", "magrittr") # magrittr vs purrr
 ```
 
-Verify top level project directory\
-`here()`
+Verify top level project directory `here::here()`.\
 
 ## Package descriptions
 
-Use the `here` package to deal with file paths:\
-https://here.r-lib.org
+<!-- Use the `here` package to deal with file paths:\ -->
+<!-- https://here.r-lib.org -->
 
-Suppose you have a dataset in csv format. Use:\
-`readr::read_csv(here::here("<The subfolder where your csv file resides>", "<The CSV file.csv>"))`
+<!-- Suppose you have a dataset in csv format. Use:\ -->
+<!-- `readr::read_csv(here::here("<The subfolder where your csv file resides>", "<The CSV file.csv>"))` -->
 
-Only load essential packages with many useful functions (don't load a whole package to access a single function).\
-Refer to individual functions in not loaded packages by `namespace::function()`
+Only load essential packages with many useful functions (don't load a whole package to access a single function). Refer to individual functions in packages that are not loaded by `namespace::function()`.\
 
-Resolve conflicts across multiple packages with `conflicted`:\
-https://conflicted.r-lib.org
+<!-- Resolve conflicts across multiple packages with `conflicted`:\ -->
+<!-- https://conflicted.r-lib.org -->
 
-Core `tidyverse` packages:\
-https://www.tidyverse.org
+- Core [tidyverse](https://www.tidyverse.org) packages.\
+- Non-core tidyverse packages (need to be loaded separately):\
+  - [magrittr](https://magrittr.tidyverse.org)\
+  - [lubridate](https://lubridate.tidyverse.org)
+- Time series tools in [tsbox](https://www.tsbox.help) (learn them and use them, very useful). All start with `ts_`.\
+- Load the [fcutils package](https://github.com/UHERO/fcutils) for utility functions.\
+- Forecasting with multi-equation behavioral models: only the [load bimets](https://cran.r-project.org/web/packages/bimets/index.html) pakage if actually doing forecasts, no need for data manipulation.\
+- bimets depends on the [xts package](http://joshuaulrich.github.io/xts/) (if not loaded, can access necessary functions via `xts::function()`). Prefer using tsbox and tidyverse functions whenever possible, but understand the components and behavior of xts objects.\
 
-Non-core `tidyverse` packages (need to be loaded separately):\
-https://magrittr.tidyverse.org\
-https://lubridate.tidyverse.org
+<!-- ## Additional info in setup -->
 
-Time series tools in `tsbox` (learn them and use them, very useful). All start with `ts_`.\
-https://www.tsbox.help
-
-Forecasting with multi-equation behavioral models (only load `bimets` if actually doing forecasts, no need for data manipulation):\
-https://cran.r-project.org/web/packages/bimets/index.html
-
-`bimets` depends on `xts` (if not loaded, can access necessary functions via `xts::function()`):\
-https://cran.r-project.org/web/packages/xts/index.html
-
-Prefer using `tsbox` and `tidyverse` functions whenever possible, but understand the components and behavior of `xts` objects: https://rc2e.com/timeseriesanalysis
-
-## Additional info in setup
-
-Define project-wide constants:
-
-```         
-bnk_start <- ymd("1900-01-01")
-bnk_end <- ymd("2060-12-31")
-```
-
-Load user defined utility functions (details in next section):\
-`source(here("R", "util_funs.R"))`

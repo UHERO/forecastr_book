@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><title>R: Time Series Properties</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_summary</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Time Series Properties</h2>
+
+<h3>Description</h3>
+
+<p>Extract time series properties, such as the number of observations
+(<code>obs</code>), the time differences between observations (<code>obs</code>), the number
+of observations per year (<code>freq</code>), and the start time stamp (<code>start</code>)
+and the end time stamp (<code>end</code>) of the series.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ts_summary(x, spark = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="x">x</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+<tr><td><code id="spark">spark</code></td>
+<td>
+<p>logical should an additional column with a spark-line added to
+the data frame (experimental, ASCII only on Windows.)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>ts_summary</code> returns a <code>data.frame</code>. Individual column can be
+accessed through the <code>$</code> notation (see examples).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>ts_summary(ts_c(mdeaths, austres))
+ts_summary(ts_c(mdeaths, austres), spark = TRUE)
+# Extracting specific properties
+ts_summary(AirPassengers)$start
+ts_summary(AirPassengers)$freq
+ts_summary(AirPassengers)$obs
+</code></pre>
+
+</main>
+
+</div>
+</body></html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><title>R: Arithmetic Operators for ts-boxable objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container"><main>
+
+<table style="width: 100%;"><tr><td>ts_arithmetic</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Arithmetic Operators for ts-boxable objects</h2>
+
+<h3>Description</h3>
+
+<p>Arithmetic Operators for ts-boxable objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>e1 %ts+% e2
+
+e1 %ts-% e2
+
+e1 %ts*% e2
+
+e1 %ts/% e2
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="e1">e1</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+<tr><td><code id="e2">e2</code></td>
+<td>
+<p>ts-boxable time series, an object of class <code>ts</code>, <code>xts</code>, <code>zoo</code>,
+<code>zooreg</code>, <code>data.frame</code>, <code>data.table</code>, <code>tbl</code>, <code>tbl_ts</code>, <code>tbl_time</code>, <code>tis</code>,
+<code>irts</code> or <code>timeSeries</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a ts-boxable time series, with the same class as the left input.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>head(fdeaths - mdeaths)
+head(fdeaths %ts-% mdeaths)
+head(ts_df(fdeaths) %ts-% mdeaths)
+</code></pre>
+
+</main>
+
+</div>
+</body></html>
