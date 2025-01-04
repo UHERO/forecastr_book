@@ -46,6 +46,7 @@ format:
     code-copy: true
     code-link: true
     css: style.css
+    number-depth: 2
     
     author-meta: "Peter Fuleky"
     callout-appearance: simple
@@ -53,8 +54,10 @@ format:
   pdf:
     documentclass: scrreport
     keep-tex: true
+    number-depth: 2
 
   epub:
     toc: true
+    number-depth: 2
 
 editor: source

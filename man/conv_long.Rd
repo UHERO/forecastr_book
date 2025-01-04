@@ -2,7 +2,7 @@
 % Please edit documentation in R/fcst_utils.R
 \name{conv_long}
 \alias{conv_long}
-\title{Convert "ts-boxable" objects to long format (extension of tsbox::ts_long())}
+\title{Convert "ts-boxable" objects to long format (extension of \code{tsbox::ts_long()})}
 \usage{
 conv_long(x, ser_info = FALSE)
 }
@@ -19,13 +19,13 @@ returns a ts-boxable object in long format with \code{id}, \code{time} and
 \code{ser_names} are the names of the series in x.
 }
 \description{
-Convert "ts-boxable" objects to long format (extension of tsbox::ts_long())
+Convert "ts-boxable" objects to long format (extension of \code{tsbox::ts_long()})
 }
 \details{
-This function performs a similar operation to tsbox::ts_long(). It
+This function performs a similar operation to \code{tsbox::ts_long()}. It
 converts wide data frames and other ts-boxable objects to the long format
 (wide data frames are not ts-boxable). An important difference compared with
-tsbox::ts_long() is that conv_long() ensures that objects containing a single
+\code{tsbox::ts_long()} is that \code{conv_long()} ensures that objects containing a single
 time series get an id column.
 }
 \examples{

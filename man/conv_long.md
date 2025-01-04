@@ -2,7 +2,8 @@
 
 #### Description
 
-Convert \"ts-boxable\" objects into long format
+Convert \"ts-boxable\" objects to long format (extension of
+`tsbox::ts_long()`)
 
 #### Usage
 
@@ -13,15 +14,17 @@ conv_long(x, ser_info = FALSE)
 #### Arguments
 
   ----------------------- --------------------------------------------------------------------------------------------
-  `x`{#x}                 a \"tx-boxable\" object to be converted
+  `x`{#x}                 a \"ts-boxable\" object to be converted
   `ser_info`{#ser_info}   should additional details be returned (TRUE) or only the long format of x (default: FALSE)
   ----------------------- --------------------------------------------------------------------------------------------
 
 #### Details
 
-This function converts wide data frames and other ts-boxable objects to
-the long format (wide data frames are not ts-boxable). In addition, it
-ensures that objects containing a single time series have an id column.
+This function performs a similar operation to `tsbox::ts_long()`. It
+converts wide data frames and other ts-boxable objects to the long
+format (wide data frames are not ts-boxable). An important difference
+compared with `tsbox::ts_long()` is that `conv_long()` ensures that
+objects containing a single time series get an id column.
 
 #### Value
 

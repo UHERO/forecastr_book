@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>R: Convert &quot;ts-boxable&quot; objects into long format</title>
+<!DOCTYPE html><html><head><title>R: Convert &quot;ts-boxable&quot; objects to long format (extension of...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
@@ -16,11 +16,11 @@ function processMathHTML() {
 
 <table style="width: 100%;"><tr><td>conv_long</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Convert &quot;ts-boxable&quot; objects into long format</h2>
+<h2>Convert &quot;ts-boxable&quot; objects to long format (extension of <code>tsbox::ts_long()</code>)</h2>
 
 <h3>Description</h3>
 
-<p>Convert &quot;ts-boxable&quot; objects into long format
+<p>Convert &quot;ts-boxable&quot; objects to long format (extension of <code>tsbox::ts_long()</code>)
 </p>
 
 
@@ -35,7 +35,7 @@ function processMathHTML() {
 <table>
 <tr><td><code id="x">x</code></td>
 <td>
-<p>a &quot;tx-boxable&quot; object to be converted</p>
+<p>a &quot;ts-boxable&quot; object to be converted</p>
 </td></tr>
 <tr><td><code id="ser_info">ser_info</code></td>
 <td>
@@ -47,9 +47,11 @@ only the long format of x (default: FALSE)</p>
 
 <h3>Details</h3>
 
-<p>This function converts wide data frames and other ts-boxable objects
-to the long format (wide data frames are not ts-boxable). In addition, it
-ensures that objects containing a single time series have an id column.
+<p>This function performs a similar operation to <code>tsbox::ts_long()</code>. It
+converts wide data frames and other ts-boxable objects to the long format
+(wide data frames are not ts-boxable). An important difference compared with
+<code>tsbox::ts_long()</code> is that <code>conv_long()</code> ensures that objects containing a single
+time series get an id column.
 </p>
 
 
