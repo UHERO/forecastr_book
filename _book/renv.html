@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-854d42f42d0f6b455b86ad16a464e311.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -195,8 +195,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#collaboration" id="toc-collaboration" class="nav-link" data-scroll-target="#collaboration"><span class="header-section-number">4.2</span> Collaboration</a></li>
   <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages"><span class="header-section-number">4.3</span> Installing packages</a></li>
   <li><a href="#updating-packages" id="toc-updating-packages" class="nav-link" data-scroll-target="#updating-packages"><span class="header-section-number">4.4</span> Updating packages</a></li>
-  <li><a href="#workflow-for-setting-up-a-project-with-version-control-and-renv" id="toc-workflow-for-setting-up-a-project-with-version-control-and-renv" class="nav-link" data-scroll-target="#workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.5</span> Workflow for setting up a project with version control and renv</a></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">4.6</span> Additional resources</a></li>
+  <li><a href="#updating-r" id="toc-updating-r" class="nav-link" data-scroll-target="#updating-r"><span class="header-section-number">4.5</span> Updating R</a></li>
+  <li><a href="#workflow-for-setting-up-a-project-with-version-control-and-renv" id="toc-workflow-for-setting-up-a-project-with-version-control-and-renv" class="nav-link" data-scroll-target="#workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.6</span> Workflow for setting up a project with version control and renv</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">4.7</span> Additional resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/UHERO/forecastr_book/edit/main/renv.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/UHERO/forecastr_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/UHERO/forecastr_book/blob/main/renv.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -253,8 +254,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Regularly (at least once a year) update the packages in your project to get the latest versions of all dependencies. Similarly, if you’re making major changes to a project that you haven’t worked on for a while, it’s often a good idea to start with an <code>renv::update()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> before making any changes to the code.</p>
 <p>After calling <code>renv::update()</code>, you should run the code in your project and verify that it still works (or make any changes needed to get it working). Then call <code>renv::snapshot()</code> to record the new versions in the lockfile. If you get stuck, and can’t get the project to work with the new versions, you can call <code>renv::restore()</code> to roll back changes to the project library and revert to the known good state recorded in your lockfile. If you need to roll back to an even older version, take a look at <code>renv::history()</code> and <code>renv::revert()</code>. <code>renv::update()</code> will also update renv itself, ensuring that you get all the latest features.</p>
 </section>
-<section id="workflow-for-setting-up-a-project-with-version-control-and-renv" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.5</span> Workflow for setting up a project with version control and renv</h2>
+<section id="updating-r" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="updating-r"><span class="header-section-number">4.5</span> Updating R</h2>
+<p>The <a href="https://github.com/r-lib/rig">rig package</a> is a version management tool for R that allows users to easily install, switch, and manage multiple versions of R on their system. To update your R version using rig, you first need to install rig itself by downloading the <a href="https://github.com/r-lib/rig/releases">installer</a>. Once installed, you can view available R versions that can be installed by executing <code>rig available</code> in the terminal. Install a new R version by running <code>rig add &lt;version&gt;</code>, replacing <code>&lt;version&gt;</code> with the desired R version number (e.g., <code>rig add 4.3.2</code>). After installation, set the new version as the default with <code>rig default &lt;version&gt;</code>. You can also switch between R versions in the <a href="https://github.com/r-lib/rig?tab=readme-ov-file#-macos-menu-bar-app-">menu bar app on MacOS</a>. This makes it easy to work with different R versions across projects. If prompted by rig, execute <code>rig system make-orthogonal</code> in the terminal. This command prevents interference between your system-installed R and the versions managed by rig. After installing and switching to a new R version, run <code>renv::update()</code> to get the most recent versions of all packages stored under the new R version.</p>
+</section>
+<section id="workflow-for-setting-up-a-project-with-version-control-and-renv" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="workflow-for-setting-up-a-project-with-version-control-and-renv"><span class="header-section-number">4.6</span> Workflow for setting up a project with version control and renv</h2>
 <p>The combination of version control and package management can facilitate reproducibility and collaboration.</p>
 <ol type="1">
 <li><p>Set up a repository on GitHub</p></li>
@@ -275,8 +280,8 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>This process ensures that you will always work with the most recent version of your project.</p>
 </section>
-<section id="additional-resources" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">4.6</span> Additional resources</h2>
+<section id="additional-resources" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">4.7</span> Additional resources</h2>
 <p>Overview of <code>renv</code>:<br>
 <a href="https://rstudio.github.io/renv/articles/renv.html" class="uri">https://rstudio.github.io/renv/articles/renv.html</a></p>
 
@@ -373,8 +378,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -485,7 +488,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

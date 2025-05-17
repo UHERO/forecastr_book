@@ -120,15 +120,17 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 
@@ -178,9 +180,6 @@
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
 
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
 
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
@@ -198,7 +197,7 @@
 
 \title{User guide to UHERO's forecast processes}
 \author{Peter Fuleky}
-\date{2025-01-03}
+\date{2025-05-16}
 
 \begin{document}
 \maketitle
@@ -750,6 +749,30 @@ state recorded in your lockfile. If you need to roll back to an even
 older version, take a look at \texttt{renv::history()} and
 \texttt{renv::revert()}. \texttt{renv::update()} will also update renv
 itself, ensuring that you get all the latest features.
+
+\section{Updating R}\label{updating-r}
+
+The \href{https://github.com/r-lib/rig}{rig package} is a version
+management tool for R that allows users to easily install, switch, and
+manage multiple versions of R on their system. To update your R version
+using rig, you first need to install rig itself by downloading the
+\href{https://github.com/r-lib/rig/releases}{installer}. Once installed,
+you can view available R versions that can be installed by executing
+\texttt{rig\ available} in the terminal. Install a new R version by
+running \texttt{rig\ add\ \textless{}version\textgreater{}}, replacing
+\texttt{\textless{}version\textgreater{}} with the desired R version
+number (e.g., \texttt{rig\ add\ 4.3.2}). After installation, set the new
+version as the default with
+\texttt{rig\ default\ \textless{}version\textgreater{}}. You can also
+switch between R versions in the
+\href{https://github.com/r-lib/rig?tab=readme-ov-file\#-macos-menu-bar-app-}{menu
+bar app on MacOS}. This makes it easy to work with different R versions
+across projects. If prompted by rig, execute
+\texttt{rig\ system\ make-orthogonal} in the terminal. This command
+prevents interference between your system-installed R and the versions
+managed by rig. After installing and switching to a new R version, run
+\texttt{renv::update()} to get the most recent versions of all packages
+stored under the new R version.
 
 \section{Workflow for setting up a project with version control and
 renv}\label{workflow-for-setting-up-a-project-with-version-control-and-renv}
@@ -2719,8 +2742,8 @@ Trend estimation that uses \texttt{stats::loess()}.
 \subsubsection{Arguments}\label{arguments-33}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \endhead
 \bottomrule\noalign{}

@@ -42,6 +42,10 @@ Regularly (at least once a year) update the packages in your project to get the 
 
 After calling `renv::update()`, you should run the code in your project and verify that it still works (or make any changes needed to get it working). Then call `renv::snapshot()` to record the new versions in the lockfile. If you get stuck, and can't get the project to work with the new versions, you can call `renv::restore()` to roll back changes to the project library and revert to the known good state recorded in your lockfile. If you need to roll back to an even older version, take a look at `renv::history()` and `renv::revert()`. `renv::update()` will also update renv itself, ensuring that you get all the latest features.
 
+## Updating R
+
+The [rig package](https://github.com/r-lib/rig) is a version management tool for R that allows users to easily install, switch, and manage multiple versions of R on their system. To update your R version using rig, you first need to install rig itself by downloading the [installer](https://github.com/r-lib/rig/releases). Once installed, you can view available R versions that can be installed by executing `rig available` in the terminal. Install a new R version by running `rig add <version>`, replacing `<version>` with the desired R version number (e.g., `rig add 4.3.2`). After installation, set the new version as the default with `rig default <version>`. You can also switch between R versions in the [menu bar app on MacOS](https://github.com/r-lib/rig?tab=readme-ov-file#-macos-menu-bar-app-). This makes it easy to work with different R versions across projects. If prompted by rig, execute `rig system make-orthogonal` in the terminal. This command prevents interference between your system-installed R and the versions managed by rig. After installing and switching to a new R version, run `renv::update()` to get the most recent versions of all packages stored under the new R version.
+
 ## Workflow for setting up a project with version control and renv
 
 The combination of version control and package management can facilitate reproducibility and collaboration.
